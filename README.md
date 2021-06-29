@@ -203,10 +203,10 @@ json-simple [Apache license](docs/Licenser/Apache.txt)<br>
 jsoup [MIT license](docs/Licenser/MIT.txt)<br>
 commons-collections4 [Apache license](docs/Licenser/Apache.txt)<br>
 
-# Status
+# Status v0.9
 Detta är en första version av verktyget. <br>
 Arbetsförmedlingen och Bolagsverket kommer prova mjukvaran skarpt under hösten. <br>
-När mjukvaran fungerar för tillräckligt många offentliga organisationer kommer den släppas i beta-version. <br>
-Tills dess drivs den av Arbetsförmedlingen och DIGG.
+När mjukvaran fungerar för tillräckligt många offentliga organisationer kommer versionen uppdateras till 1.0. <br>
+Mjukvaran utvecklas av DIGG och Arbetsförmedlingen.
 
 # Bidra
