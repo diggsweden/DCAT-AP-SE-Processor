@@ -1,0 +1,427 @@
+{
+    "DataService": {
+        "metadata": "dcat-dataservice",
+        "about": {
+            "metadata": "about"
+        },
+        "dcterms:title": {
+            "metadata": "title"
+        },
+        "dcterms:description": {
+            "metadata": "description"
+        },
+        "dcat:endpointURL": {
+            "metadata": "endpointURL"
+        },
+        "dcat:endpointDescription": {
+            "metadata": "endpointDescription"
+        },
+        "publisher": {
+            "metadata": "publisher"
+        },
+        "contactPoint": {
+            "metadata": "contactPoint"
+        },
+        "dcterms:type": {
+            "metadata": "type"
+        },
+        "dcat:keyword": {
+            "metadata": "keyword"
+        },
+        "dcat:theme": {
+            "metadata": "theme"
+        },
+        "Standard": {
+            "metadata": "conformsTo"
+        },
+        "dcat:servesDataset": {
+            "metadata": "servesDataset"
+        },
+        "LicenseDocument": {
+            "metadata": "licensedoc"
+        },
+        "dcterms:license": {
+            "metadata": "licenseurl"
+        },
+        "dcterms:accessRights": {
+            "metadata": "accessRights"
+        },
+        "dcat:landingPage": {
+            "metadata": "landingPage"
+        },
+        "Document": {
+            "metadata": "page"
+        }
+    },
+    "Dataset": {
+        "metadata": "dcat-dataset",
+        "about": {
+            "metadata": "about"
+        },
+        "dcterms:title": {
+            "metadata": "title"
+        },
+        "dcterms:description": {
+            "metadata": "description"
+        },
+        "publisher": {
+            "metadata": "publisher"
+        },
+        "contactPoint": {
+            "metadata": "contactPoint"
+        },
+        "Distribution": {
+            "metadata": "distribution"
+        },
+        "creator": {
+            "metadata": "creator"
+        },
+        "Attribution": {
+            "metadata": "other agent"
+        },
+        "dcat:keyword": {
+            "metadata": "keyword"
+        },
+        "dcat:theme": {
+            "metadata": "theme"
+        },
+        "dcterms:identifier": {
+            "metadata": "identifier"
+        },
+        "adms:identifier": {
+            "metadata": "adms"
+        },
+        "dcterms:issued": {
+            "metadata": "issued"
+        },
+        "dcterms:modified": {
+            "metadata": "modified"
+        },
+        "dcat:landingPage": {
+            "metadata": "landingPage"
+        },
+        "Standard": {
+            "metadata": "conformsTo"
+        },
+        "spatial": {
+            "metadata": "location"
+        },
+        "dcterms:spatial": {
+            "metadata": "spatialUrl"
+        },
+        "temporal": {
+            "metadata": "temporal"
+        },
+        "dcat:temporalResolution": {
+            "metadata": "temporalResolution"
+        },
+        "dcat:spatialResolutionInMeters": {
+            "metadata": "spatialResolutionInMeters"
+        },
+        "dcterms:accrualPeriodicity": {
+            "metadata": "accrualPeriodicity"
+        },
+        "owl:versionInfo": {
+            "metadata": "versionInfo"
+        },
+        "adms:versionNotes": {
+            "metadata": "versionNotes"
+        },
+        "dcterms:source": {
+            "metadata": "source"
+        },
+        "dcterms:accessRights": {
+            "metadata": "accessRights"
+        },
+        "offers": {
+            "metadata": "offers"
+        },
+        "dcat:hasVersion": {
+            "metadata": "hasVersion"
+        },
+        "dcat:isVersionOf": {
+            "metadata": "isVersionOf"
+        },
+        "dcterms:isReferencedBy": {
+            "metadata": "isReferencedBy"
+        },
+        "dcterms:relation": {
+            "metadata": "relation"
+        },
+        "qualifiedRelation": {
+            "metadata": "qualifiedRelation"
+        },
+        "Document": {
+            "metadata": "page"
+        },
+        "provenance": {
+            "metadata": "provenance"
+        }
+    },
+    "publisher": {
+        "metadata": "publisher",
+        "about": {
+            "metadata": "about"
+        },
+        "foaf:name": {
+            "metadata": "name"
+        },
+        "dcterms:type": {
+            "metadata": "type"
+        },
+        "foaf:homepage": {
+            "metadata": "homepage"
+        },
+        "foaf:mbox": {
+            "metadata": "mbox"
+        }
+    },
+    "creator": {
+        "metadata": "creator",
+        "about": {
+            "metadata": "about"
+        },
+        "foaf:name": {
+            "metadata": "name"
+        },
+        "dcterms:type": {
+            "metadata": "type"
+        },
+        "foaf:homepage": {
+            "metadata": "homepage"
+        },
+        "foaf:mbox": {
+            "metadata": "mbox"
+        }
+    },
+    "Attribution": {
+        "metadata": "other agent",
+        "about": {
+            "metadata": "about"
+        },
+        "foaf:name": {
+            "metadata": "name"
+        },
+        "dcterms:type": {
+            "metadata": "type"
+        },
+        "foaf:homepage": {
+            "metadata": "homepage"
+        },
+        "foaf:mbox": {
+            "metadata": "mbox"
+        },
+        "dcat:hadRole":{
+            "metadata": "role"
+        }
+    },
+    "spatial": {
+        "metadata": "location",
+        "about": {
+            "metadata": "about"
+        },
+        "dcat:centroid": {
+            "metadata": "centroid"
+        },
+        "dcat:bbox": {
+            "metadata": "bbox"
+        },
+        "locn:geometry": {
+            "metadata": "geometry"
+        }
+    },
+    "contactPoint": {
+        "metadata": "contactPoint",
+        "about": {
+            "metadata": "about"
+        },
+        "rdf:type": {
+            "metadata": "type"
+        },
+        "vcard:fn": {
+            "metadata": "name"
+        },
+        "vcard:hasEmail": {
+            "metadata": "email"
+        },
+        "vcard:hasTelephone": {
+            "metadata": "phone"
+        },
+        "Address": {
+            "metadata": "address"
+        }
+    },
+    "LicenseDocument": {
+        "metadata": "licensedoc",
+        "about": {
+            "metadata": "about"
+        },
+        "dcterms:title": {
+            "metadata": "title"
+        },
+        "dcterms:description": {
+            "metadata": "description"
+        }
+    },
+    "Document": {
+        "metadata": "page",
+        "about": {
+            "metadata": "about"
+        },
+        "dcterms:title": {
+            "metadata": "title"
+        },
+        "dcterms:description": {
+            "metadata": "description"
+        }
+    },
+    "Distribution": {
+        "metadata": "distribution",
+        "about": {
+            "metadata": "about"
+        },
+        "dcterms:title": {
+            "metadata": "title"
+        },
+        "dcterms:description": {
+            "metadata": "description"
+        },
+        "dcat:accessURL": {
+            "metadata": "accessURL"
+        },
+        "dcat:downloadURL": {
+            "metadata": "downloadURL"
+        },
+        "formatGeo": {
+            "metadata": "formatGeo"
+        },
+        "formatText": {
+            "metadata": "formatText"
+        },
+        "formatMedia": {
+            "metadata": "formatMedia"
+        },
+        "dcat:accessService": {
+            "metadata": "accessService"
+        },
+        "dcat:temporalResolution": {
+            "metadata": "temporalResolution"
+        },
+        "dcat:spatialResolutionInMeters": {
+            "metadata": "spatialResolutionInMeters"
+        },
+        "dcat:byteSize": {
+            "metadata": "byteSize"
+        },
+        "dcterms:issued": {
+            "metadata": "issued"
+        },
+        "dcterms:modified": {
+            "metadata": "modified"
+        },
+        "adms:status": {
+            "metadata": "status"
+        },
+        "dcatap:availability": {
+            "metadata": "availability"
+        },
+        "LicenseDocument": {
+            "metadata": "licensedoc"
+        },
+        "dcterms:license": {
+            "metadata": "licenseurl"
+        },
+        "RightsStatement": {
+            "metadata": "rights"
+        },
+        "checksum": {
+            "metadata": "checksum"
+        },
+        "Document": {
+            "metadata": "page"
+        },
+        "Standard": {
+            "metadata": "conformsTo"
+        }
+    },
+    "temporal": {
+        "metadata": "temporal",
+        "dcat:startDate": {
+            "metadata": "startDate"
+        },
+        "dcat:endDate": {
+            "metadata": "endDate"
+        }
+    },
+    "offers": {
+        "metadata": "offers",
+        "schema:description": {
+            "metadata": "description"
+        },
+        "schema:mainEntityOfPage": {
+            "metadata": "page"
+        }
+    },
+    "Standard": {
+        "metadata": "conformsTo",
+        "about": {
+            "metadata": "about"
+        },
+        "dcterms:title": {
+            "metadata": "title"
+        },
+        "dcterms:description": {
+            "metadata": "description"
+        }
+    },
+    "checksum": {
+        "metadata": "checksum",
+        "spdx:checksumValue": {
+            "metadata": "value"
+        }
+    },
+    "RightsStatement": {
+        "metadata": "rights",
+        "odrs:attributionText": {
+            "metadata": "attributionText"
+        },
+        "odrs:attributionURL": {
+            "metadata": "attributionURL"
+        },
+        "odrs:copyrightNotice": {
+            "metadata": "copyrightNotice"
+        },
+        "LicenseDocument": {
+            "metadata": "copyrightStatement"
+        },
+        "odrs:copyrightYear": {
+            "metadata": "copyrightYear"
+        },
+        "publisher": {
+            "metadata": "copyrightHolder"
+        },
+        "odrs:jurisdiction": {
+            "metadata": "jurisdiction"
+        },
+        "odrs:reuserGuidelines": {
+            "metadata": "reuserGuidelines"
+        }
+    },
+    "qualifiedRelation": {
+        "metadata": "qualifiedRelation",
+        "dcat:hadRole": {
+            "metadata": "role"
+        },
+        "dcterms:relation": {
+            "metadata": "relation"
+        }
+    }
+}
+
+
+
+
+
+
+
+

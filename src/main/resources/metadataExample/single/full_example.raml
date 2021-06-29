@@ -1,0 +1,349 @@
+#%RAML 1.0
+title: Annotation exempel api
+description: Annotation exempel api är ett påhittat api som använder sig av annotations för att skapa metadata för DCAT-AP-SE.
+version: 1.0.0
+
+annotationTypes:
+  dcat-catalog:
+    properties:
+      about: string
+      title-sv: string
+      description-sv: string
+      publisher:
+        properties:
+          about: string
+          name: string
+          type: string
+          homepage: string
+          mbox: string
+      license: string
+      issued: string
+      homepage: string
+      modified: string
+      rights:
+        properties:
+          attributionText-sv: string
+          attributionURL: string
+          copyrightNotice: string
+          copyrightStatement:
+            properties:
+              title-sv: string
+              description-sv: string
+          copyrightYear: integer
+          copyrightHolder:
+            properties:
+              about: string
+              name: string
+              homepage: string
+              type: string
+          jurisdiction: string
+          reuserGuidelines: string
+  dcat-dataset:
+    properties:
+      about: string
+      title-sv: string
+      description-sv: string
+      creator:
+        properties:
+          about: string
+          name: string
+          type: string
+          homepage: string
+          mbox: string
+      other agent:
+        properties:
+          about: string
+          name: string
+          type: string
+          homepage: string
+          mbox: string
+          role: string
+      contactPoint:
+        properties:
+          about: string
+          type: string
+          name: string
+          email: string
+          phone: string
+          address: string
+      keyword-sv: string
+      theme: string
+      identifier: string
+      adms: string
+      issued: string
+      modified: string
+      landingPage: string
+      temporalResolution: string
+      spatialResolutionInMeters: string
+      versionInfo: string
+      versionNotes: string
+      accessRights: string
+      isReferencedBy: string
+      relation: string
+      spatialUrl: string
+      conformsTo:
+        properties:
+          title-sv: string
+          description-sv: string
+      offers:
+        properties:
+          description-sv: string
+          page: string
+      page:
+        properties:
+          title-sv: string
+          description-sv: string
+      temporal:
+        properties:
+          startDate: string
+          endDate: string
+      distribution:
+        properties:
+          about: string
+          title-sv: string
+          description-sv: string
+          accessURL: string
+          downloadURL: string
+          formatMedia: string
+          accessService: string
+          temporalResolution: string
+          spatialResolutionInMeters: string
+          byteSize: integer
+          issued: string
+          modified: string
+          status: string
+          availability: string
+          licenseurl: string
+          rights:
+            properties:
+              attributionText-sv: string
+              attributionURL: string
+              copyrightNotice: string
+              copyrightStatement:
+                properties:
+                  title-sv: string
+                  description-sv: string
+              copyrightYear: integer
+              copyrightHolder:
+                properties:
+                  about: string
+                  name: string
+                  type: string
+                  homepage: string
+                  mbox: string
+              jurisdiction: string
+              reuserGuidelines: string
+          checksum:
+            properties:
+              value: string
+          page:
+            properties:
+              title-sv: string
+              description-sv: string
+          conformsTo:
+            properties:
+              title-sv: string
+              description-sv: string
+  dcat-dataservice:
+    properties:
+      about: string
+      title-sv: string
+      description-sv: string
+      endpointURL: string
+      endpointDescription: string
+      publisher:
+        properties:
+          about: string
+          name: string
+          type: string
+          homepage: string
+          mbox: string
+      contactPoint:
+        properties:
+          about: string
+          type: string
+          name: string
+          email: string
+          phone: string
+          address: string
+      type: string
+      keyword-sv: string
+      theme: string
+      conformsTo:
+        properties:
+          about: string
+          title-sv: string
+          description-sv: string
+      servesDataset: string
+      licensedoc:
+        properties:
+          about: string
+          title-sv: string
+          description-sv: string
+      accessRights: string
+      landingPage: string
+      page:
+        properties:
+          about: string
+          title-sv: string
+          description-sv: string
+
+(dcat-catalog):
+  about: https://www.af.se
+  title-sv: Exempel på catalog för en organisation med flera api'n
+  title-en: Example of a catalog for an organistaion with several api's
+  description-sv: Arbetsförmedlingen med flera api'er
+  publisher:
+    about: https://www.example.se/result.rdf#publisher
+    name: Arbetsförmedlingens Catalog
+    type: Company
+    homepage: www.publishertest.se
+    mbox: publisher1@publisher.com
+  license: https://www.apache.org/licenses/LICENSE-2.0
+  issued: 2021-04-01
+  homepage: www.arbetsformedlingen.se
+  modified: 2021-04-02
+  rights:
+    attributionText-sv: Detta är ett exempel på rättighetstext för Catalog
+    attributionURL: www.rattighetstextcatalog.se
+    copyrightNotice: Upphovsrätt
+    copyrightStatement:
+      title-sv: License För Catalog
+      description-sv: license för Catalog
+    copyrightYear: 1979
+    copyrightHolder:
+      about: www.exempel.se/#copyrightHolderCatalog
+      name: Copyright Holder för Catalog
+      homepage: www.holder.com
+      type: RegionalAuthority
+    jurisdiction: www.nywebaddresscat.com
+    reuserGuidelines: www.guidelinescat.se
+(dcat-dataset):
+  about: https://www.example.se/#datasetA
+  title-sv: Datamängd A
+  description-sv: Exempel beskrivning datamängd A
+  creator:
+    about: https://www.example.se/#creatorA
+    name: ExempelFöretag
+    type: NationalAuthority
+    homepage: www.exempelforetag.com
+    mbox: kontakt@exempelforetag.com
+  other agent:
+    about: https://www.example.se/#other_agentA
+    name: ExempelFöretag 2
+    type: NationalAuthority
+    homepage: www.exempelforetag2.com
+    mbox: kontakt@exempelforetag2.com
+    role: distributor
+  contactPoint:
+    about: https://www.example.se/#contactA
+    name: Exempel Organisation
+    type: Organization
+    email: admin@exempel.se
+    address: Testgatan 5; 76543; Tranemo; Sverige
+    phone: 0799887655
+  keyword-sv: exempel; info; data
+  keyword-en: example; info; computer
+  theme: TRAN; EDUC
+  issued: 2021-03-05
+  modified: 2021-03-15
+  spatialUrl: https://www.geonames.org/6695072/european-union.html
+  versionInfo: version 3.7.5
+  versionNotes: Exempel på VersionsNoteringar; Fler versionsnoteringar
+  landingPage: www.exempelsida.se
+  temporalResolution: P1Y
+  spatialResolutionInMeters: 1.4
+  relation: www.relateradresursexempelsida.se
+  isReferencedBy: www.exempelreferenssida.se
+  identifier: www.identifierare.com
+  adms: www.ovrig-identifierare.com
+  conformsTo:
+    title-sv: Exempel namn på Standard
+    description-sv: Beskrivning Standard
+  temporal:
+    startDate: 2021-03-16
+    endDate: 2021-03-25
+  accessRights: Public
+  offers:
+      description-sv: Exempel Avgift
+      page: www.avgiftsexempel.se
+  page:
+    title-sv: Exempel Dokument
+    description-sv: Beskrivning av Exempeldokument
+  distribution:
+    about: https://www.example.se/#distributionA
+    title-sv: Distribution A
+    description-sv: Beskrivning av Distribution A
+    accessURL: www.distribution!.se
+    downloadURL: www.exempelforetag.se/distributionA
+    formatMedia: text/html
+    accessService: https://www.example.se/#dataserviceA
+    temporalResolution: P1Y
+    spatialResolutionInMeters: 1.4
+    byteSize: 3000
+    issued: 2021-05-04
+    modified: 2021-05-20
+    status: Completed
+    availability: Stable
+    licenseurl: CC BY-NC-ND 4.0
+    rights:
+      attributionText-sv: Detta är en rättighetstext
+      attributionURL: www.rattighetstext.se
+      copyrightNotice: Upphovsrätt
+      copyrightStatement:
+        title-sv: Test License
+        description-sv: Test license for dcat spec
+      copyrightYear: 1976
+      copyrightHolder:
+        about: https://www.example.se/#copyrightHolderA
+        name: Copyright Name
+        homepage: www.copyrightweb.com
+        type: RegionalAuthority
+        mbox: copyrightname@company.se
+      jurisdiction: www.copyrightwebjurisdiction.com
+      reuserGuidelines: www.guidelines.se
+    checksum:
+      value: A23DF
+    page:
+      title-sv: Nytt Exempel Dokument
+      description-sv: Beskrivning av Nytt Exempeldokument
+    conformsTo:
+      title-sv: Ny Standard
+      description-sv: Beskrivning av Ny Standard
+(dcat-dataservice):
+  about: https://www.example.se/#dataserviceA
+  title-sv: Datatjänst A
+  description-sv: Beskrivning av Datatjänst A
+  endpointURL: www.datatjanstA.se
+  endpointDescription: www.beskrivningDatatjanstA.se
+  publisher:
+    about: https://www.example.se/#publisherA2
+    name: Utgivare av Datatjänst A
+    type: NonGovernmentalOrganisation
+    homepage: www.utgivare2.se
+    mbox: kontakt@utgivare2.se
+  contactPoint:
+    about: https://www.example.se/#contactPointA2
+    type: Organization
+    name: Namn på Organisation 2
+    email: kontakt@organization2.se
+    phone: 07923568945
+    address: Testvägen 24; 93847; Backa; Sverige
+  type: REST
+  keyword-sv: rest; datatjänst
+  theme: ENER
+  conformsTo:
+    about: https://www.example.se/#dataserviceA/standard
+    title-sv: Standard för Datatjänst A
+    description-sv: Beskrivning av Standard för Datatjänst A
+  servesDataset: https://www.example.se/#datasetA
+  licensedoc:
+    about: https://www.example.se/#dataserviceA/license
+    title-sv: namn på licens för DataTjänst
+    description-sv: Beskrivning av licens för Datatjänst
+  accessRights: Restricted
+  landingPage: www.landingpagefordataservice.com
+  page:
+    about: https://www.example.se/#dataserviceA/page
+    title-sv: Namn på exempel dokument för Datatjänst
+    description-sv: Beskrivning av dokument för Datatjänst

@@ -1,0 +1,390 @@
+{
+    "albanska": {
+        "metadata" : "sq",
+        "url": "http://publications.europa.eu/resource/authority/language/SQI"
+    },
+    "arabiska": {
+        "metadata" : "ar",
+        "url": "http://publications.europa.eu/resource/authority/language/ARA"
+    },
+    "armeniska": {
+        "metadata" : "hy",
+        "url": "http://publications.europa.eu/resource/authority/language/HYE"
+    },
+    "azerbajdzjanska": {
+        "metadata" : "az",
+        "url": "http://publications.europa.eu/resource/authority/language/AZE"
+    },
+    "baskiska": {
+        "metadata" : "eu",
+        "url": "http://publications.europa.eu/resource/authority/language/EUS"
+    },
+    "bengali": {
+        "metadata" : "bn",
+        "url": "http://publications.europa.eu/resource/authority/language/BEN"
+    },
+    "bosniska": {
+        "metadata" : "bs",
+        "url": "http://publications.europa.eu/resource/authority/language/BOS"
+    },
+    "bretonska": {
+        "metadata" : "br",
+        "url": "http://publications.europa.eu/resource/authority/language/BRE"
+    },
+    "bulgariska": {
+        "metadata" : "bg",
+        "url": "http://publications.europa.eu/resource/authority/language/BUL"
+    },
+    "danska": {
+        "metadata" : "da",
+        "url": "http://publications.europa.eu/resource/authority/language/DAN"
+    },
+    "divehi": {
+        "metadata" : "dv",
+        "url": "http://publications.europa.eu/resource/authority/language/DIV"
+    },
+    "engelska": {
+        "metadata" : "en",
+        "url": "http://publications.europa.eu/resource/authority/language/ENG"
+    },
+    "esperanto": {
+        "metadata" : "eo",
+        "url": "http://publications.europa.eu/resource/authority/language/EPO"
+    },
+    "estniska": {
+        "metadata" : "et",
+        "url": "http://publications.europa.eu/resource/authority/language/EST"
+    },
+    "finska": {
+        "metadata" : "fi",
+        "url": "http://publications.europa.eu/resource/authority/language/FIN"
+    },
+    "flamländska": {
+        "metadata" : "vls",
+        "url": "http://publications.europa.eu/resource/authority/language/VLS"
+    },
+    "franska": {
+        "metadata" : "fr",
+        "url": "http://publications.europa.eu/resource/authority/language/FRA"
+    },
+    "frisiska": {
+        "metadata" : "fy",
+        "url": "http://publications.europa.eu/resource/authority/language/FRY"
+    },
+    "färöiska": {
+        "metadata" : "fo",
+        "url": "http://publications.europa.eu/resource/authority/language/FAO"
+    },
+    "galiciska": {
+        "metadata" : "gl",
+        "url": "http://publications.europa.eu/resource/authority/language/GLG"
+    },
+    "georgiska": {
+        "metadata" : "ka",
+        "url": "http://publications.europa.eu/resource/authority/language/KAT"
+    },
+    "grekiska": {
+        "metadata" : "el",
+        "url": "http://publications.europa.eu/resource/authority/language/ELL"
+    },
+    "grönländska": {
+        "metadata" : "kl",
+        "url": "http://publications.europa.eu/resource/authority/language/KAL"
+    },
+    "hebreiska": {
+        "metadata" : "he",
+        "url": "http://publications.europa.eu/resource/authority/language/HEB"
+    },
+    "hindi": {
+        "metadata" : "hi",
+        "url": "http://publications.europa.eu/resource/authority/language/HIN"
+    },
+    "indonesiska": {
+        "metadata" : "id",
+        "url": "http://publications.europa.eu/resource/authority/language/IND"
+    },
+    "interlingua": {
+        "metadata" : "ia",
+        "url": "http://publications.europa.eu/resource/authority/language/INA"
+    },
+    "iriska": {
+        "metadata" : "ga",
+        "url": "http://publications.europa.eu/resource/authority/language/GLE"
+    },
+    "isländska": {
+        "metadata" : "is",
+        "url": "http://publications.europa.eu/resource/authority/language/ISL"
+    },
+    "italienska": {
+        "metadata" : "it",
+        "url": "http://publications.europa.eu/resource/authority/language/ITA"
+    },
+    "japanska": {
+        "metadata" : "ja",
+        "url": "http://publications.europa.eu/resource/authority/language/JPN"
+    },
+    "jiddisch": {
+        "metadata" : "yi",
+        "url": "http://publications.europa.eu/resource/authority/language/YID"
+    },
+    "kasjubiska": {
+        "metadata" : "csb",
+        "url": "http://publications.europa.eu/resource/authority/language/CSB"
+    },
+    "katalanska": {
+        "metadata" : "ca",
+        "url": "http://publications.europa.eu/resource/authority/language/CAT"
+    },
+    "kazakiska": {
+        "metadata" : "kk",
+        "url": "http://publications.europa.eu/resource/authority/language/KAZ"
+    },
+    "khmer": {
+        "metadata" : "km",
+        "url": "http://publications.europa.eu/resource/authority/language/KHM"
+    },
+    "kinesiska": {
+        "metadata" : "zh",
+        "url": "http://publications.europa.eu/resource/authority/language/ZHO"
+    },
+    "kirgiziska": {
+        "metadata" : "ky",
+        "url": "http://publications.europa.eu/resource/authority/language/KIR"
+    },
+    "koreanska": {
+        "metadata" : "ko",
+        "url": "http://publications.europa.eu/resource/authority/language/KOR"
+    },
+    "korsikanska": {
+        "metadata" : "co",
+        "url": "http://publications.europa.eu/resource/authority/language/COS"
+    },
+    "kroatiska": {
+        "metadata" : "hr",
+        "url": "http://publications.europa.eu/resource/authority/language/HRV"
+    },
+    "kurdiska": {
+        "metadata" : "ku",
+        "url": "http://publications.europa.eu/resource/authority/language/KUR"
+    },
+    "kymriska": {
+        "metadata" : "cy",
+        "url": "http://publications.europa.eu/resource/authority/language/CYM"
+    },
+    "lao": {
+        "metadata" : "lo",
+        "url": "http://publications.europa.eu/resource/authority/language/LAO"
+    },
+    "latin": {
+        "metadata" : "la",
+        "url": "http://publications.europa.eu/resource/authority/language/LAT"
+    },
+    "lettiska": {
+        "metadata" : "lv",
+        "url": "http://publications.europa.eu/resource/authority/language/LAV"
+    },
+    "litauiska": {
+        "metadata" : "lt",
+        "url": "http://publications.europa.eu/resource/authority/language/LIT"
+    },
+    "luxemburgiska": {
+        "metadata" : "la",
+        "url": "http://publications.europa.eu/resource/authority/language/LTZ"
+    },
+    "makedonska": {
+        "metadata" : "mk",
+        "url": "http://publications.europa.eu/resource/authority/language/MKD"
+    },
+    "malagassiska": {
+        "metadata" : "mg",
+        "url": "http://publications.europa.eu/resource/authority/language/MLG"
+    },
+    "malajiska": {
+        "metadata" : "ms",
+        "url": "http://publications.europa.eu/resource/authority/language/MSA"
+    },
+    "maltesiska": {
+        "metadata" : "mt",
+        "url": "http://publications.europa.eu/resource/authority/language/MLT"
+    },
+    "minangkabau": {
+        "metadata" : "min",
+        "url": "http://publications.europa.eu/resource/authority/language/MIN"
+    },
+    "moldaviska": {
+        "metadata" : "mol",
+        "url": "http://publications.europa.eu/resource/authority/language/MOL"
+    },
+    "mongoliska": {
+        "metadata" : "mn",
+        "url": "http://publications.europa.eu/resource/authority/language/MON"
+    },
+    "montenegrinska": {
+        "metadata" : "oeo",
+        "url": "http://publications.europa.eu/resource/authority/language/0E0"
+    },
+    "nederländska": {
+        "metadata" : "nl",
+        "url": "http://publications.europa.eu/resource/authority/language/NLD"
+    },
+    "nepali": {
+        "metadata" : "ne",
+        "url": "http://publications.europa.eu/resource/authority/language/NEP"
+    },
+    "nordsamiska": {
+        "metadata" : "se",
+        "url": "http://publications.europa.eu/resource/authority/language/SME"
+    },
+    "norska": {
+        "metadata" : "no",
+        "url": "http://publications.europa.eu/resource/authority/language/NOR"
+    },
+    "occitanska": {
+        "metadata" : "oc",
+        "url": "http://publications.europa.eu/resource/authority/language/OCI"
+    },
+    "ossetiska": {
+        "metadata" : "os",
+        "url": "http://publications.europa.eu/resource/authority/language/OSS"
+    },
+    "persiska": {
+        "metadata" : "fa",
+        "url": "http://publications.europa.eu/resource/authority/language/FAS"
+    },
+    "polska": {
+        "metadata" : "pl",
+        "url": "http://publications.europa.eu/resource/authority/language/POL"
+    },
+    "portugisiska": {
+        "metadata" : "pt",
+        "url": "http://publications.europa.eu/resource/authority/language/POR"
+    },
+    "romani": {
+        "metadata" : "rom",
+        "url": "http://publications.europa.eu/resource/authority/language/ROM"
+    },
+    "rumänska": {
+        "metadata" : "ro",
+        "url": "http://publications.europa.eu/resource/authority/language/RON"
+    },
+    "ryska": {
+        "metadata" : "ru",
+        "url": "http://publications.europa.eu/resource/authority/language/RUS"
+    },
+    "rätoromanska": {
+        "metadata" : "rm",
+        "url": "http://publications.europa.eu/resource/authority/language/ROH"
+    },
+    "serbiska": {
+        "metadata" : "sr",
+        "url": "http://publications.europa.eu/resource/authority/language/SRP"
+    },
+    "serbokroatiska": {
+        "metadata" : "hbs",
+        "url": "http://publications.europa.eu/resource/authority/language/HBS"
+    },
+    "singalesiska": {
+        "metadata" : "si",
+        "url": "http://publications.europa.eu/resource/authority/language/SIN"
+    },
+    "skotsk gaeliska": {
+        "metadata" : "gd",
+        "url": "http://publications.europa.eu/resource/authority/language/GLA"
+    },
+    "slovakiska": {
+        "metadata" : "sk",
+        "url": "http://publications.europa.eu/resource/authority/language/SLK"
+    },
+    "slovenska": {
+        "metadata" : "sl",
+        "url": "http://publications.europa.eu/resource/authority/language/SLV"
+    },
+    "spanska": {
+        "metadata" : "es",
+        "url": "http://publications.europa.eu/resource/authority/language/SPA"
+    },
+    "svenska": {
+        "metadata" : "sv",
+        "url": "http://publications.europa.eu/resource/authority/language/SWE"
+    },
+    "swahili": {
+        "metadata" : "sw",
+        "url": "http://publications.europa.eu/resource/authority/language/SWA"
+    },
+    "tadzjikiska": {
+        "metadata" : "tg",
+        "url": "http://publications.europa.eu/resource/authority/language/TGK"
+    },
+    "tamil": {
+        "metadata" : "ta",
+        "url": "http://publications.europa.eu/resource/authority/language/TAM"
+    },
+    "thai": {
+        "metadata" : "th",
+        "url": "http://publications.europa.eu/resource/authority/language/THA"
+    },
+    "tibetanska": {
+        "metadata" : "bo",
+        "url": "http://publications.europa.eu/resource/authority/language/BOD"
+    },
+    "tjeckiska": {
+        "metadata" : "cs",
+        "url": "http://publications.europa.eu/resource/authority/language/CES"
+    },
+    "turkiska": {
+        "metadata" : "tr",
+        "url": "http://publications.europa.eu/resource/authority/language/TUR"
+    },
+    "turkmeniska": {
+        "metadata" : "tk",
+        "url": "http://publications.europa.eu/resource/authority/language/TUK"
+    },
+    "tyska": {
+        "metadata" : "de",
+        "url": "http://publications.europa.eu/resource/authority/language/DEU"
+    },
+    "ukrainska": {
+        "metadata" : "ukr",
+        "url": "http://publications.europa.eu/resource/authority/language/UKR"
+    },
+    "ungerska": {
+        "metadata" : "hu",
+        "url": "http://publications.europa.eu/resource/authority/language/HUN"
+    },
+    "urdu": {
+        "metadata" : "ur",
+        "url": "http://publications.europa.eu/resource/authority/language/URD"
+    },
+    "uzbekiska": {
+        "metadata" : "uz",
+        "url": "http://publications.europa.eu/resource/authority/language/UZB"
+    },
+    "valencianska": {
+        "metadata" : "uk",
+        "url": "http://publications.europa.eu/resource/authority/language/UKR"
+    },
+    "vallonska": {
+        "metadata" : "wa",
+        "url": "http://publications.europa.eu/resource/authority/language/WLN"
+    },
+    "vietnamesiska": {
+        "metadata" : "vi",
+        "url": "http://publications.europa.eu/resource/authority/language/VIE"
+    },
+    "vitryska": {
+        "metadata" : "be",
+        "url": "http://publications.europa.eu/resource/authority/language/BEL"
+    },
+    "zulu": {
+        "metadata" : "zu",
+        "url": "http://publications.europa.eu/resource/authority/language/ZUL"
+    }
+}
+
+
+
+
+
+
+
+

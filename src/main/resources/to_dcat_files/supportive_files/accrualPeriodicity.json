@@ -1,0 +1,94 @@
+{
+    "other": {
+        "title" : "andra",
+        "url": "http://publications.europa.eu/resource/authority/frequency/OTHER"
+    },
+    "daily": {
+        "title" : "dagligen",
+        "url": "http://publications.europa.eu/resource/authority/frequency/DAILY"
+    },
+    "semiannual": {
+        "title" : "halvårs",
+        "url": "http://publications.europa.eu/resource/authority/frequency/ANNUAL_2"
+    },
+    "continuous": {
+        "title" : "kontinuerlig",
+        "url": "http://publications.europa.eu/resource/authority/frequency/CONT"
+    },
+    "quarterly": {
+        "title" : "kvartalsvis",
+        "url": "http://publications.europa.eu/resource/authority/frequency/QUARTERLY"
+    },
+    "monthly": {
+        "title" : "månadsvis",
+        "url": "http://publications.europa.eu/resource/authority/frequency/MONTHLY"
+    },
+    "unknown": {
+        "title" : "unknown",
+        "url": "http://publications.europa.eu/resource/authority/frequency/UNKNOWN"
+    },
+    "irregular": {
+        "title" : "oregelbunden",
+        "url": "http://publications.europa.eu/resource/authority/frequency/IRREG"
+    },
+    "three times a month": {
+        "title" : "three times a month",
+        "url": "http://publications.europa.eu/resource/authority/frequency/MONTHLY_3"
+    },
+    "three times a week": {
+        "title" : "three times a week",
+        "url": "http://publications.europa.eu/resource/authority/frequency/WEEKLY_3"
+    },
+    "three times a year": {
+        "title" : "three times a year",
+        "url": "http://publications.europa.eu/resource/authority/frequency/ANNUAL_3"
+    },
+    "semiweekly": {
+        "title" : "semiweekly",
+        "url": "http://publications.europa.eu/resource/authority/frequency/WEEKLY_2"
+    },
+    "twice a day": {
+        "title" : "twice a day",
+        "url": "http://publications.europa.eu/resource/authority/frequency/DAILY_2"
+    },
+    "semimonthly": {
+        "title" : "semimonthly",
+        "url": "http://publications.europa.eu/resource/authority/frequency/MONTHLY_2"
+    },
+    "continuously": {
+        "title" : "uppdateras kontinuerligt",
+        "url": "http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT"
+    },
+    "biweekly": {
+        "title" : "var fjortonde dag",
+        "url": "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
+    },
+    "bimonthly": {
+        "title" : "varannan månad",
+        "url": "http://publications.europa.eu/resource/authority/frequency/BIMONTHLY"
+    },
+    "triennial": {
+        "title" : "triennial",
+        "url": "http://publications.europa.eu/resource/authority/frequency/TRIENNIAL"
+    },
+    "biennial": {
+        "title" : "vartannat år",
+        "url": "http://publications.europa.eu/resource/authority/frequency/BIENNIAL"
+    },
+    "weekly": {
+        "title" : "weekly",
+        "url": "http://publications.europa.eu/resource/authority/frequency/WEEKLY"
+    },
+    "annual": {
+        "title" : "årlig",
+        "url": "http://publications.europa.eu/resource/authority/frequency/ANNUAL"
+    }
+}
+
+
+
+
+
+
+
+

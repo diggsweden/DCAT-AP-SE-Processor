@@ -1,0 +1,168 @@
+/*
+ * This file is part of dcat-ap-se-processor.
+ *
+ * dcat-ap-se-processor is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * dcat-ap-se-processor is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package se.ams.dcatprocessor.converter;
+
+import org.eclipse.rdf4j.model.vocabulary.DCAT;
+import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
+import org.eclipse.rdf4j.model.vocabulary.FOAF;
+import org.eclipse.rdf4j.model.vocabulary.VCARD4;
+import org.json.simple.JSONObject;
+import se.ams.dcatprocessor.models.*;
+
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Optional;
+
+public class ConverterFiles extends Converter {
+
+    /* Takes one specFile for a Api and creates an Object with ApiSpec tags, DataSet, DataService, Distribution etc. */
+    @Override
+    public DataClass fileToDcat(JSONObject apiSpec) throws Exception {
+        setConvertAndMandatoryFile(ConverterHelpClass.uriToDcat);
+
+        processToDcat(orgConvert, apiSpec, Optional.empty(), Optional.empty(), Optional.empty());
+
+        if (errors.size() > 0) {
+            StringBuilder errorResult = new StringBuilder();
+            for (String error : errors) {
+                errorResult.append(error).append("\n");
+            }
+            throw new Exception(errorResult.toString());
+        }
+        return fileHandler;
+    }
+
+    /* Process the spec to find elements for dcat-ap-se and add them to an Object to return */
+    @Override
+    void processToDcat(JSONObject subConvert, JSONObject file, Optional<String> subCat, Optional<DataClass> preData, Optional<DataClass> preDist) throws Exception {
+        DataSet dataSet = new DataSet();
+        DataService dataService = new DataService();
+        Distribution distribution = new Distribution();
+        Organization organizationLocal = new Organization();
+        DataClass dataClassLocal = new DataClass();
+        Object[] dcatKeys = subConvert.keySet().toArray();
+        Iterator<?> keysInFile = Arrays.stream(dcatKeys).iterator();
+
+        while (keysInFile.hasNext()) {
+            Object key = keysInFile.next();
+            if (key.equals(ConverterHelpClass.toDcatString) && (subCat.isPresent())) {
+                if (!keysInFile.hasNext()) {
+                    break;
+                }
+                key = keysInFile.next();
+            }
+
+            // Get tag-name for api-spec
+            String annotationName = (String) ((JSONObject) subConvert.get(key)).get(ConverterHelpClass.toDcatString);
+
+            // Check if tag is Mandatory
+            boolean isMandatory;
+            String mandatoryKey = key.toString();
+            if (subCat.isPresent()) {
+                mandatoryKey = subCat + "-" + key;
+            }
+            isMandatory = jsonObjectMandatoryDcat.containsKey(mandatoryKey);
+
+            // Do if key is DATASET
+            if (key.toString().contains(DCAT.DATASET.getLocalName())) {
+                ConverterDataSet convertDataSet = new ConverterDataSet();
+                convertDataSet.orgConvert = orgConvert;
+                convertDataSet.jsonObjectMandatoryDcat = jsonObjectMandatoryDcat;
+                convertDataSet.fileHandler = fileHandler;
+                convertDataSet.createSubset(file, key.toString(), annotationName, Optional.of(dataSet), Optional.empty(), isMandatory);
+            }
+            // Do if key is LICENSE_DOCUMENT
+            else if (key.toString().equals(DCTERMS.LICENSE_DOCUMENT.getLocalName())) {
+                if (subCat.isPresent()) {
+                    if (subCat.get().equals(DCAT.DATA_SERVICE.getLocalName())) {
+                        createSubset(file, key.toString(), annotationName, Optional.of(dataService), Optional.empty(), isMandatory);
+                    } else if (subCat.get().equals(DCTERMS.RIGHTS_STATEMENT.getLocalName())) {
+                        createSubset(file, key.toString(), annotationName, Optional.of(dataClassLocal), Optional.empty(), isMandatory);
+                    } else {
+                        createSubset(file, key.toString(), annotationName, Optional.empty(), Optional.of(distribution), isMandatory);
+                    }
+                } else {
+                    createSubset(file, key.toString(), annotationName, preData, Optional.of(distribution), isMandatory);
+                }
+            }
+            // Do if key is DATASERVICE
+            else if (key.toString().contains(DCAT.DATA_SERVICE.getLocalName())) {
+                ConverterDataService convertDataService = new ConverterDataService();
+                convertDataService.orgConvert = orgConvert;
+                convertDataService.jsonObjectMandatoryDcat = jsonObjectMandatoryDcat;
+                convertDataService.fileHandler = fileHandler;
+                convertDataService.createSubset(file, key.toString(), annotationName, Optional.of(dataService), Optional.empty(), isMandatory);
+            }
+            // Do if key is A Nested Object
+            else if (ConverterHelpClass.isNestedObjects(key.toString())) {
+                if (subCat.isEmpty()) {
+                    createSubset(file, key.toString(), annotationName, Optional.empty(), Optional.empty(), isMandatory);
+                } else if (subCat.get().equals(DCTERMS.RIGHTS_STATEMENT.getLocalName())) {
+                    createSubset(file, key.toString(), annotationName, Optional.of(dataClassLocal), Optional.empty(), isMandatory);
+                } else {
+                    createSubset(file, key.toString(), annotationName, Optional.empty(), Optional.empty(), isMandatory);
+                }
+            }
+            /*
+             * Checks for language strings to add them correctly */
+            else {
+                boolean hasLanguages = false;
+                if (subCat.isPresent()) {
+                    if (ConverterHelpClass.isNestedLanguageObjects(subCat.get())) {
+                        hasLanguages = loopLanguage(file, annotationName, subCat, Optional.of(dataClassLocal), key.toString());
+                    }
+                }
+                if (!hasLanguages) {
+                    if (key.equals(VCARD4.ADDRESS.getLocalName())) {
+                        if (file.containsKey(annotationName)) {
+                            String value = String.valueOf(file.get(annotationName));
+                            addValues(organizationLocal, value, key.toString(), subCat);
+                        } else {
+                            loopObject(file, key.toString(), annotationName, organizationLocal, subCat);
+                        }
+                    } else if (file.containsKey(annotationName)) {
+                        String value = String.valueOf(file.get(annotationName));
+                        if (subCat.isPresent()) {
+                            if (subCat.get().contains(DCAT.CONTACT_POINT.getLocalName())) {
+                                addValues(organizationLocal, value, key.toString(), subCat);
+                            } else if (ConverterHelpClass.isNestedObjects(subCat.get())) {
+                                addValues(dataClassLocal, value, key.toString(), subCat);
+                            }
+                        }
+                    } else if (isMandatory) {
+                        if (subCat.isPresent()) {
+                            errors.add("Errormessage: " + annotationName + " in " + subCat + " is Mandatory");
+                        } else {
+                            errors.add("Errormessage: " + annotationName + " is Mandatory");
+                        }
+                    }
+                }
+            }
+        }
+        if (subCat.isPresent()) {
+            if (subCat.get().contains(DCTERMS.PUBLISHER.getLocalName())) {
+                preData.get().agent = dataClassLocal;
+            } else if (subCat.get().contains(DCTERMS.LICENSE_DOCUMENT.getLocalName())) {
+                preData.ifPresent(dataClass -> dataClass.licenseDocuments.add(dataClassLocal));
+            } else if (subCat.get().contains(FOAF.DOCUMENT.getLocalName())) {
+                preData.ifPresent(dataClass -> dataClass.documents.add(dataClassLocal));
+            }
+        }
+    }
+
+}

@@ -1,0 +1,38 @@
+{
+  "dcat-catalog": {
+    "about": "https://www.af.se",
+    "title-sv": "Exempel på catalog för en organisation med flera api'n",
+    "title-en": "Example of a catalog for an organistaion with several api's",
+    "description-sv": "Arbetsförmedlingen med flera api'er",
+    "publisher": {
+      "about": "https://www.example.se/result.rdf#publisher",
+      "name": "Arbetsförmedlingens Catalog",
+      "type": "Company",
+      "homepage": "www.publishertest.se",
+      "mbox": "publisher1@publisher.com"
+    },
+    "license": "https://www.apache.org/licenses/LICENSE-2.0",
+    "issued": "2021-04-01",
+    "homepage": "www.arbetsformedlingen.se",
+    "modified": "2021-04-02",
+    "rights": {
+      "attributionText-sv": "Detta är ett exempel på rättighetstext för Catalog",
+      "attributionURL": "www.rattighetstextcatalog.se",
+      "copyrightNotice": "Upphovsrätt",
+      "copyrightStatement": {
+        "title-sv": "License För Catalog",
+        "description-sv": "license för Catalog"
+      },
+      "copyrightYear": "1979",
+      "copyrightHolder": {
+        "about": "www.exempel.se/#copyrightHolderCatalog",
+        "name": "Copyright Holder för Catalog",
+        "homepage": "www.holder.com",
+        "type": "RegionalAuthority"
+      },
+      "jurisdiction": "www.nywebaddresscat.com",
+      "reuserGuidelines": "www.guidelinescat.se"
+    }
+  }
+}
+

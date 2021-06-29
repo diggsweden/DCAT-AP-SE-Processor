@@ -1,0 +1,206 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "1.0.0",
+    "title": "Annotation exempel api",
+    "description": "Annotation exempel api är ett påhittat api som använder sig av annotations för att skapa metadata för DCAT-AP-SE.",
+    "x-dcat": {
+      "dcat-catalog": {
+        "about": "https://www.af.se",
+        "title-sv": "Exempel på catalog för en organisation med flera api'n",
+        "title-en": "Example of a catalog for an organistaion with several api's",
+        "description-sv": "Arbetsförmedlingen med flera api'er",
+        "publisher": {
+          "about": "https://www.example.se/result.rdf#publisher",
+          "name": "Arbetsförmedlingens Catalog",
+          "type": "Company",
+          "homepage": "www.publishertest.se",
+          "mbox": "publisher1@publisher.com"
+        },
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "issued": "2021-04-01",
+        "homepage": "www.arbetsformedlingen.se",
+        "modified": "2021-04-02",
+        "rights": {
+          "attributionText-sv": "Detta är ett exempel på rättighetstext för Catalog",
+          "attributionURL": "www.rattighetstextcatalog.se",
+          "copyrightNotice": "Upphovsrätt",
+          "copyrightStatement": {
+            "title-sv": "License För Catalog",
+            "description-sv": "license för Catalog"
+          },
+          "copyrightYear": "1979",
+          "copyrightHolder": {
+            "about": "www.exempel.se/#copyrightHolderCatalog",
+            "name": "Copyright Holder för Catalog",
+            "homepage": "www.holder.com",
+            "type": "RegionalAuthority"
+          },
+          "jurisdiction": "www.nywebaddresscat.com",
+          "reuserGuidelines": "www.guidelinescat.se"
+        }
+      },
+      "dcat-dataset": {
+        "about": "https://www.example.se/#datasetC",
+        "title-sv": "Datamängd C",
+        "description-sv": "Exempel beskrivning datamängd C",
+        "creator": {
+          "about": "https://www.example.se/#creatorC",
+          "name": "ExempelFöretag",
+          "type": "NationalAuthority",
+          "homepage": "www.exempelforetag.com",
+          "mbox": "kontakt@exempelforetag.com"
+        },
+        "other agent": {
+          "about": "https://www.example.se/#other_agentC",
+          "name": "ExempelFöretag 2",
+          "type": "NationalAuthority",
+          "homepage": "www.exempelforetag2.com",
+          "mbox": "kontakt@exempelforetag2.com",
+          "role": "distributor"
+        },
+        "contactPoint": {
+          "about": "https://www.example.se/#contactC",
+          "name": "Exempel Organisation",
+          "type": "Organization",
+          "email": "admin@exempel.se",
+          "address": "Testgatan 5; 76543; Tranemo; Sverige",
+          "phone": "0799887655"
+        },
+        "keyword-sv": "exempel; info; data",
+        "keyword-en": "example; info; computer",
+        "theme": "TRAN; EDUC",
+        "issued": "2021-03-05",
+        "modified": "2021-03-15",
+        "spatialUrl": "https://www.geonames.org/6695072/european-union.html",
+        "versionInfo": "version 3.7.5",
+        "versionNotes": "Exempel på VersionsNoteringar; Fler versionsnoteringar",
+        "landingPage": "www.exempelsida.se",
+        "temporalResolution": "P1Y",
+        "spatialResolutionInMeters": "1.4",
+        "relation": "www.relateradresursexempelsida.se",
+        "isReferencedBy": "www.exempelreferenssida.se",
+        "identifier": "www.identifierare.com",
+        "adms": "www.ovrig-identifierare.com",
+        "conformsTo": {
+          "title-sv": "Exempel namn på Standard",
+          "description-sv": "Beskrivning Standard"
+        },
+        "temporal": {
+          "startDate": "2021-03-16",
+          "endDate": "2021-03-25"
+        },
+        "accessRights": "Public",
+        "offers": {
+          "description-sv": "Exempel Avgift",
+          "page": "www.avgiftsexempel.se"
+        },
+        "page": {
+          "title-sv": "Exempel Dokument",
+          "description-sv": "Beskrivning av Exempeldokument"
+        },
+        "distribution": {
+          "about": "https://www.example.se/#distributionC",
+          "title-sv": "Distribution C",
+          "description-sv": "Beskrivning av Distribution C",
+          "accessURL": "www.distributionC.se",
+          "downloadURL": "www.exempelforetag.se/distributionC",
+          "formatMedia": "text/html",
+          "accessService": "https://www.example.se/#dataserviceC",
+          "temporalResolution": "P1Y",
+          "spatialResolutionInMeters": "1.4",
+          "byteSize": "3000",
+          "issued": "2021-05-04",
+          "modified": "2021-05-20",
+          "status": "Completed",
+          "availability": "Stable",
+          "license": "CC BY-NC-ND 4.0",
+          "rights": {
+            "attributionText-sv": "Detta är en rättighetstext",
+            "attributionURL": "www.rattighetstext.se",
+            "copyrightNotice": "Upphovsrätt",
+            "copyrightStatement": {
+              "title-sv": "Test License",
+              "description-sv": "Test license for dcat spec"
+            },
+            "copyrightYear": "1976",
+            "copyrightHolder": {
+              "about": "https://www.example.se/#copyrightHolderC",
+              "name": "Copyright Name",
+              "homepage": "www.copyrightweb.com",
+              "type": "RegionalAuthority"
+            },
+            "jurisdiction": "www.copyrightwebjurisdiction.com",
+            "reuserGuidelines": "www.guidelines.se"
+          },
+          "checksum": {
+            "value": "A23DF"
+          },
+          "page": {
+            "title-sv": "Nytt Exempel Dokument",
+            "description-sv": "Beskrivning av Nytt Exempeldokument"
+          },
+          "conformsTo": {
+            "title-sv": "Ny Standard",
+            "description-sv": "Beskrivning av Ny Standard"
+          }
+        }
+      },
+      "dcat-dataservice": {
+        "about": "https://www.example.se/#dataserviceC",
+        "title-sv": "Datatjänst C",
+        "description-sv": "Beskrivning av Datatjänst C",
+        "endpointURL": "www.datatjanstC.se",
+        "endpointDescription": "www.beskrivningDatatjanstC.se",
+        "publisher": {
+          "about": "https://www.example.se/#publisherC2",
+          "name": "Utgivare av Datatjänst C",
+          "type": "NonGovernmentalOrganisation",
+          "homepage": "www.utgivare2.se",
+          "mbox": "kontakt@utgivare2.se"
+        },
+        "contactPoint": {
+          "about": "https://www.example.se/#contactPointC2",
+          "type": "Organization",
+          "name": "Namn på Organisation 2",
+          "email": "kontakt@organization2.se",
+          "phone": "07923568945",
+          "address": "Testvägen 24; 93847; Backa; Sverige"
+        },
+        "type": "REST",
+        "keyword-sv": "rest; datatjänst",
+        "theme": "ENER",
+        "conformsTo": {
+          "about": "https://www.example.se/#dataserviceC/standard",
+          "title-sv": "Standard för Datatjänst C",
+          "description-sv": "Beskrivning av Standard för Datatjänst C"
+        },
+        "servesDataset": "https://www.example.se/#datasetC",
+        "licensedoc": {
+          "about": "https://www.example.se/#dataserviceC/license",
+          "title-sv": "namn på licens för DataTjänst",
+          "description-sv": "Beskrivning av licens för Datatjänst"
+        },
+        "accessRights": "Restricted",
+        "landingPage": "www.landingpagefordataservice.com",
+        "page": {
+          "about": "https://www.example.se/#dataserviceC/page",
+          "title-sv": "Namn på exempel dokument för Datatjänst",
+          "description-sv": "Beskrivning av dokument för Datatjänst"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "description": "Fake API description. Only in this file to show where the rest of the api definition would be located.",
+        "responses": {
+          "200": {
+            "description": "Fake 200 response"
+          }
+        }
+      }
+    }
+  }
+}

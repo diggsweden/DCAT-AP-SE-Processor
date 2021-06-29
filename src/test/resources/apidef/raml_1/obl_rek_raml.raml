@@ -1,0 +1,171 @@
+#%RAML 1.0
+title: Annotation exempel api
+description: Annotation exempel api är ett påhittat api som använder sig av annotations för att skapa metadata för DCAT-AP-SE.
+version: 1.0.0
+
+annotationTypes:
+  dcat-catalog:
+    properties:
+      about: string
+      title: string
+      description: string
+      publisher:
+        name :string
+        type :string
+        homepage :string
+        mbox :string
+      license: string
+      issued: string
+      language: string
+      modified: string
+      homepage: string
+      location:
+        centroid: string
+        bbox: string
+        geometry: string
+      rights: string
+      hasPart: string
+      isPartOf: string
+  dcat-dataset:
+    properties:
+      title: string
+      description: string
+      publisher:
+        name :string
+        type :string
+        homepage :string
+        mbox :string
+      creator: string
+      qualifiedAttribution: string
+      contactPoint:
+        type :string
+        name :string
+        email :string
+        phone :string
+        adress :string
+      distribution:
+        belongsTo: string
+        title: string
+        description: string
+        accessURL: string
+        downloadURL: string
+        format: string
+        accessService: string
+        temporalResolution: string
+        spatialResolutionInMeters: string
+        byteSize: string
+        language: string
+        issued: string
+        modified: string
+        status: string
+        availability: string
+        license: string
+        rights: string
+        checksum: string
+        page: string
+        conformsTo: string
+      keyword: string
+      theme: string
+      identifier: string
+      adms: string
+      issued: string
+      modified: string
+      language: string
+      landingPage: string
+      conformsTo: string
+      location:
+        centroid: string
+        bbox: string
+        geometry: string
+      temporal:
+        startDate: string
+        endDate: string
+      temporalResolution: string
+      spatialResolutionInMeters: string
+      accrualPeriodicity: string
+      versionInfo: string
+      versionNotes: string
+      source: string
+      accessRights: string
+      offers: string
+      hasVersion: string
+      isVersionOf: string
+      isReferencedBy: string
+      relation: string
+      qualifiedRelation: string
+      page: string
+      provenance: string
+  dcat-dataservice:
+    properties:
+      title: string
+      description: string
+      endpointURL: string
+      endpointDescription: string
+      publisher:
+        name :string
+        type :string
+        homepage :string
+        mbox :string
+      contactPoint:
+        type :string
+        name :string
+        email :string
+        phone :string
+        adress :string
+      type: string
+      keyword: string
+      theme: string
+      conformsTo: string
+      servesDataset: string
+      license: string
+      accessRights: string
+      landingPage: string
+      page: string
+  dcat-agent:
+    properties:
+      name: string
+  dcat-organization:
+    properties:
+      type: string
+      name: string
+      email: string
+
+(dcat-catalog):
+  about: https://www.af.se
+  title-sv: Annotation exempel RAML 1.0
+  title-en: Annotation example RAML 1.0
+  description-sv: Annotation exempel från arbetsförmedlingen
+  publisher:
+    about: https://www.example.se/result.rdf#publisher
+    name: Redpill Linpro AB Catalog
+    type: NationalAuthority
+  license: https://www.apache.org/licenses/LICENSE-2.0
+  issued: 2021-03-01
+  modified: 2021-03-16
+  homepage: https://www.af.se/home
+
+(dcat-dataset):
+  about: https://www.example.se/result.rdf#dataset1
+  title-sv: Datamängd
+  description-sv: Exempel beskrivning
+  publisher:
+    about: https://www.example.se/result.rdf#publisher
+    name: Redpill Linpro AB
+    type: NationalAuthority
+  contactPoint:
+    about: www.af11.se
+    name: Redpill Linpro AB Contact
+    type: Organisation
+    email: admin2@test.se
+    address: Testgatan 5; 76543; Tranemo; Sverige
+    phone: 98876554
+  keyword-sv: yrke; info; redpill; linpro
+  keyword-en: profession; info; redpill; linpro
+  theme: TRAN; EDUC
+  issued: 2021-03-05
+  spatialUrl: https://www.geonames.org/6695072/european-union.html
+  temporal:
+    startDate: 2021-03-16
+    endDate: 2021-03-25
+  accessRights: Public
+

@@ -1,0 +1,78 @@
+{
+    "csv": {
+        "title" : "CSV (.csv)",
+        "url": "text/csv"
+    },
+    "csv zip": {
+        "title" : "CSV (.csv) i en zip",
+        "url": "text/csv+zip"
+    },
+    "html": {
+        "title" : "HTML (.html)",
+        "url": "text/html"
+    },
+    "json": {
+        "title" : "JSON (.json)",
+        "url": "application/json"
+    },
+    "json zip": {
+        "title" : "JSON (.json) i en zip",
+        "url": "application/json+zip"
+    },
+    "excel": {
+        "title" : "Microsoft Excel (.xls)",
+        "url": "application/vnd.ms-excel"
+    },
+    "xlsx": {
+        "title" : "Microsoft Excel XML (.xlsx)",
+        "url": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    },
+    "opendocument": {
+        "title" : "OpenDocument Spreadsheet (.ods)",
+        "url": "application/vnd.oasis.opendocument.spreadsheet"
+    },
+    "pdf": {
+        "title" : "PDF (.pdf)",
+        "url": "application/pdf"
+    },
+    "n3": {
+        "title" : "RDF som N-Triples (.n3)",
+        "url": "application/n-triples"
+    },
+    "turtle": {
+        "title" : "RDF som Turtle (.ttl)",
+        "url": "text/turtle"
+    },
+    "sparql": {
+        "title" : "RDF sökning (SPARQL)",
+        "url": "application/sparql-query"
+    },
+    "rdf/xml": {
+        "title" : "RDF/XML (.rdf)",
+        "url": "application/rdf+xml"
+    },
+    "text": {
+        "title" : "Text (.txt)",
+        "url": "text/plain"
+    },
+    "xml": {
+        "title" : "XML (.xml)",
+        "url": "application/xml"
+    },
+    "xml zip": {
+        "title" : "XML (.xml) i en zip",
+        "url": "application/xml+zip"
+    },
+    "zip": {
+        "title" : "ZIP (.zip)",
+        "url": "application/zip"
+    }
+}
+
+
+
+
+
+
+
+

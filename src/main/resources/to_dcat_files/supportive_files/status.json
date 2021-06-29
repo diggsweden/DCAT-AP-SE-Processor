@@ -1,0 +1,26 @@
+{
+    "Deprecated": {
+        "title" : "Avvecklad",
+        "url": "http://purl.org/adms/status/Deprecated"
+    },
+    "Completed": {
+        "title" : "Färdig",
+        "url": "http://purl.org/adms/status/Completed"
+    },
+    "Withdrawn": {
+        "title" : "Tillbakadragen",
+        "url": "http://purl.org/adms/status/Withdrawn"
+    },
+    "UnderDevelopment": {
+        "title" : "Under utveckling",
+        "url": "http://purl.org/adms/status/UnderDevelopment"
+    }
+}
+
+
+
+
+
+
+
+

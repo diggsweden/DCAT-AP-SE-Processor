@@ -1,0 +1,42 @@
+{
+    "user": {
+        "title" : "Användare",
+        "url": "http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/user"
+    },
+    "distributor": {
+        "title" : "Distributör",
+        "url": "http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/distributor"
+    },
+    "custodian": {
+        "title" : "Förvaltare",
+        "url": "http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/custodian"
+    },
+    "resourceProvider": {
+        "title" : "Leverantör",
+        "url": "http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/resourceProvider"
+    },
+    "principalInvestigator": {
+        "title" : "Undersökningsledare",
+        "url": "http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/principalInvestigator"
+    },
+    "author": {
+        "title" : "Upphovsman",
+        "url": "http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/author"
+    },
+    "processor": {
+        "title" : "Vidareförädlare",
+        "url": "http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/processor"
+    },
+    "owner": {
+        "title" : "Ägare",
+        "url": "http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/owner"
+    }
+}
+
+
+
+
+
+
+
+

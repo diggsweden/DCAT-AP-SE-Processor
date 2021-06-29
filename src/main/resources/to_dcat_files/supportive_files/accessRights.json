@@ -1,0 +1,22 @@
+{
+    "Non-public": {
+        "title" : "NON_PUBLIC",
+        "url": "http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+    },
+    "Public": {
+        "title" : "PUBLIC",
+        "url": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+    },
+    "Restricted": {
+        "title" : "RESTRICTED",
+        "url": "http://publications.europa.eu/resource/authority/access-right/RESTRICTED"
+    }
+}
+
+
+
+
+
+
+
+

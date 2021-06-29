@@ -1,0 +1,54 @@
+{
+    "Academia-ScientificOrganisation": {
+        "title" : "Akademia/Vetenskaplig organisation",
+        "url": "http://purl.org/adms/publishertype/Academia-ScientificOrganisation"
+    },
+    "NonProfitOrganisation": {
+        "title" : "Ej vinstdrivande organisation",
+        "url": "http://purl.org/adms/publishertype/NonProfitOrganisation"
+    },
+    "Company": {
+        "title" : "Företag",
+        "url": "http://purl.org/adms/publishertype/Company"
+    },
+    "NonGovernmentalOrganisation": {
+        "title" : "Icke-statlig organisation",
+        "url": "http://purl.org/adms/publishertype/NonGovernmentalOrganisation"
+    },
+    "IndustryConsortium": {
+        "title" : "Industrikonsortium",
+        "url": "http://purl.org/adms/publishertype/IndustryConsortium"
+    },
+    "LocalAuthority": {
+        "title" : "Lokal myndighet/kommun",
+        "url": "http://purl.org/adms/publishertype/LocalAuthority"
+    },
+    "NationalAuthority": {
+        "title" : "Nationell myndighet",
+        "url": "http://purl.org/adms/publishertype/NationalAuthority"
+    },
+    "Private": {
+        "title" : "Privatperson(er)",
+        "url": "http://purl.org/adms/publishertype/PrivateIndividual(s)"
+    },
+    "RegionalAuthority": {
+        "title" : "Regional myndighet/landsting",
+        "url": "http://purl.org/adms/publishertype/RegionalAuthority"
+    },
+    "StandardisationBody": {
+        "title" : "Standardiseringsorganisation",
+        "url": "http://purl.org/adms/publishertype/StandardisationBody"
+    },
+    "SupraNationalAuthority": {
+        "title" : "Över-/mellanstatlig myndighet",
+        "url": "http://purl.org/adms/publishertype/SupraNationalAuthority"
+    }
+}
+
+
+
+
+
+
+
+

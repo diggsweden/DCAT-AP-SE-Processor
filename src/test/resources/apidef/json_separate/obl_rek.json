@@ -1,0 +1,47 @@
+{
+  "dcat-catalog": {
+    "about": "https://www.af.se",
+    "title-sv": "Annotation exempel RAML 1.0",
+    "title-en": "Annotation example RAML 1.0",
+    "description-sv": "Annotation exempel från arbetsförmedlingen",
+    "publisher": {
+      "about": "https://www.example.se/result.rdf#publisher",
+      "name": "Redpill Linpro AB Catalog",
+      "type": "NationalAuthority"
+    },
+    "license": "https://www.apache.org/licenses/LICENSE-2.0",
+    "issued": "2021-03-01",
+    "modified": "2021-03-16",
+    "homepage": "https://www.af.se/home"
+  },
+  "dcat-dataset": {
+    "about": "https://www.example.se/result.rdf#dataset1",
+    "title-sv": "Datamängd",
+    "description-sv": "Exempel beskrivning",
+    "publisher": {
+      "about": "https://www.example.se/result.rdf#publisher",
+      "name": "Redpill Linpro AB 1",
+      "type": "NationalAuthority"
+    },
+    "contactPoint":
+    {
+      "about": "www.af11.se",
+      "name": "Redpill Linpro AB Contact",
+      "type": "Organisation",
+      "email": "admin2@test.se",
+      "address": "Testgatan 5; 76543; Tranemo; Sverige",
+      "phone": "98876554"
+    },
+    "keyword-sv": "yrke; info; redpill; linpro",
+    "keyword-en": "profession; info; redpill; linpro",
+    "theme": "TRAN; EDUC",
+    "issued": "2021-03-05",
+    "spatialUrl": "https://www.geonames.org/6695072/european-union.html",
+    "temporal":
+    {
+      "startDate": "2021-03-16",
+      "endDate": "2021-03-25"
+    },
+    "accessRights": "Public"
+  }
+}

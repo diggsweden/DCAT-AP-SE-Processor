@@ -43,9 +43,8 @@ Det finns exempelfiler som visar hur obligatoriska, rekommenderade och valfria v
 När apidefinition/erna är uppdaterade med metadata görs de tillgängliga på en publikt nåbar folder, så att den separata pipeline som kör verktyget kan nå dem.
 
 #### Organisation med ett api
-Se exempel [enkel fil](src/main/resources/metadataExample/single), där Catalog elementet ligger i samma fil som resterande metadata.
+Se exempel [enkel fil](src/main/resources/metadataExample/single), där Katalog elementet ligger i samma fil som resterande metadata.
 
-*TODO: peka om länkar*<br>
 Exempel med obligatoriska och rekommenderade värden.<br>
 [RAML](src/main/resources/metadataExample/single/full_example.raml)<br>
 [OAS YAML](src/main/resources/metadataExample/single/full_example_oas.yaml)<br>
@@ -57,13 +56,14 @@ För API som inte har en definition (code-first) kan producenten tillhandahålla
 #### Organisation med mer än ett api
 Organisation med multipla api att producera RDF från använder en separat catalog.json fil för att hålla samman de ingående api'ernas metadata, se exempel under [multipla filer](src/main/resources/metadataExample/multiple).<br>
 För att verktyget ska generera en sammanslagen RDF fil krävs att organisationen skapar filer enligt följande:<br>
-catalog.json - beskriver det övergripande catalog elementet och är samma för alla ingående apier.<br>
+catalog.json - beskriver det övergripande katalog elementet och är samma för alla ingående apier.<br>
+[catalog.json](src/main/resources/metadataExample/multiple/catalog.json) - Katalog elementet i separat fil på json format<br>
 
 exempel på ingående apidefinitioner innehållande metadata för DCAT-AP-SE<br>
-apidefA.json - api A, separat metadataspecifikation<br>
-apidefB.raml - api B på RAML format<br>
-apidefC.yaml - api C på OAS3 yaml format<br>
-apidefD.json
+[full_example.raml](src/main/resources/metadataExample/multiple/full_example.raml) - Api A på RAML format<br>
+[full_example_oas.yaml](src/main/resources/metadataExample/multiple/full_example_oas.yaml) - Api B på OAS3 yaml format<br>
+[full_example_oas.json](src/main/resources/metadataExample/multiple/full_example_oas.json) - Api C på OAS3 json format<br>
+[full_example.json](src/main/resources/metadataExample/multiple/full_example.json), Api D, separat metadataspecifikation på json format<br>
 
 ## Ingående delar i verktyget
 Sekvensdiagram över flödet i verktyget.
@@ -72,7 +72,7 @@ Sekvensdiagram över flödet i verktyget.
 ### PreprocessorController (REST API)
 REST API:n för verktyget, följande två är de som finns att använda:
 
-"/dcat-generation/files/" - Skickar man in directory (dir) som sedan skickas vidare till Managern för hantering.
+"/dcat-generation/files/" - Skickar man in directory (dir) som sedan skickas vidare till Managern för hantering. <br>
 "/dcat-generation/web/" - Är endpointen från Web-guit som skickar med antingen en sträng med hela apidefinitionen eller en lista med filer som sedan skickas vidare till Managern.
 
 ### Manager
@@ -89,7 +89,7 @@ RAML0.8 och/eller OAS2 på json/yaml format stöder inte annotations/extensions,
 
 ### Converter
 
-*(TODO beskriv bibilotek vi använder med länk)*
+Använder MultiValuedMap (Apache Commons) och JSON.simple.
 
 För att konvertera mellan inläst metadata till element på DCAT AP SE format används konverteringsfiler (t.ex. TO_DCAT_OAS.json).<br>
 I senare skeden kan man enkelt lägga till nya konverteringsfiler för andra format eller ändra till nyare versioner av befintliga format.
@@ -98,14 +98,13 @@ I senare skeden kan man enkelt lägga till nya konverteringsfiler för andra for
 
 Använder RDF4J
 
-Tar emot en lista av Catalog objekt och skapar matchande RDF utifrån det.
+Tar emot en lista av Katalog objekt och skapar matchande RDF utifrån det.
 
 ## Använda verktyget
 Bygg docker image från koden i det här repositoryt, t.ex:
 ```
 docker build --no-cache -t "dcatprocessor" .
 ```
-eller hämta docker image från ***(TODO inte utrett än hur förvaltningen kommer hanteras)***
 När container startas finns ett formulär och ett REST API tillgängligt att använda efter behov.
 
 Docker imagen kör Ubuntu 18.04.2 LTS (Bionic Beaver) och installerar Swedish locale, se [dockerfile](dockerfile)
@@ -125,9 +124,11 @@ Verktyget levererar resultatet som svar på sidan
 Anropa endpoints med valfritt verktyg. I utveckling har vi använt curl från git bash.
 
 Jenkins pipeline exempel
-[Jenkinsfile](Jenkinsfile)
+[Jenkinsfile](docs/jenkinsfile)
 
 ## Arbetssätt vid lokal utveckling
+
+### Använda Docker
 Kopiera fil från lokal dator till den container man vill köra från
 
 [docker cp](https://docs.docker.com/engine/reference/commandline/cp/)
@@ -154,6 +155,15 @@ och satt sin RDF pipeline att läsa upp dem därifrån.<br>
 (docker cp source containername:destination)
 $ docker cp apidef.raml hopeful_boyd:/apidef
 ```
+
+### Köra direkt från jar-filen
+För att  köra verktyget direkt från jarfilen öppnar man ett kommandfönster och går till där jar-filen ligger. Sedan kör man:
+```
+java -jar <jar-file-name>.jar
+```
+Detta kör igång verktyget lokalt på datorn. 
+
+### Göra anrop till Verktyget
 Kör anrop till rest api via git bash, Postman eller annat verktyg<br>
 
 ```
@@ -164,30 +174,39 @@ eller testa med anrop via formulär metoden (Stå i samma katalog som en fil som
 ```
 $ curl -F apispecification= -F create=create -F apitype=apitype.R10 -F apifile=@obl_rek_raml.raml http://localhost:8080/generate/dcat/0
 ```
+Verktyget har även ett enklare GUI man kan använda för att skicka in apispecifikationer genom. GUI:t startas i webläsare genom att gå till (förutsatt att verktyget körs på localhost):
+
+http://localhost:8080/
+
 #Loggning
 Exceptions skrivs till container loggen "/opt/logs/dcatprocessor.log".<br>
 
 # Lägga till stöd för nya metadata i verktyget
+[Översikt över vad som finns och fungerar enligt DCAT-AP-SE spec](docs/DCATAPSE_completion.md)<br>
 [Tillägg i Converter](docs/converter-tutorial.md)<br>
 [Tillägg i RDFWorker](docs/rdfworker-tutorial.md)<br>
 [specifikationsfil](src/main/resources/dcat_specification.properties)
 
 # Licens
-dcat-ap-se-processor är licensierad under [GPL v3](License.txt)
+dcat-ap-se-processor är licensierad under [GPL v3](LICENSE)
 
 # Beroenden
-snakeYaml [Apache license](Apachee.txt)<br>
-RDF4J [EDL v1.0 license](edl-v10.txt)<br>
-Spring boot, Spring framework [Apache license](Apache.txt)<br>
-Project Lombok [MIT license](MIT.txt)<br>
-commonmark-java [BSD-2 clause simplified license](BSD-2.txt)<br>
-json-ld-java [BSD-3 clause license](BSD-3.txt)<br>
-jackson-dataformat-yaml [Apache license](Apache.txt)<br>
-hibernate-json-org-contributor [BSD-3 clause license](BSD-3.txt)<br>
-json-simple [Apache license](Apache.txt)<br>
-jsoup [MIT license](MIT.txt)<br>
-commons-collections4 [Apache license](Apache.txt)<br>
-*TODO fyll på med fler*
+snakeYaml [Apache license](docs/Licenser/Apache.txt)<br>
+RDF4J [EDL v1.0 license](docs/Licenser/edl-v10.txt)<br>
+Spring boot, Spring framework [Apache license](docs/Licenser/Apache.txt)<br>
+Project Lombok [MIT license](docs/Licenser/MIT.txt)<br>
+commonmark-java [BSD-2 clause simplified license](docs/Licenser/BSD-2.txt)<br>
+json-ld-java [BSD-3 clause license](docs/Licenser/BSD-3.txt)<br>
+jackson-dataformat-yaml [Apache license](docs/Licenser/Apache.txt)<br>
+hibernate-json-org-contributor [BSD-3 clause license](docs/Licenser/BSD-3.txt  )<br>
+json-simple [Apache license](docs/Licenser/Apache.txt)<br>
+jsoup [MIT license](docs/Licenser/MIT.txt)<br>
+commons-collections4 [Apache license](docs/Licenser/Apache.txt)<br>
+
+# Status
+Detta är en första version av verktyget. <br>
+Arbetsförmedlingen och Bolagsverket kommer prova mjukvaran skarpt under hösten. <br>
+När mjukvaran fungerar för tillräckligt många offentliga organisationer kommer den släppas i beta-version. <br>
+Tills dess drivs den av Arbetsförmedlingen och DIGG.
 
 # Bidra
-**//TODO beskriv hur man kan bidra när vi vet hur förvaltningen är uppsatt**

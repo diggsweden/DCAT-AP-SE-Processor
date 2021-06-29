@@ -1,0 +1,66 @@
+{
+    "SOCI": {
+        "title" : "Befolkning och samhälle",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/SOCI"
+    },
+    "ECON": {
+        "title" : "Ekonomi och finans",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/ECON"
+    },
+    "ENER": {
+        "title" : "Energi",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/ENER"
+    },
+    "HEAL": {
+        "title" : "Hälsa",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/HEAL"
+    },
+    "INTR": {
+        "title" : "Internationella frågor",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/INTR"
+    },
+    "AGRI": {
+        "title" : "Jordbruk, fiske, skogsbruk och livsmedel",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/AGRI"
+    },
+    "ENVI": {
+        "title" : "Miljö",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/ENVI"
+    },
+    "GOVE": {
+        "title" : "Regeringen och den offentliga sektorn",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/GOVE"
+    },
+    "REGI": {
+        "title" : "Regioner och städer",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/REGI"
+    },
+    "JUST": {
+        "title" : "Rättvisa, rättsliga system och allmän säkerhet",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/JUST"
+    },
+    "TRAN": {
+        "title" : "Transport",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/TRAN"
+    },
+    "EDUC": {
+        "title" : "Utbildning, kultur och sport",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/EDUC"
+    },
+    "education": {
+        "title" : "Utbildning, kultur och sport",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/EDUC"
+    },
+    "TECH": {
+        "title" : "Vetenskap och teknik",
+        "url": "http://publications.europa.eu/resource/authority/data-theme/TECH"
+    }
+}
+
+
+
+
+
+
+
+

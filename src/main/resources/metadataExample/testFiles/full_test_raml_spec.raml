@@ -1,0 +1,338 @@
+#%RAML 1.0
+title: Annotation exempel api
+description: Annotation exempel api är ett påhittat api som använder sig av annotations för att skapa metadata för DCAT-AP-SE.
+version: 1.0.0
+
+(dcat-catalog):
+  about: www.catalog.se
+  title-sv: Öppna data
+  title-en: Open Data
+  title-ukr: Відкриті дані
+  description-sv: Öppna data från arbetsförmedlingen
+  description-en: Open data from arbetsförmedlingen
+  description-ukr: Відкриті дані служби зайнятості
+  publisher:
+    about: www.af.se/publisher1
+    name: TestFöretag AB Catalog; TestFöretag nr 2; TestFöretag en tredje
+    type: NationalAuthority
+    homepage: www.publishertest.se; www.testarenhomepagetill.se
+    mbox: publisher1@publisher.com; publisher2@publisher.com
+  license: https://www.apache.org/licenses/LICENSE-2.0
+  issued: 2021-03-01
+  modified: 2021-03-16
+  homepage: www.af.se
+  rights:
+      attributionText-sv: Detta är en rättighetstext för Catalog
+      attributionURL: www.rattighetstextcatalog.se
+      copyrightNotice: Upphovsrätt
+      copyrightStatement:
+         about: www.catalog.se/license
+         title: Test License Catalog
+         description: Test license for dcat spec Catalog
+      copyrightYear: 1979
+      copyrightHolder 1:
+         about: www.copyrightcat.se
+         name: CopyRight Holder AB
+         homepage: www.copycat.com
+         type: RegionalAuthority
+      copyrightHolder 2:
+         about: www.copyrightcat2.se
+         name: CopyRight Holder AB 2
+         homepage: www.copycat2.com
+         type: RegionalAuthority
+      jurisdiction: www.nywebaddresscat.com
+      reuserGuidelines: www.guidelinescat.se
+
+
+(dcat-dataservice 1):
+  about: www.dataservice1.se
+  title-sv: Ängel
+  title-fi: Enkeli
+  endpointURL: www.testarbara.com
+  endpointDescription: www.testarbara.com; www.testarentill.se
+  contactPoint 1:
+    about: www.contactPoint1.se
+    name: TestFöretag AB Contact 1; Peter Svensson; Peter Andersson
+    type: Organization
+    email: admin@test.se
+    address: Testgatan 5; 76543; Tranemo; Sverige
+    phone: 07098876554
+  contactPoint 2:
+    about: www.contactPoint2.se
+    name: TestFöretag AB Contact 2; Berit Svensson; Anna Bengtsson
+    type: Organization
+    email: admin@test.se; test@nyaddress.se
+    address 1: Testgatan 5; 76543; Tranemo; Sverige
+    address 2: Testgatan 10; 76543; Tranemo; Sverige
+    phone: +4698876554
+  keyword-sv: af; test; kul
+  keyword-fi: af; test; kul; finska
+  accessRights: Public
+  description-sv: Detta är något kul
+  description-fi: Tämä on jotain hauskaa
+  conformsTo 1:
+    about: www.dataservice1.se/standard1
+    title: conforms dataservice 1
+    description: conforms description dataservice
+  conformsTo 2:
+    about: www.dataservice1.se/standard2
+    title: conforms dataservice 2
+    description: conforms description dataservice
+  publisher 1:
+    about: www.publisher1.se
+    name: Test Företag AB Service 1
+    type: Company
+  publisher 2:
+    about: www.publisher2.se
+    name: Test Företag AB Service 2
+    type: RegionalAuthority
+  publisher 3:
+    about: www.publisher3.se
+    name: Test Företag AB Service 3
+    type: IndustryConsortium
+  theme: ECON; JUST
+  licensedoc:
+    about: www.dataservice1.se/license1
+    title-sv: Test License Service 1
+    description-sv: Test license för dcat spec Service
+  page:
+    about: www.dataservice1.se/page
+    title-sv: test dokument
+    description-sv: test dokument
+
+(dcat-dataservice 2):
+  about: www.af2.se
+  title-sv: Demon
+  title-ar: شيطان
+  description-sv: Detta är något mindre kul
+  description-ar: هذا قليلا أقل متعة
+  endpointURL: http://www.testar2.se
+  endpointDescription: www.testarbara2.com
+  accessRights: Public
+  keyword-sv: jobb; demon; dåligt
+  keyword-ar: مهنة; شيطان; بشكل سيئ
+  type: REST; REST
+  landingPage: www.landingpagetest.se; www.testarentill.com
+  conformsTo:
+    about: www.af2.se/standard
+    title-sv: test
+    description-sv: testdesc
+  contactPoint:
+    about: www.contactPointDataservice2.se
+    name: TestFöretag AB DataService 2; Charlotte Olsson
+    type: Organization
+    email: admin@test.se
+    phone: 98876554
+    address 1: Testgatan 5; 76543; Tranemo; Sverige
+    address 2: Testgatan 10; 76543; Tranemo; Sverige
+  publisher 1:
+    about: www.dataservice2.se/publisher1
+    name: Test Företag AB Service 2
+    mbox: test@test.se
+    type: RegionalAuthority
+  publisher 2:
+    about: www.dataservice2.se/publisher2
+    name: Test Företag AB Service 2
+    mbox: test@test.se
+    type: RegionalAuthority
+  licenseurl: CC0 1.0
+  servesDataset: www.test.se/dataset1; www.test.se/dataset2
+  page 1:
+    about: www.af2.se/page1
+    title-sv: test dokument 2
+    description-sv: test document 2
+  page 2:
+    about: www.af2.se/page2
+    title-sv: test dokument 3
+    description-sv: test document 4
+
+(dcat-dataset 1):
+  about: www.test.se/dataset1
+  title-sv: Katter
+  title-el: Γάτες
+  description-sv: Beskrivning av katter
+  description-el: Περιγραφή των γατών
+  offers 1:
+    description-sv: Test Offer 1
+    page: www.testpage.se
+  offers 2:
+    description-sv: Test Offer 2
+    page: www.testpage.se
+  contactPoint 1:
+    about: www.test.se/contactPointDataset1
+    name: Test Företag AB Dataset 1 Contact
+    type: Organization
+    email: admin1@test.se
+    phone: +4698876554
+    address: Testgatan 5; 76543; Tranemo; Sverige
+  keyword-sv: info; katt; hund
+  keyword-el: πληροφορίες; Γάτα; σκύλος
+  theme: TRAN; EDUC
+  issued: 2021-03-05
+  conformsTo 1:
+    about: www.test.se/dataset1/standard1
+    title-en: conforms dataset nr1
+    description-en: conforms description dataset 1
+  conformsTo 2:
+    about: www.test.se/dataset1/standard2
+    title-en: conforms dataset nr2
+    description-en: conforms description dataset 2
+  temporal 1:
+    startDate: 2021-03-16
+    endDate: 2021-03-25
+  temporal 2:
+    startDate: 2021-03-18
+    endDate: 2021-03-30
+  accessRights: Public
+  identifier: www.testid.com; ww.testarmera.se
+  adms: www.admstest.com; www.testarflera.com
+  modified: 2021-03-22
+  versionInfo: version 3.7.5
+  versionNotes: Uttökade med fler taggar; Nya versionNotes; Ännu nyare Versionnotes
+  landingPage: www.landingpageforme.com; www.testarflerlandingpage.se
+  temporalResolution: P1Y
+  spatialResolutionInMeters: 1.4
+  relation: www.testingtesting.com; www.relateradresurs2.se
+  isReferencedBy: www.testarlite.se; www.testarflerigen.se
+  hasVersion: www.test.se/dataset2
+  page 1:
+    about: www.test.se/dataset1/page1
+    title-sv: test dokument set 1
+    description-sv: test dokument 1
+  page 2:
+    about: www.test.se/dataset1/page2
+    title-sv: test dokument set 2
+    description-sv: test dokument 2
+  qualifiedRelation:
+    role: http://www.testarroles.se
+    relation: www.testarrelations.se
+  other agent 1:
+      about: www.test.se/other1
+      role: resourceProvider
+      type: RegionalAuthority
+      name: Belsebub
+      homepage: www.belse.se
+  other agent 2:
+      about: www.test.se/other2
+      role: resourceProvider
+      type: RegionalAuthority
+      name: Baal
+      homepage: www.baal-belse.se
+  creator:
+      about: www.test.se/creator1
+      type: RegionalAuthority
+      name: Diablo
+      homepage: www.diablo-belse.com
+
+  distribution 1:
+    about: www.test.se/distribution1
+    accessURL: http://www.accessurl.com
+    description-sv: Världskul
+    description-he: כיף עולמי
+    formatMedia: text/html
+    availability: Experimental
+    title-sv: Kul
+    title-he: קול
+    downloadURL: www.whereyoudownload.se; www.annandownloadadress.se
+    temporalResolution: P1Y
+    spatialResolutionInMeters: 1.4
+    byteSize: 300
+    issued: 2021-03-05
+    modified: 2021-03-17
+    status: Deprecated
+    checksum:
+      value-sv: 2A45F
+    page 1:
+      about: www.test.se/distribution1/page1
+      title-sv: test dokument 2
+      description-sv: test dokument 2
+    page 2:
+      about: www.test.se/distribution1/page2
+      title-sv: test dokument 3
+      description-sv: test dokument 3
+    conformsTo 1:
+      about: www.test.se/distribution1/standard1
+      title-sv: test 1
+      description-sv: test beskrivning
+    conformsTo 2:
+      about: www.test.se/distribution1/standard2
+      title-sv: test 2
+      description-sv: test beskrivning
+    licensedoc:
+        about: www.test.se/distribution1/license1
+        title-sv: Test License 1
+        description-sv: Test license för dcat spec
+    rights:
+        attributionText-sv: Detta är en rättighetstext
+        attributionURL: www.rattighetstext.se
+        copyrightNotice: Upphovsrätt
+        copyrightStatement:
+           about: www.test.se/distribution1/license3
+           title-sv: Test License
+           description-sv: Test license för dcat spec
+        copyrightYear: 1976
+        copyrightHolder 1:
+           about: www.test.se/copydist1
+           name: Test Företag AB
+           homepage: www.test.com
+           type: RegionalAuthority
+        copyrightHoldertest 2:
+           about: www.test.se/copydist2
+           name: Test Företag AB 2
+           homepage: www.test2.com
+           type: RegionalAuthority
+        jurisdiction: www.nywebaddress.com
+        reuserGuidelines: www.guidelines.se
+
+  distribution 2:
+    about: www.test.se/distribution2
+    title-sv: Kuligare
+    description-sv: Detta är något kuligare
+    licenseurl: CC BY-NC-SA 4.0
+    availability: Experimental
+    formatGeo: x-worldfile
+    accessURL: http://www.accessurl.com
+
+(dcat-dataset 2):
+  about: www.test.se/dataset2
+  title-sv: Dataset 2
+  description-sv: Beskrivning av Dataset 2
+  spatialUrl: https://www.geonames.org/6695072/european-union.html
+  theme: TRAN; EDUC
+  identifier: min identifierare
+  isVersionOf: www.test.se/dataset1
+  accrualPeriodicity: weekly
+  source: www.test.se/dataset1
+  provenance-sv: provenance sträng
+  temporal:
+    startDate: 2021-02-15
+    endDate: 2021-03-04
+  contactPoint 2:
+    about: www.test2.se/contactpoint
+    name: Test Företag AB Contact 2
+    type: Organization
+    email: admin2@test.se
+    address: Testgatan 5; 76543; Tranemo; Sverige
+    phone: +4670123456
+  contactPoint 3:
+    about: www.test2.se/contactpoint3
+    name: Test Företag AB Contact 3
+    type: Organization
+    email: admin2@test.se
+    address 1: Testgatan 5; 76543; Tranemo; Sverige
+    address 2: Testgatan 10; 76543; Tranemo; Sverige
+    phone: +4487324354
+  distribution 3:
+    about: www.test.se/distribution3
+    title-sv: Tråkigt
+    title-ja: 退屈な
+    description-sv: Jättetråkigt
+    description-ja: 非常に退屈
+    formatText: application/andrew-inset
+    accessURL: http://www.accessurl.com
+    availability: Temporary
+    accessService: www.af2.se; www.af1.se
+  licenseurl: CC BY-NC-SA 4.0
+  keyword-sv: tråkigt; trist; jättetråkigt
+  keyword-ja: 退屈な; 悲しい; 非常に退屈
+  accessRights: Public

@@ -1,0 +1,124 @@
+{
+    "Catalog": {
+        "metadata": "dcat-catalog",
+        "about": {
+            "metadata": "about"
+        },
+        "dcterms:title": {
+            "metadata": "title"
+        },
+        "dcterms:description": {
+            "metadata": "description"
+        },
+        "publisher": {
+            "metadata": "publisher"
+        },
+        "license": {
+            "metadata": "license"
+        },
+        "dcterms:issued": {
+            "metadata": "issued"
+        },
+        "dcterms:modified": {
+            "metadata": "modified"
+        },
+        "foaf:homepage": {
+            "metadata": "homepage"
+        },
+        "spatial": {
+            "metadata": "location"
+        },
+        "RightsStatement": {
+            "metadata": "rights"
+        },
+        "dcterms:hasPart": {
+            "metadata": "hasPart"
+        },
+        "dcterms:isPartOf": {
+            "metadata": "isPartOf"
+        },
+        "dcat:catalog": {
+            "metadata": "catalog"
+        }
+    },
+    "publisher": {
+        "metadata": "publisher",
+        "about": {
+            "metadata": "about"
+        },
+        "foaf:name": {
+            "metadata": "name"
+        },
+        "dcterms:type": {
+            "metadata": "type"
+        },
+        "foaf:homepage": {
+            "metadata": "homepage"
+        },
+        "foaf:mbox": {
+            "metadata": "mbox"
+        }
+    },
+    "LicenseDocument": {
+        "metadata": "licensedoc",
+        "about": {
+            "metadata": "about"
+        },
+        "dcterms:title": {
+            "metadata": "title"
+        },
+        "dcterms:description": {
+            "metadata": "description"
+        }
+    },
+    "spatial": {
+        "metadata": "location",
+        "about": {
+            "metadata": "about"
+        },
+        "dcat:centroid": {
+            "metadata": "centroid"
+        },
+        "dcat:bbox": {
+            "metadata": "bbox"
+        },
+        "locn:geometry": {
+            "metadata": "geometry"
+        }
+    },
+    "RightsStatement": {
+        "metadata": "rights",
+        "odrs:attributionText": {
+            "metadata": "attributionText"
+        },
+        "odrs:attributionURL": {
+            "metadata": "attributionURL"
+        },
+        "odrs:copyrightNotice": {
+            "metadata": "copyrightNotice"
+        },
+        "LicenseDocument": {
+            "metadata": "copyrightStatement"
+        },
+        "odrs:copyrightYear": {
+            "metadata": "copyrightYear"
+        },
+        "publisher": {
+            "metadata": "copyrightHolder"
+        },
+        "odrs:jurisdiction": {
+            "metadata": "jurisdiction"
+        },
+        "odrs:reuserGuidelines": {
+            "metadata": "reuserGuidelines"
+        }
+    }
+}
+
+
+
+
+
+
+
+

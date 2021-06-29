@@ -1,0 +1,109 @@
+{
+    "wcs": {
+        "title" : "WCS-tjänst",
+        "url": "application/vnd.ogc.wcs_xml"
+    },
+    "wfs": {
+        "title" : "WFS-tjänst",
+        "url": "application/vnd.ogc.wfs_xml"
+    },
+    "wms": {
+        "title" : "WMS-tjänst",
+        "url": "application/vnd.ogc.wms_xml"
+    },
+    "wmts": {
+        "title" : "WMTS-tjänst",
+        "url": "application/vnd.ogc.wmts_xml"
+    },
+    "geopackage+sqlite3": {
+        "title" : "geopackage+sqlite3",
+        "url": "application/geopackage+sqlite3"
+    },
+    "gml+xml": {
+        "title" : "gml+xml",
+        "url": "application/gml+xml"
+    },
+    "jp2": {
+        "title" : "jp2",
+        "url": "image/jp2"
+    },
+    "tiff": {
+        "title" : "tiff",
+        "url": "image/tiff"
+    },
+    "vnd.google-earth.kml+xml": {
+        "title" : "vnd.google-earth.kml+xml",
+        "url": "application/vnd.google-earth.kml+xml"
+    },
+    "vnd.google-earth.kmz": {
+        "title" : "vnd.google-earth.kmz",
+        "url": "application/vnd.google-earth.kmz"
+    },
+    "\tvnd.sqlite3": {
+        "title" : "vnd.sqlite3",
+        "url": "application/vnd.sqlite3"
+    },
+    "x-ascii-grid": {
+        "title" : "x-ascii-grid",
+        "url": "application/x-ascii-grid",
+        "description": "Mediatypen ska användas för ASCII GRID-filer."
+    },
+    "x-ecw": {
+        "title" : "x-ecw",
+        "url": "application/x-ecw",
+        "description": "Mediatypen ska användas för Enhanced Compressed Wavelet (ECW)-filer."
+    },
+    "x-gmz": {
+        "title" : "x-gmz",
+        "url": "application/x-gmz",
+        "description": "Mediatypen ska användas för ett zip-arkiv som innehåller ett eller fler GML-dokument."
+    },
+    "x-las": {
+        "title" : "x-las",
+        "url": "application/x-las",
+        "description": "Mediatypen ska användas för filformatet LASer"
+    },
+    "x-laz": {
+        "title" : "x-laz",
+        "url": "application/x-laz",
+        "description": "Mediatypen ska användas för komprimerade LAS-filer."
+    },
+    "x-oracledump": {
+        "title" : "x-oracledump",
+        "url": "application/x-oracledump",
+        "description": "Mediatypen ska användas för Oracle-säkerhetskopieringar."
+    },
+    "x-shapefile": {
+        "title" : "x-shapefile",
+        "url": "application/x-shapefile",
+        "description": "Mediatypen ska användas för Esri shapefiles. Filen är ett zip-arkiv som innehåller åtminstone shp-, shx- och dbf-filer."
+    },
+    "x-tab": {
+        "title" : "x-tab",
+        "url": "application/x-tab",
+        "description": "Mediatypen ska användas för formatet MapInfo TAB. Filen är ett zip-arkiv som innehåller åtminstone tab-, dat-, map- och id-filer."
+    },
+    "x-tab-raster": {
+        "title" : "x-tab-raster",
+        "url": "application/x-tab-raster",
+        "description": "Mediatypen ska användas för formatet MapInfo Raster TAB."
+    },
+    "x-worldfile": {
+        "title" : "x-worldfile",
+        "url": "application/x-worldfile",
+        "description": "Mediatypen ska användas för world-filer. Filändelsen är oftast beroende på formatet av den associerade bilden, t.ex. .jgw för JPEG (2000) eller .tfw för TIFF."
+    },
+    "xfilegdb": {
+        "title" : "xfilegdb",
+        "url": "application/x-filegdb",
+        "description": "Mediatypen ska användas för Esri geodatabas-filer. Filen är ett zip-arkiv som innehåller gdp-filkatalogen."
+    }
+}
+
+
+
+
+
+
+
+

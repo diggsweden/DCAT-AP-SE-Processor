@@ -1,0 +1,148 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Annotation exempel api
+  description: Annotation exempel api är ett påhittat api som använder sig av annotations för att skapa metadata för DCAT-AP-SE.
+  x-dcat:
+    dcat-dataset:
+      about: https://www.example.se/#datasetB
+      title-sv: Datamängd B
+      description-sv: Exempel beskrivning datamängd B
+      creator:
+        about: https://www.example.se/#creatorB
+        name: ExempelFöretag
+        type: NationalAuthority
+        homepage: www.exempelforetag.com
+        mbox: kontakt@exempelforetag.com
+      other agent:
+        about: https://www.example.se/#other_agentB
+        name: ExempelFöretag 2
+        type: NationalAuthority
+        homepage: www.exempelforetag2.com
+        mbox: kontakt@exempelforetag2.com
+        role: distributor
+      contactPoint:
+        about: https://www.example.se/#contactB
+        name: Exempel Organisation
+        type: Organization
+        email: admin@exempel.se
+        address: Testgatan 5; 76543; Tranemo; Sverige
+        phone: 0799887655
+      keyword-sv: exempel; info; data
+      keyword-en: example; info; computer
+      theme: TRAN; EDUC
+      issued: 2021-03-05
+      modified: 2021-03-15
+      spatialUrl: https://www.geonames.org/6695072/european-union.html
+      versionInfo: version 3.7.5
+      versionNotes: Exempel på VersionsNoteringar; Fler versionsnoteringar
+      landingPage: www.exempelsida.se
+      temporalResolution: P1Y
+      spatialResolutionInMeters: 1.4
+      relation: www.relateradresursexempelsida.se
+      isReferencedBy: www.exempelreferenssida.se
+      identifier: www.identifierare.com
+      adms: www.ovrig-identifierare.com
+      conformsTo:
+        title-sv: Exempel namn på Standard
+        description-sv: Beskrivning Standard
+      temporal:
+        startDate: 2021-03-16
+        endDate: 2021-03-25
+      accessRights: Public
+      offers:
+        description-sv: Exempel Avgift
+        page: www.avgiftsexempel.se
+      page:
+        title-sv: Exempel Dokument
+        description-sv: Beskrivning av Exempeldokument
+      distribution:
+        about: https://www.example.se/#distributionB
+        title-sv: Distribution B
+        description-sv: Beskrivning av Distribution B
+        accessURL: www.distributionB.se
+        downloadURL: www.exempelforetag.se/distributionB
+        formatMedia: text/html
+        accessService: https://www.example.se/#dataserviceB
+        temporalResolution: P1Y
+        spatialResolutionInMeters: 1.4
+        byteSize: 3000
+        issued: 2021-05-04
+        modified: 2021-05-20
+        status: Completed
+        availability: Stable
+        license: CC BY-NC-ND 4.0
+        rights:
+          attributionText-sv: Detta är en rättighetstext
+          attributionURL: www.rattighetstext.se
+          copyrightNotice: Upphovsrätt
+          copyrightStatement:
+            title-sv: Test License
+            description-sv: Test license for dcat spec
+          copyrightYear: 1976
+          copyrightHolder:
+            about: https://www.example.se/#copyrightHolderB
+            name: Copyright Name
+            homepage: www.copyrightweb.com
+            type: RegionalAuthority
+          jurisdiction: www.copyrightwebjurisdiction.com
+          reuserGuidelines: www.guidelines.se
+        checksum:
+          value: A23DF
+        page:
+          title-sv: Nytt Exempel Dokument
+          description-sv: Beskrivning av Nytt Exempeldokument
+        conformsTo:
+          title-sv: Ny Standard
+          description-sv: Beskrivning av Ny Standard
+    dcat-dataservice:
+      about: https://www.example.se/#dataserviceB
+      title-sv: Datatjänst A
+      description-sv: Beskrivning av Datatjänst B
+      endpointURL: www.datatjanstB.se
+      endpointDescription: www.beskrivningDatatjanstB.se
+      publisher:
+        about: https://www.example.se/#publisherB2
+        name: Utgivare av Datatjänst B
+        type: NonGovernmentalOrganisation
+        homepage: www.utgivare2.se
+        mbox: kontakt@utgivare2.se
+      contactPoint:
+        about: https://www.example.se/#contactPointB2
+        type: Organization
+        name: Namn på Organisation 2
+        email: kontakt@organization2.se
+        phone: 07923568945
+        address: Testvägen 24; 93847; Backa; Sverige
+      type: REST
+      keyword-sv: rest; datatjänst
+      theme: ENER
+      conformsTo:
+        about: https://www.example.se/#dataserviceB/standard
+        title-sv: Standard för Datatjänst B
+        description-sv: Beskrivning av Standard för Datatjänst B
+      servesDataset: https://www.example.se/#datasetB
+      licensedoc:
+        about: https://www.example.se/#dataserviceB/license
+        title-sv: namn på licens för DataTjänst
+        description-sv: Beskrivning av licens för Datatjänst
+      accessRights: Restricted
+      landingPage: www.landingpagefordataservice.com
+      page:
+        about: https://www.example.se/#dataserviceB/page
+        title-sv: Namn på exempel dokument för Datatjänst
+        description-sv: Beskrivning av dokument för Datatjänst
+paths:
+  /users:
+    get:
+      summary: Fake return.
+      description: Fake API description. Only in this file to show where the rest of the api definition would be located.
+      responses:
+        '200': # status code
+          description: Fake 200 response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string

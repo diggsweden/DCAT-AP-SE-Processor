@@ -1,0 +1,34 @@
+{
+    "Catalog-about": {
+        "isMandatory" : true
+    },
+    "Catalog-dcterms:title": {
+        "isMandatory" : true
+    },
+    "Catalog-dcterms:description": {
+        "isMandatory" : true
+    },
+    "Catalog-publisher": {
+        "isMandatory" : true
+    },
+    "publisher-foaf:name": {
+        "isMandatory" : true
+    },
+    "publisher-about": {
+        "isMandatory" : true
+    },
+    "LicenseDocument-about": {
+        "isMandatory" : true
+    },
+    "Catalog-license": {
+        "isMandatory" : true
+    }
+}
+
+
+
+
+
+
+
+

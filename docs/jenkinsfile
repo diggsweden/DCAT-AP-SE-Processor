@@ -1,0 +1,97 @@
+pipeline {
+    agent {
+        label '<BUILD_AGENT>'
+    }
+    stages {
+        stage ('Preclean') {
+            steps {
+                script {
+                    sh 'docker image ls'
+                    try {
+                        sh 'docker stop dcatprocessor'
+                    } catch(e) {
+                        echo 'Could not stop container: ' + e.toString()
+                    }
+                    try {
+				        sh 'docker rm dcatprocessor'
+                    } catch(e) {
+                        echo 'Could not remove container: ' + e.toString()
+                    }
+                    try {
+				        sh 'docker rmi sonessonaf/dcatprocessor'
+                    } catch(e) {
+                        echo 'Could not remove image: ' + e.toString()
+                    }
+                    sh 'docker image ls'
+                }
+            }
+        }
+		stage('Fetch apidef') {
+			steps {
+			    // PASS - Fetch apidefinitions from somewhere and place on build agent
+				sh 'curl https://domain/path_to_apidefs/catalog.json --output catalog.json'
+				sh 'curl https://domain/path_to_apidefs/dataset_a.raml --output dataset_a.raml'
+				sh 'curl https://domain/path_to_apidefs/dataset_b.json --output dataset_b.json'
+				sh 'curl https://domain/path_to_apidefs/dataset_c.yaml --output dataset_c.yaml'
+				sh 'curl https://domain/path_to_apidefs/dataset_d.json --output dataset_d.json'
+			}
+		}
+		stage('Start container') {
+			steps {
+			    // Start the container to listen on buildagent port 12345 (or other) and redirect to port 8080 at container
+				sh 'docker run -p 12345:8080 -d --name dcatprocessor <docker repo>/dcatprocessor --pull always'
+				sh 'docker image ls'
+			}
+		}
+		stage('Generate') {
+			steps {
+			    // Give Spring some time to start up
+				sh 'sleep 20'
+                // Copy apidefinitions to container directory /apidef
+				sh 'docker cp catalog.json dcatprocessor:/apidef'
+                sh 'docker cp dataset_a.raml dcatprocessor:/apidef'
+                sh 'docker cp dataset_b.json dcatprocessor:/apidef'
+                sh 'docker cp dataset_c.yaml dcatprocessor:/apidef'
+                sh 'docker cp dataset_d.json dcatprocessor:/apidef'
+
+				// Call REST API to have dcatprocessor read files from /apidef or give parameter dir=path-to-your-folder
+				// sh 'curl --trace - "http://localhost:12345/api/v1/rdf/?dir=someotherdirectory"'
+				sh 'curl --trace - "http://localhost:12345/api/v1/rdf/"'
+
+				// Call REST API as the form would
+				//sh 'curl -F apispecification= -F create=create -F apitype=apitype.R10 -F apifile=@obl_rek_raml.raml http://localhost:12345/generate/dcat/'
+
+				// Get the log from docker container
+				sh 'docker container logs dcatprocessor'
+
+				// Copy the log to agent
+				sh 'docker cp dcatprocessor:/opt/logs/dcatprocessor.log .'
+
+				// Copy the dcat.rdf file to agent
+				sh 'docker cp dcatprocessor:/opt/dcat.rdf .'
+
+                // Create artifacts
+				archiveArtifacts artifacts: 'dcatprocessor.log, dcat.rdf', fingerprint: true
+			}
+		}
+		stage ('Check status') {
+		    steps {
+		        script {
+		            // If the size of the log is larger than zero, we have errors in some file.
+                    def log_size = sh(script: "wc -c dcatprocessor.log | awk '{print \$1}'", returnStdout: true).trim() as Integer
+                    println("log_size = ${log_size}")
+                    if(log_size > 0) {
+                        currentBuild.result = "UNSTABLE"
+                    }
+		        }
+		    }
+		}
+		stage('Cleanup') {
+			steps {
+			    // Clean up container so we can fetch a new one each time we run pipeline
+				sh 'docker stop dcatprocessor'
+				sh 'docker rm dcatprocessor'
+			}
+		}
+    }
+}

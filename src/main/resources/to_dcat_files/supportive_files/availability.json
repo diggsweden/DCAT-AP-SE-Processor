@@ -1,0 +1,26 @@
+{
+    "Available": {
+        "title" : "Available",
+        "url": "http://data.europa.eu/r5r/availability/available"
+    },
+    "Experimental": {
+        "title" : "Experimental",
+        "url": "http://data.europa.eu/r5r/availability/experimental"
+    },
+    "Stable": {
+        "title" : "Stable",
+        "url": "http://data.europa.eu/r5r/availability/stable"
+    },
+    "Temporary": {
+        "title" : "Temporary",
+        "url": "http://data.europa.eu/r5r/availability/temporary"
+    }
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,151 @@
+{
+  "dcat-dataset": {
+    "about": "https://www.example.se/#datasetD",
+    "title-sv": "Datamängd D",
+    "description-sv": "Exempel beskrivning datamängd D",
+    "creator": {
+      "about": "https://www.example.se/#creatorD",
+      "name": "ExempelFöretag",
+      "type": "NationalAuthority",
+      "homepage": "www.exempelforetag.com",
+      "mbox": "kontakt@exempelforetag.com"
+    },
+    "other agent": {
+      "about": "https://www.example.se/#other_agentD",
+      "name": "ExempelFöretag 2",
+      "type": "NationalAuthority",
+      "homepage": "www.exempelforetag2.com",
+      "mbox": "kontakt@exempelforetag2.com",
+      "role": "distributor"
+    },
+    "contactPoint": {
+      "about": "https://www.example.se/#contactD",
+      "name": "Exempel Organisation",
+      "type": "Organization",
+      "email": "admin@exempel.se",
+      "address": "Testgatan 5; 76543; Tranemo; Sverige",
+      "phone": "0799887655"
+    },
+    "keyword-sv": "exempel; info; data",
+    "keyword-en": "example; info; computer",
+    "theme": "TRAN; EDUC",
+    "issued": "2021-03-05",
+    "modified": "2021-03-15",
+    "spatialUrl": "https://www.geonames.org/6695072/european-union.html",
+    "versionInfo": "version 3.7.5",
+    "versionNotes": "Exempel på VersionsNoteringar; Fler versionsnoteringar",
+    "landingPage": "www.exempelsida.se",
+    "temporalResolution": "P1Y",
+    "spatialResolutionInMeters": "1.4",
+    "relation": "www.relateradresursexempelsida.se",
+    "isReferencedBy": "www.exempelreferenssida.se",
+    "identifier": "www.identifierare.com",
+    "adms": "www.ovrig-identifierare.com",
+    "conformsTo": {
+      "title-sv": "Exempel namn på Standard",
+      "description-sv": "Beskrivning Standard"
+    },
+    "temporal": {
+      "startDate": "2021-03-16",
+      "endDate": "2021-03-25"
+    },
+    "accessRights": "Public",
+    "offers": {
+      "description-sv": "Exempel Avgift",
+      "page": "www.avgiftsexempel.se"
+    },
+    "page": {
+      "title-sv": "Exempel Dokument",
+      "description-sv": "Beskrivning av Exempeldokument"
+    },
+    "distribution": {
+      "about": "https://www.example.se/#distributionD",
+      "title-sv": "Distribution D",
+      "description-sv": "Beskrivning av Distribution D",
+      "accessURL": "www.distributionD.se",
+      "downloadURL": "www.exempelforetag.se/distributionD",
+      "formatMedia": "text/html",
+      "accessService": "https://www.example.se/#dataserviceD",
+      "temporalResolution": "P1Y",
+      "spatialResolutionInMeters": "1.4",
+      "byteSize": "3000",
+      "issued": "2021-05-04",
+      "modified": "2021-05-20",
+      "status": "Completed",
+      "availability": "Stable",
+      "license": "CC BY-NC-ND 4.0",
+      "rights": {
+        "attributionText-sv": "Detta är en rättighetstext",
+        "attributionURL": "www.rattighetstext.se",
+        "copyrightNotice": "Upphovsrätt",
+        "copyrightStatement": {
+          "title-sv": "Test License",
+          "description-sv": "Test license for dcat spec"
+        },
+        "copyrightYear": "1976",
+        "copyrightHolder": {
+          "about": "https://www.example.se/#copyrightHolderD",
+          "name": "Copyright Name",
+          "homepage": "www.copyrightweb.com",
+          "type": "RegionalAuthority"
+        },
+        "jurisdiction": "www.copyrightwebjurisdiction.com",
+        "reuserGuidelines": "www.guidelines.se"
+      },
+      "checksum": {
+        "value": "A23DF"
+      },
+      "page": {
+        "title-sv": "Nytt Exempel Dokument",
+        "description-sv": "Beskrivning av Nytt Exempeldokument"
+      },
+      "conformsTo": {
+        "title-sv": "Ny Standard",
+        "description-sv": "Beskrivning av Ny Standard"
+      }
+    }
+  },
+  "dcat-dataservice": {
+    "about": "https://www.example.se/#dataserviceD",
+    "title-sv": "Datatjänst D",
+    "description-sv": "Beskrivning av Datatjänst D",
+    "endpointURL": "www.datatjanstD.se",
+    "endpointDescription": "www.beskrivningDatatjanstD.se",
+    "publisher": {
+      "about": "https://www.example.se/#publisherD2",
+      "name": "Utgivare av Datatjänst D",
+      "type": "NonGovernmentalOrganisation",
+      "homepage": "www.utgivare2.se",
+      "mbox": "kontakt@utgivare2.se"
+    },
+    "contactPoint": {
+      "about": "https://www.example.se/#contactPointD2",
+      "type": "Organization",
+      "name": "Namn på Organisation 2",
+      "email": "kontakt@organization2.se",
+      "phone": "07923568945",
+      "address": "Testvägen 24; 93847; Backa; Sverige"
+    },
+    "type": "REST",
+    "keyword-sv": "rest; datatjänst",
+    "theme": "ENER",
+    "licensedoc": {
+      "about": "https://www.example.se/#dataserviceD/license",
+      "title-sv": "Test License Service 1",
+      "description-sv": "Test license for dcat spec Service"
+    },
+    "conformsTo": {
+      "about": "https://www.example.se/#dataserviceD/standard",
+      "title-sv": "Standard för Datatjänst D",
+      "description-sv": "Beskrivning av Standard för Datatjänst D"
+    },
+    "servesDataset": "https://www.example.se/#datasetD",
+    "accessRights": "Restricted",
+    "landingPage": "www.landingpagefordataservice.com",
+    "page": {
+      "about": "https://www.example.se/#dataserviceD/page",
+      "title-sv": "Namn på exempel dokument för Datatjänst",
+      "description-sv": "Beskrivning av dokument för Datatjänst"
+    }
+  }
+}

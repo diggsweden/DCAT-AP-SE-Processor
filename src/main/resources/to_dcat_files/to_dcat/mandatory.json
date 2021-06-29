@@ -1,0 +1,76 @@
+{
+    "publisher-foaf:name": {
+        "isMandatory" : true
+    },
+    "publisher-about": {
+        "isMandatory" : true
+    },
+    "creator-about": {
+        "isMandatory" : true
+    },
+    "Dataset": {
+        "isMandatory" : true
+    },
+    "DataService-dcterms:title": {
+        "isMandatory": true
+    },
+    "DataService-about": {
+        "isMandatory": true
+    },
+    "DataService-dcat:endpointURL": {
+        "isMandatory": true
+    },
+    "DataService-publisher": {
+        "isMandatory": true
+    },
+    "contactPoint-rdf:type": {
+        "isMandatory": true
+    },
+    "contactPoint-about": {
+        "isMandatory": true
+    },
+    "contactPoint-vcard:fn": {
+        "isMandatory": true
+    },
+    "contactPoint-vcard:hasEmail": {
+        "isMandatory": true
+    },
+    "qualifiedRelation-dcat:hadRole": {
+        "isMandatory": true
+    },
+    "qualifiedRelation-dcterms:relation": {
+        "isMandatory": true
+    },
+    "Dataset-about": {
+        "isMandatory": true
+    },
+    "Dataset-dcterms:title": {
+        "isMandatory": true
+    },
+    "Dataset-dcterms:description": {
+        "isMandatory": true
+    },
+    "Distribution-dcat:accessURL": {
+        "isMandatory": true
+    },
+    "Distribution-about": {
+        "isMandatory": true
+    },
+    "LicenseDocument-about": {
+        "isMandatory" : true
+    },
+    "Standard-about": {
+        "isMandatory" : true
+    },
+    "Document-about": {
+        "isMandatory" : true
+    }
+}
+
+
+
+
+
+
+
+

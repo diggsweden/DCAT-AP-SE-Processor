@@ -1,0 +1,18 @@
+{
+    "Individual": {
+        "title" : "Individ",
+        "url": "http://www.w3.org/2006/vcard/ns#Individual"
+    },
+    "Organization": {
+        "title" : "Organisation",
+        "url": "http://www.w3.org/2006/vcard/ns#Organization"
+    }
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+#%RAML 1.0
+title: Exempel api
+description: Exempel api
+version: 1.0.0
+
+annotationTypes:
+  dcat-catalog:
+    properties:
+      title: string
+      description: string
+      agent: string
+      dataset: string
+      license: string
+  dcat-dataset:
+    properties:
+      about: string
+      dataset-title: string
+      description: string
+      agent: string
+      distribution: string
+      contactPoint: string
+
+(dcat-catalog):
+  title: Arbetsförmedlingens öppna data
+  description: Öppna data från arbetsförmedlingen
+  agent: Redpill Linpro AB
+  dataset: https://redpill-linpro.se/dcat/yrkesinfo_dcat.rdf
+  license: https://www.apache.org/licenses/LICENSE-2.0
+
+(dcat-dataset):
+  title: YrkesInfo
+  description: Yrkesinfo är en webbtjänst som beskriver ca 350 yrken.
+  agent: https://apier.arbetsformedlingen.se/catalog/yrkesinfo.rdf#Redpill
+  distribution: https://apier.arbetsformedlingen.se/catalog/yrkesinfo.rdf#Distribution
+  contactPoint: https://apier.arbetsformedlingen.se/catalog/yrkesinfo.rdf#ContactPoint
