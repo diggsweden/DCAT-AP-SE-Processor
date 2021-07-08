@@ -149,7 +149,7 @@
         "accessRights": "Restricted",
         "landingPage": "www.landingpagefordataservice.com",
         "page": {
-          "about": "https://www.example.se/#dataserviceD/page",
+          "about": "https://www.example.se/#dataserviceC/page",
           "title-sv": "Namn på exempel dokument för Datatjänst",
           "description-sv": "Beskrivning av dokument för Datatjänst"
         }
