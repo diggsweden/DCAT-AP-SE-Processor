@@ -24,9 +24,8 @@ import org.eclipse.rdf4j.model.vocabulary.VCARD4;
 import org.json.simple.JSONObject;
 import se.ams.dcatprocessor.models.*;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Optional;
+import java.lang.reflect.Field;
+import java.util.*;
 
 public class ConverterFiles extends Converter {
 
@@ -34,7 +33,6 @@ public class ConverterFiles extends Converter {
     @Override
     public DataClass fileToDcat(JSONObject apiSpec) throws Exception {
         setConvertAndMandatoryFile(ConverterHelpClass.uriToDcat);
-
         processToDcat(orgConvert, apiSpec, Optional.empty(), Optional.empty(), Optional.empty());
 
         if (errors.size() > 0) {
@@ -146,9 +144,9 @@ public class ConverterFiles extends Converter {
                         }
                     } else if (isMandatory) {
                         if (subCat.isPresent()) {
-                            errors.add("Errormessage: " + annotationName + " in " + subCat + " is Mandatory");
+                            this.errors.add("Errormessage: " + annotationName + " in " + subCat.get() + " is Mandatory");
                         } else {
-                            errors.add("Errormessage: " + annotationName + " is Mandatory");
+                            this.errors.add("Errormessage: " + annotationName + " is Mandatory");
                         }
                     }
                 }

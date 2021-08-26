@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+import se.ams.dcatprocessor.converter.Converter;
 import se.ams.dcatprocessor.converter.ConverterCatalog;
 import se.ams.dcatprocessor.converter.ConverterFiles;
 import se.ams.dcatprocessor.models.ConverterHelpClass;
@@ -71,7 +72,6 @@ public class Manager {
                 }
             }
             result = this.createDcat(apiSpecMap);
-            printToFile(result, "dcat.rdf");
         }
         return result;
     }
@@ -201,6 +201,7 @@ public class Manager {
         }
 
         ValidationErrorStorage.getInstance().resetErrors();
+        Converter.deleteErrors();
 
         if (exceptionResult.length() > 0) {
             exceptionResult.append("Check DCAT-AP-SE specification for info. https://docs.dataportal.se/dcat/sv/\n---------------------------------\n");

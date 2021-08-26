@@ -120,9 +120,9 @@ public class ConverterCatalog extends Converter {
                         }
                     } else if (isMandatory) {
                         if (subCat.isPresent()) {
-                            errors.add("Errormessage: " + AnnotationName + " in " + subCat + " is Mandatory");
+                            this.errors.add("Errormessage: " + AnnotationName + " in " + subCat.get() + " is Mandatory");
                         } else {
-                            errors.add("Errormessage: " + AnnotationName + " is Mandatory");
+                            this.errors.add("Errormessage: " + AnnotationName + " is Mandatory");
                         }
                     }
                 }

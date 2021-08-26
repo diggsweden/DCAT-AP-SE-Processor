@@ -26,6 +26,7 @@
           "attributionURL": "www.rattighetstextcatalog.se",
           "copyrightNotice": "Upphovsrätt",
           "copyrightStatement": {
+            "about": "https://www.af.se/statement",
             "title-sv": "License För Catalog",
             "description-sv": "license för Catalog"
           },
@@ -83,6 +84,7 @@
         "identifier": "www.identifierare.com",
         "adms": "www.ovrig-identifierare.com",
         "conformsTo": {
+          "about": "https://www.example.se/#datasetC/conformsTo",
           "title-sv": "Exempel namn på Standard",
           "description-sv": "Beskrivning Standard"
         },
@@ -96,6 +98,7 @@
           "page": "www.avgiftsexempel.se"
         },
         "page": {
+          "about": "https://www.example.se/#datasetC/page",
           "title-sv": "Exempel Dokument",
           "description-sv": "Beskrivning av Exempeldokument"
         },
@@ -120,6 +123,7 @@
             "attributionURL": "www.rattighetstext.se",
             "copyrightNotice": "Upphovsrätt",
             "copyrightStatement": {
+              "about": "https://www.example.se/#distributionC/statement",
               "title-sv": "Test License",
               "description-sv": "Test license for dcat spec"
             },
@@ -137,10 +141,12 @@
             "value": "A23DF"
           },
           "page": {
+            "about": "https://www.example.se/#distributionC/page",
             "title-sv": "Nytt Exempel Dokument",
             "description-sv": "Beskrivning av Nytt Exempeldokument"
           },
           "conformsTo": {
+            "about": "https://www.example.se/#distributionC/conformsTo",
             "title-sv": "Ny Standard",
             "description-sv": "Beskrivning av Ny Standard"
           }

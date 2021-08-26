@@ -23,7 +23,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import se.ams.dcatprocessor.models.*;
-import se.ams.dcatprocessor.rdf.namespace.SCHEMA;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,7 +36,11 @@ public class Converter {
     FileStorage fileHandler = new FileStorage();
     JSONObject jsonObjectMandatoryDcat;
     JSONObject orgConvert;
-    List<String> errors = new ArrayList<>();
+    public static List<String> errors = new ArrayList<>();
+
+    public static void deleteErrors() {
+        errors.clear();
+    }
 
     /*
      * Takes one specFile for a Catalog and creates a Catalog Object */
@@ -51,7 +54,7 @@ public class Converter {
         return fileHandler;
     }
 
-    void processToDcat(JSONObject subToConvert, JSONObject file, Optional<String> subCat, Optional<DataClass> preData, Optional<DataClass> preDist) throws Exception {
+    void processToDcat(JSONObject subConvert, JSONObject file, Optional<String> subCat, Optional<DataClass> preData, Optional<DataClass> preDist) throws Exception {
     }
 
     /*

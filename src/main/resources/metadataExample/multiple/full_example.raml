@@ -49,6 +49,7 @@ annotationTypes:
       spatialUrl: string
       conformsTo:
         properties:
+          about: string
           title-sv: string
           description-sv: string
       offers:
@@ -57,6 +58,7 @@ annotationTypes:
           page: string
       page:
         properties:
+          about: string
           title-sv: string
           description-sv: string
       temporal:
@@ -87,6 +89,7 @@ annotationTypes:
               copyrightNotice: string
               copyrightStatement:
                 properties:
+                  about: string
                   title-sv: string
                   description-sv: string
               copyrightYear: integer
@@ -104,10 +107,12 @@ annotationTypes:
               value: string
           page:
             properties:
+              about: string
               title-sv: string
               description-sv: string
           conformsTo:
             properties:
+              about: string
               title-sv: string
               description-sv: string
   dcat-dataservice:
@@ -194,6 +199,7 @@ annotationTypes:
   identifier: www.identifierare.com
   adms: www.ovrig-identifierare.com
   conformsTo:
+    about: https://www.example.se/#datasetA/conformsTo
     title-sv: Exempel namn på Standard
     description-sv: Beskrivning Standard
   temporal:
@@ -204,6 +210,7 @@ annotationTypes:
       description-sv: Exempel Avgift
       page: www.avgiftsexempel.se
   page:
+    about: https://www.example.se/#datasetA/page
     title-sv: Exempel Dokument
     description-sv: Beskrivning av Exempeldokument
   distribution:
@@ -227,6 +234,7 @@ annotationTypes:
       attributionURL: www.rattighetstext.se
       copyrightNotice: Upphovsrätt
       copyrightStatement:
+        about: https://www.example.se/#distributionA/statement
         title-sv: Test License
         description-sv: Test license for dcat spec
       copyrightYear: 1976
@@ -241,9 +249,11 @@ annotationTypes:
     checksum:
       value: A23DF
     page:
+      about: https://www.example.se/#distributionA/page
       title-sv: Nytt Exempel Dokument
       description-sv: Beskrivning av Nytt Exempeldokument
     conformsTo:
+      about: https://www.example.se/#distributionA/conformsTo
       title-sv: Ny Standard
       description-sv: Beskrivning av Ny Standard
 (dcat-dataservice):

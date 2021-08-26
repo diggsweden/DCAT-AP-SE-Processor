@@ -44,6 +44,7 @@ info:
       identifier: www.identifierare.com
       adms: www.ovrig-identifierare.com
       conformsTo:
+        about: https://www.example.se/#datasetB/conformsTo
         title-sv: Exempel namn på Standard
         description-sv: Beskrivning Standard
       temporal:
@@ -54,6 +55,7 @@ info:
         description-sv: Exempel Avgift
         page: www.avgiftsexempel.se
       page:
+        about: https://www.example.se/#datasetB/page
         title-sv: Exempel Dokument
         description-sv: Beskrivning av Exempeldokument
       distribution:
@@ -77,6 +79,7 @@ info:
           attributionURL: www.rattighetstext.se
           copyrightNotice: Upphovsrätt
           copyrightStatement:
+            about: https://www.example.se/#distributionB/statement
             title-sv: Test License
             description-sv: Test license for dcat spec
           copyrightYear: 1976
@@ -90,9 +93,11 @@ info:
         checksum:
           value: A23DF
         page:
+          about: https://www.example.se/#distributionB/page
           title-sv: Nytt Exempel Dokument
           description-sv: Beskrivning av Nytt Exempeldokument
         conformsTo:
+          about: https://www.example.se/#distributionB/conformsTo
           title-sv: Ny Standard
           description-sv: Beskrivning av Ny Standard
     dcat-dataservice:

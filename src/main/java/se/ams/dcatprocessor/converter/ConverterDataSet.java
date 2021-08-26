@@ -24,6 +24,7 @@ import se.ams.dcatprocessor.rdf.namespace.SCHEMA;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -58,7 +59,7 @@ public class ConverterDataSet extends Converter {
             boolean isMandatory;
             String mandatoryKey = key.toString();
             if (subCat.isPresent()) {
-                mandatoryKey = subCat + "-" + key;
+                mandatoryKey = subCat.get() + "-" + key;
             }
             isMandatory = jsonObjectMandatoryDcat.containsKey(mandatoryKey);
 
@@ -124,9 +125,9 @@ public class ConverterDataSet extends Converter {
                         }
                     } else if (isMandatory) {
                         if (subCat.isPresent()) {
-                            errors.add("Errormessage: " + annotationName + " in " + subCat + " is Mandatory");
+                            this.errors.add("Errormessage: " + annotationName + " in " + subCat.get() + " is Mandatory");
                         } else {
-                            errors.add("Errormessage: " + annotationName + " is Mandatory");
+                            this.errors.add("Errormessage: " + annotationName + " is Mandatory");
                         }
                     }
                 }
