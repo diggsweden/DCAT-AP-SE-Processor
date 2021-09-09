@@ -40,7 +40,7 @@ public class SCHEMA {
 	/**
 	 * The Schema namespace: https://schema.org/
 	 */
-	public static final String NAMESPACE = "https://schema.org/";
+	public static final String NAMESPACE = "http://schema.org/";
 	
 	/**
 	 * An immutable {@link Namespace} constant that represents the Schema Vocabulary namespace.

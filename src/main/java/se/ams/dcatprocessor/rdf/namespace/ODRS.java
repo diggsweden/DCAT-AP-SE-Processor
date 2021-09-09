@@ -40,7 +40,7 @@ public class ODRS {
 	/**
 	 * The ODRS namespace: http://schema.theodi.org/odrs#
 	 */
-	public static final String NAMESPACE = "http://schema.theodi.org/odrs/";
+	public static final String NAMESPACE = "http://schema.theodi.org/odrs#";
 	
 	/**
 	 * An immutable {@link Namespace} constant that represents the ODRS namespace.

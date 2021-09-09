@@ -40,7 +40,7 @@ public class ADMS {
 	/**
 	 * The ADMS namespace: http://www.w3.org/ns/adms/
 	 */
-	public static final String NAMESPACE = "http://www.w3.org/ns/adms/";
+	public static final String NAMESPACE = "http://www.w3.org/ns/adms#";
 	
 	/**
 	 * An immutable {@link Namespace} constant that represents the ADMS namespace.
