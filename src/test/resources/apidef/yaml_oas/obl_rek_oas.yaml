@@ -28,7 +28,7 @@ info:
       contactPoint:
         about: www.af11.se
         name: Redpill Linpro AB Contact
-        type: Organisation
+        type: Organization
         email: admin2@test.se
         address: Testgatan 5; 76543; Tranemo; Sverige
         phone: 98876554

@@ -43,10 +43,10 @@ public class ManagerTest {
             "\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" +
             "\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\"\n" +
             "\txmlns:locn=\"http://www.w3.org/ns/locn#\"\n" +
-            "\txmlns:schema=\"https://schema.org/\"\n" +
+            "\txmlns:schema=\"http://schema.org/\"\n" +
             "\txmlns:prov=\"http://www.w3.org/ns/prov#\"\n" +
-            "\txmlns:adms=\"http://www.w3.org/ns/adms/\"\n" +
-            "\txmlns:odrs=\"http://schema.theodi.org/odrs/\"\n" +
+            "\txmlns:adms=\"http://www.w3.org/ns/adms#\"\n" +
+            "\txmlns:odrs=\"http://schema.theodi.org/odrs#\"\n" +
             "\txmlns:spdx=\"http://spdx.org/rdf/terms#\"\n" +
             "\txmlns:dcatap=\"http://data.europa.eu/r5r#\"\n" +
             "\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\">\n" +
@@ -96,7 +96,6 @@ public class ManagerTest {
             "\t<dcat:endDate rdf:datatype=\"http://www.w3.org/2001/XMLSchema#date\">2021-03-25</dcat:endDate>\n" +
             "</dcterms:PeriodOfTime>\n" +
             "<vcard:Organization rdf:about=\"http://www.af11.se\">\n" +
-			"\t<rdf:type rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Organisation</rdf:type>\n" +        
             "\t<vcard:fn rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Redpill Linpro AB Contact</vcard:fn>\n" +
             "\t<vcard:hasEmail rdf:resource=\"mailTo:admin2@test.se\"/>\n" +
             "\t<vcard:hasAddress rdf:nodeID=\"TESTNODEID\"/>\n" +
@@ -271,7 +270,7 @@ public class ManagerTest {
             "  contactPoint:\n" +
             "    about: www.af11.se\n" +
             "    name: Redpill Linpro AB Contact\n" +
-            "    type: Organisation\n" +
+            "    type: Organization\n" +
             "    email: admin2@test.se\n" +
             "    address: Testgatan 5; 76543; Tranemo; Sverige\n" +
             "    phone: 98876554\n" +
