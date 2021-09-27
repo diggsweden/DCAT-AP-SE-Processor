@@ -334,7 +334,7 @@
         "RightsStatement": {
             "metadata": "rights"
         },
-        "checksum": {
+        "Checksum": {
             "metadata": "checksum"
         },
         "Document": {
@@ -374,7 +374,7 @@
             "metadata": "description"
         }
     },
-    "checksum": {
+    "Checksum": {
         "metadata": "checksum",
         "spdx:checksumValue": {
             "metadata": "value"

@@ -51,6 +51,9 @@ public class SPDX {
 	/** spdx:checksum */
 	public static final IRI CHECKSUM;
 
+	/** spdx:checksum */
+	public static final IRI CHECKSUMS;
+
 	/** spdx:checksumValue */
 	public static final IRI CHECKSUM_VALUE;
 
@@ -63,7 +66,8 @@ public class SPDX {
 	//Add more below as needed
 	
 	static {
-		CHECKSUM = SimpleValueFactory.getInstance().createIRI(NAMESPACE, "checksum");
+		CHECKSUM = SimpleValueFactory.getInstance().createIRI(NAMESPACE, "Checksum");
+		CHECKSUMS = SimpleValueFactory.getInstance().createIRI(NAMESPACE, "checksum");
 		CHECKSUM_VALUE = SimpleValueFactory.getInstance().createIRI(NAMESPACE, "checksumValue");
 		ALGORITHM = SimpleValueFactory.getInstance().createIRI(NAMESPACE, "algorithm");
 		CHECKSUM_ALGORITHM_SHA1 = SimpleValueFactory.getInstance().createIRI(NAMESPACE, "checksumAlgorithm_sha1");

@@ -487,7 +487,7 @@ public class RDFWorker {
 		 * Add CheckSum...if it exist
 		 */
 		if(Util.isNotNullOrEmpty(distribution.checksum)) {
-			addNodes(distributionIRI, SPDX.CHECKSUM, SPDX.CHECKSUM, List.of(distribution.checksum));
+			addNodes(distributionIRI, SPDX.CHECKSUMS, SPDX.CHECKSUM, List.of(distribution.checksum));
 		}
 		
 		/*
