@@ -22,7 +22,7 @@
 | | dcterms:spatial | 5 |
 | | dcat:themeTaxonomy | 1 |
 | | | |
-| Valfri | dcterms:rights | 5 |
+| Valfri | dcterms:rights | 1 |
 | | dcterms:hasPart | 1 |
 | | dcterms:isPartOf | 1 |
 | | dcat:catalog | 1 |
@@ -52,18 +52,18 @@
 | | dcterms:conformsTo | 1 |
 | | dcat:temporalResolution | 1 |
 | | dcat:spatialResolutionInMeters | 1 |
-| | dcterms:accrualPeriodicity | 41|
+| | dcterms:accrualPeriodicity | 1|
 | | owl:versionInfo | 1 |
-| | adms:versionNotes | 5 |
+| | adms:versionNotes | 1 |
 | | dcterms:source | 1 |
-| | schema:offers | 5 |
+| | schema:offers | 1 |
 | | dcat:hasVersion | 1 |
 | | dcat:isVersionOf | 1 |
 | | dcterms:isReferencedBy | 1 |
 | | dcterms:relation | 1 |
 | | dcat:qualifiedRelation | 1 |
 | | foaf:page | 1 |
-| | dcterms:provenance | 5 |
+| | dcterms:provenance | 1 |
 | | dcat:distribution | 1 |
 | | | |
 | Distribution | |
@@ -86,9 +86,9 @@
 | | dcterms:language | 1 |
 | | dcterms:issued | 1 |
 | | dcterms:modified | 1 |
-| | adms:status | 5 |
-| | dcterms:rights | 5 |
-| | spdx:checksum | 5 |
+| | adms:status | 1 |
+| | dcterms:rights | 1 |
+| | spdx:checksum | 1 |
 | | foaf:page | 1 |
 | | dcterms:conformsTo | 1 |
 | | | |
@@ -99,7 +99,7 @@
 | Rekommenderade | dcat:endpointDescription | 1 |
 | | dcat:contactPoint | 1 |
 | | dcat:keyword | 1 |
-| | dcterms:license | 5 |
+| | dcterms:license | 1 |
 | | dcterms:accessRights | 1 |
 | | | |
 | Valfri | dcterms:description | 1 |
