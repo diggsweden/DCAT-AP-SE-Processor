@@ -200,7 +200,6 @@ json-ld-java [BSD-3 clause license](docs/Licenser/BSD-3.txt)<br>
 jackson-dataformat-yaml [Apache license](docs/Licenser/Apache.txt)<br>
 hibernate-json-org-contributor [BSD-3 clause license](docs/Licenser/BSD-3.txt  )<br>
 json-simple [Apache license](docs/Licenser/Apache.txt)<br>
-jsoup [MIT license](docs/Licenser/MIT.txt)<br>
 commons-collections4 [Apache license](docs/Licenser/Apache.txt)<br>
 
 # Status v0.9
