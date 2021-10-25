@@ -146,7 +146,8 @@ public class ConverterDistribution extends Converter {
             } else if (subCat.get().equals(DCTERMS.RIGHTS_STATEMENT.getLocalName())) {
                 ((Distribution) preDist.get()).rights = dataClassLocal;
             } else if (subCat.get().equals(DCTERMS.STANDARD.getLocalName())) {
-                ((Distribution) preDist.get()).conformsTo.add(dataClassLocal);
+                preDist.get().dcData.put("dcterms:conformsTo",dataClassLocal.about );
+            //    ((Distribution) preDist.get()).conformsTo.add(dataClassLocal);
             } else if (subCat.get().equals(DCTERMS.SPATIAL.getLocalName())) {
                 ((DataSet) preData.get()).spatial.add(dataClassLocal);
             } else if (subCat.get().contains(DCAT.DISTRIBUTION.getLocalName())) {

@@ -141,7 +141,8 @@ public class ConverterDataService extends Converter {
                     }
                 }
             } else if (subCat.get().equals(DCTERMS.STANDARD.getLocalName())) {
-                preData.ifPresent(dataClass -> ((DataService) dataClass).conformsTo.add(dataClassLocal));
+                preData.get().dcData.put("dcterms:conformsTo",dataClassLocal.about );
+//                preData.ifPresent(dataClass -> ((DataService) dataClass).conformsTo.add(dataClassLocal));
             } else if (subCat.get().contains(DCAT.CONTACT_POINT.getLocalName())) {
                 preData.ifPresent(dataClass -> ((DataService) dataClass).organizations.add(organizationLocal));
             } else if (subCat.get().contains(DCTERMS.LICENSE_DOCUMENT.getLocalName())) {
