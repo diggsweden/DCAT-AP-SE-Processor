@@ -137,7 +137,9 @@ public class ConverterDataSet extends Converter {
             if (subCat.get().contains(DCAT.DATASET.getLocalName())) {
                 fileHandler.dcat_dataset.add(dataSet);
             } else if (subCat.get().contains(DCTERMS.PUBLISHER.getLocalName())) {
-                preData.get().agent = dataClassLocal;
+                if (preData.isPresent()) {
+                    preData.get().agent = dataClassLocal;
+                }
             } else if (subCat.get().contains(DCTERMS.CREATOR.getLocalName())) {
                 preData.ifPresent(dataClass -> ((DataSet) dataClass).creator = dataClassLocal);
             } else if (subCat.get().contains(PROV.ATTRIBUTION.getLocalName())) {
@@ -150,9 +152,13 @@ public class ConverterDataSet extends Converter {
             } else if (subCat.get().equals(DCTERMS.STANDARD.getLocalName())) {
                 preData.ifPresent(dataClass -> ((DataSet) dataClass).conformsTo.add(dataClassLocal));
             } else if (subCat.get().equals(DCTERMS.SPATIAL.getLocalName())) {
-                ((DataSet) preData.get()).spatial.add(dataClassLocal);
+                if (preData.isPresent()) {
+                    ((DataSet) preData.get()).spatial.add(dataClassLocal);
+                }
             } else if (subCat.get().contains(DCAT.QUALIFIED_RELATION.getLocalName())) {
-                ((DataSet) preData.get()).qualifiedRelations.add(dataClassLocal);
+                if (preData.isPresent()) {
+                    ((DataSet) preData.get()).qualifiedRelations.add(dataClassLocal);
+                }
             } else if (subCat.get().contains(DCAT.CONTACT_POINT.getLocalName())) {
                 preData.ifPresent(dataClass -> ((DataSet) dataClass).organizations.add(organizationLocal));
             } else if (subCat.get().contains(FOAF.DOCUMENT.getLocalName())) {

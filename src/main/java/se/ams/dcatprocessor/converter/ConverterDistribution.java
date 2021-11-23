@@ -139,12 +139,16 @@ public class ConverterDistribution extends Converter {
         }
         if (subCat.isPresent()) {
             if (subCat.get().contains(DCTERMS.PUBLISHER.getLocalName())) {
-                (preData.get()).agents.add(dataClassLocal);
+                if (preData.isPresent()) {
+                    (preData.get()).agents.add(dataClassLocal);
+                }
             } else if (subCat.get().equals(SPDX.CHECKSUM.getLocalName())) {
                 dataClassLocal.dcData.put("spdx:algorithm", "http://spdx.org/rdf/terms#checksumAlgorithm_sha1");
                 preDist.ifPresent(dataClass -> ((Distribution) dataClass).checksum = dataClassLocal);
             } else if (subCat.get().equals(DCTERMS.RIGHTS_STATEMENT.getLocalName())) {
-                ((Distribution) preDist.get()).rights = dataClassLocal;
+                if (preData.isPresent()) {
+                    ((Distribution) preDist.get()).rights = dataClassLocal;
+                }
             } else if (subCat.get().equals(DCTERMS.STANDARD.getLocalName())) {
                 preDist.get().dcData.put("dcterms:conformsTo",dataClassLocal.about );
             //    ((Distribution) preDist.get()).conformsTo.add(dataClassLocal);

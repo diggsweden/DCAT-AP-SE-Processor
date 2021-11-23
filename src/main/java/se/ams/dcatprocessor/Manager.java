@@ -67,8 +67,7 @@ public class Manager {
                 try {
                     String content = Files.readString(path);
                     apiSpecMap.put(path.toString(), content);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } finally {
                 }
             }
             result = this.createDcat(apiSpecMap);
@@ -113,8 +112,12 @@ public class Manager {
 
     private void printToFile(String string, String fileName) throws Exception {
         FileOutputStream fos = new FileOutputStream(fileName);
-        fos.write(string.getBytes());
-        fos.close();
+        try {
+            fos.write(string.getBytes());
+        }
+        finally {
+            fos.close();
+        }
     }
 
     public String createDcat(MultiValuedMap<String, String> apiSpecMap) throws Exception {
