@@ -990,7 +990,7 @@ class RDFWorkerTest {
 	}
 
 	private void printToFile(String string, String fileName) throws Exception {
-		FileOutputStream fos = new FileOutputStream(System.getProperty("user.home") + "\\" + fileName);
+		FileOutputStream fos = new FileOutputStream(System.getProperty("user.home") + System.getProperty("file.separator") + fileName);
 		fos.write(string.getBytes());
 		fos.close();
 	}
