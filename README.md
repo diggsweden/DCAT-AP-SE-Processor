@@ -126,6 +126,17 @@ Anropa endpoints med valfritt verktyg. I utveckling har vi använt curl från gi
 Jenkins pipeline exempel
 [Jenkinsfile](docs/jenkinsfile)
 
+### Via CLI
+Konvertera en specifikationsfil och få DCAT-data till stdout:
+```
+java -jar dcatprocessor.jar -f FIL
+```
+
+Konvertera en katalog med specifikationsfiler och få DCAT-data till stdout:
+```
+java -jar dcatprocessor.jar -d KATALOG
+```
+
 ## Arbetssätt vid lokal utveckling
 
 ### Använda Docker
@@ -161,7 +172,7 @@ För att  köra verktyget direkt från jarfilen öppnar man ett kommandfönster 
 ```
 java -jar <jar-file-name>.jar
 ```
-Detta kör igång verktyget lokalt på datorn. 
+Detta kör igång verktyget lokalt på datorn.
 
 ### Göra anrop till Verktyget
 Kör anrop till rest api via git bash, Postman eller annat verktyg<br>

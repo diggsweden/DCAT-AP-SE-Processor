@@ -27,7 +27,7 @@ RUN apt-get -y clean \
 WORKDIR /opt
 ENV PORT 8080
 EXPOSE 8080
-CMD exec java $JAVA_OPTS -jar app.jar
+ENTRYPOINT exec java $JAVA_OPTS -jar app.jar
 
 ## Set the locale
 ENV LANG sv_SE.UTF-8
