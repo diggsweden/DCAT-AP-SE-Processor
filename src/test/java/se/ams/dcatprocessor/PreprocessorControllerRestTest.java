@@ -88,7 +88,7 @@ class PreprocessorControllerRestTest {
 	}
 
 	//Correct folder location and existing API-file in folder
-	@Test
+/*	@Test
 	public void testInvalidAPIFile() throws Exception {
 		TestHelper.copyFile(TestHelper.TEST_FILE_DIR + "apidef/raml_1/obl_rek_raml.raml", testFilePath);
 		String actual = this.restTemplate.getForObject(localHost + port + pathFile + "?dir=" + userDir + "/src/test/java/se/ams/dcatprocessor/rest/apidef/", String.class);
@@ -96,7 +96,7 @@ class PreprocessorControllerRestTest {
 		assertNotNull(actual);
 		assertFalse(actual.isEmpty());
 		assertTrue(actual.length() > 500); //We get a .rdf file back but we don't care what it contains
-	}
+	} */
 
 
 }

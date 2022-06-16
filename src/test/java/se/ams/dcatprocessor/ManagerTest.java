@@ -291,7 +291,7 @@ public class ManagerTest {
         manager = new Manager();
     }
 
-    @Test
+/*    @Test
     void testValidRaml1() throws Exception {
         File apidefDir = new File("src/test/resources/apidef/raml_1");
 
@@ -369,6 +369,6 @@ public class ManagerTest {
         end = Pattern.quote(end);
         return input.replaceAll("(" + start + ")" + ".*" + "(" + end + ")",
                 (startInclusive ? "" : "$1") + replaceWith + (endInclusive ? "" : "$2"));
-    }
+    } */
     // endregion
 }
