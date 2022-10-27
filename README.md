@@ -12,6 +12,7 @@ Det möjliggör en enhetlig beskrivning av datamängder för att förenkla insam
 ## Automatiserad process för framställning av metadata
 I syfte att hjälpa producenter av metadata, som ska skördas till dataportalen, har detta verktyg tagits fram för att kunna införlivas i godtycklig CI/CD driven kedja eller köras separat.
 Verktyget skapar en metadataspecifikation på RDF-format utifrån en API-definition alternativt separat metadatafil.
+RDF är det språk som används för att uttrycka metadata om ting på webben. En central egenskap med RDF är att man använder webbadresser (URI:er) för att referera till ting i olika påståenden.
 
 ## Format på API-definitioner
 Det finns stöd för formaten OpenAPI eller RAML.
@@ -33,7 +34,7 @@ REST API:n för verktyget, följande två är de som finns att använda:
 
 ### Manager
 
-Tar emot anrop från REST API't eller formuläret och styr parsning, konvertering och uppskapande av RDF data.
+Tar emot anrop från REST API't eller formuläret och styr parsning, konvertering och uppskapande av RDF-data.
 
 ### ApiDefinitionParser
 
@@ -47,16 +48,16 @@ RAML0.8 och/eller OAS2 på json/yaml format stöder inte annotations/extensions,
 
 Använder MultiValuedMap (Apache Commons) och JSON.simple.
 
-För att konvertera mellan inläst metadata till element på DCAT AP SE format används konverteringsfiler (t.ex. TO_DCAT_OAS.json).<br>
+För att konvertera mellan inläst metadata till element på DCAT-AP-SE format används konverteringsfiler (t.ex. TO_DCAT_OAS.json).<br>
 I senare skeden kan man enkelt lägga till nya konverteringsfiler för andra format eller ändra till nyare versioner av befintliga format.
 
 ### RDFWorker
 
-Använder RDF4J
+Använder RDF4J.
 
 Tar emot en lista av Katalog objekt och skapar matchande RDF utifrån det.
 
-## Använda verktyget
+## Hur du använder DCAT-AP-SE Processor
 Bygg docker image från koden i det här repositoryt, t.ex:
 ```
 docker build --no-cache -t "dcatprocessor" .
@@ -65,24 +66,24 @@ När container startas finns ett formulär och ett REST API tillgängligt att an
 
 Docker imagen kör Ubuntu 18.04.2 LTS (Bionic Beaver) och installerar Swedish locale, se [dockerfile](dockerfile)
 
-Verktyget kan användas på följande sätt
-### Via UI
+Verktyget kan användas på följande sätt.
+### 1. Via UI
 Starta docker container, öppna browser till http://localhost:8080
 
 Det finns val för att:
-* skicka in en sträng med api definitionen
-* bifoga en fil med api definitionen
-* ange en katalog som håller flera api definitioner
+* skicka in en sträng med API-definitionen.
+* bifoga en fil med API-definitionen.
+* ange en katalog som håller flera API-definitioner.
 
-Verktyget levererar resultatet som svar på sidan
+Verktyget levererar resultatet som svar på sidan.
 
-### Via anrop till REST gränssnitt
+### 2. Via anrop till REST gränssnitt
 Anropa endpoints med valfritt verktyg. I utveckling har vi använt curl från git bash.
 
 Jenkins pipeline exempel
-[Jenkinsfile](docs/jenkinsfile)
+[Jenkinsfile](docs/jenkinsfile).
 
-### Via CLI
+### 3. Via CLI
 Konvertera en specifikationsfil och få DCAT-data till stdout:
 ```
 java -jar dcatprocessor.jar -f FIL
@@ -124,7 +125,7 @@ $ docker cp apidef.raml hopeful_boyd:/apidef
 ```
 
 ### Köra direkt från jar-filen
-För att  köra verktyget direkt från jarfilen öppnar man ett kommandfönster och går till där jar-filen ligger. Sedan kör man:
+För att  köra verktyget direkt från jarfilen öppnar man ett kommandfönster och går till där jar-filen ligger. Sedan kör du:
 ```
 java -jar <jar-file-name>.jar
 ```
@@ -155,15 +156,11 @@ Exceptions skrivs till container loggen "/opt/logs/dcatprocessor.log".<br>
 [specifikationsfil](src/main/resources/dcat_specification.properties)
 
 ## Arbetsprocess för att publicera api/er på dataportalen
-- Skapa konto på dataportalen.se och sätt upp skördningskälla<br>
-- Inför metadata i apidefinitionen, eller skapa en separat metadatafil<br>
-- Använd verktyget för att generera en RDF fil
-- Skörda RDF filen
-- Verifiera att skördningen fungerar
-
-### Skapa konto på dataportalen.se
-[Skapa konto](https://docs.dataportal.se/accounts/) eller kontrollera [status](https://admin.dataportal.se/status/public) ifall er organisation redan finns upplagd hos dataportalen.se
-
+- [Skapa konto](https://docs.dataportal.se/accounts/) till de bakomliggande systemen för dataportal.se eller kontrollera [status](https://admin.dataportal.se/status/public) om er organisation redan finns upplagd. Upprätta sedan en skördningskälla, [Komma igång](https://docs.dataportal.se/registry/start/).<br>
+- Inför metadata i apidefinitionen, eller skapa en separat metadatafil.<br>
+- Använd verktyget för att generera en RDF fil.
+- Skörda RDF filen, [Hantera organisatoiner och skördningskällor](https://docs.dataportal.se/registry/organisationer/#lagga-till-en-organisation).
+- Verifiera att skördningen fungerar.
 [Dataportalen docs](https://docs.dataportal.se/) har ingående information om hur skördningen fungerar samt hur en organisation sätter upp sin katalogkälla.
 
 ### Införa metadata
@@ -183,17 +180,17 @@ Exempel med obligatoriska och rekommenderade värden.<br>
 [OAS YAML](src/main/resources/metadataExample/single/full_example_oas.yaml)<br>
 [OAS JSON](src/main/resources/metadataExample/single/full_example_oas.json)<br>
 
-För API som inte har en definition (code-first) kan producenten tillhandahålla separat metadata på json format<br>
+För API som inte har en definition (code-first) kan dataproducenten tillhandahålla separat metadata på json format<br>
 [Separat JSON](src/main/resources/metadataExample/single/full_example.json)<br>
 
-#### Om ni har fler API:n
-Organisation med multipla api att producera RDF från använder en separat catalog.json fil för att hålla samman de ingående API:ernas metadata, se exempel under [multipla filer](src/main/resources/metadataExample/multiple).<br>
+#### Om ni har flera API:er
+Organisation med multipla API att producera RDF från använder en separat catalog.json fil för att hålla samman de ingående API:ernas metadata, se exempel under [multipla filer](src/main/resources/metadataExample/multiple).<br>
 För att verktyget ska generera en sammanslagen RDF-fil krävs att organisationen skapar filer enligt följande:<br>
 catalog.json - beskriver det övergripande katalog elementet och är samma för alla ingående apier.<br>
-[catalog.json](src/main/resources/metadataExample/multiple/catalog.json) - Katalog elementet i separat fil på json format<br>
+[catalog.json](src/main/resources/metadataExample/multiple/catalog.json) - Katalog elementet i separat fil på json format.<br>
 
-exempel på ingående apidefinitioner innehållande metadata för DCAT-AP-SE<br>
-[full_example.raml](src/main/resources/metadataExample/multiple/full_example.raml) - API A på RAML format<br>
+Exempel på ingående API-definitioner innehållande metadata för DCAT-AP-SE<br>
+[full_example.raml](src/main/resources/metadataExample/multiple/full_example.raml) - Api A på RAML format<br>
 [full_example_oas.yaml](src/main/resources/metadataExample/multiple/full_example_oas.yaml) - Api B på OAS3 yaml format<br>
 [full_example_oas.json](src/main/resources/metadataExample/multiple/full_example_oas.json) - Api C på OAS3 json format<br>
 [full_example.json](src/main/resources/metadataExample/multiple/full_example.json), Api D, separat metadataspecifikation på json format<br>
@@ -215,7 +212,7 @@ commons-collections4 [Apache license](docs/Licenser/Apache.txt)<br>
 
 ## Status v0.9
 Detta är en första version av verktyget. <br>
-Arbetsförmedlingen och Bolagsverket kommer prova mjukvaran skarpt under hösten. <br>
+Arbetsförmedlingen och Bolagsverket kommer prova mjukvaran skarpt under hösten 2022. <br>
 När mjukvaran fungerar för tillräckligt många offentliga organisationer kommer versionen uppdateras till 1.0. <br>
 Mjukvaran utvecklas av DIGG och Arbetsförmedlingen.
 
