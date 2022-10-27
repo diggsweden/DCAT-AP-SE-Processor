@@ -7,63 +7,19 @@ En förutsättning för att dataportalen ska kunna synliggöra bland annat infor
 är att aktörerna upprättar och publicerar informationen enligt en gemensam och standardiserad metadataspecifikation som är tillgänglig för skördning.
 Den specifikationen heter [DCAT-AP-SE](https://docs.dataportal.se/dcat/sv/) och är speciellt framtagen för att passa Sveriges dataportal på grund av den är tillräckligt övergripande för
 att passa inhämtning av metadata från olika typer av organisationer och datadomäner.
-Det möjliggör en enhetlig beskrivning av datamängder för att förenkla insamling, sökning och presentation av data på Sveriges dataportal.
+Det möjliggör en enhetlig beskrivning av datamängder för att förenkla insamling, sökning och presentation av data på Sveriges dataportal. Följande information innehåller mycket tekniska termer och begrepp. För att kunna tillgodogöra sig informationen bör därför någon med sådan typ av kompetens läsa instruktionen.
 
 ## Automatiserad process för framställning av metadata
-I syfte att hjälpa producenter av metadata, som ska publiceras på dataportalen, har detta verktyg tagits fram för att kunna införlivas i godtycklig CI/CD driven kedja eller köras separat.
-Verktyget skapar en metadataspecifikation på RDF format utifrån en api definition alternativt separat metadatafil.
+I syfte att hjälpa producenter av metadata, som ska skördas till dataportalen, har detta verktyg tagits fram för att kunna införlivas i godtycklig CI/CD driven kedja eller köras separat.
+Verktyget skapar en metadataspecifikation på RDF-format utifrån en API-definition alternativt separat metadatafil.
 
-## Format på apidefinitioner
-Det finns stöd för OpenAPI, RAML eller separat metadatafil.
+## Format på API-definitioner
+Det finns stöd för formaten OpenAPI eller RAML.
 * OpenAPI 3.x tillägg av metadata sker via extensions<br>
-  Lägg till en extension x-dcat och underliggande metadata hanteras
+  Lägg till en extension x-dcat och underliggande metadata hanteras.
 * RAML1.x tillägg av metadata sker via annotations<br>
-  Definiera en annotationType och använd den sedan
-* OAS2.x och RAML0.8 tillägg av metadata sker via separat metadatafil på json format
-
-## Arbetsprocess för att publicera api/er på dataportalen
-- Skapa konto på dataportalen.se och sätt upp skördningskälla<br>
-- Inför metadata i apidefinitionen, eller skapa en separat metadatafil<br>
-- Använd verktyget för att generera en RDF fil
-- Skörda RDF filen
-- Verifiera att skördningen fungerar
-
-### Skapa konto på dataportalen.se
-[Skapa konto](https://docs.dataportal.se/accounts/) eller kontrollera [status](https://admin.dataportal.se/status/public) ifall er organisation redan finns upplagd hos dataportalen.se
-
-[Dataportalen docs](https://docs.dataportal.se/) har ingående information om hur skördningen fungerar samt hur en organisation sätter upp sin katalogkälla.
-
-### Införa metadata
-För att verktyget ska ges information att generera data behöver api definitionen uppdateras med metadata information.<br>
-Repositoryt innehåller [exempelfiler](src/main/resources/metadataExample) som visar hur metadata kan införas i  apidefinition eller i separat metadatafil.<br>
-[Attribut som stöds](docs/supported_attributes.md) finns listade med beskrivning.
-Utgå från exempelfilerna och ta hjälp av [rekommendationer](https://docs.dataportal.se/dcat/docs/recommendations/) på dataportalen<br>
-
-Det finns exempelfiler som visar hur obligatoriska, rekommenderade och valfria värden kan läggas in.<br>
-När apidefinition/erna är uppdaterade med metadata görs de tillgängliga på en publikt nåbar folder, så att den separata pipeline som kör verktyget kan nå dem.
-
-#### Organisation med ett api
-Se exempel [enkel fil](src/main/resources/metadataExample/single), där Katalog elementet ligger i samma fil som resterande metadata.
-
-Exempel med obligatoriska och rekommenderade värden.<br>
-[RAML](src/main/resources/metadataExample/single/full_example.raml)<br>
-[OAS YAML](src/main/resources/metadataExample/single/full_example_oas.yaml)<br>
-[OAS JSON](src/main/resources/metadataExample/single/full_example_oas.json)<br>
-
-För API som inte har en definition (code-first) kan producenten tillhandahålla separat metadata på json format<br>
-[Separat JSON](src/main/resources/metadataExample/single/full_example.json)<br>
-
-#### Organisation med mer än ett api
-Organisation med multipla api att producera RDF från använder en separat catalog.json fil för att hålla samman de ingående api'ernas metadata, se exempel under [multipla filer](src/main/resources/metadataExample/multiple).<br>
-För att verktyget ska generera en sammanslagen RDF fil krävs att organisationen skapar filer enligt följande:<br>
-catalog.json - beskriver det övergripande katalog elementet och är samma för alla ingående apier.<br>
-[catalog.json](src/main/resources/metadataExample/multiple/catalog.json) - Katalog elementet i separat fil på json format<br>
-
-exempel på ingående apidefinitioner innehållande metadata för DCAT-AP-SE<br>
-[full_example.raml](src/main/resources/metadataExample/multiple/full_example.raml) - Api A på RAML format<br>
-[full_example_oas.yaml](src/main/resources/metadataExample/multiple/full_example_oas.yaml) - Api B på OAS3 yaml format<br>
-[full_example_oas.json](src/main/resources/metadataExample/multiple/full_example_oas.json) - Api C på OAS3 json format<br>
-[full_example.json](src/main/resources/metadataExample/multiple/full_example.json), Api D, separat metadataspecifikation på json format<br>
+  Definiera en annotationType och använd den sedan.
+* OAS2.x och RAML0.8 tillägg av metadata sker via separat metadatafil på json format.
 
 ## Ingående delar i verktyget
 Sekvensdiagram över flödet i verktyget.
@@ -189,19 +145,63 @@ Verktyget har även ett enklare GUI man kan använda för att skicka in apispeci
 
 http://localhost:8080/
 
-#Loggning
+## Loggning
 Exceptions skrivs till container loggen "/opt/logs/dcatprocessor.log".<br>
 
-# Lägga till stöd för nya metadata i verktyget
+## Lägga till stöd för nya metadata i verktyget
 [Översikt över vad som finns och fungerar enligt DCAT-AP-SE spec](docs/DCATAPSE_completion.md)<br>
 [Tillägg i Converter](docs/converter-tutorial.md)<br>
 [Tillägg i RDFWorker](docs/rdfworker-tutorial.md)<br>
 [specifikationsfil](src/main/resources/dcat_specification.properties)
 
-# Licens
+## Arbetsprocess för att publicera api/er på dataportalen
+- Skapa konto på dataportalen.se och sätt upp skördningskälla<br>
+- Inför metadata i apidefinitionen, eller skapa en separat metadatafil<br>
+- Använd verktyget för att generera en RDF fil
+- Skörda RDF filen
+- Verifiera att skördningen fungerar
+
+### Skapa konto på dataportalen.se
+[Skapa konto](https://docs.dataportal.se/accounts/) eller kontrollera [status](https://admin.dataportal.se/status/public) ifall er organisation redan finns upplagd hos dataportalen.se
+
+[Dataportalen docs](https://docs.dataportal.se/) har ingående information om hur skördningen fungerar samt hur en organisation sätter upp sin katalogkälla.
+
+### Införa metadata
+För att verktyget ska ges information att generera data behöver api definitionen uppdateras med metadata information.<br>
+Repositoryt innehåller [exempelfiler](src/main/resources/metadataExample) som visar hur metadata kan införas i  apidefinition eller i separat metadatafil.<br>
+[Attribut som stöds](docs/supported_attributes.md) finns listade med beskrivning.
+Utgå från exempelfilerna och ta hjälp av [rekommendationer](https://docs.dataportal.se/dcat/docs/recommendations/) på dataportalen<br>
+
+Det finns exempelfiler som visar hur obligatoriska, rekommenderade och valfria värden kan läggas in.<br>
+När apidefinition/erna är uppdaterade med metadata görs de tillgängliga på en publikt nåbar folder, så att den separata pipeline som kör verktyget kan nå dem.
+
+#### Om ni har ett API
+Se exempel [enkel fil](src/main/resources/metadataExample/single), där Katalog elementet ligger i samma fil som resterande metadata.
+
+Exempel med obligatoriska och rekommenderade värden.<br>
+[RAML](src/main/resources/metadataExample/single/full_example.raml)<br>
+[OAS YAML](src/main/resources/metadataExample/single/full_example_oas.yaml)<br>
+[OAS JSON](src/main/resources/metadataExample/single/full_example_oas.json)<br>
+
+För API som inte har en definition (code-first) kan producenten tillhandahålla separat metadata på json format<br>
+[Separat JSON](src/main/resources/metadataExample/single/full_example.json)<br>
+
+#### Om ni har fler API:n
+Organisation med multipla api att producera RDF från använder en separat catalog.json fil för att hålla samman de ingående API:ernas metadata, se exempel under [multipla filer](src/main/resources/metadataExample/multiple).<br>
+För att verktyget ska generera en sammanslagen RDF-fil krävs att organisationen skapar filer enligt följande:<br>
+catalog.json - beskriver det övergripande katalog elementet och är samma för alla ingående apier.<br>
+[catalog.json](src/main/resources/metadataExample/multiple/catalog.json) - Katalog elementet i separat fil på json format<br>
+
+exempel på ingående apidefinitioner innehållande metadata för DCAT-AP-SE<br>
+[full_example.raml](src/main/resources/metadataExample/multiple/full_example.raml) - API A på RAML format<br>
+[full_example_oas.yaml](src/main/resources/metadataExample/multiple/full_example_oas.yaml) - Api B på OAS3 yaml format<br>
+[full_example_oas.json](src/main/resources/metadataExample/multiple/full_example_oas.json) - Api C på OAS3 json format<br>
+[full_example.json](src/main/resources/metadataExample/multiple/full_example.json), Api D, separat metadataspecifikation på json format<br>
+
+## Licens
 dcat-ap-se-processor är licensierad under [GPL v3](LICENSE)
 
-# Beroenden
+## Beroenden
 snakeYaml [Apache license](docs/Licenser/Apache.txt)<br>
 RDF4J [EDL v1.0 license](docs/Licenser/edl-v10.txt)<br>
 Spring boot, Spring framework [Apache license](docs/Licenser/Apache.txt)<br>
@@ -213,10 +213,10 @@ hibernate-json-org-contributor [BSD-3 clause license](docs/Licenser/BSD-3.txt  )
 json-simple [Apache license](docs/Licenser/Apache.txt)<br>
 commons-collections4 [Apache license](docs/Licenser/Apache.txt)<br>
 
-# Status v0.9
+## Status v0.9
 Detta är en första version av verktyget. <br>
 Arbetsförmedlingen och Bolagsverket kommer prova mjukvaran skarpt under hösten. <br>
 När mjukvaran fungerar för tillräckligt många offentliga organisationer kommer versionen uppdateras till 1.0. <br>
 Mjukvaran utvecklas av DIGG och Arbetsförmedlingen.
 
-# Bidra
+## Bidra
