@@ -1,12 +1,10 @@
 #Eclipse settings
-.mvn/
+bin
 .settings/
 target/
 .classpath
 .project
 HELP.md
-mvnw
-mvnw.cmd
 
 #!.mvn/wrapper/maven-wrapper.jar
 #!**/src/main/**/target/

@@ -15,29 +15,24 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
   -->
-
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.1</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<version>2.7.5</version>
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>af.se</groupId>
+	<groupId>se.af</groupId>
 	<artifactId>dcat-ap-processor</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>dcat-ap-processor</name>
-	<description>Preprocessor för DCAT-AP-SE metadata</description>
-
+	<description>Preprocessor - DCAT-AP-SE metadata</description>
 	<properties>
 		<java.version>11</java.version>
 		<argLine>-Dfile.encoding=UTF-8</argLine>
-<!--		<maven.test.skip>true</maven.test.skip>-->
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -51,11 +46,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -64,33 +55,31 @@
 		<dependency>
 			<groupId>com.atlassian.commonmark</groupId>
 			<artifactId>commonmark</artifactId>
-			<version>0.12.1</version>
+			<version>0.17.0</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.eclipse.rdf4j/rdf4j-rio-rdfxml -->
 		<dependency>
 			<groupId>org.eclipse.rdf4j</groupId>
 			<artifactId>rdf4j-rio-rdfxml</artifactId>
-			<version>3.6.0</version>
+			<version>4.2.1</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.github.jsonld-java/jsonld-java -->
 		<dependency>
 			<groupId>com.github.jsonld-java</groupId>
 			<artifactId>jsonld-java</artifactId>
-			<version>0.13.1</version>
+			<version>0.13.4</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
-			<version>1.27</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-yaml</artifactId>
-			<version>2.11.1</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.mopano/hibernate-json-org-contributor -->
@@ -108,8 +97,10 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
-			<version>4.1</version>
+			<version>4.4</version>
 		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -117,14 +108,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
