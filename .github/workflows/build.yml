@@ -1,0 +1,26 @@
+name: Maven build
+
+on: [workflow_call]
+
+jobs:
+  maven-matrix-build:
+    strategy:
+      fail-fast: false
+      matrix:
+        java_version: [11]
+        os: [windows-latest, macOS-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK ${{ matrix.java_version }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java_version }}
+          distribution: "temurin"
+
+      - name: Build jar
+        if: contains(matrix.os, 'win') == false
+        run: chmod +x ./mvnw
+      - name: Maven Package
+        run: ./mvnw --batch-mode --update-snapshots --file pom.xml package
