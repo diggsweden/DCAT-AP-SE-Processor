@@ -51,61 +51,19 @@ public class Manager {
     RDFWorker rdfWorker = new RDFWorker();
 
     public String createDcatFromDirectory(String dir) throws Exception {
-        // create new file
-        File f = new File(dir);
-        String result = "Hittade inga filer";
-
-        MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
-
-        // returns pathnames for files and directory
-        File[] files = f.listFiles((dir1, name) -> name.endsWith(".raml") || name.endsWith(".yaml") || name.endsWith(".json"));
-
-        // for each file in file array
-        if (files != null && files.length > 0) {
-            for (File file : files) {
-                Path path = Path.of(String.valueOf(file));
-                try {
-                    String content = Files.readString(path);
-                    apiSpecMap.put(path.toString(), content);
-                } finally {
-                }
-            }
-            result = this.createDcat(apiSpecMap);
-        }
-        return result;
+        ConversionConfig config = ConversionConfig.fromDirectory(Path.of(dir));
+        return config.isValid()? this.createDcat(config) : "Hittade inga filer";
     }
 
     public List<Result> createFromList(List<MultipartFile> apiFiles, Model model) {
         List<Result> results = new ArrayList<>();
-        MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
-        String result;
-
-        /* Generate DCAT-AP-SE from file */
-        for (MultipartFile apiFile : apiFiles) {
-            if (!apiFile.isEmpty()) {
-                String apiSpecificationFromFile;
-                Scanner scanner;
-                try {
-                    scanner = new Scanner(apiFile.getInputStream(), StandardCharsets.UTF_8.name());
-                    apiSpecificationFromFile = scanner.useDelimiter("\\A").next();
-                    scanner.close();
-                    apiSpecMap.put(apiFile.getOriginalFilename(), apiSpecificationFromFile);
-                } catch (Exception e) {        //Catch and show processing errors in web-gui
-                    result = e.getMessage();
-                    results.add(new Result(null, result));
-                    e.printStackTrace();
-                }
-            }
-        }
+        ConversionConfig config = ConversionConfig.fromList(apiFiles, results);
         try {
-            result = createDcat(apiSpecMap);
+            results.add(new Result(null, createDcat(config)));
         } catch (Exception e) {
-            result = e.getMessage();
-            results.add(new Result(null, result));
+            results.add(new Result(null, e.getMessage()));
             e.printStackTrace();
         }
-        results.add(new Result(null, result));
-
         model.addAttribute("results", results);
         return results;
     }
@@ -121,16 +79,21 @@ public class Manager {
     }
 
     public String createDcat(MultiValuedMap<String, String> apiSpecMap) throws Exception {
+        return createDcat(ConversionConfig.fromApiSpecMap(apiSpecMap));
+    }
+    
+    public String createDcat(ConversionConfig config) throws Exception {
         ConverterCatalog catalogConverter = new ConverterCatalog();
-
         HashMap<String, String> exceptions = new HashMap<>();
         Map<String, List<ValidationError>> validationErrorsPerFileMap = new HashMap<>();
+        MultiValuedMap<String, String> apiSpecMap = config.getApiSpecMap();
+        
         String result = "Kunde inte generera en dcat fil";
-
         for (String apiFileName : apiSpecMap.keySet()) {
             Collection<String> api = apiSpecMap.get(apiFileName);
             for (String apiSpecString : api) {
-                JSONObject jsonObjectFile = ApiDefinitionParser.getApiJsonString(apiSpecString);
+                JSONObject jsonObjectFile = ApiDefinitionParser.getApiJsonString(
+                    apiSpecString, config.getWorkDir().resolve("output.json"));
 
                 // Creates both Catalog and other spec from the same file
                 if (apiSpecMap.size() == 1) {
@@ -212,7 +175,7 @@ public class Manager {
             return "There are Errors in the following files: \n" + exceptionResult;
         }
         if (result.contains("RDF")) {
-            printToFile(result, "dcat.rdf");
+            printToFile(result, config.getWorkDir().resolve("dcat.rdf").toString());
         }
         return result;
     }
