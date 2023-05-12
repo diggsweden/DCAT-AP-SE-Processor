@@ -19,8 +19,11 @@ package se.ams.dcatprocessor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections4.MultiValuedMap;
@@ -289,6 +292,40 @@ public class ManagerTest {
     @BeforeEach
     void setup() {
         manager = new Manager();
+    }
+
+    void checkRdfResult(String result, String innerStringToLookFor) {
+        assertTrue(!result.isEmpty());
+        int a = result.indexOf("<rdf:RDF");
+        int b = result.indexOf(innerStringToLookFor);
+        int c = result.indexOf("</rdf:RDF>");
+        assertTrue(0 < a);
+        assertTrue(a < b);
+        assertTrue(b < c);
+    }
+
+    @Test
+    void testJsonCustomWorkDir() throws Exception {
+        Path tempDir = Files.createTempDirectory("testJsonCustomWorkDir");
+        Path srcPath = Path.of("src/test/resources/apidef/json_oas/obl_rek_oas.json");
+        ConversionConfig config = ConversionConfig.fromFile(srcPath).withWorkDir(tempDir);
+        String result = manager.createDcat(config);
+        checkRdfResult(result, "Redpill Linpro AB Catalog");
+        
+        assertTrue(Files.exists(tempDir.resolve("dcat.rdf")));
+        assertFalse(Files.exists(tempDir.resolve("output.json")));
+    }
+
+    @Test
+    void testRamlCustomWorkDir() throws Exception {
+        Path tempDir = Files.createTempDirectory("testRamlCustomWorkDir");        
+        Path srcPath = Path.of("src/test/resources/apidef/raml_1");
+        ConversionConfig config = ConversionConfig.fromDirectory(srcPath).withWorkDir(tempDir);
+        String result = manager.createDcat(config);
+        checkRdfResult(result, "Redpill Linpro AB Catalog");
+
+        assertTrue(Files.exists(tempDir.resolve("dcat.rdf")));
+        assertTrue(Files.exists(tempDir.resolve("output.json")));
     }
 
 /*    @Test
