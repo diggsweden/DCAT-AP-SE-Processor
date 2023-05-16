@@ -38,57 +38,69 @@ public class ApiDefinitionParser {
 
     private static Logger logger = LoggerFactory.getLogger(ApiDefinitionParser.class);
 
-    public static JSONObject getApiJsonString(String fileString) throws IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        Stream<String> lines;
-        String apiJsonString = "";
+    public enum ApiSpecSyntax {
+        Json,
+        YamlRaml,
+        Unknown
+    };
 
+    public static JSONObject getApiJsonString(String fileString) throws IOException, ParseException {
+        JSONObject fullObj = parseToJsonObject(fileString);
+        JSONObject inner = getIn(fullObj, new String[]{"info", "x-dcat"});
+        return inner == null? fullObj : inner;
+    }
+
+    private static JSONObject getIn(JSONObject obj, String[] path) {
+        for (String k: path) {
+            obj = (JSONObject)obj.get(k);
+            if (obj == null) {
+                return null;
+            }
+        }
+        return obj;
+    }
+    
+    public static ApiSpecSyntax guessSyntax(String fileString) {
+        String trimmedString = fileString.trim();
+        if (trimmedString.startsWith("{") && trimmedString.endsWith("}")) {
+            return ApiSpecSyntax.Json;
+        }
+        
+        Stream<String> lines;
         lines = fileString.lines();
         String apiLine1 = lines.limit(1).collect(Collectors.joining("\n"));
 
-        if (apiLine1.contains("openapi")) {
-            apiJsonString = getFileApiYamlRaml(fileString);
-        } else if (apiLine1.contains("RAML")) {
-            apiJsonString = getFileApiYamlRaml(fileString);
-        } else if (apiLine1.contains("{")){
-            apiJsonString = fileString;
+        if (apiLine1.contains("RAML") || apiLine1.contains("openapi")) {
+            return ApiSpecSyntax.YamlRaml;
         }
-        else {
-            throw new DcatException("not supported api definition");
+
+        return ApiSpecSyntax.Unknown;
+    }
+    
+    private static JSONObject parseToJsonObject(String fileString) throws IOException, ParseException {
+        switch (guessSyntax(fileString)) {
+        case Json: return (JSONObject)((new JSONParser()).parse(fileString));
+        case YamlRaml: return convertYamlRamlToJsonObject(fileString);
+        case Unknown: {throw new DcatException("not supported api definition");}
         }
-        JSONObject jsonObjectFile = (JSONObject) parser.parse(apiJsonString);
-        if (jsonObjectFile.containsKey("info")) {
-            jsonObjectFile = (org.json.simple.JSONObject) (jsonObjectFile.get("info"));
-            jsonObjectFile = (org.json.simple.JSONObject) (jsonObjectFile.get("x-dcat"));
-        }
-        return jsonObjectFile;
+        return null;
     }
 
-    private static String getFileApiYamlRaml(String apiSpec) throws IOException {
-        FileOutputStream output = new FileOutputStream("output.json");
+    private static JSONObject convertYamlRamlToJsonObject(String apiSpec) throws IOException, ParseException {
+        FileOutputStream output = new FileOutputStream("output.json"); // TODO: Could we use a ByteArrayOutputStream for this, instead?
         JsonFactory factory = new JsonFactory();
         JsonGenerator generator = factory.createGenerator(output, JsonEncoding.UTF8);
 
-        try {
-            Yaml yamlParser = new Yaml();
-            yamlParser.addImplicitResolver(Tag.YAML, Pattern.compile("^(!)$"), "!");
-            Node compose = yamlParser.compose(new StringReader(apiSpec));
-            build(compose, generator);
-            generator.close();
-            output.close();
+        Yaml yamlParser = new Yaml();
+        yamlParser.addImplicitResolver(Tag.YAML, Pattern.compile("^(!)$"), "!");
+        Node compose = yamlParser.compose(new StringReader(apiSpec));
+        build(compose, generator);
+        generator.close();
+        output.close();
 
-            JSONParser jsonParser = new JSONParser();
-            FileReader reader = new FileReader("output.json");
-
-            //Read JSON file
-            Object obj = jsonParser.parse(reader);
-            return obj.toString();
-            //logger.debug("JSON string from file:\n"+obj.toString());
-
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
-        return "";
+        JSONParser jsonParser = new JSONParser();
+        FileReader reader = new FileReader("output.json");
+        return (JSONObject)jsonParser.parse(reader);
     }
 
     private static void build(Node yaml, JsonGenerator generator) throws IOException {

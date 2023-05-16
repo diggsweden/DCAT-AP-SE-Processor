@@ -195,24 +195,24 @@ public class ApiDefinitionParserTest {
         parser = new ApiDefinitionParser();
     }
 
-    //TODO: Fixa så att testet funkar
+    // Helper method
+    void checkParse(String input, ApiDefinitionParser.ApiSpecSyntax expectedSyntax, String expectedOutput) throws Exception {
+        assertEquals(expectedSyntax, parser.guessSyntax(input));
+        assertEquals(expectedOutput, parser.getApiJsonString(input).toString());
+    }
+    
     @Test
     void testMandatoryRamlApi() throws Exception {
-        try {
-            String result = parser.getApiJsonString(ramlApi).toString();
-            assertEquals(result, ramlResult);
-        } catch (DcatException e) {
-
-        }
+        checkParse(ramlApi, ApiDefinitionParser.ApiSpecSyntax.YamlRaml, ramlResult);
     }
 
     @Test
     void testMandatoryJsonApi() throws Exception {
-        try {
-            String result = parser.getApiJsonString(jsonApi).toString();
-            assertEquals(result, jsonresult);
-        } catch (DcatException e) {
+        checkParse(jsonApi, ApiDefinitionParser.ApiSpecSyntax.Json, jsonresult);
+    }
 
-        }
+    @Test
+    void testMandatoryJsonApiCompactFormatting() throws Exception {
+        checkParse(jsonApi.replace("\n", ""), ApiDefinitionParser.ApiSpecSyntax.Json, jsonresult);
     }
 }
