@@ -11,18 +11,17 @@ RUN ./mvnw clean package spring-boot:repackage
 
 
 # Note: The default non root chainguard user is 65532
-FROM cgr.dev/chainguard/jdk:openjdk-jre-11-20221109
+FROM cgr.dev/chainguard/jdk:latest
 
 USER root
-RUN mkdir -p /opt/.logs \
-    && mkdir -p /apidef
-RUN chown -R 65532:65532 /opt/
+RUN mkdir -p /app/.logs \
+  && mkdir -p /apidef
+RUN chown -R 65532:65532 /app/
 USER 65532
-COPY --from=build /build/target/dcat-ap-processor-0.0.2-SNAPSHOT.jar /opt/app.jar
+COPY --from=build /build/target/dcat-ap-processor-0.0.2-SNAPSHOT.jar /app/app.jar
 
 
 ENV JDK_JAVA_OPTIONS -Duser.language=sv-SE -Duser.region=SE -Duser.timezone=Europe/Stockholm
-WORKDIR /opt
 ENV PORT 8080
 EXPOSE 8080
-CMD ["-jar","app.jar"]
+CMD ["java","-jar","/app/app.jar"]
