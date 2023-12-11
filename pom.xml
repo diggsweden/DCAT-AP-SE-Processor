@@ -21,7 +21,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.5</version>
+		<version>3.2.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>se.af</groupId>
@@ -30,8 +30,9 @@
 	<name>dcat-ap-processor</name>
 	<description>Preprocessor - DCAT-AP-SE metadata</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<argLine>-Dfile.encoding=UTF-8</argLine>
+		<!--<spring-security.version>5.8</spring-security.version>-->
 	</properties>
 	<dependencies>
 		<dependency>
@@ -75,6 +76,7 @@
 		<dependency>
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
+			<version>2.2</version>
 		</dependency>
 
 		<dependency>
@@ -109,6 +111,21 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+                <groupId>org.owasp</groupId>
+              	<artifactId>dependency-check-maven</artifactId>
+                <version>8.0.0</version>
+                <configuration>
+                    <goalPrefix>dependency-check</goalPrefix>
+                </configuration>
+               <executions>
+                  <execution>
+                      <goals>
+                          <goal>check</goal>
+                      </goals>
+                  </execution>
+              </executions>
+            </plugin>
 		</plugins>
 	</build>
 
