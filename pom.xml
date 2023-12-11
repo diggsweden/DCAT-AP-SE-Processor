@@ -84,13 +84,6 @@
 			<artifactId>jackson-dataformat-yaml</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.mopano/hibernate-json-org-contributor -->
-		<dependency>
-			<groupId>com.mopano</groupId>
-			<artifactId>hibernate-json-org-contributor</artifactId>
-			<version>1.0</version>
-		</dependency>
-
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
