@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim AS build
+FROM docker.io/library/openjdk:17-jdk-slim AS build
 
 RUN mkdir /build
 COPY pom.xml /build/
