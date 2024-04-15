@@ -62,6 +62,9 @@ Bygg en container image från koden i det här repositoryt, t.ex:
 ```
 docker build --no-cache -t "dcatprocessor" .
 ```
+
+docker run -it --rm -p 8080:8080 dcatprocessor:latest 
+
 När container startas finns ett formulär och ett REST API tillgängligt att använda efter behov.
 
 Alternativt, finns det också en experimentell färdigbyggd image för att testa.
