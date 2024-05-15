@@ -33,12 +33,18 @@ import java.io.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.nio.file.Path;
 
 public class ApiDefinitionParser {
 
     private static Logger logger = LoggerFactory.getLogger(ApiDefinitionParser.class);
 
-    public static JSONObject getApiJsonString(String fileString) throws IOException, ParseException {
+    // TODO: Do we need to provide a method with this signature for the sake of not breaking the API? Or will people adapt?
+    //
+    // public static JSONObject getApiJsonString(String fileString) throws IOException, ParseException
+    
+    public static JSONObject getApiJsonString(
+        String fileString, Path outJsonFile) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         Stream<String> lines;
         String apiJsonString = "";
@@ -47,9 +53,9 @@ public class ApiDefinitionParser {
         String apiLine1 = lines.limit(1).collect(Collectors.joining("\n"));
 
         if (apiLine1.contains("openapi")) {
-            apiJsonString = getFileApiYamlRaml(fileString);
+            apiJsonString = getFileApiYamlRaml(fileString, outJsonFile);
         } else if (apiLine1.contains("RAML")) {
-            apiJsonString = getFileApiYamlRaml(fileString);
+            apiJsonString = getFileApiYamlRaml(fileString, outJsonFile);
         } else if (apiLine1.contains("{")){
             apiJsonString = fileString;
         }
@@ -64,8 +70,8 @@ public class ApiDefinitionParser {
         return jsonObjectFile;
     }
 
-    private static String getFileApiYamlRaml(String apiSpec) throws IOException {
-        FileOutputStream output = new FileOutputStream("output.json");
+    private static String getFileApiYamlRaml(String apiSpec, Path outJsonFile) throws IOException {
+        FileOutputStream output = new FileOutputStream(outJsonFile.toFile());
         JsonFactory factory = new JsonFactory();
         JsonGenerator generator = factory.createGenerator(output, JsonEncoding.UTF8);
 
@@ -78,7 +84,7 @@ public class ApiDefinitionParser {
             output.close();
 
             JSONParser jsonParser = new JSONParser();
-            FileReader reader = new FileReader("output.json");
+            FileReader reader = new FileReader(outJsonFile.toFile());
 
             //Read JSON file
             Object obj = jsonParser.parse(reader);

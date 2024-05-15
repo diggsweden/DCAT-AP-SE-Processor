@@ -46,14 +46,9 @@ public class Application {
 
     public static void convertFile(String filename) {
         Manager manager = new Manager();
-        Path path = Path.of(filename);
-        MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
-        String result;
-
         try {
-            String content = Files.readString(path);
-            apiSpecMap.put(path.toString(), content);
-            result = manager.createDcat(apiSpecMap);
+            ConversionConfig config = ConversionConfig.fromFile(Path.of(filename));
+            String result = manager.createDcat(config);
             assertTrue(!result.isEmpty());
             System.out.println(result);
         } catch (Exception e) {
