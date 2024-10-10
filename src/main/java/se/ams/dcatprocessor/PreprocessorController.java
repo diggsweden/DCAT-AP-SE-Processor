@@ -29,10 +29,14 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
+import org.jboss.resteasy.reactive.RestForm;
+import org.jboss.resteasy.reactive.multipart.FileUpload;
 
 @Path("")
 class PreprocessorController {
 
+	@Inject
+	Manager manager;
 
 	/**
 	 * REST API Endpoint for creating DCAT-AP-SE data in RDF/XML format
@@ -55,6 +59,13 @@ class PreprocessorController {
 		return result;
 	}
 
+	@POST
+	@Path("/dcat-generation/file/")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public String produceRdf(@RestForm("file") FileUpload file){
+		return manager.createFromList(List.of(file)).getFirst().toString();
+	}
+
 	/**
 	 * View endpoint - Access from web-gui
 	 * 
@@ -64,6 +75,7 @@ class PreprocessorController {
 	 * @param model				The Model according to Spring MVC pattern
 	 * @return					The index page with the result added
 	 */
+
 
 	//TODO: Ta bort freemarker och använd en simpel vue application istället?
 	/*@POST

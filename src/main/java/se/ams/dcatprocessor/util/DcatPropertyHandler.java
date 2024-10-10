@@ -17,17 +17,23 @@
 
 package se.ams.dcatprocessor.util;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.POST;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
-
+@ApplicationScoped
 public class DcatPropertyHandler {
 
 
-	private static DcatPropertyHandler instance;
+	@ConfigProperty(name = "dcat.specification.properties")
+	public String dcatPropertyFile;
 
 	//Holds the cardinalityvalues
 	private HashMap<String, String> cardinalityValue;
@@ -37,20 +43,15 @@ public class DcatPropertyHandler {
 	
 	private static final String DCAT_PROPERTY_FILE_KEY = "dcat.specification.properties";
 	
-	private DcatPropertyHandler() {
+	protected DcatPropertyHandler() {
+	}
+
+	@PostConstruct
+	void init() {
 		loadProperties();
+
 	}
-	
-	
-	public static DcatPropertyHandler getInstance() {
-		if(instance == null) {
-			instance = new DcatPropertyHandler();
-		}
-		
-		return instance;
-	}
-	
-	/**
+ 	/**
 	 * Delimiter for propertyvalues
 	 * Like this: dataset.adms\:identifier=0..n|xsd:\string
 	 */
@@ -73,8 +74,7 @@ public class DcatPropertyHandler {
 		Properties properties = new Properties();
 		
 		try {
-			//TODO quarkus - check syntax for application properteies
-			InputStream inputStream = getClass().getClassLoader().getResourceAsStream("dcat.specification.properties");
+			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(dcatPropertyFile);
 			
 			properties.load(inputStream);
 			

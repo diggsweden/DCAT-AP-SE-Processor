@@ -17,8 +17,11 @@
 
 package se.ams.dcatprocessor;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
+import org.jboss.resteasy.reactive.multipart.FileUpload;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,12 +44,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
+@ApplicationScoped
 public class Manager {
 
     private static final Logger logger = LoggerFactory.getLogger(Manager.class);
     Catalog catalog = new Catalog();
     List<FileStorage> fileStorages = new ArrayList<>();
-    RDFWorker rdfWorker = new RDFWorker();
+
+    @Inject
+    RDFWorker rdfWorker;
 
     public String createDcatFromDirectory(String dir) throws Exception {
         // create new file
@@ -72,22 +78,22 @@ public class Manager {
         }
         return result;
     }
-/*
-    public List<Result> createFromList(List<MultipartFile> apiFiles, Model model) {
+
+    public List<Result> createFromList(List<FileUpload> apiFiles) {
         List<Result> results = new ArrayList<>();
         MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
         String result;
 
-        /* Generate DCAT-AP-SE from file *
-        for (MultipartFile apiFile : apiFiles) {
-            if (!apiFile.isEmpty()) {
+        /* Generate DCAT-AP-SE from file */
+        for (FileUpload apiFile : apiFiles) {
+            if (apiFile.size() > 0L) {
                 String apiSpecificationFromFile;
                 Scanner scanner;
                 try {
-                    scanner = new Scanner(apiFile.getInputStream(), StandardCharsets.UTF_8.name());
+                    scanner = new Scanner(apiFile.uploadedFile().toFile(), StandardCharsets.UTF_8);
                     apiSpecificationFromFile = scanner.useDelimiter("\\A").next();
                     scanner.close();
-                    apiSpecMap.put(apiFile.getOriginalFilename(), apiSpecificationFromFile);
+                    apiSpecMap.put(apiFile.fileName(), apiSpecificationFromFile);
                 } catch (Exception e) {        //Catch and show processing errors in web-gui
                     result = e.getMessage();
                     results.add(new Result(null, result));
@@ -104,10 +110,9 @@ public class Manager {
         }
         results.add(new Result(null, result));
 
-        model.addAttribute("results", results);
         return results;
     }
-*/
+
     private void printToFile(String string, String fileName) throws Exception {
         FileOutputStream fos = new FileOutputStream(fileName);
         try {

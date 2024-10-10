@@ -29,6 +29,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Literal;
@@ -76,11 +78,18 @@ import se.ams.dcatprocessor.util.Util;
  * @author nacbr
  *
  */
+@ApplicationScoped
 public class RDFWorker {
 	private static Logger logger = LoggerFactory.getLogger(RDFWorker.class);
 
 	private Model model;
-	
+
+	@Inject
+	private SingleInputValidator singleInputValidator;
+
+	@Inject
+	private CardinalityValidator cardinalityValidator;
+
 	/**
 	 * Holds the file that is presently being processed
 	 */
@@ -117,8 +126,8 @@ public class RDFWorker {
 		 * The Catalog data does not come from a file with a name we can access 
 		 * so we use a generic name as an identifier for possible errors in this input data
 		 */
-		SingleInputValidator.getInstance().setCurrentFileName(catalog.fileName);
-		CardinalityValidator.getInstance().setCurrentFileName(catalog.fileName);
+		singleInputValidator.setCurrentFileName(catalog.fileName);
+		cardinalityValidator.setCurrentFileName(catalog.fileName);
 		multipleURIValidator.setCurrentFileName(catalog.fileName);
 
 		/**
@@ -139,8 +148,8 @@ public class RDFWorker {
 			/**
 			 * Save validation errors under the correct filename
 			 */
-			SingleInputValidator.getInstance().setCurrentFileName(currentFileName);
-			CardinalityValidator.getInstance().setCurrentFileName(currentFileName);
+			singleInputValidator.setCurrentFileName(currentFileName);
+			cardinalityValidator.setCurrentFileName(currentFileName);
 			multipleURIValidator.setCurrentFileName(currentFileName);
 			
 			/*
@@ -244,7 +253,7 @@ public class RDFWorker {
 		 * 2. Occur within the range allowed in the specification
 		 */
 		List<String> checkedElsewhere = List.of("dcat:dataset", "dcterms:publisher"); //Items that will not be checked now
-		CardinalityValidator.getInstance().validate(DcatClass.CATALOG, catalog.dcData, checkedElsewhere);
+		cardinalityValidator.validate(DcatClass.CATALOG, catalog.dcData, checkedElsewhere);
 		
 		IRI catalogIRI = createIri(catalog.about);
 		
@@ -284,7 +293,7 @@ public class RDFWorker {
 		 * 1. Are defined in the specification
 		 * 2. Occur within the range allowed in the specification
 		 */
-		CardinalityValidator.getInstance().validate(DcatClass.AGENT, agent.dcData, List.of());
+		cardinalityValidator.validate(DcatClass.AGENT, agent.dcData, List.of());
 
 		IRI agentIRI = SimpleValueFactory.getInstance().createIRI(agent.about);
 
@@ -315,7 +324,7 @@ public class RDFWorker {
 		 * 2. Occur within the range allowed in the specification
 		 */
 		List<String> checkedElsewhere = List.of("dcterms:publisher", "dcterms:creator"); //Items that will not be checked now
-		CardinalityValidator.getInstance().validate(DcatClass.DATASET, dataSet.dcData, checkedElsewhere);
+		cardinalityValidator.validate(DcatClass.DATASET, dataSet.dcData, checkedElsewhere);
 		
 	
 		IRI dataSetIRI =  createIri(dataSet.about);
@@ -450,7 +459,7 @@ public class RDFWorker {
 		 * 2. Occur within the range allowed in the specification
 		 */
 		List<String> checkedElsewhere = List.of("dcat:accessService"); //Items that will not be checked now
-		CardinalityValidator.getInstance().validate(DcatClass.DISTRIBUTION, distribution.dcData, checkedElsewhere);
+		cardinalityValidator.validate(DcatClass.DISTRIBUTION, distribution.dcData, checkedElsewhere);
 		
 		IRI distributionIRI = createIri(distribution.about);
 		model.add(distributionIRI, RDF.TYPE, DCAT.DISTRIBUTION);
@@ -519,7 +528,7 @@ public class RDFWorker {
 		 * 2. Occur within the range allowed in the specification
 		 */
 		List<String> checkedElsewhere = List.of("dcterms:publisher", "dcat:contactPoint"); //Items that will not be checked now
-		CardinalityValidator.getInstance().validate(DcatClass.DATASERVICE, dataService.dcData, checkedElsewhere);
+		cardinalityValidator.validate(DcatClass.DATASERVICE, dataService.dcData, checkedElsewhere);
 		
 		IRI dataServiceIRI = createIri(dataService.about);
 		model.add(dataServiceIRI, RDF.TYPE, DCAT.DATA_SERVICE);
@@ -581,7 +590,7 @@ public class RDFWorker {
 		 * 2. Occur within the range allowed in the specification
 		 */
 		List<String> checkedElsewhere = List.of("vcard:hasTelephone", "vcard:hasAddress"); //Items that will not be checked now
-		CardinalityValidator.getInstance().validate(DcatClass.ORGANISATION, org.dcData, checkedElsewhere);
+		cardinalityValidator.validate(DcatClass.ORGANISATION, org.dcData, checkedElsewhere);
 				
 		IRI organizationIRI = createIri(org.about);
 		model.add(organizationIRI, RDF.TYPE, VCARD4.ORGANIZATION);
@@ -659,7 +668,7 @@ public class RDFWorker {
 				
 				for (String value : values) {
 					
-					SingleInputValidator.getInstance().validateData(key, value);
+					singleInputValidator.validateData(key, value);
 				
 					if (Util.isURI(value) ) { // Check if its an URI and create a resource
 						model.add(resource, iri, valueFactory.createIRI(value));
@@ -734,7 +743,7 @@ public class RDFWorker {
 	        return null; 
 	    }
 	    
-	    List<InputType> inputTypes = SingleInputValidator.getInstance().getInputTypes(key);
+	    List<InputType> inputTypes = singleInputValidator.getInputTypes(key);
 	    
 	    if(inputTypes.contains(InputType.INTEGER) || inputTypes.contains(InputType.DECIMAL)) {
 	    	try {
@@ -762,7 +771,7 @@ public class RDFWorker {
 	        return null; 
 	    }
 
-	    List<InputType> inputTypes = SingleInputValidator.getInstance().getInputTypes(key);
+	    List<InputType> inputTypes = singleInputValidator.getInputTypes(key);
 	    
 	    if(inputTypes.contains(InputType.DURATION)) {
 	    	try {
@@ -825,7 +834,7 @@ public class RDFWorker {
 
 				for (String value : values) {
 
-					SingleInputValidator.getInstance().validateData(key, value);
+					singleInputValidator.validateData(key, value);
 					
 					/**
 					 * First check if its a numeric value...otherwise it might be interpreted as date value further down

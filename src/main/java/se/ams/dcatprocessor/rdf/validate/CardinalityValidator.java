@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import org.apache.commons.collections4.MultiValuedMap;
 
 import se.ams.dcatprocessor.rdf.Cardinality;
@@ -30,23 +32,17 @@ import se.ams.dcatprocessor.rdf.DcatClass;
 import se.ams.dcatprocessor.rdf.DcatException;
 import se.ams.dcatprocessor.util.Util;
 
+@ApplicationScoped
 public class CardinalityValidator {
 	
-	
+	@Inject
+	CardinalityHandler cardinalityHandler;
+
 	private static CardinalityValidator instance;
 	
 	private String currentFileName;
 	
-	private CardinalityValidator() {}
-	
-	public static CardinalityValidator getInstance() {
-		if(instance == null) {
-			instance = new CardinalityValidator();
-		}
-		return instance;
-	}
-	
-	
+
 	/*
 	 * Predefined errormessages
 	 */
@@ -68,7 +64,7 @@ public class CardinalityValidator {
 				
 		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
 		
-		Map<String, Cardinality> cardinalities = CardinalityHandler.getInstance().getCardinalities(dcatClass);
+		Map<String, Cardinality> cardinalities = cardinalityHandler.getCardinalities(dcatClass);
 		
 		HashMap<String, Integer> countedKeyNames = new HashMap<>();
 

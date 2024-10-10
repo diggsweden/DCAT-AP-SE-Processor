@@ -24,6 +24,9 @@ import java.util.regex.Pattern;
 
 import jakarta.annotation.Nonnull;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import se.ams.dcatprocessor.rdf.DcatException;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
 import se.ams.dcatprocessor.util.DcatPropertyHandler;
@@ -35,10 +38,12 @@ import se.ams.dcatprocessor.util.Util;
  * @author nacbr
  *
  */
+@ApplicationScoped
 public class SingleInputValidator {
-	
-	private static SingleInputValidator instance;
-	
+
+	@Inject
+	DcatPropertyHandler instance;
+
 	//Map from an InputType to regex
 	private static HashMap<InputType, Pattern> inputTypeToRegexMap;
 	
@@ -50,17 +55,13 @@ public class SingleInputValidator {
 	 */
 	private String currentFileName;
 	
-	private SingleInputValidator() {
-		mapInputTypeToRegex();
-		loadInputTypeDefinitions();
+	protected SingleInputValidator() {
 	}
 	
-
-	public static SingleInputValidator getInstance() {
-		if(instance == null) {
-			instance = new SingleInputValidator();	
-		}
-		return instance;
+	@PostConstruct
+	void init() {
+		mapInputTypeToRegex();
+		loadInputTypeDefinitions();
 	}
 
 	/**
@@ -196,8 +197,7 @@ public class SingleInputValidator {
 	 * For example everything after the "|" sign dcterms:issued=0..1|xsd:date,xsd:dateTime,xsd:gYear
 	 */
 	private void loadInputTypeDefinitions() {
-		DcatPropertyHandler instance = DcatPropertyHandler.getInstance();
-		
+
 		String[] propertyKeys = instance.getPropertyKeys();
 		
 		keyToInputTypeMap = new HashMap<String, List<InputType>>();

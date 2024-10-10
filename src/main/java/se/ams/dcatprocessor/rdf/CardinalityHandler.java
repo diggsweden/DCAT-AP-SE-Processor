@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import se.ams.dcatprocessor.util.DcatPropertyHandler;
 
 //TODO: CardinalityHandler needs to be redesigned to read properties dynamically from a file specifiecd in application.properties or similar
@@ -28,23 +31,20 @@ import se.ams.dcatprocessor.util.DcatPropertyHandler;
  * Handler for reading cardinalities for DCAT-elements from a property-file
  * @author nacbr
  */
+@ApplicationScoped
 public class CardinalityHandler {
 
-	private static CardinalityHandler instance;
-	
+	@Inject
+	DcatPropertyHandler dcatPropertyHandler;
+
 	private Map<DcatClass, Map<String, Cardinality>> cardinalities;
 	
-	private CardinalityHandler() {
+
+	@PostConstruct
+	void init() {
 		loadCardinalities();
 	}
-	
-	public static CardinalityHandler getInstance() {
-		if(instance == null) {
-			instance = new CardinalityHandler();
-		}
-		return instance;
-	}
-		
+
 	//Regexp for checking correctness of property key=value format
 	private static final String CHARACTER_DOT = "\\.";
 	
@@ -59,9 +59,7 @@ public class CardinalityHandler {
 		for (DcatClass dcatClass : dcatClasses) {
 			cardinalities.put(dcatClass, new HashMap<>());
 		}
-		
-		DcatPropertyHandler dcatPropertyHandler = DcatPropertyHandler.getInstance();
-		
+
 		String[] keys = dcatPropertyHandler.getPropertyKeys();
 		
 		for (int i = 0; i < keys.length; i++) {
