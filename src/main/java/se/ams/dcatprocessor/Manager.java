@@ -18,6 +18,7 @@
 package se.ams.dcatprocessor;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
@@ -44,7 +45,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
-@ApplicationScoped
+@RequestScoped
 public class Manager {
 
     private static final Logger logger = LoggerFactory.getLogger(Manager.class);
@@ -53,6 +54,9 @@ public class Manager {
 
     @Inject
     RDFWorker rdfWorker;
+
+    @Inject
+    ValidationErrorStorage validationErrorStorage;
 
     public String createDcatFromDirectory(String dir) throws Exception {
         // create new file
@@ -194,7 +198,7 @@ public class Manager {
         }
 
         // True if RDFWorker return errors
-        if (ValidationErrorStorage.getInstance().hasValidationErrors()) {
+        if (validationErrorStorage.hasValidationErrors()) {
             exceptionResult.append("\n");
             validationErrorsPerFileMap.forEach((key, value) -> {
                 exceptionResult.append(key).append(":\n");
@@ -206,7 +210,7 @@ public class Manager {
             });
         }
 
-        ValidationErrorStorage.getInstance().resetErrors();
+        validationErrorStorage.resetErrors();
         Converter.deleteErrors();
 
         if (exceptionResult.length() > 0) {

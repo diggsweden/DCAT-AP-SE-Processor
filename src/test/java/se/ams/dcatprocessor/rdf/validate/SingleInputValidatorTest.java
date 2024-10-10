@@ -15,7 +15,7 @@
  * along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package se.ams.dcatprocessor.rdf;
+package se.ams.dcatprocessor.rdf.validate;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,18 +23,26 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.reflect.Field;
 
+import io.quarkus.test.junit.QuarkusTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import se.ams.dcatprocessor.rdf.validate.SingleInputValidator;
+import se.ams.dcatprocessor.rdf.DcatException;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
-import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
 import se.ams.dcatprocessor.testutil.TestHelper;
 import se.ams.dcatprocessor.util.DcatPropertyHandler;
 
+@QuarkusTest
 class SingleInputValidatorTest {
+
+	@Inject
+	SingleInputValidator singleInputValidator;
+
+	@Inject
+	ValidationErrorStorage validationErrorStorage;
 
 	/**
 	 * Save the original dcat_specification.properties file before changing it
@@ -43,27 +51,10 @@ class SingleInputValidatorTest {
 	public static void setUp() throws Exception {
 		TestHelper.copyFile(TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE, TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE_SAVED);
 	}
-	
-	/**
-	 * Set the instance of PropertyLoader and InputValidator to null
-	 * to force them to re-instansiate since they are Singletons
-	 * @throws NoSuchFieldException
-	 * @throws IllegalAccessException
-	 */
+
 	@BeforeEach
 	public void setup() throws Exception{
-        Field instance = DcatPropertyHandler.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(DcatPropertyHandler.class, null);
-        
-        instance = SingleInputValidator.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(SingleInputValidator.class, null);
-        
-        instance = ValidationErrorStorage.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(ValidationErrorStorage.class, null);
-        
+		validationErrorStorage.resetErrors();
         /**
 		 * Copy the propertiesfile we want to use in the test directly to the target files dirctory to have it in the claspath
 		 */
@@ -83,7 +74,7 @@ class SingleInputValidatorTest {
 	void testThatValidationFailsWhenInputParametersAreNull1() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			instance.setCurrentFileName("irrelevantfilename.raml");
 			instance.validateData(null, null);
 			fail("Expected DCATException when all inputparameters are null");
@@ -96,7 +87,7 @@ class SingleInputValidatorTest {
 	void testThatValidationFailsWhenInputParametersAreNull2() throws Exception {
 		
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			instance.setCurrentFileName("irrelevantfilename.raml");
 			instance.validateData("IrrelevantKeyToTriggerNextError", null);
 			fail("Expected DCATException when all inputparameters are null");
@@ -109,7 +100,7 @@ class SingleInputValidatorTest {
 	void testThatValidationFailsWhenInputParametersAreNull3() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			instance.setCurrentFileName("irrelevantfilename.raml");
 			instance.validateData(null, "IrrelevantValueToTriggerNextError");
 			fail("Expected DCATException when all inputparameters are null");
@@ -123,7 +114,7 @@ class SingleInputValidatorTest {
 	void testThatValidationFailsWhenPropertyKeyDoesNotHaveADefinedType() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			instance.setCurrentFileName("irrelevantfilename.raml");
 			instance.validateData("dcterms:accessRights", "http://arbetsformedlingen.se");
 			fail("Expected DCATException when key does not have a corresponding typedefinition");
@@ -139,7 +130,7 @@ class SingleInputValidatorTest {
 		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
 
 		try {
-			SingleInputValidator.getInstance();	//Trigger reloading of properties
+			singleInputValidator.loadInputTypeDefinitions();	//Trigger reloading of properties
 			fail("Expected DCATException when key does not have a defined value type");
 		} catch (DcatException e) {
 			assertEquals("Error loading properties: No corresponding definition found for type xsd:boolean", e.getMessage());
@@ -150,7 +141,7 @@ class SingleInputValidatorTest {
 	void testThatValidationFailsWhenCurrentFileIsNotSet() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			//Provoke an error to discover that the filename was not set when saving ValidationError
 			instance.validateData("dcterms:issued", "2001-26");
 			fail("Expected DCATException when currentFile is not set");
@@ -168,10 +159,10 @@ class SingleInputValidatorTest {
 	void testThatInputValuesCanBeValidatedCorrectly1() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String filename1 = "fileName1.raml";
 			instance.setCurrentFileName(filename1);
-			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, filename1, "dcterms:description", "dcterms:description");
+			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, filename1, "dcterms:description", "dcterms:description", validationErrorStorage);
 		} catch (DcatException e) {
 			fail("Unexpected DCATException when testing normal validation");
 		}
@@ -183,10 +174,10 @@ class SingleInputValidatorTest {
 	void testThatInputValuesCanBeValidatedCorrectly1_1() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String filename1 = "fileName1.raml";
 			instance.setCurrentFileName(filename1);
-			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, filename1, "dcterms:description", "aze:azərbaycan dili");
+			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, filename1, "dcterms:description", "aze:azərbaycan dili", validationErrorStorage);
 		} catch (DcatException e) {
 			fail("Unexpected DCATException when testing normal validation");
 		}
@@ -198,10 +189,10 @@ class SingleInputValidatorTest {
 	void testThatInputValuesCanBeValidatedCorrectly2() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String filename1 = "fileName1.raml";
 			instance.setCurrentFileName(filename1);
-			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, filename1, "dcterms:publisher", "Any text");
+			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, filename1, "dcterms:publisher", "Any text", validationErrorStorage);
 		} catch (DcatException e) {
 			fail("Unexpected DCATException when testing normal validation");
 		}
@@ -213,10 +204,10 @@ class SingleInputValidatorTest {
 	void testThatInputValuesCanBeValidatedCorrectly3() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String filename1 = "fileName1.raml";
 			instance.setCurrentFileName(filename1);
-			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, filename1, "dcterms:issued", "2001-10-26");
+			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, filename1, "dcterms:issued", "2001-10-26", validationErrorStorage);
 		} catch (DcatException e) {
 			fail("Unexpected DCATException when testing normal validation");
 		}
@@ -228,10 +219,10 @@ class SingleInputValidatorTest {
 	void testThatInputValuesCanBeValidatedCorrectly4() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String filename1 = "fileName1.raml";
 			instance.setCurrentFileName(filename1);
-			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, filename1, "dcterms:issued", "2002-05-30T09:30:10");
+			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, filename1, "dcterms:issued", "2002-05-30T09:30:10", validationErrorStorage);
 		} catch (DcatException e) {
 			fail("Unexpected DCATException when testing normal validation");
 		}
@@ -243,10 +234,10 @@ class SingleInputValidatorTest {
 	void testThatInputValuesCanBeValidatedCorrectly5() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String filename1 = "fileName1.raml";
 			instance.setCurrentFileName(filename1);
-			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, filename1, "dcterms:issued", "1982");
+			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, filename1, "dcterms:issued", "1982", validationErrorStorage);
 		} catch (DcatException e) {
 			fail("Unexpected DCATException when testing normal validation");
 		}
@@ -257,9 +248,9 @@ class SingleInputValidatorTest {
 	@Test
 	void testThatInputValuesCanBeValidatedCorrectly6() throws Exception {
 
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
+		
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "arbetsformedlingen_apispec1.raml";
 			instance.setCurrentFileName(fileName);
 			String key = "dcterms:issued";
@@ -277,9 +268,9 @@ class SingleInputValidatorTest {
 	@Test
 	void testThatInputValuesCanBeValidatedCorrectly7() throws Exception {
 
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();	
+			
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "arbetsformedlingen_apispec1.raml";
 			instance.setCurrentFileName(fileName);
 			String key = "dcterms:issued";
@@ -297,9 +288,9 @@ class SingleInputValidatorTest {
 	@Test
 	void testThatInputValuesCanBeValidatedCorrectly8() throws Exception {
 
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
+		
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "arbetsformedlingen_apispec1.raml";
 			instance.setCurrentFileName(fileName);
 			String key = "dcterms:issued";
@@ -319,10 +310,10 @@ class SingleInputValidatorTest {
 	void testThatInputValuesCanBeValidatedCorrectly9() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "swagger1.json";
 			instance.setCurrentFileName(fileName);
-			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "foaf:homepage", "http://arbetsformedlingen.se");
+			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "foaf:homepage", "http://arbetsformedlingen.se", validationErrorStorage);
 		} catch (DcatException e) {
 			fail("Unexpected DCATException when testing normal validation");
 		}
@@ -333,9 +324,9 @@ class SingleInputValidatorTest {
 	@Test
 	void testThatInputValuesCanBeValidatedCorrectly10() throws Exception {
 
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();	
+			
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "swagger445.json";
 			instance.setCurrentFileName(fileName);
 			String key = "foaf:homepage";
@@ -354,10 +345,10 @@ class SingleInputValidatorTest {
 	void testThatInputValuesCanBeValidatedCorrectly11() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "swagger12.json";
 			instance.setCurrentFileName(fileName);
-			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "dcat:temporalResolution", "P5Y2M10D");
+			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "dcat:temporalResolution", "P5Y2M10D", validationErrorStorage);
 		} catch (DcatException e) {
 			fail("Unexpected DCATException when testing normal validation");
 		}
@@ -368,9 +359,9 @@ class SingleInputValidatorTest {
 	@Test
 	void testThatInputValuesCanBeValidatedCorrectly12() throws Exception {
 
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
+		
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "filename1.raml";
 			instance.setCurrentFileName(fileName); //Needs to be set to store ValidationErrors correctly
 			String key = "dcat:temporalResolution";
@@ -389,10 +380,10 @@ class SingleInputValidatorTest {
 	void testThatInputValuesCanBeValidatedCorrectly13() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "swagger1.json";
 			instance.setCurrentFileName(fileName);
-			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "dcat:spatialResolutionInMeters", "1.093");
+			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "dcat:spatialResolutionInMeters", "1.093", validationErrorStorage);
 		} catch (DcatException e) {
 			fail("Unexpected DCATException when testing normal validation");
 		}
@@ -402,9 +393,9 @@ class SingleInputValidatorTest {
 	@Test
 	void testThatInputValuesCanBeValidatedCorrectly14() throws Exception {
 
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
+		
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "filename2.raml";
 			instance.setCurrentFileName(fileName); //Needs to be set to store ValidationErrors correctly
 			String key = "dcat:spatialResolutionInMeters";
@@ -422,10 +413,10 @@ class SingleInputValidatorTest {
 	void testThatInputValuesCanBeValidatedCorrectly15() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "swagger1.json";
 			instance.setCurrentFileName(fileName);
-			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "dcat:byteSize", "1093");
+			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "dcat:byteSize", "1093", validationErrorStorage);
 		} catch (DcatException e) {
 			fail("Unexpected DCATException when testing normal validation");
 		}
@@ -435,9 +426,9 @@ class SingleInputValidatorTest {
 	@Test
 	void testThatInputValuesCanBeValidatedCorrectly16() throws Exception {
 
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
+		
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "filename43.raml";
 			instance.setCurrentFileName(fileName); //Needs to be set to store ValidationErrors correctly
 			String key = "dcat:byteSize";
@@ -456,10 +447,10 @@ class SingleInputValidatorTest {
 	void testThatInputValuesCanBeValidatedCorrectly17() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "swagger1.json";
 			instance.setCurrentFileName(fileName);
-			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "vcard:hasValue", "0771-717 717");
+			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "vcard:hasValue", "0771-717 717", validationErrorStorage);
 		} catch (DcatException e) {
 			fail("Unexpected DCATException when testing normal validation");
 		}
@@ -470,10 +461,10 @@ class SingleInputValidatorTest {
 	void testThatInputValuesCanBeValidatedCorrectly18() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "swagger1.json";
 			instance.setCurrentFileName(fileName);
-			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "vcard:hasValue", "+46104794000");
+			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "vcard:hasValue", "+46104794000", validationErrorStorage);
 		} catch (DcatException e) {
 			fail("Unexpected DCATException when testing normal validation");
 		}
@@ -484,10 +475,10 @@ class SingleInputValidatorTest {
 	void testThatInputValuesCanBeValidatedCorrectly19() throws Exception {
 
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "swagger1.json";
 			instance.setCurrentFileName(fileName);
-			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "vcard:hasValue", "tel:+46104794000");
+			TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, "vcard:hasValue", "tel:+46104794000", validationErrorStorage);
 		} catch (DcatException e) {
 			fail("Unexpected DCATException when testing normal validation");
 		}
@@ -497,9 +488,9 @@ class SingleInputValidatorTest {
 	@Test
 	void testThatInputValuesCanBeValidatedCorrectly20() throws Exception {
 
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
+		
 		try {
-			SingleInputValidator instance = SingleInputValidator.getInstance();
+			SingleInputValidator instance = singleInputValidator;
 			String fileName = "filename88.raml";
 			instance.setCurrentFileName(fileName); //Needs to be set to store ValidationErrors correctly
 			String key = "vcard:hasValue";

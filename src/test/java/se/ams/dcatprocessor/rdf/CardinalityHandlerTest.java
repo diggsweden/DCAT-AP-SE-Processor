@@ -25,6 +25,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.lang.reflect.Field;
 import java.util.Map;
 
+import io.quarkus.arc.Arc;
+import io.quarkus.test.junit.QuarkusTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +36,11 @@ import org.junit.jupiter.api.Test;
 import se.ams.dcatprocessor.testutil.TestHelper;
 import se.ams.dcatprocessor.util.DcatPropertyHandler;
 
+@QuarkusTest
 class CardinalityHandlerTest {
+
+	@Inject
+	CardinalityHandler cardinalityHandler;
 	
 	/**
 	 * Save the original dcat_specification.properties file before changing it
@@ -42,23 +49,7 @@ class CardinalityHandlerTest {
 	public static void setUp() throws Exception {
 		TestHelper.copyFile(TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE, TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE_SAVED);
 	}
-	/**
-	 * Set the instance of PropertyLoader and CardinalityHandler to null
-	 * to force them to re-instansiate since they are Singletons
-	 * @throws NoSuchFieldException
-	 * @throws IllegalAccessException
-	 */
-	@BeforeEach
-	public void beforeEach() throws Exception {
-		Field instance = DcatPropertyHandler.class.getDeclaredField("instance");
-		instance.setAccessible(true);
-		instance.set(DcatPropertyHandler.class, null);
 
-		instance = CardinalityHandler.class.getDeclaredField("instance");
-		instance.setAccessible(true);
-		instance.set(CardinalityHandler.class, null);
-	}
-	
 	/**
 	 * Restore the original dcat_specification.properties file after all tests 
 	 */
@@ -75,7 +66,7 @@ class CardinalityHandlerTest {
 		
 		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
 		
-		Map<String, Cardinality> cardinalities = CardinalityHandler.getInstance().getCardinalities(DcatClass.CATALOG);
+		Map<String, Cardinality> cardinalities = cardinalityHandler.getCardinalities(DcatClass.CATALOG);
 		
 		//Expected Cardinality from CATALOG and dcterms:title is 1..n
 		Cardinality actual = cardinalities.get("dcterms:title");
@@ -123,7 +114,7 @@ class CardinalityHandlerTest {
 		String testFile = TestHelper.doubleSeparator(TestHelper.TEST_FILE_DIR + "dcat_specification_test_5.properties");
 		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
 		try {
-			CardinalityHandler.getInstance();
+			cardinalityHandler.init();
 			fail("Expected IllegalArgumentException due to incorrect values");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Property: catalogue is not a DCAT-vocabulary", e.getMessage());

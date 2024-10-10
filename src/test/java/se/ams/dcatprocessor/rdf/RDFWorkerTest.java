@@ -29,6 +29,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import io.quarkus.test.junit.QuarkusTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -50,9 +52,11 @@ import se.ams.dcatprocessor.util.DcatPropertyHandler;
 
 //TODO: Fix so that path to properties is set automatically and independently of the user. The default properties should be overridden during test
 
+@QuarkusTest
 class RDFWorkerTest {
 	private static Logger logger = LoggerFactory.getLogger(RDFWorkerTest.class);
 
+	@Inject
 	private RDFWorker rdfWorker;
 	private Catalog testCatalog1;
 	private List<FileStorage> testFileStorageList1;
@@ -60,35 +64,8 @@ class RDFWorkerTest {
 	
 	private String catalogFileName = "catalog.json";
 
-	/**
-	 * Set the instance of PropertyLoader to null
-	 * to force them to re-instansiate since they are Singletons
-	 * @throws NoSuchFieldException
-	 * @throws IllegalAccessException
-	 */
-	@BeforeEach
-	void setProperties() throws IOException, NoSuchFieldException, IllegalAccessException{
-		Field instance = DcatPropertyHandler.class.getDeclaredField("instance");
-		instance.setAccessible(true);
-		instance.set(DcatPropertyHandler.class, null);
-
-		instance = CardinalityHandler.class.getDeclaredField("instance");
-		instance.setAccessible(true);
-		instance.set(CardinalityHandler.class, null);
-		
-		instance = SingleInputValidator.class.getDeclaredField("instance");
-	    instance.setAccessible(true);
-	    instance.set(SingleInputValidator.class, null);
-	        
-	    instance = ValidationErrorStorage.class.getDeclaredField("instance");
-	    instance.setAccessible(true);
-	    instance.set(ValidationErrorStorage.class, null);
-	
-	}
-
 	@BeforeEach
 	void setup() {
-		rdfWorker = new RDFWorker();
 		testCatalog1 = createTestCatalog1();
 		testFileStorageList1 = createTestFileStorageList1();
 		testFileStorageList2 = createTestFileStorageList2();

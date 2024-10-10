@@ -30,6 +30,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.eclipse.rdf4j.model.IRI;
@@ -78,7 +79,7 @@ import se.ams.dcatprocessor.util.Util;
  * @author nacbr
  *
  */
-@ApplicationScoped
+@RequestScoped
 public class RDFWorker {
 	private static Logger logger = LoggerFactory.getLogger(RDFWorker.class);
 
@@ -90,16 +91,17 @@ public class RDFWorker {
 	@Inject
 	private CardinalityValidator cardinalityValidator;
 
+	@Inject
+	private ValidationErrorStorage validationErrorStorage;
+
 	/**
 	 * Holds the file that is presently being processed
 	 */
 	private String currentFileName;
 
+	@Inject
 	private MultipleURIValidator multipleURIValidator;
-	
-	public RDFWorker() {
-		multipleURIValidator = new MultipleURIValidator();
-	}
+
 
 	/**
 	 * 
@@ -119,8 +121,6 @@ public class RDFWorker {
 	public String createDcatFile(Catalog catalog, List<FileStorage> fileStorages) throws DcatException, IOException {
 
 		createModel();
-		
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
 		
 		/**
 		 * The Catalog data does not come from a file with a name we can access 

@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import org.apache.commons.collections4.MultiValuedMap;
 
@@ -32,11 +33,14 @@ import se.ams.dcatprocessor.rdf.DcatClass;
 import se.ams.dcatprocessor.rdf.DcatException;
 import se.ams.dcatprocessor.util.Util;
 
-@ApplicationScoped
+@RequestScoped
 public class CardinalityValidator {
 	
 	@Inject
 	CardinalityHandler cardinalityHandler;
+
+	@Inject
+	ValidationErrorStorage validationErrorStorage;
 
 	private static CardinalityValidator instance;
 	
@@ -61,8 +65,6 @@ public class CardinalityValidator {
 	
 		//Check that the filename for the file being validated is set
 		Util.checkNotNull(currentFileName, ERROR_CURRENT_FILENAME_NOT_SET);
-				
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
 		
 		Map<String, Cardinality> cardinalities = cardinalityHandler.getCardinalities(dcatClass);
 		

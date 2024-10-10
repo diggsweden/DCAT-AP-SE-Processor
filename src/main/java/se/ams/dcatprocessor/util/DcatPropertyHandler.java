@@ -49,7 +49,6 @@ public class DcatPropertyHandler {
 	@PostConstruct
 	void init() {
 		loadProperties();
-
 	}
  	/**
 	 * Delimiter for propertyvalues
@@ -67,7 +66,7 @@ public class DcatPropertyHandler {
 	/**
 	 * Loads the cardinalities for the respective DCAT-element into a hashmap
 	 */
-	private void loadProperties() {
+	void loadProperties() {
 		cardinalityValue = new HashMap<String, String>();
 		typeValues = new HashMap<String, String[]>();
 

@@ -93,7 +93,10 @@
 			<version>4.4</version>
 		</dependency>
 
-
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-picocli</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-rest</artifactId>

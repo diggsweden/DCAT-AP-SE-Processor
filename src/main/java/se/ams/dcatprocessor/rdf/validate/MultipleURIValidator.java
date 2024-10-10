@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
 import se.ams.dcatprocessor.util.Util;
 
@@ -32,7 +35,11 @@ import se.ams.dcatprocessor.util.Util;
  * @author nacbr
  *
  */
+@RequestScoped
 public class MultipleURIValidator {
+
+	@Inject
+	ValidationErrorStorage validationErrorStorage;
 
 	/**
 	 * Stores the number of times an URI occures within each file
@@ -115,8 +122,6 @@ public class MultipleURIValidator {
 	 * @return True if no ValidationErrors exist. False if ValidationErrors exist
 	 */
 	public boolean validate() {
-		
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
 		
 		/**
 		 * Check if each URI is unique within each file and across all the files

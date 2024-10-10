@@ -15,7 +15,7 @@
  * along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package se.ams.dcatprocessor.rdf;
+package se.ams.dcatprocessor.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -23,35 +23,26 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.reflect.Field;
 
+import io.quarkus.test.junit.QuarkusTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import se.ams.dcatprocessor.testutil.TestHelper;
-import se.ams.dcatprocessor.util.DcatPropertyHandler;
 
+@QuarkusTest
 class DcatPropertyHandlerTest {
 
+	@Inject
+	DcatPropertyHandler dcatPropertyHandler;
 	/**
 	 * Save the original dcat_specification.properties file before changing it
 	 */
 	@BeforeAll
 	public static void setUp() throws Exception {
 		TestHelper.copyFile(TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE, TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE_SAVED);
-	}
-	
-	/**
-	 * Set the instance of PropertyLoader to null
-	 * to force them to re-instansiate since they are Singletons
-	 * @throws NoSuchFieldException
-	 * @throws IllegalAccessException
-	 */
-	@BeforeEach
-	public void setup() throws NoSuchFieldException, IllegalAccessException {
-        Field instance = DcatPropertyHandler.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(DcatPropertyHandler.class, null);
 	}
 	
 	/**
@@ -72,7 +63,7 @@ class DcatPropertyHandlerTest {
 		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
 		
 		try {
-			DcatPropertyHandler instance = DcatPropertyHandler.getInstance();
+			DcatPropertyHandler instance = dcatPropertyHandler;
 			String[] types = instance.getPropertyValueTypes("catalog.dcterms:publisher");
 			assertNotNull(types);
 			assertEquals(1, types.length);
@@ -94,7 +85,7 @@ class DcatPropertyHandlerTest {
 		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
 		
 		try {
-			DcatPropertyHandler instance = DcatPropertyHandler.getInstance();
+			DcatPropertyHandler instance = dcatPropertyHandler;
 			String[] types = instance.getPropertyValueTypes("catalog.dcterms:description");
 			assertNotNull(types);
 			assertEquals(1, types.length);
@@ -116,7 +107,7 @@ class DcatPropertyHandlerTest {
 		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
 		
 		try {
-			DcatPropertyHandler instance = DcatPropertyHandler.getInstance();
+			DcatPropertyHandler instance = dcatPropertyHandler;
 			String[] types = instance.getPropertyValueTypes("catalog.dcterms:modified");
 			assertNotNull(types);
 			assertEquals(3, types.length);
@@ -140,7 +131,7 @@ class DcatPropertyHandlerTest {
 		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
 		
 		try {
-			DcatPropertyHandler.getInstance();
+			dcatPropertyHandler.loadProperties();
 			fail("Expected IllegalArgumentException due to incorrect values");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Propertyfile: Illegal value for cardinality found 2..n|class Allowed values are 1, 1..n, 0..1 or 0..n followed by | and then a string", e.getMessage());
@@ -158,7 +149,7 @@ class DcatPropertyHandlerTest {
 		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
 
 		try {
-			DcatPropertyHandler.getInstance();
+			dcatPropertyHandler.loadProperties();
 			fail("Expected IllegalArgumentException due to incorrect values");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Propertyfile: Illegal value for cardinality found 3|class Allowed values are 1, 1..n, 0..1 or 0..n followed by | and then a string", e.getMessage());
@@ -176,7 +167,7 @@ class DcatPropertyHandlerTest {
 		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
 
 		try {
-			DcatPropertyHandler.getInstance();
+			dcatPropertyHandler.loadProperties();
 			fail("Expected IllegalArgumentException due to incorrect values");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Propertykey catalog_dcterms:isPartOf has invalid format. Permitted format is xx.xx:xx", e.getMessage());

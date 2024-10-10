@@ -74,20 +74,16 @@ public class TestHelper {
 		assertEquals(description, validationError.getDescription());		
 	}
 
-	public static void assertValidationOkAndZeroValidationErrors(MultipleURIValidator multipleURIValidator ) {
-		
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
-		
+	public static void assertValidationOkAndZeroValidationErrors(MultipleURIValidator multipleURIValidator, ValidationErrorStorage validationErrorStorage ) {
+
 		//Validation generated no errors
 		assertTrue(multipleURIValidator.validate());
-		
+
 		//And there are no ValidationErrors stored
 		assertTrue(!validationErrorStorage.hasValidationErrors());
 	}
-	
-	public static void assertFileNameSetValidationOkAndZeroValidationErrors(SingleInputValidator singleInputValidator, String fileName, String key, String value) {
-		
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
+
+	public static void assertFileNameSetValidationOkAndZeroValidationErrors(SingleInputValidator singleInputValidator, String fileName, String key, String value, ValidationErrorStorage validationErrorStorage) {
 		
 		//Validation generated no errors	
 		assertTrue(singleInputValidator.validateData(key, value));

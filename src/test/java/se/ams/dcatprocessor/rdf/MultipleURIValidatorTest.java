@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import io.quarkus.test.junit.QuarkusTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -36,11 +38,14 @@ import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
 import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
 import se.ams.dcatprocessor.testutil.TestHelper;
 
+@QuarkusTest
 class MultipleURIValidatorTest {
 
+	@Inject
 	MultipleURIValidator multipleURIValidator;
 
-	ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
+	@Inject
+	ValidationErrorStorage validationErrorStorage;
 	
 	private String fileName1 = "RamlApiSpec1.raml";
 	private String fileName2 = "RamlApiSpec2.raml";
@@ -57,13 +62,7 @@ class MultipleURIValidatorTest {
 	
 	@BeforeEach
 	void setup() throws Exception {
-		//Reset Singleton before each test
-		Field instance = ValidationErrorStorage.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(ValidationErrorStorage.class, null);
-        
-		multipleURIValidator = new MultipleURIValidator();
-		validationErrorStorage = ValidationErrorStorage.getInstance();
+		validationErrorStorage.resetErrors();
 	}
 	
 	//Bad
@@ -102,7 +101,7 @@ class MultipleURIValidatorTest {
 		multipleURIValidator.addUri(uri2);
 		
 		//Validation ok and generated no validation errors
-		TestHelper.assertValidationOkAndZeroValidationErrors(multipleURIValidator);
+		TestHelper.assertValidationOkAndZeroValidationErrors(multipleURIValidator, validationErrorStorage);
 	}
 	
 	//Good
@@ -115,7 +114,7 @@ class MultipleURIValidatorTest {
 		multipleURIValidator.addUri(uri3);
 
 		//Validation ok and generated no validation errors
-		TestHelper.assertValidationOkAndZeroValidationErrors(multipleURIValidator);
+		TestHelper.assertValidationOkAndZeroValidationErrors(multipleURIValidator, validationErrorStorage);
 	}
 	
 	//Good
@@ -129,7 +128,7 @@ class MultipleURIValidatorTest {
 		multipleURIValidator.addUri(uri2);
 		
 		//Validation ok and generated no validation errors
-		TestHelper.assertValidationOkAndZeroValidationErrors(multipleURIValidator);
+		TestHelper.assertValidationOkAndZeroValidationErrors(multipleURIValidator, validationErrorStorage);
 	}
 	
 	// Good
@@ -149,7 +148,7 @@ class MultipleURIValidatorTest {
 		multipleURIValidator.addUri(uri6);
 		
 		//Validation ok and generated no validation errors
-		TestHelper.assertValidationOkAndZeroValidationErrors(multipleURIValidator);
+		TestHelper.assertValidationOkAndZeroValidationErrors(multipleURIValidator, validationErrorStorage);
 	}
 	
 	//Bad

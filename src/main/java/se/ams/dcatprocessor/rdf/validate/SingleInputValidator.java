@@ -26,6 +26,7 @@ import jakarta.annotation.Nonnull;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import se.ams.dcatprocessor.rdf.DcatException;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
@@ -38,11 +39,14 @@ import se.ams.dcatprocessor.util.Util;
  * @author nacbr
  *
  */
-@ApplicationScoped
+@RequestScoped
 public class SingleInputValidator {
 
 	@Inject
 	DcatPropertyHandler instance;
+
+	@Inject
+	ValidationErrorStorage validationErrorStorage;
 
 	//Map from an InputType to regex
 	private static HashMap<InputType, Pattern> inputTypeToRegexMap;
@@ -54,9 +58,6 @@ public class SingleInputValidator {
 	 * The name of the file currently being validated
 	 */
 	private String currentFileName;
-	
-	protected SingleInputValidator() {
-	}
 	
 	@PostConstruct
 	void init() {
@@ -82,8 +83,6 @@ public class SingleInputValidator {
 	 * @throws DcatException - If there is an error during validation
 	 */
 	public boolean validateData(@Nonnull String key, @Nonnull String value) throws DcatException {
-
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
 		
 		//Check that the filename for the file being validated is set
 		Util.checkNotNull(currentFileName, ERROR_CURRENT_FILENAME_NOT_SET);
@@ -196,7 +195,7 @@ public class SingleInputValidator {
 	 * Gets the properties and stores the inputtype definitions
 	 * For example everything after the "|" sign dcterms:issued=0..1|xsd:date,xsd:dateTime,xsd:gYear
 	 */
-	private void loadInputTypeDefinitions() {
+	void loadInputTypeDefinitions() {
 
 		String[] propertyKeys = instance.getPropertyKeys();
 		

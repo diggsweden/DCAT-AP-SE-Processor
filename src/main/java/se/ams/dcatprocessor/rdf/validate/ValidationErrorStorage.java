@@ -24,6 +24,9 @@ import java.util.Map;
 
 import jakarta.annotation.Nonnull;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.RequestScoped;
 import se.ams.dcatprocessor.rdf.DcatException;
 import se.ams.dcatprocessor.util.Util;
 
@@ -33,9 +36,8 @@ import se.ams.dcatprocessor.util.Util;
  * @author nacbr
  *
  */
+@RequestScoped
 public class ValidationErrorStorage {
-
-	private static ValidationErrorStorage instance;
 	
 	/**
 	 * Stores the validationresults for each file
@@ -44,13 +46,6 @@ public class ValidationErrorStorage {
 	
 	public ValidationErrorStorage() {
 		validationErrorsPerFileMap = new HashMap<String, List<ValidationError>>();
-	}
-	
-	public static ValidationErrorStorage getInstance() {
-		if(instance == null) {
-			instance = new ValidationErrorStorage();
-		}	
-		return instance;
 	}
 
 	/**
