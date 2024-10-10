@@ -129,6 +129,11 @@
 			<artifactId>quarkus-openapi-generator</artifactId>
 			<version>2.4.7</version>
 		</dependency>
+		<dependency>
+			<groupId>io.quarkiverse.freemarker</groupId>
+			<artifactId>quarkus-freemarker</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
 	</dependencies>
 

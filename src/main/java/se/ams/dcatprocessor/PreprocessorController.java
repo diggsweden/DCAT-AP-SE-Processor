@@ -18,19 +18,17 @@
 package se.ams.dcatprocessor;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Properties;
+import java.io.StringWriter;
+import java.util.*;
 
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import io.quarkiverse.freemarker.TemplatePath;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
-
 
 @Path("")
 class PreprocessorController {
@@ -66,12 +64,15 @@ class PreprocessorController {
 	 * @param model				The Model according to Spring MVC pattern
 	 * @return					The index page with the result added
 	 */
-/*	@PostMapping("/dcat-generation/web/")
-	public String viewEndpoint(	@RequestParam(name = "apispecification", required = false) String apiSpecification, 
-								@RequestParam(name = "create", required = true) String create,
-								@RequestParam(name = "apifile", required = false) List<MultipartFile> apiFiles,
+
+	//TODO: Ta bort freemarker och använd en simpel vue application istället?
+	/*@POST
+	@Path("/dcat-generation/web/")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String viewEndpoint(	@PathParam("apispecification") String apiSpecification,
+								@PathParam("create") String create,
 								Model model) {
-		
+
 		List<Result> results = new ArrayList<Result>();
 		Manager manager = new Manager();
 		MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
@@ -79,16 +80,13 @@ class PreprocessorController {
 		if (create != null && create.equals("create")) {
 			String result = "";
 
-			/**
-			 * Generate DCAT-AP-SE from files
-			 *
+			//Generate DCAT-AP-SE from files
 			if(apiSpecification.isEmpty() && !apiFiles.isEmpty()) {
 
 				results = manager.createFromList(apiFiles,model);
 
-				/**
-				 * Generate DCAT-AP-SE from string
-				 *
+
+				//Generate DCAT-AP-SE from string
 			} else if(!apiSpecification.isEmpty()){
 
 				try {
@@ -104,8 +102,20 @@ class PreprocessorController {
 			model.addAttribute("results", results);
 		}
 		return "index";
-	}
-	*/
+	}*/
 	
+
+	@Inject
+	@TemplatePath("index.ftlh")
+	Template hello;
+
+	@GET
+	@Produces(MediaType.TEXT_HTML)
+	public String getIndex() throws TemplateException, IOException {
+		StringWriter stringWriter = new StringWriter();
+		hello.process(Map.of("name", "bob"), stringWriter);
+		String result = stringWriter.toString();
+		return result;
+	}
 }
 

@@ -17,6 +17,7 @@
 
 package se.ams.dcatprocessor;
 
+import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.annotations.QuarkusMain;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
@@ -36,8 +37,7 @@ public class Application {
         } else if (args.length == 2 && args[0].equals("-d")) {
             convertDir(args[1]);
         } else {
-            //TODO quarkus ?
-//            SpringApplication.run(Application.class, args);
+            Quarkus.run(args);
         }
     }
 
