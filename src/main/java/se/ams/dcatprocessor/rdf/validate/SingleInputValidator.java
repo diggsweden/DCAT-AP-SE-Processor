@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.springframework.lang.NonNull;
+import jakarta.annotation.Nonnull;
 
 import se.ams.dcatprocessor.rdf.DcatException;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
@@ -80,7 +80,7 @@ public class SingleInputValidator {
 	 * @return T/F depending of the result
 	 * @throws DcatException - If there is an error during validation
 	 */
-	public boolean validateData(@NonNull String key, @NonNull String value) throws DcatException {
+	public boolean validateData(@Nonnull String key, @Nonnull String value) throws DcatException {
 
 		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
 		

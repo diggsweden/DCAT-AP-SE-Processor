@@ -17,19 +17,16 @@
 
 package se.ams.dcatprocessor;
 
+import io.quarkus.runtime.annotations.QuarkusMain;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import se.ams.dcatprocessor.Manager;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static org.junit.Assert.assertTrue;
 
-
-@SpringBootApplication
+@QuarkusMain
 public class Application {
 
     public static void main(String[] args) {
@@ -39,7 +36,8 @@ public class Application {
         } else if (args.length == 2 && args[0].equals("-d")) {
             convertDir(args[1]);
         } else {
-            SpringApplication.run(Application.class, args);
+            //TODO quarkus ?
+//            SpringApplication.run(Application.class, args);
         }
     }
 

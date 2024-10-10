@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.lang.NonNull;
+import jakarta.annotation.Nonnull;
 
 import se.ams.dcatprocessor.rdf.DcatException;
 import se.ams.dcatprocessor.util.Util;
@@ -73,7 +73,7 @@ public class ValidationErrorStorage {
 	 * @param validationError The validation error to store
 	 * @throws DcatException If fileName is null
 	 */
-	public void setValidationError(@NonNull String fileName, @NonNull ValidationError validationError) throws DcatException {
+	public void setValidationError(@Nonnull String fileName, @Nonnull ValidationError validationError) throws DcatException {
 		
 		/**
 		 * The file that is being validated has to be set with method setCurrentFileName(String fileName)

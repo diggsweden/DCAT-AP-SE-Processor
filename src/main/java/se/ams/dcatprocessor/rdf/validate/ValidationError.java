@@ -17,7 +17,7 @@
 
 package se.ams.dcatprocessor.rdf.validate;
 
-import org.springframework.lang.NonNull;
+import jakarta.annotation.Nonnull;
 
 import se.ams.dcatprocessor.rdf.Cardinality;
 import se.ams.dcatprocessor.util.Util;
@@ -77,7 +77,7 @@ public class ValidationError {
 	 * @param fileNames - Filename(s) where the error occurred
 	 * @param value - Value where the error occurred
 	 */
-	public ValidationError(@NonNull ErrorType errorType, @NonNull String[] fileNames, @NonNull String value) {
+	public ValidationError(@Nonnull ErrorType errorType, @Nonnull String[] fileNames, @Nonnull String value) {
 		this.errorType = errorType;
 		this.value = value;
 		
@@ -100,7 +100,7 @@ public class ValidationError {
 	 * @param key - Key where the error occurred
 	 * @param value - Value where the error occurred
 	 */
-	public ValidationError(@NonNull ErrorType errorType, @NonNull String fileName, @NonNull String key, @NonNull String value) {
+	public ValidationError(@Nonnull ErrorType errorType, @Nonnull String fileName, @Nonnull String key, @Nonnull String value) {
 		this.errorType = errorType;
 		this.fileName = fileName;
 		this.key = key;
@@ -123,7 +123,7 @@ public class ValidationError {
 	 * @param value - Value where the error occurred
 	 * @param cardinality - Contains the allowed range FYI
 	 */
-	public ValidationError(@NonNull String fileName, @NonNull String key, @NonNull Integer value, Cardinality cardinality) {
+	public ValidationError(@Nonnull String fileName, @Nonnull String key, @Nonnull Integer value, Cardinality cardinality) {
 		this.errorType = ErrorType.VALUE_OUTSIDE_OF_SPEC;
 		this.fileName = fileName;
 		this.key = key;
@@ -143,7 +143,7 @@ public class ValidationError {
 	 * @param fileName - Filename where the error occurred
 	 * @param key - Key where the error occurred
 	 */
-	public ValidationError(@NonNull String fileName, @NonNull String key) {
+	public ValidationError(@Nonnull String fileName, @Nonnull String key) {
 		this.errorType = ErrorType.UNKNOWN_KEY;
 		this.fileName = fileName;
 		this.key = key;

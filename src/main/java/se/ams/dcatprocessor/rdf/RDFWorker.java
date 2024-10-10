@@ -52,7 +52,6 @@ import org.eclipse.rdf4j.rio.helpers.BufferedGroupingRDFHandler;
 import org.eclipse.rdf4j.rio.rdfxml.util.RDFXMLPrettyWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.lang.NonNull;
 
 import se.ams.dcatprocessor.models.Catalog;
 import se.ams.dcatprocessor.models.DataClass;
@@ -406,7 +405,7 @@ public class RDFWorker {
 		return dataSetIRI;
 	}
 	
-	private void addRights(@NonNull IRI parentIRI, @NonNull DataClass rights) {
+	private void addRights(IRI parentIRI, DataClass rights) {
 		
 		if(Util.isNullOrEmpty(rights)) {
 			return;
@@ -612,7 +611,7 @@ public class RDFWorker {
 	 * @param dataClasses - Placeholder for data to be added to this node
 	 * @return The list of created BNodes
 	 */
-	private List<Resource> addNodes(@NonNull Resource parentIRI, @NonNull IRI parentIRINodeTypeRef, @NonNull IRI nodeType, @NonNull List<DataClass> dataClasses) {
+	private List<Resource> addNodes(Resource parentIRI, IRI parentIRINodeTypeRef, IRI nodeType, List<DataClass> dataClasses) {
 		List<Resource> resources = new ArrayList<>();
 		
 		ValueFactory valueFactory = SimpleValueFactory.getInstance();
@@ -912,7 +911,7 @@ public class RDFWorker {
 //	 * @param dataClasses - Placeholder for data to be added to this node
 //	 * @return The list of created BNodes
 //	 */
-//	private List<BNode> addAnonymousNodes(@NonNull Resource parentIRI, @NonNull IRI parentIRINodeTypeRef, @Nullable IRI nodeType, @NonNull List<DataClass> dataClasses) {
+//	private List<BNode> addAnonymousNodes(@Nonnull Resource parentIRI, @Nonnull IRI parentIRINodeTypeRef, @Nullable IRI nodeType, @Nonnull List<DataClass> dataClasses) {
 //		List<BNode> bNodes = new ArrayList<>();
 //		
 //		ValueFactory valueFactory = SimpleValueFactory.getInstance();

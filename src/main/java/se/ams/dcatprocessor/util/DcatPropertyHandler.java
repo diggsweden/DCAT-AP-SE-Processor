@@ -23,10 +23,10 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
-import se.ams.dcatprocessor.ApplicationProperties;
 
 public class DcatPropertyHandler {
-	
+
+
 	private static DcatPropertyHandler instance;
 
 	//Holds the cardinalityvalues
@@ -69,14 +69,12 @@ public class DcatPropertyHandler {
 	private void loadProperties() {
 		cardinalityValue = new HashMap<String, String>();
 		typeValues = new HashMap<String, String[]>();
-		
-		ApplicationProperties ap = new ApplicationProperties();
 
 		Properties properties = new Properties();
 		
 		try {
-
-			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(ap.getProperty(DCAT_PROPERTY_FILE_KEY));
+			//TODO quarkus - check syntax for application properteies
+			InputStream inputStream = getClass().getClassLoader().getResourceAsStream("dcat.specification.properties");
 			
 			properties.load(inputStream);
 			

@@ -23,8 +23,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.lang.Nullable;
-
+import jakarta.annotation.Nullable;
 import se.ams.dcatprocessor.rdf.DcatException;
 
 /**

@@ -22,8 +22,6 @@ import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ui.Model;
-import org.springframework.web.multipart.MultipartFile;
 import se.ams.dcatprocessor.converter.Converter;
 import se.ams.dcatprocessor.converter.ConverterCatalog;
 import se.ams.dcatprocessor.converter.ConverterFiles;
@@ -74,13 +72,13 @@ public class Manager {
         }
         return result;
     }
-
+/*
     public List<Result> createFromList(List<MultipartFile> apiFiles, Model model) {
         List<Result> results = new ArrayList<>();
         MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
         String result;
 
-        /* Generate DCAT-AP-SE from file */
+        /* Generate DCAT-AP-SE from file *
         for (MultipartFile apiFile : apiFiles) {
             if (!apiFile.isEmpty()) {
                 String apiSpecificationFromFile;
@@ -109,7 +107,7 @@ public class Manager {
         model.addAttribute("results", results);
         return results;
     }
-
+*/
     private void printToFile(String string, String fileName) throws Exception {
         FileOutputStream fos = new FileOutputStream(fileName);
         try {
