@@ -42,12 +42,9 @@ public class DcatPropertyHandler {
 	private HashMap<String, String[]> typeValues;
 	
 	private static final String DCAT_PROPERTY_FILE_KEY = "dcat.specification.properties";
-	
-	protected DcatPropertyHandler() {
-	}
 
 	@PostConstruct
-	void init() {
+	public void init() {
 		loadProperties();
 	}
  	/**

@@ -28,10 +28,7 @@ import java.util.Map;
 import io.quarkus.arc.Arc;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import se.ams.dcatprocessor.testutil.TestHelper;
 import se.ams.dcatprocessor.util.DcatPropertyHandler;
@@ -41,7 +38,9 @@ class CardinalityHandlerTest {
 
 	@Inject
 	CardinalityHandler cardinalityHandler;
-	
+
+	@Inject
+	DcatPropertyHandler dcatPropertyHandler;
 	/**
 	 * Save the original dcat_specification.properties file before changing it
 	 */
@@ -57,7 +56,7 @@ class CardinalityHandlerTest {
 	public static void tearDown() throws Exception {
 		TestHelper.copyFile(TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE_SAVED, TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE);
 	}
-	
+
 	@Test
 	void testThatCardinalitiesAreLoadedCorrectly() throws Exception{
 		
@@ -104,7 +103,7 @@ class CardinalityHandlerTest {
 		assertTrue(actual.isZeroOrMore());		
 				
 	}
-	
+
 	// Invalid property key name i propertyfile
 	@Test
 	void testThatIllegalPropertyNameIsHandledCorrectly() throws Exception {
@@ -113,6 +112,8 @@ class CardinalityHandlerTest {
 		
 		String testFile = TestHelper.doubleSeparator(TestHelper.TEST_FILE_DIR + "dcat_specification_test_5.properties");
 		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
+		dcatPropertyHandler.init();
+
 		try {
 			cardinalityHandler.init();
 			fail("Expected IllegalArgumentException due to incorrect values");
@@ -121,6 +122,4 @@ class CardinalityHandlerTest {
 		}
 
 	}
-	
-
 }

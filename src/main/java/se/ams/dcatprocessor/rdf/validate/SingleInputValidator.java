@@ -60,7 +60,7 @@ public class SingleInputValidator {
 	private String currentFileName;
 	
 	@PostConstruct
-	void init() {
+	public void init() {
 		mapInputTypeToRegex();
 		loadInputTypeDefinitions();
 	}

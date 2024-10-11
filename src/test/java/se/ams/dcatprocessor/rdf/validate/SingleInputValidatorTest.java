@@ -44,6 +44,10 @@ class SingleInputValidatorTest {
 	@Inject
 	ValidationErrorStorage validationErrorStorage;
 
+	@Inject
+	DcatPropertyHandler dcatPropertyHandler;
+
+
 	/**
 	 * Save the original dcat_specification.properties file before changing it
 	 */
@@ -60,6 +64,7 @@ class SingleInputValidatorTest {
 		 */
     	String testFile = TestHelper.doubleSeparator(TestHelper.TEST_FILE_DIR + "dcat_specification_test_1.properties");
 		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
+		dcatPropertyHandler.init();
 	}
 	
 	/**
@@ -128,6 +133,7 @@ class SingleInputValidatorTest {
 
 		String testFile = TestHelper.doubleSeparator(TestHelper.TEST_FILE_DIR + "dcat_specification_test_1_undefined_type.properties");
 		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
+		dcatPropertyHandler.init();
 
 		try {
 			singleInputValidator.loadInputTypeDefinitions();	//Trigger reloading of properties

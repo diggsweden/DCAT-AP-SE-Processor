@@ -31,6 +31,7 @@ import java.util.Set;
 
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -43,6 +44,7 @@ import se.ams.dcatprocessor.models.DataSet;
 import se.ams.dcatprocessor.models.Distribution;
 import se.ams.dcatprocessor.models.FileStorage;
 import se.ams.dcatprocessor.models.Organization;
+import se.ams.dcatprocessor.rdf.validate.CardinalityValidator;
 import se.ams.dcatprocessor.rdf.validate.SingleInputValidator;
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
@@ -64,11 +66,34 @@ class RDFWorkerTest {
 	
 	private String catalogFileName = "catalog.json";
 
+	@Inject
+	CardinalityHandler cardinalityHandler;
+
+	@Inject
+	SingleInputValidator singleInputValidator;
+
+	@Inject
+	DcatPropertyHandler dcatPropertyHandler;
+
+	/**
+	 * Save the original dcat_specification.properties file before changing it
+	 */
+	@BeforeAll
+	public static void setUp() throws Exception {
+	}
+
+
 	@BeforeEach
-	void setup() {
+	void setup() throws Exception {
 		testCatalog1 = createTestCatalog1();
 		testFileStorageList1 = createTestFileStorageList1();
 		testFileStorageList2 = createTestFileStorageList2();
+
+		//This is needed because other tests pollutes the classpath.
+		dcatPropertyHandler.init();
+		cardinalityHandler.init();
+		singleInputValidator.init();
+
 	}
 
 	/**
