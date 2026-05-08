@@ -1,4 +1,4 @@
-FROM docker.io/library/openjdk:17-jdk-slim AS build
+FROM eclipse-temurin:25-jre-jammy AS build
 
 RUN mkdir /build
 COPY pom.xml /build/
@@ -18,7 +18,7 @@ RUN mkdir -p /opt/.logs \
     && mkdir -p /apidef
 RUN chown -R 65532:65532 /opt/
 USER 65532
-COPY --from=build /build/target/dcat-ap-processor-0.0.2-SNAPSHOT.jar /opt/app.jar
+COPY --from=build /build/target/dcat-ap-processor-0.0.3-SNAPSHOT.jar /opt/app.jar
 
 
 ENV JDK_JAVA_OPTIONS -Duser.language=sv-SE -Duser.region=SE -Duser.timezone=Europe/Stockholm

@@ -156,12 +156,10 @@ dcat-ap-se-processor är licensierad under [GPL v3](LICENSE)
 snakeYaml [Apache license](docs/Licenser/Apache.txt)<br>
 RDF4J [EDL v1.0 license](docs/Licenser/edl-v10.txt)<br>
 Spring boot, Spring framework [Apache license](docs/Licenser/Apache.txt)<br>
-Project Lombok [MIT license](docs/Licenser/MIT.txt)<br>
 commonmark-java [BSD-2 clause simplified license](docs/Licenser/BSD-2.txt)<br>
 json-ld-java [BSD-3 clause license](docs/Licenser/BSD-3.txt)<br>
 jackson-dataformat-yaml [Apache license](docs/Licenser/Apache.txt)<br>
-hibernate-json-org-contributor [BSD-3 clause license](docs/Licenser/BSD-3.txt  )<br>
-json-simple [Apache license](docs/Licenser/Apache.txt)<br>
+JSON-java [Public domain](https://github.com/stleary/JSON-java)<br>
 commons-collections4 [Apache license](docs/Licenser/Apache.txt)<br>
 
 ## Status v0.9

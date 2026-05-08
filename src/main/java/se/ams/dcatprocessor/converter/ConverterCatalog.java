@@ -19,8 +19,7 @@ package se.ams.dcatprocessor.converter;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.eclipse.rdf4j.model.vocabulary.*;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
+import org.json.JSONObject;
 import se.ams.dcatprocessor.models.*;
 
 import java.io.IOException;
@@ -64,7 +63,7 @@ public class ConverterCatalog extends Converter {
             }
 
             // Get tag-name for api-spec
-            String AnnotationName = (String) ((JSONObject) subConvert.get(key)).get(ConverterHelpClass.toDcatString);
+            String annotationName = subConvert.getJSONObject(key.toString()).getString(ConverterHelpClass.toDcatString);
 
             // Check if tag is Mandatory
             boolean isMandatory;
@@ -72,26 +71,26 @@ public class ConverterCatalog extends Converter {
             if (subCat.isPresent()) {
                 mandatoryKey = subCat + "-" + key;
             }
-            isMandatory = jsonObjectMandatoryDcat.containsKey(mandatoryKey);
+            isMandatory = jsonObjectMandatoryDcat.has(mandatoryKey);
 
             // Do if key is CATALOG
             if (key.toString().contains(DCAT.CATALOG.getLocalName())) {
-                createSubset(file, key.toString(), AnnotationName, Optional.empty(), Optional.empty(), isMandatory);
+                createSubset(file, key.toString(), annotationName, Optional.empty(), Optional.empty(), isMandatory);
             }
             // Do if key is LICENSE_DOCUMENT
             else if (key.toString().equals(DCTERMS.LICENSE_DOCUMENT.getLocalName())) {
                 if (subCat.isPresent()) {
                     if (subCat.get().equals(DCTERMS.RIGHTS_STATEMENT.getLocalName())) {
-                        createSubset(file, key.toString(), AnnotationName, Optional.of(dataClassLocal), Optional.empty(), isMandatory);
+                        createSubset(file, key.toString(), annotationName, Optional.of(dataClassLocal), Optional.empty(), isMandatory);
                     }
                 }
             }
             // Do if key is A Nested Object
             else if (ConverterHelpClass.isNestedObjects(key.toString())) {
                 if (subCat.isPresent() && subCat.get().equals(DCTERMS.RIGHTS_STATEMENT.getLocalName())) {
-                    createSubset(file, key.toString(), AnnotationName, Optional.of(dataClassLocal), Optional.empty(), isMandatory);
+                    createSubset(file, key.toString(), annotationName, Optional.of(dataClassLocal), Optional.empty(), isMandatory);
                 } else {
-                    createSubset(file, key.toString(), AnnotationName, Optional.empty(), Optional.empty(), isMandatory);
+                    createSubset(file, key.toString(), annotationName, Optional.empty(), Optional.empty(), isMandatory);
                 }
             }
             /*
@@ -100,17 +99,17 @@ public class ConverterCatalog extends Converter {
                 boolean hasLanguages;
                 if (subCat.isPresent()) {
                     if (ConverterHelpClass.isNestedLanguageObjects(subCat.get())) {
-                        hasLanguages = loopLanguage(file, AnnotationName, subCat, Optional.of(dataClassLocal), key.toString());
+                        hasLanguages = loopLanguage(file, annotationName, subCat, Optional.of(dataClassLocal), key.toString());
                     } else {
-                        hasLanguages = loopLanguage(file, AnnotationName, subCat, Optional.ofNullable(catalog), key.toString());
+                        hasLanguages = loopLanguage(file, annotationName, subCat, Optional.ofNullable(catalog), key.toString());
                     }
                 } else {
-                    hasLanguages = loopLanguage(file, AnnotationName, Optional.empty(), Optional.ofNullable(catalog), key.toString());
+                    hasLanguages = loopLanguage(file, annotationName, Optional.empty(), Optional.ofNullable(catalog), key.toString());
                 }
 
                 if (!hasLanguages) {
-                    if (file.containsKey(AnnotationName)) {
-                        String value = String.valueOf(file.get(AnnotationName));
+                    if (file.has(annotationName)) {
+                        String value = String.valueOf(file.get(annotationName));
                         if (subCat.isPresent()) {
                             if (ConverterHelpClass.isNestedObjects(subCat.get())) {
                                 addValues(dataClassLocal, value, key.toString(), subCat);
@@ -120,9 +119,9 @@ public class ConverterCatalog extends Converter {
                         }
                     } else if (isMandatory) {
                         if (subCat.isPresent()) {
-                            this.errors.add("Errormessage: " + AnnotationName + " in " + subCat.get() + " is Mandatory");
+                            this.errors.add("Errormessage: " + annotationName + " in " + subCat.get() + " is Mandatory");
                         } else {
-                            this.errors.add("Errormessage: " + AnnotationName + " is Mandatory");
+                            this.errors.add("Errormessage: " + annotationName + " is Mandatory");
                         }
                     }
                 }
@@ -148,7 +147,7 @@ public class ConverterCatalog extends Converter {
     /*
      * Sets a value to the correct Object */
     @Override
-    void addValue(MultiValuedMap<String, String> valueMap, String value, String key, Optional<String> subCat) throws IOException, ParseException {
+    void addValue(MultiValuedMap<String, String> valueMap, String value, String key, Optional<String> subCat) throws IOException {
         JSONObject jsonSupportiveDcat = null;
         if (subCat.isPresent())
             jsonSupportiveDcat = getSupportiveFile(key, subCat.get());
@@ -158,7 +157,7 @@ public class ConverterCatalog extends Converter {
             String mapValue = s;
             if (jsonSupportiveDcat != null) {
                 mapValue = mapValue.trim();
-                if (jsonSupportiveDcat.containsKey(mapValue)) {
+                if (jsonSupportiveDcat.has(mapValue)) {
                     mapValue = (String) ((JSONObject) (jsonSupportiveDcat.get(mapValue))).get("url");
                 } else if (!mapValue.contains("http://") && !key.contains("format")) {
                     errors.add("Errormessage: " + key + " has a not supported value (" + mapValue + "). Check list for " + key + " to see the correct values that can be used.");
@@ -182,7 +181,7 @@ public class ConverterCatalog extends Converter {
     }
 
     @Override
-    void addValues(DataClass dataObj, String value, String key, Optional<String> subCat) throws IOException, ParseException {
+    void addValues(DataClass dataObj, String value, String key, Optional<String> subCat) throws IOException {
         if (key.equals(ConverterHelpClass.toDcatAboutString)) {
             addAbout(dataObj, value);
         } else {

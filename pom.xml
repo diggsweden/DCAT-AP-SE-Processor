@@ -21,17 +21,19 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.0</version>
+		<version>4.0.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>se.af</groupId>
 	<artifactId>dcat-ap-processor</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>dcat-ap-processor</name>
 	<description>Preprocessor - DCAT-AP-SE metadata</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>25</java.version>
 		<argLine>-Dfile.encoding=UTF-8</argLine>
+		<!-- For usage of dependency-check-maven replace value with valid API key: https://github.com/dependency-check/DependencyCheck -->
+		<nvd.api.key>placeholder-api-key</nvd.api.key>
 		<!--<spring-security.version>5.8</spring-security.version>-->
 	</properties>
 	<dependencies>
@@ -47,55 +49,46 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.atlassian.commonmark</groupId>
-			<artifactId>commonmark</artifactId>
-			<version>0.17.0</version>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-resttestclient</artifactId>
+    		<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-restclient</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.commonmark</groupId>
+		    <artifactId>commonmark</artifactId>
+		    <version>0.22.0</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.eclipse.rdf4j/rdf4j-rio-rdfxml -->
 		<dependency>
 			<groupId>org.eclipse.rdf4j</groupId>
 			<artifactId>rdf4j-rio-rdfxml</artifactId>
-			<version>4.2.1</version>
+			<version>5.3.1</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.github.jsonld-java/jsonld-java -->
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
 		<dependency>
-			<groupId>com.github.jsonld-java</groupId>
-			<artifactId>jsonld-java</artifactId>
-			<version>0.13.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.yaml</groupId>
-			<artifactId>snakeyaml</artifactId>
-			<version>2.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-yaml</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.googlecode.json-simple</groupId>
-			<artifactId>json-simple</artifactId>
-			<version>1.1.1</version>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20251224</version>
+		    <scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
 			<version>4.4</version>
 		</dependency>
-
-
 	</dependencies>
 
 	<build>
@@ -105,10 +98,13 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
+				<!-- https://mvnrepository.com/artifact/org.owasp/dependency-check-maven -->
                 <groupId>org.owasp</groupId>
               	<artifactId>dependency-check-maven</artifactId>
-                <version>8.0.0</version>
+                <version>12.2.0</version>
                 <configuration>
+					<!-- Get API key from maven.properties -->
+					<nvdApiKey>${nvd.api.key}</nvdApiKey>
                     <goalPrefix>dependency-check</goalPrefix>
                 </configuration>
                <executions>
@@ -121,5 +117,4 @@
             </plugin>
 		</plugins>
 	</build>
-
 </project>
