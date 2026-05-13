@@ -19,9 +19,7 @@ package se.ams.dcatprocessor.converter;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.eclipse.rdf4j.model.vocabulary.*;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.json.JSONObject;
 import se.ams.dcatprocessor.models.*;
 
 import java.io.IOException;
@@ -31,7 +29,6 @@ import java.util.*;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class Converter {
-    JSONParser parser = new JSONParser();
     Catalog catalog = new Catalog();
     FileStorage fileHandler = new FileStorage();
     JSONObject jsonObjectMandatoryDcat;
@@ -59,14 +56,13 @@ public class Converter {
 
     /*
      * Finds and sets correct converterfile and mandatoryfile depending on if it is catalog or other file */
-    void setConvertAndMandatoryFile(String uriToDirectory) throws IOException, ParseException {
+    void setConvertAndMandatoryFile(String uriToDirectory) throws IOException {
         String convertFile;
         convertFile = getFileString(uriToDirectory + ConverterHelpClass.convertFileName);
-        orgConvert = (JSONObject) parser.parse(convertFile);
+        orgConvert = new JSONObject(convertFile);
 
         String mandatoryFile = getFileString(uriToDirectory + ConverterHelpClass.mandatoryFileName);
-        jsonObjectMandatoryDcat = (JSONObject) parser.parse(mandatoryFile);
-
+        jsonObjectMandatoryDcat = new JSONObject(mandatoryFile);
     }
 
     String getFileString(String fileName) throws IOException {
@@ -76,23 +72,19 @@ public class Converter {
 
     /*
      * Finds and sets correct supportiveFile to create correct values for some tags */
-    JSONObject getSupportiveFile(String key, String subCat) throws IOException, ParseException {
+    JSONObject getSupportiveFile(String key, String subCat) throws IOException {
         JSONObject jsonSupportiveDcat = null;
 
         if (ConverterHelpClass.supportiveFile.containsKey(key)) {
-            JSONParser parser = new JSONParser();
-
             String fileName = ConverterHelpClass.uriToDcatSupportive + ConverterHelpClass.supportiveFile.get(key);
             String supportiveFile;
             supportiveFile = getFileString(fileName);
-            jsonSupportiveDcat = (JSONObject) parser.parse(supportiveFile);
+            jsonSupportiveDcat = new JSONObject(supportiveFile);
 
         } else if (ConverterHelpClass.supportiveFile.containsKey(subCat + "-" + key)) {
-            JSONParser parser = new JSONParser();
-
             String fileName = ConverterHelpClass.uriToDcatSupportive + ConverterHelpClass.supportiveFile.get(subCat + "-" + key);
             String supportiveFile = getFileString(fileName);
-            jsonSupportiveDcat = (JSONObject) parser.parse(supportiveFile);
+            jsonSupportiveDcat = new JSONObject(supportiveFile);
         }
         return jsonSupportiveDcat;
     }
@@ -106,24 +98,24 @@ public class Converter {
         dataObj.about = value;
     }
 
-    boolean loopLanguage(JSONObject file, String AnnotationName, Optional<String> subCat, Optional<DataClass> dataClass, String key) throws IOException, ParseException {
+    boolean loopLanguage(JSONObject file, String AnnotationName, Optional<String> subCat, Optional<DataClass> dataClass, String key) throws IOException {
         boolean hasLanguage = false;
-        JSONParser parser = new JSONParser();
 
         String fileName = ConverterHelpClass.uriToLanguageDcat;
         String languageFile;
         languageFile = getFileString(fileName);
-        JSONObject jsonObjectLanguageDcat = (JSONObject) parser.parse(languageFile);
+        JSONObject jsonObjectLanguageDcat = new JSONObject(languageFile);
 
         Object[] languageKeys = jsonObjectLanguageDcat.keySet().toArray();
         Iterator<?> keysInLanguageFile = Arrays.stream(languageKeys).iterator();
 
         while (keysInLanguageFile.hasNext()) {
             Object keyTest = keysInLanguageFile.next();
-            String keyInLanguage = (String) ((JSONObject) jsonObjectLanguageDcat.get(keyTest)).get(ConverterHelpClass.toDcatString);
-            String urlLanguage = (String) ((JSONObject) jsonObjectLanguageDcat.get(keyTest)).get("url");
 
-            if (file.containsKey(AnnotationName + "-" + keyInLanguage)) {
+            String keyInLanguage = jsonObjectLanguageDcat.getJSONObject((String) keyTest).getString(ConverterHelpClass.toDcatString);
+            String urlLanguage = jsonObjectLanguageDcat.getJSONObject((String) keyTest).getString("url");
+
+            if (file.has(AnnotationName + "-" + keyInLanguage)) {
                 String value = (String) file.get(AnnotationName + "-" + keyInLanguage);
                 String[] splitValue = value.split(";");
                 for (String s : splitValue) {
@@ -155,7 +147,7 @@ public class Converter {
 
     /*
      * Sets a value to the correct Object */
-    void addValue(MultiValuedMap<String, String> valueMap, String value, String key, Optional<String> subCat) throws IOException, ParseException {
+    void addValue(MultiValuedMap<String, String> valueMap, String value, String key, Optional<String> subCat) throws IOException {
         JSONObject jsonSupportiveDcat = null;
         if (subCat.isPresent())
             jsonSupportiveDcat = getSupportiveFile(key, subCat.get());
@@ -166,7 +158,7 @@ public class Converter {
             String mapValue = s;
             if (jsonSupportiveDcat != null) {
                 mapValue = mapValue.trim();
-                if (jsonSupportiveDcat.containsKey(mapValue)) {
+                if (jsonSupportiveDcat.has(mapValue)) {
                     mapValue = (String) ((JSONObject) (jsonSupportiveDcat.get(mapValue))).get("url");
                 } else if (!mapValue.contains("http://") && !key.contains("format")) {
                     errors.add("Errormessage: " + key + " has a not supported value (" + mapValue + "). Check list for " + key + " to see the correct values that can be used.");
@@ -222,7 +214,7 @@ public class Converter {
         }
     }
 
-    void addValues(DataClass dataObj, String value, String key, Optional<String> subCat) throws IOException, ParseException {
+    void addValues(DataClass dataObj, String value, String key, Optional<String> subCat) throws IOException {
         if (key.equals(ConverterHelpClass.toDcatAboutString)) {
             addAbout(dataObj, value);
         } else if (key.equals("vcard:hasTelephone")) {
@@ -237,14 +229,15 @@ public class Converter {
     void loopData(JSONObject file, String key, String AnnotationName, String newKey, Optional<DataClass> preData, Optional<DataClass> preDist) throws Exception {
     }
 
-    void loopObject(JSONObject file, String key, String annotationName, DataClass address, Optional<String> subCat) throws IOException, ParseException {
+    void loopObject(JSONObject file, String key, String annotationName, DataClass address, Optional<String> subCat) throws IOException {
         Object[] fileKeys = file.keySet().toArray();
         Iterator<?> keysInRamlFile = Arrays.stream(fileKeys).iterator();
 
         while (keysInRamlFile.hasNext()) {
             Object keyInRaml = keysInRamlFile.next();
             if ((annotationName != null) && ((keyInRaml.toString()).contains(annotationName))) {
-                String value = String.valueOf(file.get(keyInRaml));
+
+                String value = file.get(keyInRaml.toString()).toString();
                 addValues(address, value, key, subCat);
             }
         }

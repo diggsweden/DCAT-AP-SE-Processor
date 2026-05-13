@@ -20,9 +20,9 @@ package se.ams.dcatprocessor.parser;
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
@@ -30,6 +30,8 @@ import org.yaml.snakeyaml.nodes.*;
 import se.ams.dcatprocessor.rdf.DcatException;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -38,8 +40,7 @@ public class ApiDefinitionParser {
 
     private static Logger logger = LoggerFactory.getLogger(ApiDefinitionParser.class);
 
-    public static JSONObject getApiJsonString(String fileString) throws IOException, ParseException {
-        JSONParser parser = new JSONParser();
+    public static JSONObject getApiJsonString(String fileString) throws IOException, JSONException  {
         Stream<String> lines;
         String apiJsonString = "";
 
@@ -56,10 +57,10 @@ public class ApiDefinitionParser {
         else {
             throw new DcatException("not supported api definition");
         }
-        JSONObject jsonObjectFile = (JSONObject) parser.parse(apiJsonString);
-        if (jsonObjectFile.containsKey("info")) {
-            jsonObjectFile = (org.json.simple.JSONObject) (jsonObjectFile.get("info"));
-            jsonObjectFile = (org.json.simple.JSONObject) (jsonObjectFile.get("x-dcat"));
+        JSONObject jsonObjectFile = new JSONObject(apiJsonString);
+        if (jsonObjectFile.has("info")) {
+            jsonObjectFile = jsonObjectFile.getJSONObject("info");
+            jsonObjectFile = jsonObjectFile.getJSONObject("x-dcat");
         }
         return jsonObjectFile;
     }
@@ -77,15 +78,13 @@ public class ApiDefinitionParser {
             generator.close();
             output.close();
 
-            JSONParser jsonParser = new JSONParser();
-            FileReader reader = new FileReader("output.json");
-
             //Read JSON file
-            Object obj = jsonParser.parse(reader);
+            String jsonString = new String(Files.readAllBytes(Paths.get("output.json")));
+            Object obj = new JSONObject(jsonString);
             return obj.toString();
             //logger.debug("JSON string from file:\n"+obj.toString());
 
-        } catch (IOException | ParseException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
         return "";

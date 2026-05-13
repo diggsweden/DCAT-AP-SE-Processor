@@ -21,12 +21,9 @@ import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import se.ams.dcatprocessor.Manager;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import static org.junit.Assert.assertTrue;
 
 
 @SpringBootApplication
@@ -43,7 +40,6 @@ public class Application {
         }
     }
 
-
     public static void convertFile(String filename) {
         Manager manager = new Manager();
         Path path = Path.of(filename);
@@ -54,13 +50,14 @@ public class Application {
             String content = Files.readString(path);
             apiSpecMap.put(path.toString(), content);
             result = manager.createDcat(apiSpecMap);
-            assertTrue(!result.isEmpty());
+
+            if (result.isEmpty()) throw new RuntimeException("Kunde inte generera en dcat fil");
+
             System.out.println(result);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
 
     public static void convertDir(String dirname) {
         Manager manager = new Manager();
@@ -68,11 +65,12 @@ public class Application {
 
         try {
             result = manager.createDcatFromDirectory(dirname);
-            assertTrue(!result.isEmpty());
+
+            if (result.isEmpty()) throw new RuntimeException("Kunde inte generera en dcat fil");
+            
             System.out.println(result);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
 }

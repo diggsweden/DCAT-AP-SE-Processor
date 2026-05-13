@@ -21,13 +21,12 @@ import org.eclipse.rdf4j.model.vocabulary.DCAT;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
 import org.eclipse.rdf4j.model.vocabulary.VCARD4;
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
 import se.ams.dcatprocessor.models.*;
 import se.ams.dcatprocessor.rdf.namespace.SPDX;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -53,7 +52,7 @@ public class ConverterDistribution extends Converter {
             }
 
             // Get tag-name for api-spec
-            String annotationName = (String) ((JSONObject) subConvert.get(key)).get(ConverterHelpClass.toDcatString);
+            String annotationName = subConvert.getJSONObject(key.toString()).getString(ConverterHelpClass.toDcatString);
 
             // Check if tag is Mandatory
             boolean isMandatory;
@@ -61,7 +60,7 @@ public class ConverterDistribution extends Converter {
             if (subCat.isPresent()) {
                 mandatoryKey = subCat + "-" + key;
             }
-            isMandatory = jsonObjectMandatoryDcat.containsKey(mandatoryKey);
+            isMandatory = jsonObjectMandatoryDcat.has(mandatoryKey);
 
             // Do if key is DISTRIBUTION
             if (key.toString().equals(DCAT.DISTRIBUTION.getLocalName())) {
@@ -108,13 +107,13 @@ public class ConverterDistribution extends Converter {
                 }
                 if (!hasLanguages) {
                     if (key.equals(VCARD4.ADDRESS.getLocalName())) {
-                        if (file.containsKey(annotationName)) {
+                        if (file.has(annotationName)) {
                             String value = String.valueOf(file.get(annotationName));
                             addValues(organizationLocal, value, key.toString(), subCat);
                         } else {
                             loopObject(file, key.toString(), annotationName, organizationLocal, subCat);
                         }
-                    } else if (file.containsKey(annotationName)) {
+                    } else if (file.has(annotationName)) {
                         String value = String.valueOf(file.get(annotationName));
                         if (subCat.isPresent()) {
                             if (subCat.get().contains(DCAT.DATASET.getLocalName())) {
