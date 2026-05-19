@@ -16,6 +16,8 @@ formatter:
   # Padding between inline comment and content (default: 1)
   pad_line_comments: 1
 
+match_type: doublestar
+
 exclude:
   - "**/metadataExample/**"
   - "**/test/**"
