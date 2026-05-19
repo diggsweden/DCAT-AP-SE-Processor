@@ -63,11 +63,13 @@
 		<dependency>
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-resttestclient</artifactId>
+			<version>4.0.5</version>
     		<scope>test</scope>
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-restclient</artifactId>
+			<version>4.0.5</version>
 		    <scope>test</scope>
 		</dependency>
 		<dependency>
