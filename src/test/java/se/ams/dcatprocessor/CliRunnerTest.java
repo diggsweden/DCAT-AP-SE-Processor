@@ -75,7 +75,7 @@ public class CliRunnerTest {
     }
 
     @Test
-    void testNoValidFlagHasNoInteractionsWithService() throws Exception {
+    void testThatInvalidFlagHasNoInteractionsWithService() throws Exception {
         String flag = "-unknown";
         ApplicationArguments args = new DefaultApplicationArguments(flag);
         
@@ -86,7 +86,7 @@ public class CliRunnerTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"-f", "-d"})
-    void testMissingValueHasNoInteractionsWithService(String flag) throws Exception {
+    void testThatMissingFlagValueHasNoInteractionsWithService(String flag) throws Exception {
         ApplicationArguments args = new DefaultApplicationArguments(flag);
         
         cliRunner.run(args);
