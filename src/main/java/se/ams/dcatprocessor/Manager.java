@@ -22,6 +22,9 @@ import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import se.ams.dcatprocessor.converter.Converter;
@@ -43,12 +46,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
+@Service
+@Scope("prototype")
 public class Manager {
+
+    private final ObjectProvider<RDFWorker> rdfWorkerProvider;
+
+    public Manager(ObjectProvider<RDFWorker> rdfWorkerProvider){
+        this.rdfWorkerProvider = rdfWorkerProvider;
+    }
 
     private static final Logger logger = LoggerFactory.getLogger(Manager.class);
     Catalog catalog = new Catalog();
     List<FileStorage> fileStorages = new ArrayList<>();
-    RDFWorker rdfWorker = new RDFWorker();
 
     public String createDcatFromDirectory(String dir) throws Exception {
         // create new file
@@ -71,6 +81,26 @@ public class Manager {
                 }
             }
             result = this.createDcat(apiSpecMap);
+        }
+        return result;
+    }
+
+    public String createDcatFromFile(String filename) {
+        if (!validateFileExtension(filename)) {
+            return "Invalid file extension: " + filename;
+        }
+
+        Path path = Path.of(filename);
+        MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
+        String result;
+
+        try {
+            String content = Files.readString(path);
+            apiSpecMap.put(path.toString(), content);
+            result = createDcat(apiSpecMap);
+            if (result.isEmpty()) throw new RuntimeException("Kunde inte generera en dcat fil");
+        } catch (Exception e) {
+            result = e.getMessage();
         }
         return result;
     }
@@ -122,6 +152,8 @@ public class Manager {
 
     public String createDcat(MultiValuedMap<String, String> apiSpecMap) throws Exception {
         ConverterCatalog catalogConverter = new ConverterCatalog();
+        RDFWorker rdfWorker = rdfWorkerProvider.getObject();
+        resetValidationErrors();
 
         HashMap<String, String> exceptions = new HashMap<>();
         Map<String, List<ValidationError>> validationErrorsPerFileMap = new HashMap<>();
@@ -203,8 +235,7 @@ public class Manager {
             });
         }
 
-        ValidationErrorStorage.getInstance().resetErrors();
-        Converter.deleteErrors();
+        resetValidationErrors();
 
         if (exceptionResult.length() > 0) {
             exceptionResult.append("Check DCAT-AP-SE specification for info. https://docs.dataportal.se/dcat/sv/\n---------------------------------\n");
@@ -215,5 +246,17 @@ public class Manager {
             printToFile(result, "dcat.rdf");
         }
         return result;
+    }
+
+    private boolean validateFileExtension(String filename){
+        if (filename.endsWith(".raml") || filename.endsWith(".yaml") || filename.endsWith(".json")) {
+            return true;
+        }
+        return false;
+    }
+
+    private void resetValidationErrors(){
+        ValidationErrorStorage.getInstance().resetErrors();
+        Converter.deleteErrors();
     }
 }

@@ -18,20 +18,35 @@
 package se.ams.dcatprocessor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import se.ams.dcatprocessor.rdf.DcatException;
+import se.ams.dcatprocessor.testutil.TestHelper;
 
+@SpringBootTest
 public class ManagerTest {
-    private static Manager manager;
+    
+    @Autowired
+    private ObjectProvider<Manager> managerProvider;
+
+    private Manager manager;
   
     // region Testdata
     private static String expectedRDF = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -261,8 +276,8 @@ public class ManagerTest {
             "\n" +
             "(dcat-dataset):\n" +
             "  about: https://www.example.se/result.rdf#dataset1\n" +
-            "  title-sv: Datamängd 1\n" +
-            "  description-sv: Exempel beskrivning 1\n" +
+            "  title-sv: Datamängd\n" +
+            "  description-sv: Exempel beskrivning\n" +
             "  publisher:\n" +
             "    about: https://www.example.se/result.rdf#publisher\n" +
             "    name: Redpill Linpro AB\n" +
@@ -284,79 +299,101 @@ public class ManagerTest {
             "    endDate: 2021-03-25\n" +
             "  accessRights: Public\n" +
             "\n";
-    // endregion
 
-    @BeforeEach
-    void setup() {
-        manager = new Manager();
-    }
-
-/*    @Test
-    void testValidRaml1() throws Exception {
+	@BeforeEach
+	void setup() throws Exception {
+        TestHelper.resetSingeltons();
+		manager = managerProvider.getObject();
+	}
+	
+    @Test
+    void testThatDcatIsCreatedFromDirWithRaml() throws Exception {
         File apidefDir = new File("src/test/resources/apidef/raml_1");
 
-        try {
-            String result = manager.createDcatFromDirectory(apidefDir.toString());
-            // nodeIDs are generated dynamically, changing them allows for comparison
-            String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");
-            assertEquals(expectedRDF, convertedRdf);
-        } catch (DcatException e) {
-
-        }
+        String result = manager.createDcatFromDirectory(apidefDir.toString());
+        // nodeIDs are generated dynamically, changing them allows for comparison
+        String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");      
+        
+        assertEquals(expectedRDF, convertedRdf);        
     }
 
     @Test
-    void testValidJsonOas() throws Exception {
+    void testThatDcatIsCreatedFromDirWithJson() throws Exception {
         File apidefDir = new File("src/test/resources/apidef/json_oas");
-
-        try {
-            String result = manager.createDcatFromDirectory(apidefDir.toString());
-            // nodeIDs are generated dynamically, changing them allows for comparison
-            String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");
-            assertEquals(expectedRDF, convertedRdf);
-        } catch (DcatException e) {
-
-        }
+   
+        String result = manager.createDcatFromDirectory(apidefDir.toString());
+        // nodeIDs are generated dynamically, changing them allows for comparison
+        String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");
+        
+        assertEquals(expectedRDF, convertedRdf);
     }
 
     @Test
-    void testValidYaml() throws Exception {
+    void testThatDcatIsCreatedFromDirWithYaml() throws Exception {
         File apidefDir = new File("src/test/resources/apidef/yaml_oas");
-
-        try {
-            String result = manager.createDcatFromDirectory(apidefDir.toString());
-            // nodeIDs are generated dynamically, changing them allows for comparison
-            String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");
-            assertEquals(expectedRDF, convertedRdf);
-        } catch (DcatException e) {
-
-        }
+   
+        String result = manager.createDcatFromDirectory(apidefDir.toString());  
+        // nodeIDs are generated dynamically, changing them allows for comparison
+        String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");      
+        
+        assertEquals(expectedRDF, convertedRdf);
     }
 
     @Test
-    void testValidJsonSeparate() throws Exception {
+    void testThatDcatIsCreatedFromDirWithSeparateJson() throws Exception {
         File apidefDir = new File("src/test/resources/apidef/json_separate");
-
-        try {
-            String result = manager.createDcatFromDirectory(apidefDir.toString());
-            // nodeIDs are generated dynamically, changing them allows for comparison
-            String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");
-            assertEquals(expectedRDF, convertedRdf);
-        } catch (DcatException e) {
-
-        }
+ 
+        String result = manager.createDcatFromDirectory(apidefDir.toString());
+        // nodeIDs are generated dynamically, changing them allows for comparison
+        String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");
+       
+        assertEquals(expectedRDF, convertedRdf);
     }
 
     @Test
-    void testCreateDcat() throws Exception {
+    void testThatDcatIsCreatedFromFileWithRaml() throws Exception {
         MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
         apiSpecMap.put("apifile", ramlApidef);
-        try {
-            String result = manager.createDcat(apiSpecMap);
-            assertTrue(!result.isEmpty());
-        } catch (DcatException e) {
+       
+        String result = manager.createDcat(apiSpecMap);
+        // nodeIDs are generated dynamically, changing them allows for comparison
+        String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");
+       
+        
+        assertEquals(expectedRDF, convertedRdf);
+    }
 
-        }
+    @Test
+    void testThatInvalidJsonThrowsExpectedException(@TempDir Path tempDir) throws Exception {
+        Path invalidFile = tempDir.resolve("invalid.json");
+        Files.writeString(invalidFile, "{ not valid json }");
+    
+        Exception exception = assertThrows(DcatException.class, () -> {
+            manager.createDcatFromDirectory(tempDir.toString());
+        });
+    
+        assertTrue(exception.getMessage().contains("Failed to parse JSON"));
+    }
+
+    @Test
+    void testThatInvalidAddressLogsCorrectError(@TempDir Path tempDir) throws Exception {
+        Path original = Path.of("src/test/resources/apidef/json_oas/obl_rek_oas.json");
+        String content = Files.readString(original);
+
+        // Make address nonvalid
+        String notValid = content.replace("Testgatan 5; 76543; Tranemo; Sverige", "Testgatan 5; 76543; Tranemo");
+        Files.writeString(tempDir.resolve("api.json"), notValid);
+
+        String result = manager.createDcatFromDirectory(tempDir.toString());
+        
+        assertTrue(result.contains("Address in Contact point has too few values"));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"testfile.txt", "testfile.xml", "testfile.csv"})
+    void testInvalidFileExtensionReturnsExpectedMessage(String filename) throws Exception {
+        String result = manager.createDcatFromFile(filename);     
+        assertEquals(result, "Invalid file extension: " + filename);
     }
 
     // region Utility methods
@@ -369,6 +406,5 @@ public class ManagerTest {
         end = Pattern.quote(end);
         return input.replaceAll("(" + start + ")" + ".*" + "(" + end + ")",
                 (startInclusive ? "" : "$1") + replaceWith + (endInclusive ? "" : "$2"));
-    } */
-    // endregion
+    }
 }

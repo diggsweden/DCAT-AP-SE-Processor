@@ -21,8 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.lang.reflect.Field;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +30,6 @@ import se.ams.dcatprocessor.rdf.validate.SingleInputValidator;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
 import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
 import se.ams.dcatprocessor.testutil.TestHelper;
-import se.ams.dcatprocessor.util.DcatPropertyHandler;
 
 class SingleInputValidatorTest {
 
@@ -44,26 +41,9 @@ class SingleInputValidatorTest {
 		TestHelper.copyFile(TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE, TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE_SAVED);
 	}
 	
-	/**
-	 * Set the instance of PropertyLoader and InputValidator to null
-	 * to force them to re-instansiate since they are Singletons
-	 * @throws NoSuchFieldException
-	 * @throws IllegalAccessException
-	 */
 	@BeforeEach
 	public void setup() throws Exception{
-        Field instance = DcatPropertyHandler.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(DcatPropertyHandler.class, null);
-        
-        instance = SingleInputValidator.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(SingleInputValidator.class, null);
-        
-        instance = ValidationErrorStorage.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(ValidationErrorStorage.class, null);
-        
+		TestHelper.resetSingeltons();     
         /**
 		 * Copy the propertiesfile we want to use in the test directly to the target files dirctory to have it in the claspath
 		 */

@@ -21,8 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.lang.reflect.Field;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,17 +39,9 @@ class DcatPropertyHandlerTest {
 		TestHelper.copyFile(TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE, TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE_SAVED);
 	}
 	
-	/**
-	 * Set the instance of PropertyLoader to null
-	 * to force them to re-instansiate since they are Singletons
-	 * @throws NoSuchFieldException
-	 * @throws IllegalAccessException
-	 */
 	@BeforeEach
-	public void setup() throws NoSuchFieldException, IllegalAccessException {
-        Field instance = DcatPropertyHandler.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(DcatPropertyHandler.class, null);
+	public void setup() throws Exception {
+		TestHelper.resetSingeltons();
 	}
 	
 	/**

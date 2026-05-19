@@ -22,10 +22,8 @@ import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
 import org.eclipse.rdf4j.model.vocabulary.VCARD4;
 import org.json.JSONObject;
-//import org.json.simple.JSONObject;
 import se.ams.dcatprocessor.models.*;
 
-import java.lang.reflect.Field;
 import java.util.*;
 
 public class ConverterFiles extends Converter {
@@ -145,9 +143,9 @@ public class ConverterFiles extends Converter {
                         }
                     } else if (isMandatory) {
                         if (subCat.isPresent()) {
-                            this.errors.add("Errormessage: " + annotationName + " in " + subCat.get() + " is Mandatory");
+                            errors.add("Errormessage: " + annotationName + " in " + subCat.get() + " is Mandatory");
                         } else {
-                            this.errors.add("Errormessage: " + annotationName + " is Mandatory");
+                            errors.add("Errormessage: " + annotationName + " is Mandatory");
                         }
                     }
                 }

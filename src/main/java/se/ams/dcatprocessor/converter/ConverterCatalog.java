@@ -119,9 +119,9 @@ public class ConverterCatalog extends Converter {
                         }
                     } else if (isMandatory) {
                         if (subCat.isPresent()) {
-                            this.errors.add("Errormessage: " + annotationName + " in " + subCat.get() + " is Mandatory");
+                            errors.add("Errormessage: " + annotationName + " in " + subCat.get() + " is Mandatory");
                         } else {
-                            this.errors.add("Errormessage: " + annotationName + " is Mandatory");
+                            errors.add("Errormessage: " + annotationName + " is Mandatory");
                         }
                     }
                 }
@@ -198,6 +198,4 @@ public class ConverterCatalog extends Converter {
             processToDcat(subToConvert, subJsonFile, Optional.ofNullable(newKey), preData, preDist);
         }
     }
-
-
 }

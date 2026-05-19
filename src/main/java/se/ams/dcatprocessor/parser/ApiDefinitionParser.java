@@ -23,8 +23,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.nodes.*;
 import se.ams.dcatprocessor.rdf.DcatException;
@@ -38,11 +36,10 @@ import java.util.stream.Stream;
 
 public class ApiDefinitionParser {
 
-    private static Logger logger = LoggerFactory.getLogger(ApiDefinitionParser.class);
-
     public static JSONObject getApiJsonString(String fileString) throws IOException, JSONException  {
         Stream<String> lines;
         String apiJsonString = "";
+        JSONObject jsonObjectFile;
 
         lines = fileString.lines();
         String apiLine1 = lines.limit(1).collect(Collectors.joining("\n"));
@@ -57,7 +54,13 @@ public class ApiDefinitionParser {
         else {
             throw new DcatException("not supported api definition");
         }
-        JSONObject jsonObjectFile = new JSONObject(apiJsonString);
+
+        try {
+            jsonObjectFile = new JSONObject(apiJsonString);
+        } catch (JSONException e) {
+            throw new DcatException("Failed to parse JSON: " + e.getMessage());
+        }
+
         if (jsonObjectFile.has("info")) {
             jsonObjectFile = jsonObjectFile.getJSONObject("info");
             jsonObjectFile = jsonObjectFile.getJSONObject("x-dcat");
@@ -82,7 +85,6 @@ public class ApiDefinitionParser {
             String jsonString = new String(Files.readAllBytes(Paths.get("output.json")));
             Object obj = new JSONObject(jsonString);
             return obj.toString();
-            //logger.debug("JSON string from file:\n"+obj.toString());
 
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -96,7 +98,6 @@ public class ApiDefinitionParser {
             generator.writeStartObject();
             for (NodeTuple tuple : mappingNode.getValue()) {
                 if (tuple.getKeyNode() instanceof ScalarNode) {
-                    //logger.debug("MappingNode="+((ScalarNode) tuple.getKeyNode()).getValue());
                     generator.writeFieldName(((ScalarNode) tuple.getKeyNode()).getValue());
                 }
                 build(tuple.getValueNode(), generator);
@@ -105,7 +106,6 @@ public class ApiDefinitionParser {
         } else if (yaml instanceof SequenceNode) {
             generator.writeStartArray();
             for (Node node : ((SequenceNode) yaml).getValue()) {
-                //logger.debug("SequenceNode="+node);
                 build(node, generator);
             }
             generator.writeEndArray();

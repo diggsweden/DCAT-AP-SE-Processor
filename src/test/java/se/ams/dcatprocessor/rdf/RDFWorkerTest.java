@@ -33,6 +33,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import se.ams.dcatprocessor.models.Catalog;
 import se.ams.dcatprocessor.models.DataClass;
@@ -50,8 +53,11 @@ import se.ams.dcatprocessor.util.DcatPropertyHandler;
 
 //TODO: Fix so that path to properties is set automatically and independently of the user. The default properties should be overridden during test
 
+@SpringBootTest
 class RDFWorkerTest {
-	private static Logger logger = LoggerFactory.getLogger(RDFWorkerTest.class);
+	
+	@Autowired
+    private ObjectProvider<RDFWorker> rdfWorkerProvider;
 
 	private RDFWorker rdfWorker;
 	private Catalog testCatalog1;
@@ -88,7 +94,7 @@ class RDFWorkerTest {
 
 	@BeforeEach
 	void setup() {
-		rdfWorker = new RDFWorker();
+		rdfWorker = rdfWorkerProvider.getObject();
 		testCatalog1 = createTestCatalog1();
 		testFileStorageList1 = createTestFileStorageList1();
 		testFileStorageList2 = createTestFileStorageList2();
@@ -680,7 +686,7 @@ class RDFWorkerTest {
 		DataClass license1 = createDataClass("http://wwww.licenseURI_3.com", List.of("dcterms:title", "dcterms:description"),List.of("en¤License title 7", "en¤License description 7"));
 		DataClass license2 = createDataClass("http://wwww.licenseURI_4.com", List.of("dcterms:title", "dcterms:description"), List.of("rom¤rromani ćhib 8", "en¤License description 8"));
 
-		DataClass copyrightHolder1 = createDataClass("http://www.af22457101.se", List.of("foaf:name", "dcterms:type"), List.of("Aktör namn 3", "	http://purl.org/adms/publishertype/SupraNationalAuthority"));	
+		DataClass copyrightHolder1 = createDataClass("http://www.af22457101.se", List.of("foaf:name", "dcterms:type"), List.of("Aktör namn 3", "http://purl.org/adms/publishertype/SupraNationalAuthority"));	
 		DataClass copyrightHolder2 = createDataClass("http://www.af22457032.se", List.of("foaf:name", "dcterms:type"), List.of("Aktör namn 4", "http://purl.org/adms/publishertype/StandardisationBody"));
 				
 		distribution1.rights = createRights(List.of(copyrightHolder1, copyrightHolder2), List.of(license1, license2),
