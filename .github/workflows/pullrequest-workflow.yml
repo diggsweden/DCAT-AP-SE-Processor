@@ -33,7 +33,7 @@ jobs:
       linters.licenselint: false
       linters.dependencyreview: true # Trivy-based scan, no GHAS required (SARIF upload optional)
 
-  test:
+  maven-test:
     needs: [pr-checks]
     if: always() # Run tests even if linting fails (get complete feedback)
     permissions:
