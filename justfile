@@ -159,7 +159,10 @@ lint-license:
 lint-container:
     @{{lint}}/container.sh
 
-
+# Lint XML files
+[group('lint')]
+lint-xml:
+    @{{lint}}/xml.sh
 
 # ==================================================================================== #
 # LINT-FIX - Auto-fix linting violations
