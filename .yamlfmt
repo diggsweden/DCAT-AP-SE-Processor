@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2026 diggsweden/DCAT-AP-SE-Processor
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# yamlfmt configuration
+# See: https://github.com/google/yamlfmt/blob/main/docs/config-file.md
+#
+# NOTE: yamlfmt removes blank lines after comment blocks (like SPDX headers).
+# This is expected behavior and there's no configuration to preserve them.
+# See: https://github.com/google/yamlfmt/issues/184
+
+formatter:
+  type: basic
+  # Retain blank lines within YAML content
+  retain_line_breaks: true
+  # Padding between inline comment and content (default: 1)
+  pad_line_comments: 1
+
+exclude:
+  - src/main/resources/metadataExample
+  - src/test/
+  - target/
