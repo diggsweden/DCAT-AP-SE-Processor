@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2025 Digg - Agency for Digital Government
+# SPDX-FileCopyrightText: 2026 diggsweden/DCAT-AP-SE-Processor
 #
 # SPDX-License-Identifier: CC0-1.0
 
@@ -15,3 +15,8 @@ formatter:
   retain_line_breaks: true
   # Padding between inline comment and content (default: 1)
   pad_line_comments: 1
+
+exclude:
+  - src/main/resources/metadataExample
+  - src/test/
+  - target/

@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2025 Digg - Agency for Digital Government
+# SPDX-FileCopyrightText: 2026 diggsweden/DCAT-AP-SE-Processor
 #
 # SPDX-License-Identifier: CC0-1.0
 
