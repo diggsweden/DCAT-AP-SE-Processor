@@ -24,13 +24,13 @@ import java.util.Properties;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,6 +41,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 class PreprocessorController {
 
+	private final ObjectProvider<Manager> managerProvider;
 	Resource resource = new ClassPathResource("application.properties");
 	Properties properties;
 	{
@@ -51,12 +52,15 @@ class PreprocessorController {
 		}
 	}
 
+  	public PreprocessorController(ObjectProvider<Manager> managerProvider) {
+        this.managerProvider = managerProvider;
+    }
+
     @GetMapping("/")
     public String index(Model model) {
         return "index";
     }
  
-
 	/**
 	 * REST API Endpoint for creating DCAT-AP-SE data in RDF/XML format
 	 * 
@@ -66,7 +70,7 @@ class PreprocessorController {
 	@RequestMapping(value="/dcat-generation/files/", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String restEndpointProduceRdf(@RequestParam(name = "dir", defaultValue = "/apidef") String dir) {
-		Manager manager = new Manager();
+		Manager manager = managerProvider.getObject();
 		String result = "";
 
 		try {
@@ -93,10 +97,10 @@ class PreprocessorController {
 								Model model) {
 		
 		List<Result> results = new ArrayList<Result>();
-		Manager manager = new Manager();
 		MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
 
 		if (create != null && create.equals("create")) {
+			Manager manager = managerProvider.getObject();
 			String result = "";
 
 			/**

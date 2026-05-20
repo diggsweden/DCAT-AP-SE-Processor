@@ -124,9 +124,9 @@ public class ConverterDataSet extends Converter {
                         }
                     } else if (isMandatory) {
                         if (subCat.isPresent()) {
-                            this.errors.add("Errormessage: " + annotationName + " in " + subCat.get() + " is Mandatory");
+                            errors.add("Errormessage: " + annotationName + " in " + subCat.get() + " is Mandatory");
                         } else {
-                            this.errors.add("Errormessage: " + annotationName + " is Mandatory");
+                            errors.add("Errormessage: " + annotationName + " is Mandatory");
                         }
                     }
                 }

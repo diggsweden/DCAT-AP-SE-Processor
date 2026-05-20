@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2026 diggsweden/DCAT-AP-SE-Processor
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Release Workflow Dev
+#
+# This workflow triggers the dev release orchestrator for development and feature branches.
+# It creates dev-tagged artifacts and container images for testing.
+#
+# Triggers:
+# - Push to dev/* or feat/* branches
+# - Manual workflow dispatch
+#
+# Created artifacts:
+# - Container images with dev tags
+# - See release summary for full details
+
+name: Release Workflow Dev
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dev-release:
+    permissions:
+      contents: read # Read code for building
+      packages: write # Push dev images to ghcr.io
+    uses: diggsweden/reusable-ci/.github/workflows/release-dev-orchestrator.yml@d31c989acd139c3e8754e116496c826af8dbbca0 # v2.8.2
+    with:
+      reusable-ci-ref: d31c989acd139c3e8754e116496c826af8dbbca0
+      project-type: maven
+      sboms: all
+    secrets: inherit

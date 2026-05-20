@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 diggsweden/DCAT-AP-SE-Processor
+#
+# SPDX-License-Identifier: CC0-1.0
+
+name: Pull Request Workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - "release/**"
+      - "feature/**"
+
+permissions:
+  contents: read # Best Security practice. Jobs only get read as base, and then permissions are added as needed
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pr-checks:
+    uses: diggsweden/reusable-ci/.github/workflows/pullrequest-orchestrator.yml@d31c989acd139c3e8754e116496c826af8dbbca0 # v2.8.2
+    secrets: inherit # Pass org-level secrets (for private Maven dependencies)
+    permissions:
+      contents: read # Clone repository and read source code
+      packages: read # Access GitHub Packages for Maven dependencies
+      security-events: write # Upload SpotBugs/dependency check results to Security tab
+    with:
+      reusable-ci-ref: d31c989acd139c3e8754e116496c826af8dbbca0
+      project-type: maven
+      # Use devbase-check linting (replaces megalint, commitlint, licenselint)
+      linters.devbasecheck: true
+      linters.megalint: false
+      linters.commitlint: false
+      linters.licenselint: false
+      linters.dependencyreview: true # Trivy-based scan, no GHAS required (SARIF upload optional)
+
+  maven-test:
+    needs: [pr-checks]
+    if: always() # Run tests even if linting fails (get complete feedback)
+    permissions:
+      contents: read # Access test resources and source code
+      packages: read # Fetch test dependencies from GitHub Packages
+    uses: ./.github/workflows/maven-test.yml

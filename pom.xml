@@ -53,6 +53,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+			<exclusions>
+        		<exclusion>
+        		    <groupId>com.vaadin.external.google</groupId>
+        		    <artifactId>android-json</artifactId>
+        		</exclusion>
+    	</exclusions>
 		</dependency>
 		<dependency>
     		<groupId>org.springframework.boot</groupId>
@@ -96,25 +102,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<!-- https://mvnrepository.com/artifact/org.owasp/dependency-check-maven -->
-                <groupId>org.owasp</groupId>
-              	<artifactId>dependency-check-maven</artifactId>
-                <version>12.2.0</version>
-                <configuration>
-					<!-- Get API key from maven.properties -->
-					<nvdApiKey>${nvd.api.key}</nvdApiKey>
-                    <goalPrefix>dependency-check</goalPrefix>
-                </configuration>
-               <executions>
-                  <execution>
-                      <goals>
-                          <goal>check</goal>
-                      </goals>
-                  </execution>
-              </executions>
-            </plugin>
+			</plugin>			
 		</plugins>
 	</build>
 </project>

@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2026 diggsweden/DCAT-AP-SE-Processor
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+version = 1
+
+[[annotations]]
+path = [
+  "renovate.json",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 diggsweden/DCAT-AP-SE-Processor"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = [
+  "pom.xml",
+  "Dockerfile",
+  "README.md",
+  "DEVELOPMENT.md",
+  "docs/*.md",
+  "docs/*.png",
+  "docs/jenkinsfile",
+  "docs/rdfworker-tutorial_images/*.png",
+  "src/main/resources/**/*.json",
+  "src/main/resources/metadataExample/**/*.yaml",
+  "src/main/resources/metadataExample/**/*.raml",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2022 diggsweden/DCAT-AP-SE-Processor"
+SPDX-License-Identifier = "GPL-3.0-or-later"
+
+[[annotations]]
+path = [
+    "mvnw",
+    "mvnw.cmd",
+    ".mvn/wrapper/maven-wrapper.jar",
+    ".mvn/wrapper/maven-wrapper.properties",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Apache Software Foundation (ASF)"
+SPDX-License-Identifier = "Apache-2.0"

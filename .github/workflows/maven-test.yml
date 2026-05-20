@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 diggsweden/DCAT-AP-SE-Processor
+#
+# SPDX-License-Identifier: CC0-1.0
+
+name: mvn Test
+
+on: [workflow_call]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: maven-test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        java-version: ["25"]
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: "temurin"
+          cache: "maven"
+
+      - name: Run tests
+        env:
+          MAVEN_CLI_OPTS: --batch-mode --no-transfer-progress --errors --fail-at-end -Dstyle.color=always -DinstallAtEnd=true -DdeployAtEnd=true
+          GITHUB_ACTOR: ${{ github.actor }}
+          PACKAGE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # shellcheck disable=SC2086
+          mvn $MAVEN_CLI_OPTS test

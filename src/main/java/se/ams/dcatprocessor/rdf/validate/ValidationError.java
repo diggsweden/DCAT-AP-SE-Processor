@@ -17,7 +17,7 @@
 
 package se.ams.dcatprocessor.rdf.validate;
 
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 
 import se.ams.dcatprocessor.rdf.Cardinality;
 import se.ams.dcatprocessor.util.Util;

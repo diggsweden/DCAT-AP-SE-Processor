@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,11 +30,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import se.ams.dcatprocessor.rdf.CardinalityHandler;
 import se.ams.dcatprocessor.rdf.validate.MultipleURIValidator;
 import se.ams.dcatprocessor.rdf.validate.SingleInputValidator;
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
 import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
+import se.ams.dcatprocessor.util.DcatPropertyHandler;
 
 public class TestHelper {
 	
@@ -110,4 +113,27 @@ public class TestHelper {
 		return path.replace(separator, separator + separator);
 	}
 
+	/**
+	 * Set the instance of singelton classes to null, to force them to re-instansiate
+	 * @throws NoSuchFieldException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
+	public static void resetSingeltons() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
+        Field instance = DcatPropertyHandler.class.getDeclaredField("instance");
+        instance.setAccessible(true);
+        instance.set(DcatPropertyHandler.class, null);
+        
+        instance = SingleInputValidator.class.getDeclaredField("instance");
+        instance.setAccessible(true);
+        instance.set(SingleInputValidator.class, null);
+        
+        instance = ValidationErrorStorage.class.getDeclaredField("instance");
+        instance.setAccessible(true);
+        instance.set(ValidationErrorStorage.class, null);
+
+		instance = CardinalityHandler.class.getDeclaredField("instance");
+		instance.setAccessible(true);
+		instance.set(CardinalityHandler.class, null);
+	}
 }
