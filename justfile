@@ -124,6 +124,11 @@ lint-secrets:
 lint-yaml:
     @{{lint}}/yaml.sh check
 
+# Lint markdown files
+[group('lint')]
+lint-markdown:
+    @{{lint}}/markdown.sh check
+
 # Lint shell scripts (shellcheck)
 [group('lint')]
 lint-shell:
@@ -154,10 +159,7 @@ lint-license:
 lint-container:
     @{{lint}}/container.sh
 
-# Lint XML files
-[group('lint')]
-lint-xml:
-    @{{lint}}/xml.sh
+
 
 # ==================================================================================== #
 # LINT-FIX - Auto-fix linting violations
