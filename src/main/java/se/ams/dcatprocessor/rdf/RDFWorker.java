@@ -50,9 +50,9 @@ import org.eclipse.rdf4j.rio.RDFHandler;
 import org.eclipse.rdf4j.rio.Rio;
 import org.eclipse.rdf4j.rio.helpers.BufferedGroupingRDFHandler;
 import org.eclipse.rdf4j.rio.rdfxml.util.RDFXMLPrettyWriter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.lang.NonNull;
+import org.springframework.context.annotation.Scope;
+import org.jspecify.annotations.NonNull;
+import org.springframework.stereotype.Component;
 
 import se.ams.dcatprocessor.models.Catalog;
 import se.ams.dcatprocessor.models.DataClass;
@@ -77,9 +77,10 @@ import se.ams.dcatprocessor.util.Util;
  * @author nacbr
  *
  */
-public class RDFWorker {
-	private static Logger logger = LoggerFactory.getLogger(RDFWorker.class);
 
+@Component
+@Scope("prototype")
+public class RDFWorker {
 	private Model model;
 	
 	/**
@@ -89,9 +90,9 @@ public class RDFWorker {
 
 	private MultipleURIValidator multipleURIValidator;
 	
-	public RDFWorker() {
-		multipleURIValidator = new MultipleURIValidator();
-	}
+    public RDFWorker(MultipleURIValidator multipleURIValidator) {
+        this.multipleURIValidator = multipleURIValidator;
+    }
 
 	/**
 	 * 

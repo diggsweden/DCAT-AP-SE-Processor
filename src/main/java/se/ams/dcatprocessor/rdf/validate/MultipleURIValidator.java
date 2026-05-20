@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
 import se.ams.dcatprocessor.util.Util;
 
@@ -32,6 +35,9 @@ import se.ams.dcatprocessor.util.Util;
  * @author nacbr
  *
  */
+
+@Component
+@Scope("prototype")
 public class MultipleURIValidator {
 
 	/**

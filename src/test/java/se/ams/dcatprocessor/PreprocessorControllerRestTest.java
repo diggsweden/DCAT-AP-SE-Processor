@@ -18,6 +18,9 @@
 package se.ams.dcatprocessor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -50,7 +53,6 @@ class PreprocessorControllerRestTest {
 
 	private static String localHost = "http://localhost:";
 	private static String pathFile = "/dcat-generation/files/";
-	private static String userDir = System.getProperty("user.dir");
 	
 	private static String testFilePath = TestHelper.USER_DIR + "/src/test/java/se/ams/dcatprocessor/rest/apidef/obl_rek_raml_test.raml";
 
@@ -61,6 +63,7 @@ class PreprocessorControllerRestTest {
 	@BeforeEach
 	void setup() throws Exception {
 		Files.deleteIfExists(Paths.get(testFilePath));
+		TestHelper.resetSingeltons();
 	}
 	
 	/**
@@ -87,16 +90,14 @@ class PreprocessorControllerRestTest {
 	}
 
 	//Correct folder location and existing API-file in folder
-/*	@Test
-	public void testInvalidAPIFile() throws Exception {
+	@Test
+	public void testValidAPIFile() throws Exception {
 		TestHelper.copyFile(TestHelper.TEST_FILE_DIR + "apidef/raml_1/obl_rek_raml.raml", testFilePath);
-		String actual = this.restTemplate.getForObject(localHost + port + pathFile + "?dir=" + userDir + "/src/test/java/se/ams/dcatprocessor/rest/apidef/", String.class);
+		String actual = this.restTemplate.getForObject(localHost + port + pathFile + "?dir=" + TestHelper.USER_DIR + "/src/test/java/se/ams/dcatprocessor/rest/apidef/", String.class);
 
 		assertNotNull(actual);
 		assertFalse(actual.isEmpty());
 		assertTrue(actual.length() > 500); //We get a .rdf file back but we don't care what it contains
-	} */
-
-
+	}
 }
 

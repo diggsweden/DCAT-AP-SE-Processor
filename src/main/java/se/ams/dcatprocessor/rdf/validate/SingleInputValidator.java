@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 
 import se.ams.dcatprocessor.rdf.DcatException;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;

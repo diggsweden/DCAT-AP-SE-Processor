@@ -17,60 +17,29 @@
 
 package se.ams.dcatprocessor;
 
-import org.apache.commons.collections4.MultiValuedMap;
-import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
+import se.ams.dcatprocessor.util.CliFlags;
+
+import java.util.Arrays;
 
 
 @SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {
-        if (args.length == 2 && args[0].equals("-f")
-                && (args[1].endsWith(".raml") || args[1].endsWith(".yaml") || args[1].endsWith(".json"))) {
-            convertFile(args[1]);
-        } else if (args.length == 2 && args[0].equals("-d")) {
-            convertDir(args[1]);
-        } else {
-            SpringApplication.run(Application.class, args);
+        SpringApplication app = new SpringApplication(Application.class);
+
+        if (isCliArgs(args)) {
+            // CLI mode without webserver 
+            app.setWebApplicationType(WebApplicationType.NONE);
         }
+        app.run(args);
     }
 
-    public static void convertFile(String filename) {
-        Manager manager = new Manager();
-        Path path = Path.of(filename);
-        MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
-        String result;
-
-        try {
-            String content = Files.readString(path);
-            apiSpecMap.put(path.toString(), content);
-            result = manager.createDcat(apiSpecMap);
-
-            if (result.isEmpty()) throw new RuntimeException("Kunde inte generera en dcat fil");
-
-            System.out.println(result);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static void convertDir(String dirname) {
-        Manager manager = new Manager();
-        String result;
-
-        try {
-            result = manager.createDcatFromDirectory(dirname);
-
-            if (result.isEmpty()) throw new RuntimeException("Kunde inte generera en dcat fil");
-            
-            System.out.println(result);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    static boolean isCliArgs(String[] args) {
+        return Arrays.stream(args).anyMatch(CliFlags.SUPPORTED_FLAGS::contains);
     }
 }

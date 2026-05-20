@@ -17,11 +17,15 @@
 
 package se.ams.dcatprocessor.util;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class UtilTest {
 
@@ -34,4 +38,33 @@ class UtilTest {
 		assertTrue(Util.isNullOrEmpty(new ArrayList<>()));
 	}
 
+	@ParameterizedTest
+    @ValueSource(strings = {
+		"https://example.com",
+		"http://example.com",
+		"https://example.com/path/to/resource",
+		"https://example.com/path?query=value&other=123",
+		"ftp://files.example.com/file.txt",
+		"https://192.168.1.1/api",
+	})
+	void testIsURIReturnsTrueForValidURI(String uri){
+		boolean result = Util.isURI(uri);
+		assertTrue(result);
+	}
+
+	@ParameterizedTest
+	@NullAndEmptySource
+	@ValueSource(strings = {
+    " ",
+    "a:b",
+    "https://",
+    "example.com",
+    "/relative/path",
+    "//example.com",
+    "https://exa mple.com"
+	})
+	void testIsURIReturnsFalseForInvalidURI(String uri) {
+		boolean result = Util.isURI(uri);
+	    assertFalse(result);
+	}
 }

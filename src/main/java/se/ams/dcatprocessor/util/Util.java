@@ -18,12 +18,12 @@
 package se.ams.dcatprocessor.util;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import se.ams.dcatprocessor.rdf.DcatException;
 
@@ -122,12 +122,12 @@ public class Util {
 	}
 	
 	public static boolean isURI(String url) {
-		try {
-			new URL(url).toURI();
-			return true;
-		} catch (URISyntaxException | MalformedURLException e) {
-			return false;
-		}
+	    if (url == null) return false;
+	    try {
+	        new URI(url).toURL();
+	        return true;
+	    } catch (URISyntaxException | MalformedURLException | IllegalArgumentException e) {
+	        return false;
+	    }
 	}
-	
 }

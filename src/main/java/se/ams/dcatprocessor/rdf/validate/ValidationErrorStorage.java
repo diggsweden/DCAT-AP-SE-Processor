@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.lang.NonNull;
+import org.jspecify.annotations.NonNull;
 
 import se.ams.dcatprocessor.rdf.DcatException;
 import se.ams.dcatprocessor.util.Util;
@@ -36,7 +36,7 @@ import se.ams.dcatprocessor.util.Util;
 public class ValidationErrorStorage {
 
 	private static ValidationErrorStorage instance;
-	
+
 	/**
 	 * Stores the validationresults for each file
 	 */
@@ -52,7 +52,7 @@ public class ValidationErrorStorage {
 		}	
 		return instance;
 	}
-
+	
 	/**
 	 * Resets the saves ValidationErrors
 	 */

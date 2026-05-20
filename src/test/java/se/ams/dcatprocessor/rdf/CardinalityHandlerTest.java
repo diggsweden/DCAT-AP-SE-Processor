@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.lang.reflect.Field;
 import java.util.Map;
 
 import org.junit.jupiter.api.AfterAll;
@@ -31,7 +30,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import se.ams.dcatprocessor.testutil.TestHelper;
-import se.ams.dcatprocessor.util.DcatPropertyHandler;
 
 class CardinalityHandlerTest {
 	
@@ -42,21 +40,10 @@ class CardinalityHandlerTest {
 	public static void setUp() throws Exception {
 		TestHelper.copyFile(TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE, TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE_SAVED);
 	}
-	/**
-	 * Set the instance of PropertyLoader and CardinalityHandler to null
-	 * to force them to re-instansiate since they are Singletons
-	 * @throws NoSuchFieldException
-	 * @throws IllegalAccessException
-	 */
+
 	@BeforeEach
 	public void beforeEach() throws Exception {
-		Field instance = DcatPropertyHandler.class.getDeclaredField("instance");
-		instance.setAccessible(true);
-		instance.set(DcatPropertyHandler.class, null);
-
-		instance = CardinalityHandler.class.getDeclaredField("instance");
-		instance.setAccessible(true);
-		instance.set(CardinalityHandler.class, null);
+		TestHelper.resetSingeltons();
 	}
 	
 	/**

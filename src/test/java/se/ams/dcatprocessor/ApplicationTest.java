@@ -16,51 +16,42 @@
  */
 package se.ams.dcatprocessor;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mockConstruction;
-import static org.mockito.Mockito.when;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import org.mockito.MockedConstruction;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import se.ams.dcatprocessor.util.CliFlags;
+
 
 public class ApplicationTest {
     
-    @TempDir
-    Path tempDir;
-
-    @Test
-    public void testThatConvertToFileHandlesEmptyResult() throws Exception{
-        Path tempFile = tempDir.resolve("test.json");
-        Files.writeString(tempFile, "{}");
-        RuntimeException result = null;
-
-        try (MockedConstruction<Manager> mock = mockConstruction(Manager.class,
-                (m, ctx) -> when(m.createDcat(any())).thenReturn(""))) {
-                
-            result = assertThrows(RuntimeException.class,
-                () -> Application.convertFile(tempFile.toString()));
-        }
-
-        assertTrue(result.getCause().getMessage().contains("Kunde inte generera en dcat fil"));
+    @ParameterizedTest
+    @MethodSource("supportedFlagsProvider")
+    void testIsCliArgsReturnsTrueIfValidFlag(String flag) {
+        boolean result = Application.isCliArgs(new String[]{flag});
+        assertTrue(result);
+    }
+    
+    @ParameterizedTest
+    @ValueSource(strings = {"-x","-invalid", ""})
+    void testIsCliArgsReturnsFalseIfUnknownOrEmptyFlag(String flag) {
+        boolean result = Application.isCliArgs(new String[]{flag});
+        assertFalse(result);
     }
 
     @Test
-    public void testThatConvertDirHandlesEmptyResult() throws Exception{
-        RuntimeException result = null;
- 
-        try (MockedConstruction<Manager> mock = mockConstruction(Manager.class,
-                (m, ctx) -> when(m.createDcatFromDirectory(any())).thenReturn(""))) {
-                
-            result = assertThrows(RuntimeException.class,
-                () -> Application.convertDir("mockDirectory"));
-        }
+    void testIsCliArgsReturnsFalseIfNoArgs() {
+        boolean result = Application.isCliArgs(new String[]{});
+        assertFalse(result);
+    }
 
-        assertTrue(result.getCause().getMessage().contains("Kunde inte generera en dcat fil"));
+    static Stream<String> supportedFlagsProvider() {
+        return CliFlags.SUPPORTED_FLAGS.stream(); // returns all supported flags.
     }
 }
