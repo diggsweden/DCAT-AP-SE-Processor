@@ -82,10 +82,6 @@ tools-update: _ensure-devtools
     just_run "Tools update" mise upgrade
     just_run "Tools update" mise install
     
-    # Install system tools not available in mise
-    if ! command -v xmllint &>/dev/null; then
-        sudo apt-get install -y libxml2-utils 2>/dev/null || true
-    fi
 
 # ==================================================================================== #
 # VERIFY - Quality assurance
