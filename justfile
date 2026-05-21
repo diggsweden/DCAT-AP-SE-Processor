@@ -65,6 +65,14 @@ check-tools: _ensure-devtools
 [group('setup')]
 install: tools-install
 
+# Install tools via mise
+[group('setup')]
+tools-install: _ensure-devtools
+    #!/usr/bin/env bash
+    source "{{colors}}"
+    just_header "Install development tools" "mise install"
+    just_run "Tools installation" mise install
+
 # Update tools via mise
 [group('setup')]
 tools-update: _ensure-devtools
