@@ -65,14 +65,6 @@ check-tools: _ensure-devtools
 [group('setup')]
 install: tools-install
 
-# Install tools via mise
-[group('setup')]
-tools-install: _ensure-devtools
-    #!/usr/bin/env bash
-    source "{{colors}}"
-    just_header "Install development tools" "mise install"
-    just_run "Tools installation" mise install
-
 # Update tools via mise
 [group('setup')]
 tools-update: _ensure-devtools
@@ -81,7 +73,17 @@ tools-update: _ensure-devtools
     just_header "Update development tools" "mise upgrade && mise install"
     just_run "Tools update" mise upgrade
     just_run "Tools update" mise install
-    
+
+
+# Setup misc dependencies
+[group('setup')]
+_setup-misc-dependencies:
+    #!/usr/bin/env bash
+    if ! command -v xmllint &>/dev/null; then
+        if command -v apt-get &>/dev/null; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq libxml2-utils
+        fi
+    fi
 
 # ==================================================================================== #
 # VERIFY - Quality assurance
@@ -102,7 +104,7 @@ verify: _ensure-devtools
 lint: lint-all
 
 [group('lint')]
-lint-all: _ensure-devtools
+lint-all: _ensure-devtools _setup-misc-dependencies
     @{{devtools_dir}}/scripts/verify.sh
 
 # Validate version control
