@@ -67,7 +67,7 @@ install: tools-install
 
 # Install tools via mise
 [group('setup')]
-tools-install: _ensure-devtools
+tools-install: _ensure-devtools _install-apt-tools
     #!/usr/bin/env bash
     source "{{colors}}"
     just_header "Install development tools" "mise install"
@@ -75,13 +75,23 @@ tools-install: _ensure-devtools
 
 # Update tools via mise
 [group('setup')]
-tools-update: _ensure-devtools
+tools-update: _ensure-devtools _install-apt-tools
     #!/usr/bin/env bash
     source "{{colors}}"
     just_header "Update development tools" "mise upgrade && mise install"
     just_run "Tools update" mise upgrade
     just_run "Tools update" mise install
-    
+
+# Install packages with apt
+[group('setup')]
+_install-apt-tools:
+    #!/usr/bin/env bash
+    source "{{colors}}"
+    just_header "Install apt tools" "apt-get update && apt-get install libxml2-utils"
+    if ! command -v xmllint &>/dev/null; then   
+        just_run "Update apt cache" sudo apt-get update -qq
+        just_run "Install libxml2-utils" sudo apt-get install -y -qq libxml2-utils 
+    fi
 
 # ==================================================================================== #
 # VERIFY - Quality assurance
