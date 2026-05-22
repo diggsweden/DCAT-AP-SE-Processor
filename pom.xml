@@ -21,7 +21,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.5</version>
+		<version>4.0.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>se.af</groupId>
@@ -32,6 +32,7 @@
 	<properties>
 		<java.version>25</java.version>
 		<argLine>-Dfile.encoding=UTF-8</argLine>
+		<tomcat.version>11.0.22</tomcat.version>
 		<!--<spring-security.version>5.8</spring-security.version>-->
 	</properties>
 	<dependencies>
