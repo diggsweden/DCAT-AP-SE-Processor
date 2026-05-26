@@ -50,47 +50,37 @@ public class ConverterCatalog extends Converter {
     @Override
     void processToDcat(JSONObject subConvert, JSONObject file, Optional<String> subCat, Optional<DataClass> preData, Optional<DataClass> preDist) throws Exception {
         DataClass dataClassLocal = new DataClass();
-        Object[] dcatKeys = subConvert.keySet().toArray();
-        Iterator<?> keysInFile = Arrays.stream(dcatKeys).iterator();
+        
+        for (String key : subConvert.keySet()) {
 
-        while (keysInFile.hasNext()) {
-            Object key = keysInFile.next();
-            if (key.equals(ConverterHelpClass.toDcatString) && (subCat.isPresent())) {
-                if (!keysInFile.hasNext()) {
-                    break;
-                }
-                key = keysInFile.next();
+            if (key.equals(ConverterHelpClass.toDcatString) && subCat.isPresent()) {
+                continue;
             }
 
             // Get tag-name for api-spec
-            String annotationName = subConvert.getJSONObject(key.toString()).getString(ConverterHelpClass.toDcatString);
+            String annotationName = subConvert.getJSONObject(key).getString(ConverterHelpClass.toDcatString);
 
             // Check if tag is Mandatory
-            boolean isMandatory;
-            String mandatoryKey = key.toString();
-            if (subCat.isPresent()) {
-                mandatoryKey = subCat + "-" + key;
-            }
-            isMandatory = jsonObjectMandatoryDcat.has(mandatoryKey);
+            boolean isMandatory = isKeyMandatory(key, subCat);
 
             // Do if key is CATALOG
-            if (key.toString().contains(DCAT.CATALOG.getLocalName())) {
-                createSubset(file, key.toString(), annotationName, Optional.empty(), Optional.empty(), isMandatory);
+            if (key.contains(DCAT.CATALOG.getLocalName())) {
+                createSubset(file, key, annotationName, Optional.empty(), Optional.empty(), isMandatory);
             }
             // Do if key is LICENSE_DOCUMENT
-            else if (key.toString().equals(DCTERMS.LICENSE_DOCUMENT.getLocalName())) {
+            else if (key.equals(DCTERMS.LICENSE_DOCUMENT.getLocalName())) {
                 if (subCat.isPresent()) {
                     if (subCat.get().equals(DCTERMS.RIGHTS_STATEMENT.getLocalName())) {
-                        createSubset(file, key.toString(), annotationName, Optional.of(dataClassLocal), Optional.empty(), isMandatory);
+                        createSubset(file, key, annotationName, Optional.of(dataClassLocal), Optional.empty(), isMandatory);
                     }
                 }
             }
             // Do if key is A Nested Object
-            else if (ConverterHelpClass.isNestedObjects(key.toString())) {
+            else if (ConverterHelpClass.isNestedObjects(key)) {
                 if (subCat.isPresent() && subCat.get().equals(DCTERMS.RIGHTS_STATEMENT.getLocalName())) {
-                    createSubset(file, key.toString(), annotationName, Optional.of(dataClassLocal), Optional.empty(), isMandatory);
+                    createSubset(file, key, annotationName, Optional.of(dataClassLocal), Optional.empty(), isMandatory);
                 } else {
-                    createSubset(file, key.toString(), annotationName, Optional.empty(), Optional.empty(), isMandatory);
+                    createSubset(file, key, annotationName, Optional.empty(), Optional.empty(), isMandatory);
                 }
             }
             /*
@@ -99,12 +89,12 @@ public class ConverterCatalog extends Converter {
                 boolean hasLanguages;
                 if (subCat.isPresent()) {
                     if (ConverterHelpClass.isNestedLanguageObjects(subCat.get())) {
-                        hasLanguages = loopLanguage(file, annotationName, subCat, Optional.of(dataClassLocal), key.toString());
+                        hasLanguages = addLanguageValues(file, annotationName, subCat, Optional.of(dataClassLocal), key);
                     } else {
-                        hasLanguages = loopLanguage(file, annotationName, subCat, Optional.ofNullable(catalog), key.toString());
+                        hasLanguages = addLanguageValues(file, annotationName, subCat, Optional.ofNullable(catalog), key);
                     }
                 } else {
-                    hasLanguages = loopLanguage(file, annotationName, Optional.empty(), Optional.ofNullable(catalog), key.toString());
+                    hasLanguages = addLanguageValues(file, annotationName, Optional.empty(), Optional.ofNullable(catalog), key);
                 }
 
                 if (!hasLanguages) {
@@ -112,35 +102,38 @@ public class ConverterCatalog extends Converter {
                         String value = String.valueOf(file.get(annotationName));
                         if (subCat.isPresent()) {
                             if (ConverterHelpClass.isNestedObjects(subCat.get())) {
-                                addValues(dataClassLocal, value, key.toString(), subCat);
+                                addValues(dataClassLocal, value, key, subCat);
                             } else {
-                                addValues(catalog, value, key.toString(), subCat);
+                                addValues(catalog, value, key, subCat);
                             }
                         }
                     } else if (isMandatory) {
-                        if (subCat.isPresent()) {
-                            errors.add("Errormessage: " + annotationName + " in " + subCat.get() + " is Mandatory");
-                        } else {
-                            errors.add("Errormessage: " + annotationName + " is Mandatory");
-                        }
+                        addMandatoryError(annotationName, subCat);
                     }
                 }
             }
         }
         if (subCat.isPresent()) {
-            if (subCat.get().contains(DCTERMS.PUBLISHER.getLocalName())) {
-                if (preData.isPresent()) {
-                    (preData.get()).agents.add(dataClassLocal);
-                } else {
-                    catalog.publisher = dataClassLocal;
-                }
-            } else if (subCat.get().equals(DCTERMS.RIGHTS_STATEMENT.getLocalName())) {
-                catalog.rights = dataClassLocal;
-            } else if (subCat.get().equals(DCTERMS.SPATIAL.getLocalName())) {
-                catalog.spatial.add(dataClassLocal);
-            } else if (subCat.get().contains(DCTERMS.LICENSE_DOCUMENT.getLocalName())) {
-                preData.ifPresent(dataClass -> dataClass.licenseDocuments.add(dataClassLocal));
+            attachDataToParent(subCat, preData, dataClassLocal);
+        }
+    }
+
+    // Attaches the locally built dataClassLocal to the correct field on the parent (either preData or catalog)
+    private void attachDataToParent(Optional<String> subCat, Optional<DataClass> preData, DataClass dataClassLocal) {
+        String subCatValue = subCat.get();
+
+        if (subCatValue.contains(DCTERMS.PUBLISHER.getLocalName())) {
+            if (preData.isPresent()) {
+                preData.get().agents.add(dataClassLocal);
+            } else {
+                catalog.publisher = dataClassLocal;
             }
+        } else if (subCatValue.equals(DCTERMS.RIGHTS_STATEMENT.getLocalName())) {
+            catalog.rights = dataClassLocal;
+        } else if (subCatValue.equals(DCTERMS.SPATIAL.getLocalName())) {
+            catalog.spatial.add(dataClassLocal);
+        } else if (subCatValue.contains(DCTERMS.LICENSE_DOCUMENT.getLocalName())) {
+            preData.ifPresent(dataClass -> dataClass.licenseDocuments.add(dataClassLocal));
         }
     }
 
@@ -186,16 +179,6 @@ public class ConverterCatalog extends Converter {
             addAbout(dataObj, value);
         } else {
             addValue(dataObj.dcData, value, key, subCat);
-        }
-    }
-
-    @Override
-    void loopData(JSONObject file, String key, String AnnotationName, String newKey, Optional<DataClass> preData, Optional<DataClass> preDist) throws Exception {
-        JSONObject subToConvert = ((JSONObject) orgConvert.get(key));
-        subToConvert.remove(ConverterHelpClass.toDcatMandatoryString);
-        if (subToConvert.keySet().size() > 0) {
-            JSONObject subJsonFile = ((JSONObject) file.get(AnnotationName));
-            processToDcat(subToConvert, subJsonFile, Optional.ofNullable(newKey), preData, preDist);
         }
     }
 }

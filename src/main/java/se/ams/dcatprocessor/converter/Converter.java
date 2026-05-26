@@ -27,11 +27,11 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class Converter {
     Catalog catalog = new Catalog();
     FileStorage fileHandler = new FileStorage();
     JSONObject jsonObjectMandatoryDcat;
+    JSONObject jsonLanguageFile;
     JSONObject orgConvert;
     public static List<String> errors = new ArrayList<>();
 
@@ -57,8 +57,7 @@ public class Converter {
     /*
      * Finds and sets correct converterfile and mandatoryfile depending on if it is catalog or other file */
     void setConvertAndMandatoryFile(String uriToDirectory) throws IOException {
-        String convertFile;
-        convertFile = getFileString(uriToDirectory + ConverterHelpClass.convertFileName);
+        String convertFile = getFileString(uriToDirectory + ConverterHelpClass.convertFileName);
         orgConvert = new JSONObject(convertFile);
 
         String mandatoryFile = getFileString(uriToDirectory + ConverterHelpClass.mandatoryFileName);
@@ -73,20 +72,19 @@ public class Converter {
     /*
      * Finds and sets correct supportiveFile to create correct values for some tags */
     JSONObject getSupportiveFile(String key, String subCat) throws IOException {
-        JSONObject jsonSupportiveDcat = null;
+        String resolvedKey = null;
+        String compositeKey = subCat + "-" + key;
 
         if (ConverterHelpClass.supportiveFile.containsKey(key)) {
-            String fileName = ConverterHelpClass.uriToDcatSupportive + ConverterHelpClass.supportiveFile.get(key);
-            String supportiveFile;
-            supportiveFile = getFileString(fileName);
-            jsonSupportiveDcat = new JSONObject(supportiveFile);
-
-        } else if (ConverterHelpClass.supportiveFile.containsKey(subCat + "-" + key)) {
-            String fileName = ConverterHelpClass.uriToDcatSupportive + ConverterHelpClass.supportiveFile.get(subCat + "-" + key);
-            String supportiveFile = getFileString(fileName);
-            jsonSupportiveDcat = new JSONObject(supportiveFile);
+            resolvedKey = key;
+        } else if (ConverterHelpClass.supportiveFile.containsKey(compositeKey)) {
+            resolvedKey = compositeKey;
+        } else {
+            return null;
         }
-        return jsonSupportiveDcat;
+
+        String fileName = ConverterHelpClass.uriToDcatSupportive + ConverterHelpClass.supportiveFile.get(resolvedKey);
+        return new JSONObject(getFileString(fileName));
     }
 
     /*
@@ -98,51 +96,72 @@ public class Converter {
         dataObj.about = value;
     }
 
-    boolean loopLanguage(JSONObject file, String AnnotationName, Optional<String> subCat, Optional<DataClass> dataClass, String key) throws IOException {
+    JSONObject getOrLoadLanguageFile() throws IOException {
+        if (jsonLanguageFile == null) {
+            jsonLanguageFile = new JSONObject(getFileString(ConverterHelpClass.uriToLanguageDcat));
+        }
+        return jsonLanguageFile;
+    }
+
+    boolean addLanguageValues(JSONObject file, String annotationName, Optional<String> subCat, Optional<DataClass> dataClass, String key) throws IOException {
         boolean hasLanguage = false;
+        JSONObject languageFile = getOrLoadLanguageFile();
 
-        String fileName = ConverterHelpClass.uriToLanguageDcat;
-        String languageFile;
-        languageFile = getFileString(fileName);
-        JSONObject jsonObjectLanguageDcat = new JSONObject(languageFile);
+        for(String langKey : languageFile.keySet()){
+            String keyInLanguage = languageFile.getJSONObject(langKey).getString(ConverterHelpClass.toDcatString);
+            String fieldName = annotationName + "-" + keyInLanguage;
+            
+            if (!file.has(fieldName)) continue;
+            
+            String value = (String) file.get(fieldName);
+            String urlLanguage = languageFile.getJSONObject(langKey).getString("url");
 
-        Object[] languageKeys = jsonObjectLanguageDcat.keySet().toArray();
-        Iterator<?> keysInLanguageFile = Arrays.stream(languageKeys).iterator();
-
-        while (keysInLanguageFile.hasNext()) {
-            Object keyTest = keysInLanguageFile.next();
-
-            String keyInLanguage = jsonObjectLanguageDcat.getJSONObject((String) keyTest).getString(ConverterHelpClass.toDcatString);
-            String urlLanguage = jsonObjectLanguageDcat.getJSONObject((String) keyTest).getString("url");
-
-            if (file.has(AnnotationName + "-" + keyInLanguage)) {
-                String value = (String) file.get(AnnotationName + "-" + keyInLanguage);
-                String[] splitValue = value.split(";");
-                for (String s : splitValue) {
-                    if (subCat.isPresent()) {
-                        if (key.equals(DCTERMS.PROVENANCE.getLocalName())) {
-                            DataClass provenance = new DataClass();
-                            provenance.dcData.put("dcterms:description", keyInLanguage + "¤" + s);
-                            if (dataClass.isPresent()) ((DataSet)dataClass.get()).provenances.add(provenance);
-                        }
-                        else {
-                            dataClass.ifPresent(aClass -> aClass.dcData.put(key, keyInLanguage + "¤" + s));
-                        }
-                        if (subCat.get().equals(DCAT.DATASET.getLocalName()) || subCat.get().equals(DCAT.DISTRIBUTION.getLocalName()) || subCat.get().equals(DCAT.CATALOG.getLocalName())) {
-                            if (dataClass.isPresent()) {
-                                if (!((dataClass.get().dcData.get(ConverterHelpClass.languages)).contains(urlLanguage))) {
-                                    dataClass.get().dcData.put(ConverterHelpClass.languages, urlLanguage);
-                                }
-                            }
-                        }
-                    } else {
-                        catalog.dcData.put(key + "-" + keyInLanguage, value);
-                    }
-                }
-                hasLanguage = true;
+            for (String s : value.split(";")) {
+                applyLanguageValue(subCat, key, keyInLanguage, dataClass, s, urlLanguage);
             }
+            hasLanguage = true;        
         }
         return hasLanguage;
+    }
+
+    private void applyLanguageValue(Optional<String> subCat, String key, String keyInLanguage, Optional<DataClass> optionalDataClass, String value, String urlLanguage){  
+        // Without subCat, write directly to catalog with language suffix
+        if (subCat.isEmpty()) {
+            catalog.dcData.put(key + "-" + keyInLanguage, value);
+            return;
+        }
+        
+        if(subCat.isPresent()){
+
+            if (optionalDataClass.isEmpty()) return;
+
+            DataClass dataClass = optionalDataClass.get();
+            String combinedValue = keyInLanguage + "¤" + value;
+
+            // Provenance is a special case that requires its own DataClass entry
+            if (key.equals(DCTERMS.PROVENANCE.getLocalName())) {
+                DataClass provenance = new DataClass();
+                provenance.dcData.put("dcterms:description", combinedValue);
+
+                if (dataClass instanceof DataSet dataSet) {
+                    dataSet.provenances.add(provenance);
+                }
+            }
+            // Add value to dataClass
+            else {
+                dataClass.dcData.put(key, combinedValue);
+            }
+            String subCatValue = subCat.get();
+            if (subCatValue.equals(DCAT.DATASET.getLocalName()) || subCatValue.equals(DCAT.DISTRIBUTION.getLocalName()) || subCatValue.equals(DCAT.CATALOG.getLocalName())) {
+
+                if (!((dataClass.dcData.get(ConverterHelpClass.languages)).contains(urlLanguage))) {
+                    dataClass.dcData.put(ConverterHelpClass.languages, urlLanguage);
+                }
+            }
+        }
+        else{
+            catalog.dcData.put(key + "-" + keyInLanguage, value);
+        }
     }
 
     /*
@@ -226,18 +245,22 @@ public class Converter {
         }
     }
 
-    void loopData(JSONObject file, String key, String AnnotationName, String newKey, Optional<DataClass> preData, Optional<DataClass> preDist) throws Exception {
+    void convertNestedObject(JSONObject file, String key, String annotationName, String newKey, Optional<DataClass> preData, Optional<DataClass> preDist) throws Exception {
+        JSONObject subToConvert = (JSONObject) orgConvert.get(key);
+        subToConvert.remove(ConverterHelpClass.toDcatMandatoryString);
+        
+        if (subToConvert.keySet().size() > 0) {
+            JSONObject subJsonFile = ((JSONObject) file.get(annotationName));
+            processToDcat(subToConvert, subJsonFile, Optional.ofNullable(newKey), preData, preDist);
+        }
     }
 
-    void loopObject(JSONObject file, String key, String annotationName, DataClass address, Optional<String> subCat) throws IOException {
-        Object[] fileKeys = file.keySet().toArray();
-        Iterator<?> keysInRamlFile = Arrays.stream(fileKeys).iterator();
+    void addFieldsContainingName(JSONObject file, String key, String annotationName, DataClass address, Optional<String> subCat) throws IOException {
+        if (annotationName == null) return;
 
-        while (keysInRamlFile.hasNext()) {
-            Object keyInRaml = keysInRamlFile.next();
-            if ((annotationName != null) && ((keyInRaml.toString()).contains(annotationName))) {
-
-                String value = file.get(keyInRaml.toString()).toString();
+        for(String keyInRaml : file.keySet()){
+            if(keyInRaml.contains(annotationName)){
+                String value = file.get(keyInRaml).toString();
                 addValues(address, value, key, subCat);
             }
         }
@@ -254,7 +277,7 @@ public class Converter {
                 if (((keyInRaml.toString()).contains(annotationName)) && !((keyInRaml.toString()).equals("temporalResolution"))) {
                     if (((JSONObject) orgConvert.get(key)).keySet().size() > 1) {
                         exists = true;
-                        loopData(file, key, keyInRaml.toString(), key, preData, preDist);
+                        convertNestedObject(file, key, keyInRaml.toString(), key, preData, preDist);
                     }
                 }
             }
@@ -262,6 +285,32 @@ public class Converter {
 
         if (!exists && isMandatory) {
             errors.add("Errormessage: " + annotationName + " is Mandatory");
+        }
+    }
+
+    protected boolean isKeyMandatory(Object key, Optional<String> subCat) {
+        String mandatoryKey;
+        if (subCat.isPresent()) {
+            mandatoryKey = subCat.get() + "-" + key;
+        } else {
+            mandatoryKey = key.toString();
+        }
+        return jsonObjectMandatoryDcat.has(mandatoryKey);
+    }
+
+    protected void addMandatoryError(String annotationName, Optional<String> subCat) {
+        if (subCat.isPresent()) {
+            errors.add("Errormessage: " + annotationName + " in " + subCat.get() + " is Mandatory");
+        } else {
+            errors.add("Errormessage: " + annotationName + " is Mandatory");
+        }
+    }
+
+    protected void handleAddress(JSONObject file, String key, String annotationName, Organization organizationLocal, Optional<String> subCat) throws Exception {
+        if (file.has(annotationName)) {
+            addValues(organizationLocal, String.valueOf(file.get(annotationName)), key, subCat);
+        } else {
+            addFieldsContainingName(file, key, annotationName, organizationLocal, subCat);
         }
     }
 }
