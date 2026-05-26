@@ -15,7 +15,7 @@
  * along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package se.ams.dcatprocessor;
+package se.ams.dcatprocessor.processor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

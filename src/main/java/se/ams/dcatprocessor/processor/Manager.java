@@ -15,7 +15,7 @@
  * along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package se.ams.dcatprocessor;
+package se.ams.dcatprocessor.processor;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
@@ -27,6 +27,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+
+import se.ams.dcatprocessor.controller.Result;
 import se.ams.dcatprocessor.converter.Converter;
 import se.ams.dcatprocessor.converter.ConverterCatalog;
 import se.ams.dcatprocessor.converter.ConverterFiles;
@@ -51,14 +53,18 @@ import java.util.*;
 public class Manager {
 
     private final ObjectProvider<RDFWorker> rdfWorkerProvider;
-
-    public Manager(ObjectProvider<RDFWorker> rdfWorkerProvider){
-        this.rdfWorkerProvider = rdfWorkerProvider;
-    }
+    private final ErrorReporter errorReporter; 
 
     private static final Logger logger = LoggerFactory.getLogger(Manager.class);
+    
     Catalog catalog = new Catalog();
     List<FileStorage> fileStorages = new ArrayList<>();
+
+    
+    public Manager(ObjectProvider<RDFWorker> rdfWorkerProvider, ErrorReporter errorReporter){
+        this.rdfWorkerProvider = rdfWorkerProvider;
+        this.errorReporter = errorReporter;
+    }
 
     public String createDcatFromDirectory(String dir) throws Exception {
         // create new file
@@ -122,7 +128,7 @@ public class Manager {
                     apiSpecMap.put(apiFile.getOriginalFilename(), apiSpecificationFromFile);
                 } catch (Exception e) {        //Catch and show processing errors in web-gui
                     result = e.getMessage();
-                    results.add(new Result(null, result));
+                    results.add(new Result(result));
                     e.printStackTrace();
                 }
             }
@@ -131,10 +137,10 @@ public class Manager {
             result = createDcat(apiSpecMap);
         } catch (Exception e) {
             result = e.getMessage();
-            results.add(new Result(null, result));
+            results.add(new Result(result));
             e.printStackTrace();
         }
-        results.add(new Result(null, result));
+        results.add(new Result(result));
 
         model.addAttribute("results", results);
         return results;
@@ -151,7 +157,6 @@ public class Manager {
     }
 
     public String createDcat(MultiValuedMap<String, String> apiSpecMap) throws Exception {
-        ConverterCatalog catalogConverter = new ConverterCatalog();
         RDFWorker rdfWorker = rdfWorkerProvider.getObject();
         resetValidationErrors();
 
@@ -164,41 +169,15 @@ public class Manager {
             for (String apiSpecString : api) {
                 JSONObject jsonObjectFile = ApiDefinitionParser.getApiJsonString(apiSpecString);
 
-                // Creates both Catalog and other spec from the same file
-                if (apiSpecMap.size() == 1) {
-                    try {
-                        catalog = (Catalog) catalogConverter.catalogToDcat(jsonObjectFile);
-                        catalog.fileName = apiFileName;
-                    } catch (Exception e) {
-                        exceptions.put(apiFileName, e.fillInStackTrace().getMessage());
-                    }
-                    try {
-                        ConverterFiles filesConverter = new ConverterFiles();
-                        FileStorage fileStorage = (FileStorage) filesConverter.fileToDcat(jsonObjectFile);
-                        fileStorage.fileName = apiFileName;
-                        fileStorages.add(fileStorage);
-                    } catch (Exception e) {
-                        exceptions.put(apiFileName, e.fillInStackTrace().getMessage());
-                    }
-                    // Creates Catalog from specific file
-                } else if (apiFileName.contains(ConverterHelpClass.catalogFileName)) {
-                    try {
-                        catalog = (Catalog) catalogConverter.catalogToDcat(jsonObjectFile);
-                        catalog.fileName = apiFileName;
-                    } catch (Exception e) {
-                        exceptions.put(apiFileName, e.fillInStackTrace().getMessage());
-                    }
-                    // Creates all other spec besides Catalog from file
-                } else {
-                    try {
-                        ConverterFiles filesConverter = new ConverterFiles();
-                        FileStorage fileStorage;
-                        fileStorage = (FileStorage) filesConverter.fileToDcat(jsonObjectFile);
-                        fileStorage.fileName = apiFileName;
-                        fileStorages.add(fileStorage);
-                    } catch (Exception e) {
-                        exceptions.put(apiFileName, e.fillInStackTrace().getMessage());
-                    }
+                boolean isSingleFile = apiSpecMap.size() == 1;
+                boolean isCatalogFile = apiFileName.contains(ConverterHelpClass.catalogFileName);
+
+                if(isSingleFile || isCatalogFile){
+                    addCatalog(jsonObjectFile, apiFileName, exceptions);
+                }
+                // Single file and non-catalog files produces FileStorage
+                if(isSingleFile || !isCatalogFile){
+                    addFileStorage(jsonObjectFile, apiFileName, exceptions);
                 }
             }
         }
@@ -214,38 +193,41 @@ public class Manager {
                 validationErrorsPerFileMap = e.getValidationResults();
             }
         }
-        StringBuilder exceptionResult = new StringBuilder();
 
-        // True if ApiDefinitionParser or Converter return errors
-        if (!exceptions.isEmpty()) {
-            exceptionResult.append("\n");
-            exceptions.forEach((key, value) -> exceptionResult.append(key).append(":\n").append(value).append("\n\n"));
+        String errorReport = errorReporter.buildErrorReport(exceptions, validationErrorsPerFileMap);
+
+        // If any errors, return report
+        if(!errorReport.isEmpty()){
+            result = "There are Errors in the following files: \n" + errorReport;
+            logger.error(result);
+            return result;
         }
 
-        // True if RDFWorker return errors
-        if (ValidationErrorStorage.getInstance().hasValidationErrors()) {
-            exceptionResult.append("\n");
-            validationErrorsPerFileMap.forEach((key, value) -> {
-                exceptionResult.append(key).append(":\n");
-
-                for (ValidationError validationError : value) {
-                    exceptionResult.append("Errortype: ").append(validationError.getErrorType()).append(" Description: ").append(validationError.getDescription()).append("\n");
-                }
-                exceptionResult.append("\n");
-            });
-        }
-
-        resetValidationErrors();
-
-        if (exceptionResult.length() > 0) {
-            exceptionResult.append("Check DCAT-AP-SE specification for info. https://docs.dataportal.se/dcat/sv/\n---------------------------------\n");
-            logger.error("There are Errors in the following files: \n" + exceptionResult);
-            return "There are Errors in the following files: \n" + exceptionResult;
-        }
         if (result.contains("RDF")) {
             printToFile(result, "dcat.rdf");
         }
         return result;
+    }
+
+    private void addCatalog(JSONObject json, String fileName, Map<String, String> exceptions) {
+        ConverterCatalog catalogConverter = new ConverterCatalog();
+        try {
+            catalog = (Catalog) catalogConverter.catalogToDcat(json);
+            catalog.fileName = fileName;
+        } catch (Exception e) {
+            exceptions.put(fileName, e.fillInStackTrace().getMessage());
+        }
+    }
+
+    private void addFileStorage(JSONObject json, String fileName, Map<String, String> exceptions) {
+        try {
+            ConverterFiles filesConverter = new ConverterFiles();
+            FileStorage fileStorage = (FileStorage) filesConverter.fileToDcat(json);
+            fileStorage.fileName = fileName;
+            fileStorages.add(fileStorage);
+        } catch (Exception e) {
+            exceptions.put(fileName, e.fillInStackTrace().getMessage());
+        }
     }
 
     private boolean validateFileExtension(String filename){
