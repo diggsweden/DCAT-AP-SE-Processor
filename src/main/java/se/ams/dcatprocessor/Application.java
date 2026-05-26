@@ -21,7 +21,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import se.ams.dcatprocessor.util.CliFlags;
+import se.ams.dcatprocessor.cli.CliFlags;
 
 import java.util.Arrays;
 

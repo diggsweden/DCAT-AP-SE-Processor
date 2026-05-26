@@ -15,7 +15,7 @@
  * along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package se.ams.dcatprocessor;
+package se.ams.dcatprocessor.cli;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -27,7 +27,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import se.ams.dcatprocessor.util.CliFlags;
+import se.ams.dcatprocessor.processor.Manager;
 
 @Component
 public class CliRunner implements ApplicationRunner{

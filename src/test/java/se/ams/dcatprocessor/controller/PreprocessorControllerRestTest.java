@@ -15,7 +15,7 @@
  * along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package se.ams.dcatprocessor;
+package se.ams.dcatprocessor.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -100,4 +100,3 @@ class PreprocessorControllerRestTest {
 		assertTrue(actual.length() > 500); //We get a .rdf file back but we don't care what it contains
 	}
 }
-
