@@ -1,3 +1,5 @@
+# DCAT-AP-SE attributstatus
+
 | Statuskod | Kommentar |
 |---|---|
 |1|Fullt fungerande|
@@ -5,7 +7,6 @@
 |3|Går igenom Converter men inte RDFWriter|
 |4|Inte implementerat|
 |5|Fungerar i verktyget, men går inte att validera hos Dataportalen|
-
 
 | Katalog | | Status |
 |-------|-------|-------|
@@ -36,7 +37,7 @@
 | Rekommenderade | dcterms:issued | 1 |
 | | dcat:contactPoint | 1 |
 | | dcterms:temporal | 1 |
-| | dcterms:spatial | 5 Geografisk värdemängd | |
+|  | dcterms:spatial | 5 Geografisk värdemängd |
 | | dcat:theme | 1 |
 | | dcat:keyword | 1 |
 | | dcterms:accessRights | 1 |
@@ -66,19 +67,19 @@
 | | dcterms:provenance | 1 |
 | | dcat:distribution | 1 |
 | | | |
-| Distribution | |
+| Distribution |  |  |
 | Obligatoriska:|dcat:accessURL | 1 |
 | | | |
 | Rekommenderade | dcterms:license | 1 |
 | | dcatap:availability | 1 |
-| | dcterms:format|Vanliga mediatyper | 1 |
+|  | dcterms:format | Vanliga mediatyper |
 | | dcterms:description | 1 |
-| | dcterms:format|Övriga mediatyper | 1 |
-| | dcterms:license|License Document | 1 |
+|  | dcterms:format | Övriga mediatyper |
+|  | dcterms:license | License Document |
 | | | |
 | Valfri | dcterms:title | 1 |
 | | dcat:downloadURL | 1 |
-| | dcterms:format| 1 Geografiska mediatyper||
+|  | dcterms:format | 1 Geografiska mediatyper |
 | | dcat:accessService | 1 |
 | | dcat:temporalResolution | 1 |
 | | dcat:spatialResolutionInMeters | 1 |
@@ -92,7 +93,7 @@
 | | foaf:page | 1 |
 | | dcterms:conformsTo | 1 |
 | | | |
-| DataService | |
+| DataService |  |  |
 | Obligatoriska | dcterms:title | 1 |
 | | dcat:endpointURL | 1 |
 | | | |

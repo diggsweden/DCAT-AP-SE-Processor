@@ -1,4 +1,5 @@
 # Tutorial - Lägga till/ändra element i DCAT-fil
+
 Nedan följer ett "kokboksrecept" på hur man ändrar eller lägger till data i den .RDF-fil som genereras av programmet.
 
 För att ändra eller lägga till ett element i .RDF-filen kan det behövas en ändring i programkoden beroende på vilken typ av data som ska läggas till..
@@ -14,16 +15,17 @@ En komplex typ är ett element som länkar från en primär klass till en stödj
 För att lägga till en enkel typ behöver man oftast inte ändra i programkoden vilket man måste göra om det är en komplex typ.
 
 ## Lägga till en enkel typ
+
 För att lägga till en enkel typ börjar man med säkerställa att typen finns definierad i specifikationsfilen. Specifikationsfilen anger vilka element som RDFWorker kan läsa in från API-specifikationen samt vilka typer ett elementets värde kan ha. Vidare anger specifikationsfilen min/max antal(kardinalitet) av det elementet. Se bild 1.  
-![ Bild 1](./rdfworker-tutorial_images/bild1.png)  
+![Bild 1](./rdfworker-tutorial_images/bild1.png)  
 Bild 1 Utdrag ur specifikationsfilen.
 
-Sökvägen till specifikationsfilen pekas ut av propertyn dcat.specification.prop i propertiesfilen ``application.properties`` 
+Sökvägen till specifikationsfilen pekas ut av propertyn dcat.specification.prop i propertiesfilen ``application.properties``
 som finns under
 ``/src/main/resources/``
 Ett exempel på en enkel typ är dcterms:title. Bild 2 visar definitionen som är hämtad från [DCAT-AP-SE version 2.0.0](http://dataportal.se)  
 
-![ Bild 2](./rdfworker-tutorial_images/bild2.png)
+![Bild 2](./rdfworker-tutorial_images/bild2.png)
 Bild 2 Definition av dcterms:title.
 
 Av beskrivningen kan man se att det är en enkel typ med en sträng som värdemängd. Under egenskap kan man se i vilken namnrymd elementet är definierat
@@ -31,27 +33,28 @@ Av beskrivningen kan man se att det är en enkel typ med en sträng som värdem�
 För att denna typ ska kunna läsas in från en API-definition och skrivas in i DCAT-filen behöver den således finnas definierad under varje klass den förekommer. I bild 1 ser vi att den är definierad under klassen Datamängd. Typen är xsd:string och antalet är minst 1 eller däröver. Notera att alla typer, både enkla och komplexa, kan finnas definierad i alla klasser.
 
 Alla typer i DCAT-AP-SE 2.0 finns även definierade internt i programmet. Detta innebär att om standarden utökas med nya typer behöver dessa läggas in internt i programmet. Dessa typer finns definierade i klassen ``VocabularyStringToIRI`` där varje typ är definierad under respektive namnrymd. Se bild 3.
-![ Bild 3.](./rdfworker-tutorial_images/bild3.png)  
+![Bild 3.](./rdfworker-tutorial_images/bild3.png)  
 Bild 3 Utdrag ur koden i VocabularyStringToIRI.
 
 Bild 4 visar utdrag ur klassen VocabularyStringToIRI. Om det t.ex. skulle komma en ny typ från namnrymden DC-TERMS som heter ``dcterms:coverage`` kan man bara kopiera en av befintliga rader och ändra innehåll enligt bild 4.
-![ Bild 4.](./rdfworker-tutorial_images/bild4.png)  
+
+![Bild 4.](./rdfworker-tutorial_images/bild4.png)  
 Bild 4. Uppdatering med ett nytt element i klassen VocabularyStringToIRI.
 
 ## Lägga till komplex typ
 
-Att lägga till en komplex typ liknar förfarandet att lägga till en enkel typ men man behöver dessutom göra större ändringar i programkoden. 
+Att lägga till en komplex typ liknar förfarandet att lägga till en enkel typ men man behöver dessutom göra större ändringar i programkoden.
 
 För att bäst förklara detta följer nedan ett exempel där vi ska lägga till den komplexa typen `dcat:qualifiedRelation`.
 
 När man tittar i DCAT-AP-SE specifikationen enligt bild 5 ser man att `dcat:qualifiedRelation` har som värdemängd ”Kvalificerad relaterad resurs”.
 
-![ Bild 5.](./rdfworker-tutorial_images/bild5.png)
+![Bild 5.](./rdfworker-tutorial_images/bild5.png)
 Bild 5. Kvalificerad relaterad resurs.
 
 Klickar man på den länken ser man att den i sin tur är en klass som är definierad i namnrymden [http://www.w3.org/ns/dcat#Relationship](http://www.w3.org/ns/dcat#Relationship) och har undertyperna `dcat:hadRole` och `dcterms:relation`. Dessa två undertyper i sin tur har bägge värdetypen Webbadress (URI) med kardinalitet 1, dvs obligatoriska. Se bild 6.
 
-![ Bild 6.](./rdfworker-tutorial_images/bild6.png)
+![Bild 6.](./rdfworker-tutorial_images/bild6.png)
 Bild 6. Den komplexa klassen Kvalificerad Resurs med två undertyper
 
 Att lägga in en komplex typ i DCAT-filen innebär att den läggs in som en nod med referens till den nod den tilhör. I detta fall Datamängd. Referensen mellan noderna kan vara en URI eller ett nodid som är unikt i den resulterande DCAT-filen.
@@ -60,18 +63,19 @@ Att lägga in en komplex typ i DCAT-filen innebär att den läggs in som en nod 
 
 Det första man gör är att kolla i specifikationsfilen om kvalificerad resurs och dess undertyper finns inlagda under Datamängd. Bilaga 1. En titt i bilagan visar att länken till klassen finns inlagd under datamängd med raden
 
-```
+```text
 dataset.dcat\:qualifiedRelation=0..n|class
 
 ```
 
 Dock är inte klassen som datamängd länkar till definierad. Vi definierar den genom att under ”SUPPORTIVE CLASSES” lägga till raderna
 
-```
+```text
 #Relationship - Kvalificerad relaterad resurs
 relationship.dcat\:hadRole=1|xsd:anyURI
 relationship.dcterms\:relation=1|xsd:anyURI
 ```
+
 Efter relationship deklareras den enkla typen `dcat:hadRole` som har kardinalitet 1 (obligatorisk) och är av typen `xsd:anyURI`. På exakt samma sätt deklareras `dcterms:relation`. Jämför deklarationen med definitionen i bild 6. Dcat och dcterms är prefix för respektive namnrymder och hadRole och relation är elementets namn. Backslash tecknet används för att ”escapa” efterföljande :. Dvs läsa in kolontecknet som ett vanligt tecken. Klassen Properties i Java som läser in filen kommer annars default att tolka kolon som en separator mellan en property och dess värde. Efter = tecknet kommer typens kardinalitet, dvs min/maxgränserna för antalet av denna typ. I detta fall måste det finnas exakt en. Efter kardinaliteten kommer | tecken som används av programmet som intern avgränsare mellan olika propertyvärden. Därefter kommer typen som i bägge dessa fall är `xsd:anyURI`.
 
 Programmet kommer att ge fel vid inläsningen om antalet värden är utanför tillåten kardinalitet eller om värdet inte är en giltig URI
@@ -81,24 +85,23 @@ Notera att i datamängd definieras elementet som länkar till relationship med n
 
 Notera också att elementet `dcat:qualifiedRelation` i dataset har kardinaliteten 0..n. Alltså ett icke obligatoriskt element.
 
-
-
 ## Lägga till definitioner i programmets klasser
 
 När definitionen i propertiesfilen är klar är det dags att definiera en del saker i programmets klasser
 
-I klassen `se.ams.dcatprocessor.rdf.DcatClass` (bilaga 2) definieras alla klasser som finns definierade i `dcat_specification.properties`(bilaga 1) för att programmet ska känna till dessa. Här lägger vi till raden 
+I klassen `se.ams.dcatprocessor.rdf.DcatClass` (bilaga 2) definieras alla klasser som finns definierade i `dcat_specification.properties`(bilaga 1) för att programmet ska känna till dessa. Här lägger vi till raden
 
-```
+```text
 RELATIONSHIP("relationship")
 ```
+
  i enumdefinitionerna. Här är det viktigt att namnet är exakt samma som i filen `dcat_specifications.properties`
 
 I klassen `se.ams.dcatprocessor.rdf.VocabularyStringToIRI` (bilaga 3) finns samtliga element med deras prefix och namnrymder definierade och här måste man kolla att varje element finns med.
 
 Vi har ju infört:
 
-```
+```text
 dcat:qualifiedRelation
 
 dcat:hadRole
@@ -108,7 +111,7 @@ dcterms:relation
 
 Och här finns alla med förutom dcat:qualifiedRelation. Vi lägger till den i HashMap DCAT_MAP med raden
 
-```
+```text
 DCAT_MAP.put("dcat:qualifiedRelation", DCAT.QUALIFIED_RELATION);
 ```
 
@@ -118,12 +121,13 @@ I klassen `se.ams.dcatprocessor.rdf.RDFWorker` (bilaga 4)utförs jobbet med att 
 
 I metoden
 
-```
+```text
 private IRI createDataset(DataSet dataSet, IRI agentIRI)
 ```
+
 Skapas elementet DataSet och i denna finns sedan tidigare kod som lägger till noder och vi behöver bara kopiera ett av de många anropen till `addNodes()` och byta ut inparametrar. Vi lägger till raderna
 
-```
+```text
 /*
 * Add the Relations...dcat:qualifiedRelation as anonymous nodes
 */
@@ -132,33 +136,32 @@ addNodes(dataSetIRI, DCAT.QUALIFIED_RELATION, DCAT.RELATIONSHIP, dataSet.qualifi
 
 Parametrarna är:
 
-```
+```text
 dataSetIRI - Föräldranoden
 ```
 
-```
+```text
 DCAT.QUALIFIED_RELATION – Elementtypen i Dataset(föräldranoden) som länkar till noden
 ```
 
-```
+```text
 DCAT.RELATIONSHIP – Barn-nodens elemttyp relationship)
 ```
 
-```
+```text
 dataSet.qualifiedRelations – Lista med objekt där varje objekt innehåller data(dcat:hadRole och dcterms:relation) för en nod.
 ```
 
 Mer än detta behövs inte. När programmet körs och inkommande data innehåller ett dataset som har en qualified relation så kommer den relevant del av den resulterande .RDF-filen se ut enligt följande(med exempeldata). Se bild 7.
 
-![ Bild 7.](./rdfworker-tutorial_images/bild7.png)
-Bild 7. Utdrag av den resulterande rdf-filen.
-
-
+![Bild 7.](./rdfworker-tutorial_images/bild7.png)  
+Bild 7.Utdrag av den resulterande rdf-filen.
 
 ## Bilaga 1
+
 Konfigurationsfil dcat_specification.properties
 
-```
+```text
 #
 # This file is part of dcat-ap-se-processor.
 #
@@ -273,7 +276,7 @@ organization.vcard\:fn=1..n|xsd:string
 organization.vcard\:hasEmail=1..n|xsd:anyURI
 organization.vcard\:hasTelephone=0..n|class
 organization.vcard\:hasAddress=0..n|class
- 
+
 #Distribution - Distribution
 distribution.dcterms\:title=0..n|xsd:string
 distribution.dcterms\:description=0..n|xsd:string
@@ -375,15 +378,16 @@ checksum.spdx\:algorithm=1|xsd:anyURI
 #Relationship - Kvalificerad relaterad resurs
 relationship.dcat\:hadRole=1|xsd:anyURI
 relationship.dcterms\:relation=1|xsd:anyURI
- 
+
 #ProvenanceStatement - Ursprung
 provenancestatement.dcterms\:description=1..n|xsd:string
 ```
 
 ## Bilaga 2
+
 Klass DCATClass.java
 
-```
+```text
 /*
  * This file is part of dcat-ap-se-processor.
  *
@@ -466,10 +470,12 @@ public enum DcatClass {
 }
 
 ```
+
 ## Bilaga 3
+
 Klass VocabularyStringToIRI.java
 
-```
+```text
 /*
  * This file is part of dcat-ap-se-processor.
  *
@@ -722,10 +728,12 @@ public class VocabularyStringToIRI {
 
 }
 ```
+
 ## Bilaga 4
+
 Klass RDFWorker.java
 
-```
+```text
 /*
  * This file is part of dcat-ap-se-processor.
  *
@@ -1472,9 +1480,9 @@ public class RDFWorker {
 	    if (Util.isNullOrEmpty(key) || Util.isNullOrEmpty(value)) {
 	        return null; 
 	    }
-	    
+
 	    List<InputType> inputTypes = SingleInputValidator.getInstance().getInputTypes(key);
-	    
+
 	    if(inputTypes.contains(InputType.INTEGER) || inputTypes.contains(InputType.DECIMAL)) {
 	    	try {
 			    return new BigDecimal(value);
@@ -1502,7 +1510,7 @@ public class RDFWorker {
 	    }
 
 	    List<InputType> inputTypes = SingleInputValidator.getInstance().getInputTypes(key);
-	    
+
 	    if(inputTypes.contains(InputType.DURATION)) {
 	    	try {
 			    return Period.parse(value);

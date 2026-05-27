@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2026 diggsweden/DCAT-AP-SE-Processor
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# .rumdl.toml
+
+[global]
+# (optional) whatever else you have here
+
+[per-file-ignores]
+"README.md" = ["MD033"]
+"docs/supported_attributes*.md" = ["MD041", "MD033"]
