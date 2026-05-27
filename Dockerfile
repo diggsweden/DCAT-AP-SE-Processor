@@ -9,7 +9,7 @@ WORKDIR /build
 RUN ./mvnw clean package spring-boot:repackage
 
 # Note: The default non root chainguard user is 65532
-FROM cgr.dev/chainguard/jdk:latest
+FROM cgr.dev/chainguard/jdk:cgr.dev/chainguard/jdk@sha256:325b07100ec5d02524e263fa56ab66ad1566a72fd62b641cf8cd5d6bb463ac29
 
 USER root
 RUN mkdir -p /opt/.logs \
