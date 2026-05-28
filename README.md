@@ -1,6 +1,7 @@
 # DCAT-AP-SE Processor
 
-[![License: GPL v3.0-or-later](https://img.shields.io/badge/License-General_Public_License_3.0--or--later-library?style=for-the-badge&&color=blue)](LICENSES/GPL-3.0-or-later.txt)
+[![License: EUPL 1.2](https://img.shields.io/badge/License-European%20Union%20Public%20Licence%201.2-library?style=for-the-badge&&color=lightblue)](LICENSE)  
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/diggsweden/DCAT-AP-SE-Processor/badge?style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/diggsweden/DCAT-AP-SE-Processor)
 
 DCAT-AP-SE Processor är ett verktyg för att automatisera framställningen av metadata enligt metadataspecifikationen [DCAT-AP-SE](https://docs.dataportal.se/dcat/sv/) , som används för att publicera information om datamängder och API:er på [Sveriges dataportal](https://www.dataportal.se/).
 Verktyget tar en API-definition som indata och genererar en RDF-fil redo för skördning av dataportalen. Som indata stöds API-definitioner i formaten OpenAPI och RAML, samt separata metadatafiler på JSON-format för OAS2/RAML0.8 eller för API:er utan en formell definition. Detta verktyg är framtaget för att enkelt kunna integreras i en CI/CD-pipeline eller köras fristående.
@@ -235,8 +236,8 @@ Exempel på ingående API-definitioner innehållande metadata för DCAT-AP-SE<br
 
 ## Licens
 
-DCAT-AP-SE-Processor är licensierad under GNU GENERAL PUBLIC LICENSE v.3.0-or-later<br>
-Se [licens](LICENSES/GPL-3.0-or-later.txt) för mer information.
+DCAT-AP-SE-Processor är licensierad under EUPL-1.2<br>
+Se [licens](LICENSES/EUPL-1.2.txt) för mer information.
 
 ## Beroenden
 

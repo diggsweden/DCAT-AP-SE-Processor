@@ -162,22 +162,9 @@ Bild 7.Utdrag av den resulterande rdf-filen.
 Konfigurationsfil dcat_specification.properties
 
 ```text
+# SPDX-FileCopyrightText: 2022 Agency for Digital Government
 #
-# This file is part of dcat-ap-se-processor.
-#
-# dcat-ap-se-processor is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# dcat-ap-se-processor is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
-#
+# SPDX-License-Identifier: EUPL-1.2
 
 #Specifies the cardinality of the elements of DCAT-AP-SE
 
@@ -388,22 +375,9 @@ provenancestatement.dcterms\:description=1..n|xsd:string
 Klass DCATClass.java
 
 ```text
-/*
- * This file is part of dcat-ap-se-processor.
- *
- * dcat-ap-se-processor is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * dcat-ap-se-processor is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
- */
+// SPDX-FileCopyrightText: 2022 Agency for Digital Government
+//
+// SPDX-License-Identifier: EUPL-1.2
 
 package se.ams.dcatprocessor.rdf;
 
@@ -476,22 +450,9 @@ public enum DcatClass {
 Klass VocabularyStringToIRI.java
 
 ```text
-/*
- * This file is part of dcat-ap-se-processor.
- *
- * dcat-ap-se-processor is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * dcat-ap-se-processor is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
- */
+// SPDX-FileCopyrightText: 2022 Agency for Digital Government
+//
+// SPDX-License-Identifier: EUPL-1.2
 
 package se.ams.dcatprocessor.rdf;
 
@@ -734,22 +695,9 @@ public class VocabularyStringToIRI {
 Klass RDFWorker.java
 
 ```text
-/*
- * This file is part of dcat-ap-se-processor.
- *
- * dcat-ap-se-processor is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * dcat-ap-se-processor is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
- */
+// SPDX-FileCopyrightText: 2022 Agency for Digital Government
+//
+// SPDX-License-Identifier: EUPL-1.2
 
 package se.ams.dcatprocessor.rdf;
 
