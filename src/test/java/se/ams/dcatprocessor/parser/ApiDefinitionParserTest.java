@@ -19,11 +19,15 @@ package se.ams.dcatprocessor.parser;
 
 import org.junit.jupiter.api.Test;
 
+import se.ams.dcatprocessor.rdf.DcatException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ApiDefinitionParserTest {
 
@@ -185,17 +189,25 @@ public class ApiDefinitionParserTest {
             "}";
 
     private static String ramlResult = "{\"(dcat-dataset 1)\":{\"title-sv\":\"Datamängd 1\",\"about\":\"https://www.example.se/result.rdf#dataset1\",\"description\":\"Exempel beskrivning 1\",\"publisher\":{\"name\":\"Redpill Linpro AB 1\"}},\"dcat-dataservice\":{\"properties\":{\"contactPoint\":{\"landingPage\":\"string\",\"adress\":\"string\",\"type\":\"string\",\"license\":\"string\",\"phone\":\"string\",\"name\":\"string\",\"theme\":\"string\",\"conformsTo\":\"string\",\"accessRights\":\"string\",\"page\":\"string\",\"keyword\":\"string\",\"servesDataset\":\"string\",\"email\":\"string\"},\"endpointURL\":\"string\",\"description\":\"string\",\"publisher\":{\"name\":\"string\",\"type\":\"string\",\"mbox\":\"string\",\"homepage\":\"string\"},\"title\":\"string\",\"endpointDescription\":\"string\"}},\"description\":\"Annotation exempel api är ett påhittat api som använder sig av annotations för att skapa metadata för DCAT-AP-SE.\",\"dcat-dataset\":{\"properties\":{\"creator\":\"string\",\"contactPoint\":{\"phone\":\"string\",\"name\":\"string\",\"adress\":\"string\",\"type\":\"string\",\"email\":\"string\"},\"description\":\"string\",\"publisher\":{\"name\":\"string\",\"type\":\"string\",\"mbox\":\"string\",\"homepage\":\"string\"},\"location\":{\"centroid\":\"string\",\"bbox\":\"string\",\"geometry\":\"string\"},\"title\":\"string\",\"distribution\":{\"byteSize\":\"string\",\"accessURL\":\"string\",\"downloadURL\":\"string\",\"description\":\"string\",\"language\":\"string\",\"availability\":\"string\",\"title\":\"string\",\"temporalResolution\":\"string\",\"accessService\":\"string\",\"spatialResolutionInMeters\":\"string\",\"rights\":\"string\",\"checksum\":\"string\",\"modified\":\"string\",\"theme\":\"string\",\"issued\":\"string\",\"keyword\":\"string\",\"identifier\":\"string\",\"adms\":\"string\",\"landingPage\":\"string\",\"format\":\"string\",\"license\":\"string\",\"page\":\"string\",\"conformsTo\":\"string\",\"belongsTo\":\"string\",\"status\":\"string\"},\"qualifiedAttribution\":\"string\",\"temporal\":{\"offers\":\"string\",\"endDate\":\"string\",\"hasVersion\":\"string\",\"versionInfo\":\"string\",\"source\":\"string\",\"relation\":\"string\",\"isReferencedBy\":\"string\",\"provenance\":\"string\",\"temporalResolution\":\"string\",\"spatialResolutionInMeters\":\"string\",\"qualifiedRelation\":\"string\",\"accrualPeriodicity\":\"string\",\"versionNotes\":\"string\",\"accessRights\":\"string\",\"isVersionOf\":\"string\",\"page\":\"string\",\"startDate\":\"string\"}}},\"title\":\"Annotation exempel api\",\"version\":\"1.0.0\",\"annotationTypes\":null,\"dcat-catalog\":{\"properties\":{\"themeTaxonomy\":\"string\",\"hasPart\":\"string\",\"about\":\"string\",\"description\":\"string\",\"language\":\"string\",\"title\":\"string\",\"isPartOf\":\"string\",\"license\":\"string\",\"rights\":\"string\",\"publisher\":{\"name\":\"string\",\"type\":\"string\",\"mbox\":\"string\",\"homepage\":\"string\"},\"modified\":\"string\",\"location\":{\"centroid\":\"string\",\"bbox\":\"string\",\"geometry\":\"string\"},\"issued\":\"string\",\"homepage\":\"string\"}},\"(dcat-catalog)\":{\"title-sv\":\"Annotation exempel RAML 1.0\",\"license\":\"https://www.apache.org/licenses/LICENSE-2.0\",\"title-en\":\"Annotation example RAML 1.0\",\"about\":\"www.af.se\",\"description\":\"Annotation exempel från arbetsförmedlingen\",\"publisher\":{\"name\":\"Redpill Linpro AB Catalog\"},\"dataset\":\"https://www.example.se/result.rdf#dataset1\"}}";
-    private static String jsonresult = "{\"dcat-dataset\":{\"title-sv\":\"Datamängd 1\",\"about\":\"https://www.example.se/result.rdf#dataset1\",\"publisher\":{\"about\":\"https://www.example.se/result.rdf#publisher\",\"name\":\"Redpill Linpro AB 1\"},\"description-sv\":\"Exempel beskrivning 1\"},\"dcat-catalog\":{\"title-sv\":\"Annotation exempel RAML 1.0\",\"license\":\"https://www.apache.org/licenses/LICENSE-2.0\",\"title-en\":\"Annotation example RAML 1.0\",\"about\":\"https://www.af.se\",\"publisher\":{\"about\":\"https://www.example.se/result.rdf#publisher\",\"name\":\"Redpill Linpro AB Catalog\"},\"description-sv\":\"Annotation exempel från arbetsförmedlingen\"}}";
+    private static String jsonResult = "{\"dcat-dataset\":{\"title-sv\":\"Datamängd 1\",\"about\":\"https://www.example.se/result.rdf#dataset1\",\"publisher\":{\"about\":\"https://www.example.se/result.rdf#publisher\",\"name\":\"Redpill Linpro AB 1\"},\"description-sv\":\"Exempel beskrivning 1\"},\"dcat-catalog\":{\"title-sv\":\"Annotation exempel RAML 1.0\",\"license\":\"https://www.apache.org/licenses/LICENSE-2.0\",\"title-en\":\"Annotation example RAML 1.0\",\"about\":\"https://www.af.se\",\"publisher\":{\"about\":\"https://www.example.se/result.rdf#publisher\",\"name\":\"Redpill Linpro AB Catalog\"},\"description-sv\":\"Annotation exempel från arbetsförmedlingen\"}}";
+
+    @Test
+    void testThatUnsupportedFormatThrowsException() {
+        String invalid = "invalid api spec"; 
+        assertThrows(DcatException.class, () -> ApiDefinitionParser.getApiJsonString(invalid));
+    }
 
     @Test
     void testMandatoryRamlApi() throws JSONException, IOException {
-        String result = ApiDefinitionParser.getApiJsonString(ramlApi).toString();
-        assertEquals(result, ramlResult);
+        JSONObject actual = ApiDefinitionParser.getApiJsonString(ramlApi);
+        JSONObject expected = new JSONObject(ramlResult);
+        assertEquals(expected.toMap(), actual.toMap());
     }
 
     @Test
     void testMandatoryJsonApi() throws JSONException, IOException {
-        String result = ApiDefinitionParser.getApiJsonString(jsonApi).toString();
-        assertEquals(result, jsonresult);
+        JSONObject actual = ApiDefinitionParser.getApiJsonString(jsonApi);
+        JSONObject expected = new JSONObject(jsonResult);
+        assertEquals(expected.toMap(), actual.toMap());
     }
 }

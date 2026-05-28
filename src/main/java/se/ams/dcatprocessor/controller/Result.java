@@ -15,17 +15,17 @@
  * along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package se.ams.dcatprocessor;
+package se.ams.dcatprocessor.controller;
 
-class Result {
-    private String description;
+public class Result {
+    private String result;
 
-    public Result(Object object, String trim) {
-		description = trim;
+    public Result(String result) {
+		this.result = result;
 	}
 
 	@Override
     public String toString() {
-        return description;
+        return result;
     }
 }

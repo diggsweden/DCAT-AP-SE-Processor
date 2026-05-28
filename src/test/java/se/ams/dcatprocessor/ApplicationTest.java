@@ -26,7 +26,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import se.ams.dcatprocessor.util.CliFlags;
+import se.ams.dcatprocessor.cli.CliFlags;
 
 
 public class ApplicationTest {

@@ -1,4 +1,4 @@
-package se.ams.dcatprocessor.util;
+package se.ams.dcatprocessor.cli;
 
 import java.util.List;
 

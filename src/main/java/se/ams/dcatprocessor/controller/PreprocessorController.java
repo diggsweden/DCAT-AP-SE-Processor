@@ -15,7 +15,8 @@
  * along with dcat-ap-se-processor.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package se.ams.dcatprocessor;
+package se.ams.dcatprocessor.controller;
+import se.ams.dcatprocessor.processor.Manager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -103,33 +104,25 @@ class PreprocessorController {
 			Manager manager = managerProvider.getObject();
 			String result = "";
 
-			/**
-			 * Generate DCAT-AP-SE from files
-			 */
+			// Generate DCAT-AP-SE from files
 			if(apiSpecification.isEmpty() && !apiFiles.isEmpty()) {
-
 				results = manager.createFromList(apiFiles,model);
-
-				/**
-				 * Generate DCAT-AP-SE from string
-				 */
+		
+			// Generate DCAT-AP-SE from string
 			} else if(!apiSpecification.isEmpty()){
-
 				try {
 					apiSpecMap.put("apifile", apiSpecification);
 					result = manager.createDcat(apiSpecMap);
-				} catch (Exception e) {			//Catch and show processing errors in web-gui
+				
+				//Catch and show processing errors in web-gui
+				} catch (Exception e) {
 					result = e.getMessage();
-					results.add(new Result(null, result));
 					e.printStackTrace();
 				}
-				results.add(new Result(null, result));
+				results.add(new Result(result));
 			}
 			model.addAttribute("results", results);
 		}
 		return "index";
 	}
-	
-	
 }
-

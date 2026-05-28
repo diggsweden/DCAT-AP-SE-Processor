@@ -28,25 +28,16 @@ import org.yaml.snakeyaml.nodes.*;
 import se.ams.dcatprocessor.rdf.DcatException;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ApiDefinitionParser {
 
     public static JSONObject getApiJsonString(String fileString) throws IOException, JSONException  {
-        Stream<String> lines;
-        String apiJsonString = "";
-        JSONObject jsonObjectFile;
+        String apiJsonString;
+        String apiLine1 = fileString.lines().findFirst().orElse("");
 
-        lines = fileString.lines();
-        String apiLine1 = lines.limit(1).collect(Collectors.joining("\n"));
-
-        if (apiLine1.contains("openapi")) {
-            apiJsonString = getFileApiYamlRaml(fileString);
-        } else if (apiLine1.contains("RAML")) {
+        if (apiLine1.contains("openapi") || apiLine1.contains("RAML")) {
             apiJsonString = getFileApiYamlRaml(fileString);
         } else if (apiLine1.contains("{")){
             apiJsonString = fileString;
@@ -55,6 +46,7 @@ public class ApiDefinitionParser {
             throw new DcatException("not supported api definition");
         }
 
+        JSONObject jsonObjectFile;
         try {
             jsonObjectFile = new JSONObject(apiJsonString);
         } catch (JSONException e) {
@@ -69,27 +61,24 @@ public class ApiDefinitionParser {
     }
 
     private static String getFileApiYamlRaml(String apiSpec) throws IOException {
-        FileOutputStream output = new FileOutputStream("output.json");
         JsonFactory factory = new JsonFactory();
-        JsonGenerator generator = factory.createGenerator(output, JsonEncoding.UTF8);
 
-        try {
+        try (ByteArrayOutputStream output = new ByteArrayOutputStream();
+            JsonGenerator generator = factory.createGenerator(output, JsonEncoding.UTF8)) {
+
             Yaml yamlParser = new Yaml();
             yamlParser.addImplicitResolver(Tag.YAML, Pattern.compile("^(!)$"), "!");
             Node compose = yamlParser.compose(new StringReader(apiSpec));
+            
             build(compose, generator);
-            generator.close();
-            output.close();
-
-            //Read JSON file
-            String jsonString = new String(Files.readAllBytes(Paths.get("output.json")));
-            Object obj = new JSONObject(jsonString);
-            return obj.toString();
-
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
+            generator.flush();
+            
+            String jsonString = output.toString(StandardCharsets.UTF_8);
+            return new JSONObject(jsonString).toString();
+            
+        } catch (JSONException e) {
+            throw new IOException("Failed to parse YAML/RAML as JSON: " + e.getMessage(), e);
         }
-        return "";
     }
 
     private static void build(Node yaml, JsonGenerator generator) throws IOException {
