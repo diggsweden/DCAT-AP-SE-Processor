@@ -20,20 +20,20 @@ public class ApplicationTest {
     
     @ParameterizedTest
     @MethodSource("supportedFlagsProvider")
-    void testIsCliArgsReturnsTrueIfValidFlag(String flag) {
+    void testThatCliArgsReturnsTrueIfValidFlag(String flag) {
         boolean result = Application.isCliArgs(new String[]{flag});
         assertTrue(result);
     }
     
     @ParameterizedTest
     @ValueSource(strings = {"-x","-invalid", ""})
-    void testIsCliArgsReturnsFalseIfUnknownOrEmptyFlag(String flag) {
+    void testThatCliArgsReturnsFalseIfUnknownOrEmptyFlag(String flag) {
         boolean result = Application.isCliArgs(new String[]{flag});
         assertFalse(result);
     }
 
     @Test
-    void testIsCliArgsReturnsFalseIfNoArgs() {
+    void testThatCliArgsReturnsFalseIfNoArgs() {
         boolean result = Application.isCliArgs(new String[]{});
         assertFalse(result);
     }

@@ -185,14 +185,14 @@ public class ApiDefinitionParserTest {
     }
 
     @Test
-    void testMandatoryRamlApi() throws JSONException, IOException {
+    void testThatRamlApiIsParsedToExpectedJson() throws JSONException, IOException {
         JSONObject actual = ApiDefinitionParser.getApiJsonString(ramlApi);
         JSONObject expected = new JSONObject(ramlResult);
         assertEquals(expected.toMap(), actual.toMap());
     }
 
     @Test
-    void testMandatoryJsonApi() throws JSONException, IOException {
+    void testThatJsonApiIsParsedToExpectedJson() throws JSONException, IOException {
         JSONObject actual = ApiDefinitionParser.getApiJsonString(jsonApi);
         JSONObject expected = new JSONObject(jsonResult);
         assertEquals(expected.toMap(), actual.toMap());

@@ -7,9 +7,7 @@ package se.ams.dcatprocessor.rdf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,14 +29,10 @@ import se.ams.dcatprocessor.models.DataSet;
 import se.ams.dcatprocessor.models.Distribution;
 import se.ams.dcatprocessor.models.FileStorage;
 import se.ams.dcatprocessor.models.Organization;
-import se.ams.dcatprocessor.rdf.validate.SingleInputValidator;
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
 import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
 import se.ams.dcatprocessor.testutil.TestHelper;
-import se.ams.dcatprocessor.util.DcatPropertyHandler;
-
-//TODO: Fix so that path to properties is set automatically and independently of the user. The default properties should be overridden during test
 
 @SpringBootTest
 class RDFWorkerTest {
@@ -60,23 +54,9 @@ class RDFWorkerTest {
 	 * @throws IllegalAccessException
 	 */
 	@BeforeEach
-	void setProperties() throws IOException, NoSuchFieldException, IllegalAccessException{
-		Field instance = DcatPropertyHandler.class.getDeclaredField("instance");
-		instance.setAccessible(true);
-		instance.set(DcatPropertyHandler.class, null);
-
-		instance = CardinalityHandler.class.getDeclaredField("instance");
-		instance.setAccessible(true);
-		instance.set(CardinalityHandler.class, null);
-		
-		instance = SingleInputValidator.class.getDeclaredField("instance");
-	    instance.setAccessible(true);
-	    instance.set(SingleInputValidator.class, null);
-	        
-	    instance = ValidationErrorStorage.class.getDeclaredField("instance");
-	    instance.setAccessible(true);
-	    instance.set(ValidationErrorStorage.class, null);
-	
+	void reset() throws IOException, NoSuchFieldException, IllegalAccessException{
+		TestHelper.resetSingeltons();
+		ValidationErrorStorage.getInstance().resetErrors();  
 	}
 
 	@BeforeEach
@@ -91,10 +71,9 @@ class RDFWorkerTest {
 	 * Happy tests
 	 */
 	@Test
-	void testGenerateCatalog2DatasetsAndPublisherOK() {
+	void testThatValidCatalogCreatesDcatFile() {
 		try {
-			String rdfFile = rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
-			printToFile(rdfFile, "testdcat_1.rdf");
+			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Unexpected exception when creating a fully functional DCAT-AP-SE with message: " + e.getMessage());
@@ -102,24 +81,20 @@ class RDFWorkerTest {
 	}
 
 
-	//Using a different Catalog and printing to a different file
+	//Using a different Catalog
 	@Test
-	void testGenerateCatalog2DatasetsAndPublisherOK2() throws Exception{
+	void testThatValidCatalogWithMergedFilesCreatesDcatFile() throws Exception{
 		testFileStorageList1.addAll(createTestFileStorageList2());
 		try {
-			String rdfFile = rdfWorker.createDcatFile(createTestCatalog2(), testFileStorageList1);
-			printToFile(rdfFile, "testdcat_2.rdf");
+			rdfWorker.createDcatFile(createTestCatalog2(), testFileStorageList1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Unexpected exception when creating a fully functional DCAT-AP-SE with message: " + e.getMessage());
 		}
 	}
 	
-	/**
-	 * Test missing primary classes
-	 */
 	@Test
-	void testMissingPublisher () {
+	void testThatMissingCatalogPublisherThrowsException () {
 		testCatalog1.publisher = null;
 		try {
 			rdfWorker.createDcatFile(testCatalog1, createTestFileStorageList1());
@@ -131,22 +106,18 @@ class RDFWorkerTest {
 	}
 
 	@Test
-	void testMissingDataset() {
+	void testThatMissingDatasetThrowsException() {
 		testFileStorageList1.get(0).dcat_dataset = null;
 		try {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 			fail("Expected DCATException when missing Catalog.dcat_dataset");
 		} catch (DcatException | IOException e) {
 			assertEquals("class se.ams.dcatprocessor.rdf.RDFWorker : Unable to create DCAT. Reason: Catalog.dcat_dataset is a mandatory but is missing", e.getMessage());
-		}
-		
+		}	
 	}
 
-	/**
-	 * Test missing mandatory data
-	 */
 	@Test
-	void testMissingCatalogAbout() {
+	void testThatMissingAboutThrowsException() {
 		testCatalog1.about = null;
 		try {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
@@ -157,7 +128,7 @@ class RDFWorkerTest {
 	}
 		
 	@Test
-	void testMissingDctermsTitle() throws Exception {
+	void testThatMissingTitleReturnsValidationError() throws Exception {
 		String removedKey = "dcterms:title";
 		testCatalog1.dcData.remove(removedKey);
 		try {
@@ -171,7 +142,7 @@ class RDFWorkerTest {
 	}
 
 	@Test
-	void testMissingLicense() throws Exception {
+	void testThatMissingLicenseReturnsValidationError() throws Exception {
 		String removedKey = "dcterms:license";
 		testCatalog1.dcData.remove(removedKey);
 		try {
@@ -185,7 +156,7 @@ class RDFWorkerTest {
 	}
 
 	@Test
-	void testMissingPublisherAbout() {
+	void testThatMissingPublisherAboutThrowsException() {
 		testCatalog1.publisher.about = null;
 		try {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
@@ -196,7 +167,7 @@ class RDFWorkerTest {
 	}
 
 	@Test
-	void testMissingPublisherName() throws Exception {
+	void testThatMissingPublisherNameReturnsValidationError() throws Exception {
 		String removedKey = "foaf:name";
 		testCatalog1.publisher.dcData.remove(removedKey);
 		try {
@@ -210,7 +181,7 @@ class RDFWorkerTest {
 	}
 	
 	@Test
-	void testMissingDataset1Title() throws Exception {
+	void testThatMissingDatasetTitleReturnsValidationError () throws Exception {
 		String removedKey = "dcterms:title";
 		testFileStorageList1.get(0).dcat_dataset.get(0).dcData.remove(removedKey);
 		try {
@@ -224,7 +195,7 @@ class RDFWorkerTest {
 	}
 
 	@Test
-	void testMissingOrganization2About() {
+	void testThatMissingOrganizationAboutThrowsException() {
 		testFileStorageList1.get(0).dcat_dataset.get(0).organizations.get(0).about = "";		
 		try {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
@@ -235,7 +206,7 @@ class RDFWorkerTest {
 	}
 	
 	@Test
-	void testMissingContactPoint2Email() throws Exception {
+	void testThatMissingContactPointEmailReturnsValidationError() throws Exception {
 		String removedKey = "vcard:hasEmail";
 		testFileStorageList1.get(0).dcat_dataset.get(0).organizations.get(1).dcData.remove(removedKey);
 		try {
@@ -249,7 +220,7 @@ class RDFWorkerTest {
 	}
 
 	@Test
-	void testMissingDistributionDcatAccessUrl() throws Exception {
+	void testThatMissingDistributionAccessUrlReturnsValidationError() throws Exception {
 		String removedKey = "dcat:accessURL";
 		testFileStorageList1.get(0).dcat_dataset.get(0).dcat_distribution.get(0).dcData.remove(removedKey);
 		try {
@@ -267,7 +238,7 @@ class RDFWorkerTest {
 	 * Test adding more values than allowed according to specification
 	 */
 	@Test
-	void testAddingMoreThanOneLicense() throws Exception {
+	void testThatMultipleLicensesReturnValidationError() throws Exception {
 		String addedKey = "dcterms:license";
 		String addedValue = "http://www.apache.org/licenses/LICENSE-2.0";		
 		testCatalog1.dcData.put(addedKey, addedValue);
@@ -282,7 +253,7 @@ class RDFWorkerTest {
 	}
 	
 	@Test
-	void testDistribution2MoreThanOneAccessUrl() throws Exception {
+	void testThatMultipleAccessUrlsReturnValidationError() throws Exception {
 		String addedKey = "dcat:accessURL";
 		String addedValue = "https://example.com/accessURL_extra";		
 		testFileStorageList1.get(0).dcat_dataset.get(0).dcat_distribution.get(1).dcData.put(addedKey, addedValue);
@@ -297,7 +268,7 @@ class RDFWorkerTest {
 	}
 
 	@Test
-	void testAddDescriptionWithLanguage() {
+	void testThatDescriptionWithLanguageIsAccepted () {
 		//Add description in Azerbadjan
 		testCatalog1.dcData.put( "dcterms:description", "aze¤azərbaycan dili");
 		try {
@@ -313,7 +284,7 @@ class RDFWorkerTest {
 	 */
 	//Duplicate URI in the same file
 	@Test
-	void testGettingMultipleValidationErrorMessages1() {
+	void testThatDuplicateUriBetweenFilesReturnsValidationError() {
 		String duplicateDataSetURI1 = "http://www.dataset_af1000.se";
 
 		testFileStorageList1.get(0).dcat_dataset.get(0).about = duplicateDataSetURI1;
@@ -342,7 +313,7 @@ class RDFWorkerTest {
 	 */	
 	//Duplicate URI within and between files 
 	@Test
-	void testGettingMultipleValidationErrorMessages2() {
+	void testThatDuplicateUriWithinAndBetweenFilesReturnsValidationErrors() {
 		String duplicateDataSetURI1 = "http://www.dataset_af1000.se";
 		String duplicateDataSetURI2 = "http://www.dataset_af2000.se";
 
@@ -394,7 +365,7 @@ class RDFWorkerTest {
 	 */	
 	//Duplicate URI within and between files + type and formaterrors 
 	@Test
-	void testGettingMultipleValidationErrorMessages3() {
+	void testThatDuplicateUriAndFormatErrorsReturnAllValidationErrors() {
 		String duplicateDataSetURI1 = "http://www.dataset_af1000.se";
 		String duplicateDataSetURI2 = "http://www.dataset_af2000.se";
 
@@ -459,54 +430,8 @@ class RDFWorkerTest {
 		
 	}
 	
-	//TODO: Will work when value type-check is implemented based on property
-//	@Test
-//	void testAddDescriptionWithInvalidFormat() {
-//		//Add a description in an invalid format
-//		catalog = createCompleteCatalog();
-//		catalog.dcData.put( "dcterms:description", "aze:azərbaycan:dili");
-//		try {
-//			new RDFWorker().createDCATModel(catalog);
-//			fail("Expected DCATException when adding a dcterms:description value on illegal format");
-//		} catch (DCATException e) {
-//			assertEquals("class se.ams.dcatprocessor.rdf.RDFWorker : Unable to create DCAT. Reason: The format of value aze:azərbaycan:dili is illegal", e.getMessage());
-//		}
-//	}
-
-	//TODO: Will work when value type-check is implemented based on property
-//	@Test
-//	void testAddAboutIllegalURI() {
-//		// Add a description in an invalid format...missing language
-//		catalog = createCompleteCatalog();
-//		catalog.about ="af.se";
-//		try {
-//			dcatHandler.createDCATModel(catalog);
-//			fail("Expected DCATException when adding catalog.about=af.se when the URI has illegal format");
-//		} catch (DCATException e) {
-//			assertEquals("class se.ams.dcatprocessor.rdf.RDFWorker : Unable to create DCAT. Reason: Catalog.about=af.se is not a valid URI", e.getMessage());
-//		}
-//	}
-
-	//TODO: Will work when value type-check is implemented based on property
-//	@Test
-//	void testAddDescriptionWithLanguageTagButMissingText() {
-//		// Add a description in an invalid format...missing value for the text
-//		catalog = createCompleteCatalog();
-//		catalog.dcData.put("dcterms:title", "sv:");
-//		try {
-//			new RDFWorker().createDCATModel(catalog);
-//			fail("Expected DCATException when adding a dcterms:title value on illegal format");
-//		} catch (DCATException e) {
-//			assertEquals("class se.ams.dcatprocessor.rdf.RDFWorker : Unable to create DCAT. Reason: The format of value sv: is illegal", e.getMessage());
-//		}
-//	}
-
-	//TODO: Later test in the different types of input formats. Eg. that an URI is valid ETC ETC ETC ETC
-	// Geografiskt område, skicka in felaktigt och vad är det.
-
-
 	@Test
-	void testValueNotInSpec() throws Exception {
+	void testThatUnknownKeyReturnsValidationError() throws Exception {
 		String madeUpKey = "madeup:valuenotinspec";
 		String value = "foo";
 		testCatalog1.dcData.put(madeUpKey, value);
@@ -982,12 +907,6 @@ class RDFWorkerTest {
 		return rights;
 	}
 
-	private void printToFile(String string, String fileName) throws Exception {
-		FileOutputStream fos = new FileOutputStream(System.getProperty("user.home") + System.getProperty("file.separator") + fileName);
-		fos.write(string.getBytes());
-		fos.close();
-	}
-	
 	private void printToLog(Map<String, List<ValidationError>> validationErrorsMap) {
 		Logger logger = LoggerFactory.getLogger(RDFWorkerTest.class);
 		
@@ -1005,10 +924,6 @@ class RDFWorkerTest {
 			for (ValidationError validationError : validationErrorsPerFile) {
 				logger.error("File: " + validationError.getFileName() + " Errortype: " + validationError.getErrorType() + " Description: " + validationError.getDescription());		
 			}
-			
 		}
-		
-		
 	}
-
 }
