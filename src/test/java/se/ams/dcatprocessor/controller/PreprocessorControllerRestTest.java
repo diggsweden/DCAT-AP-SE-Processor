@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -38,18 +38,14 @@ class PreprocessorControllerRestTest {
 	@Autowired
 	private TestRestTemplate restTemplate;
 
+	@TempDir
+	Path tempDir;
+
 	private static String localHost = "http://localhost:";
 	private static String pathFile = "/dcat-generation/files/";
 	
-	private static String testFilePath = TestHelper.USER_DIR + "/src/test/java/se/ams/dcatprocessor/rest/apidef/obl_rek_raml_test.raml";
-
-	/**
-	 * Delete testfile between tests
-	 * @throws Exception
-	 */
 	@BeforeEach
 	void setup() throws Exception {
-		Files.deleteIfExists(Paths.get(testFilePath));
 		TestHelper.resetSingeltons();
 	}
 	
@@ -57,10 +53,11 @@ class PreprocessorControllerRestTest {
 	 * Basic testing of the REST-api
 	 */
 	//Existing folder location but no API-files
+	
 	@Test
-	public void testEmptyAPIFilesFolder() throws Exception {
-		String actual = this.restTemplate.getForObject(localHost
-				+ port + pathFile + "?dir=" + TestHelper.USER_DIR + "/src/test/java/se/ams/dcatprocessor/rest/apidef/", String.class);
+	public void testThatFolderWithNoApiFilesReturnsNoFilesFound() throws Exception {
+		String actual = this.restTemplate.getForObject(
+			localHost + port + pathFile + "?dir=" + tempDir.toString(),String.class);
 		String expected = "Hittade inga filer";
 
 		assertEquals(expected, actual);
@@ -68,9 +65,9 @@ class PreprocessorControllerRestTest {
 
 	//Nonexisting folder location
 	@Test
-	public void testNonExistingAPIFilesFolder() throws Exception {
-		String actual = this.restTemplate.getForObject(localHost
-				+ port + pathFile + "?dir=" + TestHelper.USER_DIR + "/src/test/java/se/ams/dcatprocessor/rest/blah/", String.class);
+	public void testThatNonExistingFolderReturnsNoFilesFound() throws Exception {
+		String actual = this.restTemplate.getForObject(
+			localHost + port + pathFile + "?dir=" + tempDir.resolve("nonexistent").toString(),String.class);
 		String expected = "Hittade inga filer";
 
 		assertEquals(expected, actual);
@@ -78,9 +75,9 @@ class PreprocessorControllerRestTest {
 
 	//Correct folder location and existing API-file in folder
 	@Test
-	public void testValidAPIFile() throws Exception {
-		TestHelper.copyFile(TestHelper.TEST_FILE_DIR + "apidef/raml_1/obl_rek_raml.raml", testFilePath);
-		String actual = this.restTemplate.getForObject(localHost + port + pathFile + "?dir=" + TestHelper.USER_DIR + "/src/test/java/se/ams/dcatprocessor/rest/apidef/", String.class);
+	public void testThatValidApiFileReturnsNonEmptyResponse() throws Exception {
+		TestHelper.copyFile(TestHelper.TEST_FILE_DIR + "apidef/raml_1/obl_rek_raml.raml", tempDir.resolve("obl_rek_raml_test.raml").toString());
+		String actual = this.restTemplate.getForObject(localHost + port + pathFile + "?dir=" + tempDir.toString(),String.class);
 
 		assertNotNull(actual);
 		assertFalse(actual.isEmpty());

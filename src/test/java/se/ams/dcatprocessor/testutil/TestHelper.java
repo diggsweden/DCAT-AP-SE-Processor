@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -102,25 +101,10 @@ public class TestHelper {
 
 	/**
 	 * Set the instance of singelton classes to null, to force them to re-instansiate
-	 * @throws NoSuchFieldException
-	 * @throws IllegalArgumentException
-	 * @throws IllegalAccessException
 	 */
 	public static void resetSingeltons() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
-        Field instance = DcatPropertyHandler.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(DcatPropertyHandler.class, null);
-        
-        instance = SingleInputValidator.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(SingleInputValidator.class, null);
-        
-        instance = ValidationErrorStorage.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(ValidationErrorStorage.class, null);
-
-		instance = CardinalityHandler.class.getDeclaredField("instance");
-		instance.setAccessible(true);
-		instance.set(CardinalityHandler.class, null);
+        DcatPropertyHandler.resetInstance();
+        SingleInputValidator.resetInstance();
+		CardinalityHandler.resetInstance();
 	}
 }

@@ -49,6 +49,10 @@ public class SingleInputValidator {
 		}
 		return instance;
 	}
+	
+	public static void resetInstance(){
+		instance = null;
+	} 
 
 	/**
 	 * Predefined error messages

@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.regex.Pattern;
@@ -292,49 +291,20 @@ public class ManagerTest {
         TestHelper.resetSingeltons();
 		manager = managerProvider.getObject();
 	}
-	
-    @Test
-    void testThatDcatIsCreatedFromDirWithRaml() throws Exception {
-        File apidefDir = new File("src/test/resources/apidef/raml_1");
 
+    @ParameterizedTest
+    @ValueSource(strings = {
+		"src/test/resources/apidef/raml_1",         // with raml from dir
+		"src/test/resources/apidef/yaml_oas",       // with yaml from dir
+		"src/test/resources/apidef/json_oas",       // with json from dir
+        "src/test/resources/apidef/json_separate",  // with json from dir (separated)
+	})
+    void testThatDcatIsCreatedFromDiretory(String apidefDir) throws Exception {
         String result = manager.createDcatFromDirectory(apidefDir.toString());
         // nodeIDs are generated dynamically, changing them allows for comparison
         String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");      
         
         assertEquals(expectedRDF, convertedRdf);        
-    }
-
-    @Test
-    void testThatDcatIsCreatedFromDirWithJson() throws Exception {
-        File apidefDir = new File("src/test/resources/apidef/json_oas");
-   
-        String result = manager.createDcatFromDirectory(apidefDir.toString());
-        // nodeIDs are generated dynamically, changing them allows for comparison
-        String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");
-        
-        assertEquals(expectedRDF, convertedRdf);
-    }
-
-    @Test
-    void testThatDcatIsCreatedFromDirWithYaml() throws Exception {
-        File apidefDir = new File("src/test/resources/apidef/yaml_oas");
-   
-        String result = manager.createDcatFromDirectory(apidefDir.toString());  
-        // nodeIDs are generated dynamically, changing them allows for comparison
-        String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");      
-        
-        assertEquals(expectedRDF, convertedRdf);
-    }
-
-    @Test
-    void testThatDcatIsCreatedFromDirWithSeparateJson() throws Exception {
-        File apidefDir = new File("src/test/resources/apidef/json_separate");
- 
-        String result = manager.createDcatFromDirectory(apidefDir.toString());
-        // nodeIDs are generated dynamically, changing them allows for comparison
-        String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");
-       
-        assertEquals(expectedRDF, convertedRdf);
     }
 
     @Test
@@ -377,7 +347,11 @@ public class ManagerTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"testfile.txt", "testfile.xml", "testfile.csv"})
+    @ValueSource(strings = {
+        "testfile.txt", 
+        "testfile.xml", 
+        "testfile.csv"
+    })
     void testInvalidFileExtensionReturnsExpectedMessage(String filename) throws Exception {
         String result = manager.createDcatFromFile(filename);     
         assertEquals(result, "Invalid file extension: " + filename);
