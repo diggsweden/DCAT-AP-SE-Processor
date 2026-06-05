@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 Agency for Digital Government
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 package se.ams.dcatprocessor.processor;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

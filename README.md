@@ -1,10 +1,13 @@
 # DCAT-AP-SE Processor
-[![License: GPL v3](https://img.shields.io/badge/License-General_Public_License_v3.0-library?style=for-the-badge&&color=blue)](LICENSE)
+
+[![License: EUPL 1.2](https://img.shields.io/badge/License-European%20Union%20Public%20Licence%201.2-library?style=for-the-badge&&color=lightblue)](LICENSE)  
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/diggsweden/DCAT-AP-SE-Processor/badge?style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/diggsweden/DCAT-AP-SE-Processor)
 
 DCAT-AP-SE Processor är ett verktyg för att automatisera framställningen av metadata enligt metadataspecifikationen [DCAT-AP-SE](https://docs.dataportal.se/dcat/sv/) , som används för att publicera information om datamängder och API:er på [Sveriges dataportal](https://www.dataportal.se/).
 Verktyget tar en API-definition som indata och genererar en RDF-fil redo för skördning av dataportalen. Som indata stöds API-definitioner i formaten OpenAPI och RAML, samt separata metadatafiler på JSON-format för OAS2/RAML0.8 eller för API:er utan en formell definition. Detta verktyg är framtaget för att enkelt kunna integreras i en CI/CD-pipeline eller köras fristående.
 
 ## Innehållsförteckning
+
 - [DCAT-AP-SE Processor](#dcat-ap-se-processor)
   - [Innehållsförteckning](#innehållsförteckning)
   - [Bakgrund](#bakgrund)
@@ -20,7 +23,9 @@ Verktyget tar en API-definition som indata och genererar en RDF-fil redo för sk
   - [Bidra](#bidra)
 
 ## Bakgrund
+
 ### Sveriges dataportal
+
 [Sveriges dataportal](https://www.dataportal.se/) synliggör information om datamängder (d.v.s. metadata) där själva datamängderna och åtkomstpunkterna finns publicerade hos olika aktörer.
 Detta sker genom att Sveriges dataportal automatiskt inhämtar, ”skördar”, informationen hos publicerande aktör.
 En aktör kan vara både från offentlig och privat sektor samt från civilsamhället.
@@ -31,102 +36,124 @@ Den specifikationen heter [DCAT-AP-SE](https://docs.dataportal.se/dcat/sv/) och 
 att passa inhämtning av metadata från olika typer av organisationer och datadomäner.
 Det möjliggör en enhetlig beskrivning av datamängder för att förenkla insamling, sökning och presentation av data på Sveriges dataportal. Följande information innehåller mycket tekniska termer och begrepp. För att kunna tillgodogöra sig informationen bör därför någon med sådan typ av kompetens läsa instruktionen.
 
-
 ### Automatiserad process för framställning av metadata
+
 I syfte att hjälpa producenter av metadata, som ska skördas till dataportalen, har detta verktyg tagits fram för att kunna införlivas i godtycklig CI/CD driven kedja eller köras separat.
 Verktyget skapar en metadataspecifikation på RDF-format utifrån en API-definition alternativt separat metadatafil.
 RDF är det språk som används för att uttrycka metadata om ting på webben. En central egenskap med RDF är att man använder webbadresser (URI:er) för att referera till ting i olika påståenden.
 
-
 ## Instruktioner för att komma igång snabbt
+
 Bygg en container image från koden i detta repository.
 
-När container startas finns ett webbaserat UI och ett REST API tillgängligt att använda efter behov. 
+När container startas finns ett webbaserat UI och ett REST API tillgängligt att använda efter behov.
 
 ### Docker
+
 Kör med docker:
-```
+
+```text
 docker build --no-cache -t "dcatprocessor" .
 ```
-```
+
+```text
 docker run -it --rm -p 8080:8080 dcatprocessor:latest 
 ```
 
 ### Podman
+
 Kör med Podman:
-```
+
+```text
 podman build --no-cache -t "dcatprocessor" .
 ```
-```
+
+```text
 podman run -it --rm -p 8080:8080 dcatprocessor:latest 
 ```
 
-### Färdigbyggd image 
+### Färdigbyggd image
+
 Alternativt, finns det också en experimentell färdigbyggd image för att testa.
 
-```
+```text
 docker run ghcr.io/diggsweden/dcat-ap-processor:latest
 ```
-```
+
+```text
 podman run ghcr.io/diggsweden/dcat-ap-processor:latest
 ```
+
 **ANVÄND INTE OVAN IMAGE I PRODUKTIONSYFTEN** - Den är endast avsedd för lokal test, och inga garantier lämnas på säkerhetsuppdateringar med mera.
 
 ## Användning
 
 ### Format på API-definitioner
+
 Det finns stöd för formaten OpenAPI eller RAML.
-* OpenAPI 3.x tillägg av metadata sker via extensions<br>
+
+- OpenAPI 3.x tillägg av metadata sker via extensions<br>
   Lägg till en extension x-dcat och underliggande metadata hanteras.
-* RAML1.x tillägg av metadata sker via annotations<br>
+- RAML1.x tillägg av metadata sker via annotations<br>
   Definiera en annotationType och använd den sedan.
-* OAS2.x och RAML0.8 tillägg av metadata sker via separat metadatafil på json format.
+- OAS2.x och RAML0.8 tillägg av metadata sker via separat metadatafil på json format.
 
 Verktyget kan användas på följande sätt.
 
 ### 1. Via UI
-Starta docker container, öppna browser till http://localhost:8080
+
+Starta docker container, öppna browser till <http://localhost:8080>
 
 Det finns val för att:
-* skicka in en sträng med API-definitionen.
-* bifoga en fil med API-definitionen.
-* ange en katalog som håller flera API-definitioner.
+
+- skicka in en sträng med API-definitionen.
+- bifoga en fil med API-definitionen.
+- ange en katalog som håller flera API-definitioner.
 
 Verktyget levererar resultatet som svar på sidan.
 
 ### 2. Via anrop till REST gränssnitt
+
 Anropa endpoints med valfritt verktyg. I utveckling har vi använt curl från git bash, t.ex:
-```
+
+```text
 curl "http://localhost:8080/dcat-generation/files/?dir=<path-to-your-folder>"
 ```
+
 Vid lyckat anrop kommer en XML med genererad RFD att returneras.
 
 Jenkins pipeline exempel
 [Jenkinsfile](docs/jenkinsfile).
 
 ### 3. Via CLI
+
 Vid användning av CLI kan enstaka filer pekas ut ( -f ) eller en hel mapp ( -d )<br>
 
 Bygg en java JAR fil.
-```
+
+```text
 mvn clean package -DskipTests
 ```
 
 Konvertera en specifikationsfil och få DCAT-data till stdout:
-```
+
+```text
 java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -f FIL
 ```
 
 Konvertera en katalog med specifikationsfiler och få DCAT-data till stdout:
-```
+
+```text
 java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -d KATALOG
 ```
 
 ## Systemkomponenter
+
 Sekvensdiagram över flödet i verktyget. <br>
 ![img_1.png](docs/dcat-sekvens.png)
 
 ### PreprocessorController (REST API)
+
 REST API:n för verktyget, följande två är de som finns att använda:
 
 "/dcat-generation/files/" - Skickar man in directory (dir) som sedan skickas vidare till Managern för hantering. <br>
@@ -158,12 +185,14 @@ Använder RDF4J.
 Tar emot en lista av Katalog objekt och skapar matchande RDF utifrån det.
 
 ## Lägga till stöd för nya metadata i verktyget
+
 [Översikt över vad som finns och fungerar enligt DCAT-AP-SE spec](docs/DCATAPSE_completion.md)<br>
 [Tillägg i Converter](docs/converter-tutorial.md)<br>
 [Tillägg i RDFWorker](docs/rdfworker-tutorial.md)<br>
 [specifikationsfil](src/main/resources/dcat_specification.properties)
 
 ## Arbetsprocess för att publicera api/er på dataportalen
+
 - [Skapa konto](https://docs.dataportal.se/accounts/) till de bakomliggande systemen för dataportal.se eller kontrollera [status](https://admin.dataportal.se/status/public) om er organisation redan finns upplagd. Upprätta sedan en skördningskälla, [Komma igång](https://docs.dataportal.se/registry/start/).<br>
 - Inför metadata i apidefinitionen, eller skapa en separat metadatafil.<br>
 - Använd verktyget för att generera en RDF fil.
@@ -172,8 +201,9 @@ Tar emot en lista av Katalog objekt och skapar matchande RDF utifrån det.
 [Dataportalen docs](https://docs.dataportal.se/) har ingående information om hur skördningen fungerar samt hur en organisation sätter upp sin katalogkälla.
 
 ### Införa metadata
+
 För att verktyget ska ges information att generera data behöver api definitionen uppdateras med metadata information.<br>
-Detta repository innehåller [exempelfiler](src/main/resources/metadataExample) som visar hur metadata kan införas i  apidefinition eller i separat metadatafil.<br>
+Detta repository innehåller [exempelfiler](src/main/resources/metadataExample) som visar hur metadata kan införas i apidefinition eller i separat metadatafil.<br>
 [Attribut som stöds](docs/supported_attributes.md) finns listade med beskrivning.
 Utgå från exempelfilerna och ta hjälp av [rekommendationer](https://docs.dataportal.se/dcat/docs/recommendations/) på dataportalen<br>
 
@@ -181,8 +211,8 @@ Det finns exempelfiler som visar hur obligatoriska, rekommenderade och valfria v
 När apidefinition/erna är uppdaterade med metadata görs de tillgängliga på en publikt nåbar folder, så att den separata pipeline som kör verktyget kan nå dem.
 
 #### Om ni har ett API
-Se exempel [enkel fil](src/main/resources/metadataExample/single), där Katalog elementet ligger i samma fil som resterande metadata.
 
+Se exempel [enkel fil](src/main/resources/metadataExample/single), där Katalog elementet ligger i samma fil som resterande metadata.  
 Exempel med obligatoriska och rekommenderade värden.<br>
 [RAML](src/main/resources/metadataExample/single/full_example.raml)<br>
 [OAS YAML](src/main/resources/metadataExample/single/full_example_oas.yaml)<br>
@@ -192,6 +222,7 @@ För API som inte har en definition (code-first) kan dataproducenten tillhandah�
 [Separat JSON](src/main/resources/metadataExample/single/full_example.json)<br>
 
 #### Om ni har flera API:er
+
 Organisation med multipla API att producera RDF från använder en separat catalog.json fil för att hålla samman de ingående API:ernas metadata, se exempel under [multipla filer](src/main/resources/metadataExample/multiple).<br>
 För att verktyget ska generera en sammanslagen RDF-fil krävs att organisationen skapar filer enligt följande:<br>
 catalog.json - beskriver det övergripande katalog elementet och är samma för alla ingående apier.<br>
@@ -204,24 +235,27 @@ Exempel på ingående API-definitioner innehållande metadata för DCAT-AP-SE<br
 [full_example.json](src/main/resources/metadataExample/multiple/full_example.json), Api D, separat metadataspecifikation på json format<br>
 
 ## Licens
-DCAT-AP-SE-Processor är licensierad under GNU GENERAL PUBLIC LICENSE v.3<br>
-Se [licens](LICENSE) för mer information.
+
+DCAT-AP-SE-Processor är licensierad under EUPL-1.2<br>
+Se [licens](LICENSES/EUPL-1.2.txt) för mer information.
 
 ## Beroenden
+
 snakeYaml [Apache license](docs/Licenser/Apache.txt)<br>
 RDF4J [EDL v1.0 license](docs/Licenser/edl-v10.txt)<br>
 Spring boot, Spring framework [Apache license](docs/Licenser/Apache.txt)<br>
 commonmark-java [BSD-2 clause simplified license](docs/Licenser/BSD-2.txt)<br>
-json-ld-java [BSD-3 clause license](docs/Licenser/BSD-3.txt)<br>
 jackson-dataformat-yaml [Apache license](docs/Licenser/Apache.txt)<br>
 JSON-java [Public domain](https://github.com/stleary/JSON-java)<br>
 commons-collections4 [Apache license](docs/Licenser/Apache.txt)<br>
 
 ## Underhållare
+
 Mjukvaran utvecklas av [DIGG](https://github.com/diggsweden) och Arbetsförmedlingen.
 
 ## Versioner
-Aktuell version är 0.9. 
+
+Aktuell version är 0.9.
 
 Detta är en första version av verktyget. Arbetsförmedlingen och Bolagsverket kommer prova mjukvaran skarpt under hösten 2022. När mjukvaran fungerar för tillräckligt många offentliga organisationer kommer versionen uppdateras till 1.0.
 

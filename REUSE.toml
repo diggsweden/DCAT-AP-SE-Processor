@@ -1,15 +1,16 @@
-# SPDX-FileCopyrightText: 2026 diggsweden/DCAT-AP-SE-Processor
+# SPDX-FileCopyrightText: 2022 Agency for Digital Government
 #
-# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-License-Identifier: EUPL-1.2
 
 version = 1
 
 [[annotations]]
 path = [
   "renovate.json",
+  "docs/Licenser/*.txt",
 ]
 precedence = "aggregate"
-SPDX-FileCopyrightText = "2026 diggsweden/DCAT-AP-SE-Processor"
+SPDX-FileCopyrightText = "2022 Agency for Digital Government"
 SPDX-License-Identifier = "CC0-1.0"
 
 [[annotations]]
@@ -19,16 +20,16 @@ path = [
   "README.md",
   "DEVELOPMENT.md",
   "docs/*.md",
-  "docs/*.png",
+  "docs/**/.png",
   "docs/jenkinsfile",
-  "docs/rdfworker-tutorial_images/*.png",
-  "src/main/resources/**/*.json",
-  "src/main/resources/metadataExample/**/*.yaml",
-  "src/main/resources/metadataExample/**/*.raml",
+  "src/**/*.json",
+  "src/**/*.raml",
+  "src/**/*.yaml",
+  "src/main/resources/templates/*.ftlh"
 ]
 precedence = "aggregate"
-SPDX-FileCopyrightText = "2022 diggsweden/DCAT-AP-SE-Processor"
-SPDX-License-Identifier = "GPL-3.0-or-later"
+SPDX-FileCopyrightText = "2022 Agency for Digital Government"
+SPDX-License-Identifier = "EUPL-1.2"
 
 [[annotations]]
 path = [

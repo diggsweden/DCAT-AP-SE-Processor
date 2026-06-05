@@ -6,7 +6,7 @@ För att lägga till en ny sorts apidefinition (ApidefN) krävs en kontroll av t
 
 I exemplet nedan är ”new-dcat” en hållare för metadatat. Beroende på typ av apidefinition och möjligheter att lägga till metadata i en api definition kan den hållaren se olika ut. I Raml och OAS används t.ex. annotations och extensions.
 
-```
+```text
 { 
   "apidefN": "1.0", 
   "info": { 
@@ -17,24 +17,27 @@ I exemplet nedan är ”new-dcat” en hållare för metadatat. Beroende på typ
       "dcat-dataset": { 
       ...
 ```
-```
+
+```text
 jsonobjekt = {"dcat-dataset": {...}
 ```
 
-# Lägga till/ändra element i DCAT spec
+## Lägga till/ändra element i DCAT spec
 
 För att införa/uppdatera element från DCAT specifikationen, görs ett tillägg/justering i matchande convertMapToDcat.json fil (en för Katalog objektet och en för alla andra).
 
 Tillägget är fältets namn i DCAT specifikationen samt en textsträng som matchas mot metadatat i apidefinitionen.
 
-```
+```text
 "dcat:nyttelement": { 
   "text": " nytt metadata" },
 ```
+
 Det är viktigt att elementet hamnar under rätt klass. Om den nya klassen har underelement ska taggens namn från specen stå som ovan och längre ner skapar man upp hela elementet.
 
 T.ex.
-```
+
+```text
 "Dataset": { 
 ... 
   "dcat:nyttelement": { 
@@ -57,7 +60,8 @@ Om fältet man lagt till är obligatoriskt (syns i DCAT specifikationen) behöve
 Här börjar taggen med namnet på huvudklassen och sedan vilket attribut det är i den klassen. <objektnamn>-<elementnamn>
 
 T.ex.
-```
+
+```text
 "Dataset-dcat:nyttelement": { 
   "isMandatory": true 
  },

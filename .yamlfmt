@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2026 diggsweden/DCAT-AP-SE-Processor
+# SPDX-FileCopyrightText: 2022 Agency for Digital Government
 #
 # SPDX-License-Identifier: CC0-1.0
 
