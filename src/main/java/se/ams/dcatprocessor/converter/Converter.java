@@ -104,7 +104,7 @@ public class Converter {
             String urlLanguage = languageFile.getJSONObject(langKey).getString("url");
 
             for (String s : value.split(";")) {
-                applyLanguageValue(subCat, key, keyInLanguage, dataClass, s, urlLanguage);
+                applyLanguageValue(subCat, key, keyInLanguage, dataClass, s.trim(), urlLanguage);
             }
             hasLanguage = true;        
         }
@@ -159,11 +159,10 @@ public class Converter {
             jsonSupportiveDcat = getSupportiveFile(key, subCat.get());
 
         String[] splitValue = value.split(";");
-
+        
         for (String s : splitValue) {
-            String mapValue = s;
+            String mapValue = s.trim();
             if (jsonSupportiveDcat != null) {
-                mapValue = mapValue.trim();
                 if (jsonSupportiveDcat.has(mapValue)) {
                     mapValue = (String) ((JSONObject) (jsonSupportiveDcat.get(mapValue))).get("url");
                 } else if (!mapValue.contains("http://") && !key.contains("format")) {
@@ -171,7 +170,6 @@ public class Converter {
                 }
             }
             if (ConverterHelpClass.tagWithUri.contains(key)) {
-                mapValue = mapValue.trim();
                 if (!(mapValue.contains("http"))) {
                     mapValue = "http://" + mapValue;
                 }
@@ -183,7 +181,6 @@ public class Converter {
                 key = "dcterms:" + key;
             }
             if (ConverterHelpClass.tagWithUriMail.contains(key)) {
-                mapValue = mapValue.trim();
                 mapValue = "mailTo:" + mapValue;
             }
             valueMap.put(key, mapValue);
@@ -253,19 +250,21 @@ public class Converter {
         }
     }
 
-    void createSubset(JSONObject file, String key, String annotationName, Optional<DataClass> preData, Optional<DataClass> preDist, boolean isMandatory) throws Exception {
-        Object[] fileKeys = file.keySet().toArray();
-        Iterator<?> keysInRamlFile = Arrays.stream(fileKeys).iterator();
+    void createSubset(JSONObject file, String key, String annotationName, Optional<DataClass> preData, Optional<DataClass> preDist, boolean isMandatory) throws Exception { 
+        if (annotationName == null) return;
+        
         boolean exists = false;
+        JSONObject mappingBlock = (JSONObject) orgConvert.get(key);
 
-        while (keysInRamlFile.hasNext()) {
-            Object keyInRaml = keysInRamlFile.next();
-            if ((annotationName != null)) {
-                if (((keyInRaml.toString()).contains(annotationName)) && !((keyInRaml.toString()).equals("temporalResolution"))) {
-                    if (((JSONObject) orgConvert.get(key)).keySet().size() > 1) {
-                        exists = true;
-                        convertNestedObject(file, key, keyInRaml.toString(), key, preData, preDist);
-                    }
+        for (Object keyInRaml : file.keySet()) {      
+            String ramlKey = keyInRaml.toString();
+
+            if (ramlKey.contains(annotationName) && !substringCollision(annotationName, ramlKey)) {
+
+                // Check if block has nested fields to convert.
+                if (mappingBlock.keySet().size() > 1) {
+                    exists = true;
+                    convertNestedObject(file, key, ramlKey, key, preData, preDist);
                 }
             }
         }
@@ -274,6 +273,18 @@ public class Converter {
             errors.add("Errormessage: " + annotationName + " is Mandatory");
         }
     }
+
+    protected boolean substringCollision(String annotationName, String ramlKey){
+        // prevent temporalResolution (field) from matching as a temporal (class)
+        if(ramlKey.equals("temporalResolution")){
+            return true;
+        }
+        // prevent dcat-datasetseries from matching as a dcat-dataset
+        if(annotationName.equals("dcat-dataset") && ramlKey.equals("dcat-datasetseries")){
+            return true;
+        }
+        return false;
+    } 
 
     protected boolean isKeyMandatory(Object key, Optional<String> subCat) {
         String mandatoryKey;

@@ -64,13 +64,14 @@
     },
     "Document-about": {
         "isMandatory" : true
+    },
+    "publisher-dcterms:type": {
+        "isMandatory": true
+    },
+    "creator-dcterms:type": {
+        "isMandatory": true
+    },
+    "other agent-dcterms:type": {
+        "isMandatory": true
     }
 }
-
-
-
-
-
-
-
-

@@ -13,13 +13,13 @@ import org.eclipse.rdf4j.model.vocabulary.DCAT;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
 import org.eclipse.rdf4j.model.vocabulary.LOCN;
+import org.eclipse.rdf4j.model.vocabulary.ORG;
 import org.eclipse.rdf4j.model.vocabulary.OWL;
 import org.eclipse.rdf4j.model.vocabulary.PROV;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.model.vocabulary.VCARD4;
 
 import se.ams.dcatprocessor.rdf.namespace.ADMS;
-import se.ams.dcatprocessor.rdf.namespace.DCATEXT;
 import se.ams.dcatprocessor.rdf.namespace.ODRS;
 import se.ams.dcatprocessor.rdf.namespace.SCHEMA;
 import se.ams.dcatprocessor.rdf.namespace.SPDX;
@@ -68,8 +68,8 @@ public class VocabularyStringToIRI {
 		DCAT_MAP.put("dcat:qualifiedRelation", DCAT.QUALIFIED_RELATION);
 		DCAT_MAP.put("dcat:contactPoint", DCAT.CONTACT_POINT);
 		DCAT_MAP.put("dcat:distribution", DCAT.DISTRIBUTION);
-		DCAT_MAP.put("dcat:hasVersion", DCATEXT.HAS_VERSION);
-		DCAT_MAP.put("dcat:isVersionOf", DCATEXT.IS_VERSION_OF);
+		DCAT_MAP.put("dcat:inSeries", DCAT.IN_SERIES);
+		DCAT_MAP.put("dcat:version", DCAT.VERSION);
 	}
 		
 	private static final HashMap<String, IRI> DCTERMS_MAP = new HashMap<>();
@@ -98,6 +98,7 @@ public class VocabularyStringToIRI {
 		DCTERMS_MAP.put("dcterms:provenance", DCTERMS.PROVENANCE_STATEMENT);
 		DCTERMS_MAP.put("dcterms:source", DCTERMS.SOURCE);
 		DCTERMS_MAP.put("dcterms:temporal", DCTERMS.TEMPORAL);
+		DCTERMS_MAP.put("dcterms:subject", DCTERMS.SUBJECT);
 	}
 	
 	private static final HashMap<String, IRI> FOAF_MAP = new HashMap<>();
@@ -117,7 +118,12 @@ public class VocabularyStringToIRI {
 
 	private static final HashMap<String, IRI> OWL_MAP = new HashMap<>();
 	static {
-		OWL_MAP.put("owl:versionInfo", OWL.VERSIONINFO);
+		OWL_MAP.put("owl:sameAs", OWL.SAMEAS);
+	}
+
+	private static final HashMap<String, IRI> ORG_MAP = new HashMap<>();
+	static {
+    	ORG_MAP.put("org:classification", ORG.CLASSIFICATION);
 	}
 	
 	private static final HashMap<String, IRI> VCARD4_MAP = new HashMap<>();
@@ -131,11 +137,14 @@ public class VocabularyStringToIRI {
 		VCARD4_MAP.put("vcard:locality", VCARD4.LOCALITY);
 		VCARD4_MAP.put("vcard:country-name", VCARD4.COUNTRY_NAME);
 		VCARD4_MAP.put("vcard:hasValue", VCARD4.HAS_VALUE);
+		VCARD4_MAP.put("vcard:hasURL", VCARD4.HAS_URL);
 	}
 	
 	private static final HashMap<String, IRI> DCATAP = new HashMap<>();
 	static {
 		DCATAP.put("dcatap:availability", valueFactory.createIRI("http://data.europa.eu/r5r/availability", ""));
+		DCATAP.put("dcatap:applicableLegislation", valueFactory.createIRI("http://data.europa.eu/r5r#", "applicableLegislation"));
+		DCATAP.put("dcatap:hvdCategory", valueFactory.createIRI("http://data.europa.eu/r5r#", "hvdCategory"));
 	}
 	
 	private static final HashMap<String, IRI> LOCATION = new HashMap<>();
@@ -231,7 +240,10 @@ public class VocabularyStringToIRI {
 			return SPDX_MAP.get(qName);
 		}
 		
+		if(ORG_MAP.containsKey(qName)){
+			return ORG_MAP.get(qName);
+		}
+
 		return null;
 	}
-
 }

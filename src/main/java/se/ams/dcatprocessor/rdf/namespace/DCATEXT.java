@@ -23,11 +23,7 @@ public class DCATEXT extends DCAT {
 	/** dcat:hasVersion */
 	public static final IRI HAS_VERSION;
 
-	/** dcat:isVersionOf */
-	public static final IRI IS_VERSION_OF;
-
 	static {
 		HAS_VERSION = SimpleValueFactory.getInstance().createIRI(NAMESPACE, "hasVersion");
-		IS_VERSION_OF = SimpleValueFactory.getInstance().createIRI(NAMESPACE, "isVersionOf");
 	}
 }

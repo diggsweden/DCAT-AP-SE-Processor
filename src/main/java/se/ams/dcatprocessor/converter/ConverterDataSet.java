@@ -65,6 +65,8 @@ public class ConverterDataSet extends Converter {
                 if (subCat.isPresent()) {
                     if (subCat.get().equals(DCAT.DATASET.getLocalName())) {
                         hasLanguages = addLanguageValues(file, annotationName, subCat, Optional.of(dataSet), key);
+                    } else if (subCat.get().contains(PROV.ATTRIBUTION.getLocalName())) {
+                        hasLanguages = addLanguageValues(file, annotationName, subCat, Optional.of(otherAgent), key);
                     } else if (ConverterHelpClass.isNestedLanguageObjects(subCat.get())) {
                         hasLanguages = addLanguageValues(file, annotationName, subCat, Optional.of(dataClassLocal), key);
                     }

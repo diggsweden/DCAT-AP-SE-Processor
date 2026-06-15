@@ -57,6 +57,18 @@
         },
         "foaf:mbox": {
             "metadata": "mbox"
+        },
+        "dcterms:description": { 
+            "metadata": "description" 
+        },
+        "dcterms:identifier": {
+             "metadata": "identifier" 
+        },
+        "owl:sameAs": { 
+            "metadata": "sameAs" 
+        },
+        "org:classification": { 
+            "metadata": "classification" 
         }
     },
     "LicenseDocument": {
@@ -114,11 +126,3 @@
         }
     }
 }
-
-
-
-
-
-
-
-

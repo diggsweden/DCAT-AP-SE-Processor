@@ -60,7 +60,7 @@ public class ConverterHelpClass {
 
     public static List<String> tagWithUri = Arrays.asList("about","foaf:homepage", "license", "homepage", "dcat:accessURL", "dcat:downloadURL", "dcat:landingPage",
             "dcterms:isReferencedBy", "dcterms:relation", "dcat:endpointURL", "dcat:endpointDescription", "dcat:accessService", "dcterms:relation", "dcat:qualifiedRelation",
-            "dcat:landingPage", "odrs:attributionURL", "odrs:jurisdiction", "odrs:reuserGuidelines", "schema:mainEntityOfPage", "dcat:servesDataset", "dcat:hasVersion", "dcat:isVersionOf",
+            "dcat:landingPage", "odrs:attributionURL", "odrs:jurisdiction", "odrs:reuserGuidelines", "schema:mainEntityOfPage", "dcat:servesDataset", "dcat:hasVersion",
             "dcterms:source");
     public static List<String> tagWithUriMail = Arrays.asList("foaf:mbox", "vcard:hasEmail");
 
@@ -91,7 +91,11 @@ public class ConverterHelpClass {
                 objectKeyName.equals(SCHEMA.OFFERS.getLocalName()) ||
                 objectKeyName.equals(FOAF.DOCUMENT.getLocalName()) ||
                 objectKeyName.equals(DCTERMS.STANDARD.getLocalName()) ||
-                objectKeyName.equals(DCTERMS.RIGHTS_STATEMENT.getLocalName())) {
+                objectKeyName.equals(DCTERMS.RIGHTS_STATEMENT.getLocalName()) ||
+                objectKeyName.equals(DCTERMS.PUBLISHER.getLocalName()) ||
+                objectKeyName.equals(DCTERMS.CREATOR.getLocalName()) ||
+                objectKeyName.equals(PROV.ATTRIBUTION.getLocalName()))          
+                {
             return true;
         }
         else {
