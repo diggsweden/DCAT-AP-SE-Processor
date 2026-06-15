@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,6 +16,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
+import org.json.JSONObject;
 
 import se.ams.dcatprocessor.rdf.CardinalityHandler;
 import se.ams.dcatprocessor.rdf.validate.MultipleURIValidator;
@@ -106,5 +109,22 @@ public class TestHelper {
         DcatPropertyHandler.resetInstance();
         SingleInputValidator.resetInstance();
 		CardinalityHandler.resetInstance();
+	}
+
+	/**
+ 	* Test helper for creating mutated variants of an apidef fixture without touching the original files
+ 	* @param sourceFile the original apidef file (left untouched)
+ 	* @param tempDir    the destination directory, normally the test's @TempDir
+ 	* @param mutation   the change to apply to the file's JSON (removing/adding fields)
+	* @return path to the mutated copy, ready to pass to createDcatFromFile
+	*/
+	public static Path copyWith(Path sourceFile, Path tempDir, Consumer<JSONObject> mutation) throws IOException {
+	    JSONObject json = new JSONObject(Files.readString(sourceFile));
+	    mutation.accept(json);
+
+	    Path target = tempDir.resolve(sourceFile.getFileName());
+	    Files.writeString(target, json.toString());
+
+	    return target;
 	}
 }

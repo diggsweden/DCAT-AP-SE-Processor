@@ -777,7 +777,6 @@ class RDFWorkerTest {
 		//Add some crosslinks between datasets
 		dataSet1.dcData.put("dcterms:source", dataSet2.about);
 		dataSet2.dcData.put("dcat:hasVersion", dataSet1.about);
-		dataSet2.dcData.put("dcat:isVersionOf", dataSet1.about);
 		
 		Organization org1 = new Organization();
 		org1.about = "https://example.com/contactpoint101";

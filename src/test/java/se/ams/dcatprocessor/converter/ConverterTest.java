@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import se.ams.dcatprocessor.models.DataClass;
@@ -109,6 +110,22 @@ public class ConverterTest {
     void testThatIsKeyMandatoryReturnsFalseWhenKeyMissing() {
         converter.jsonObjectMandatoryDcat = new JSONObject("{}");
         assertFalse(converter.isKeyMandatory("title", Optional.empty()));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+        "temporal,  temporalResolution",
+        "dcat-dataset,  dcat-datasetseries",
+    })
+    void testThatSubstringCollisionReturnsTrueForKnownCollisions(String annotationName, String ramlKey){
+        boolean result = converter.substringCollision(annotationName, ramlKey);
+        assertTrue(result);
+    }
+
+    @Test
+    void testThatSubstringCollisionReturnFalseWhenNoMatch(){
+        boolean result = converter.substringCollision("dcat-dataset", "title");
+        assertFalse(result);
     }
 
     private JSONObject getJSONObjectForTest(){
