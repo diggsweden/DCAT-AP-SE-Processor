@@ -748,12 +748,9 @@ public class RDFWorker {
 		return false;
 	}
 	
-	//TODO: Improve this and remove hardcoded value
-	//Constants for multiple use
-	private final String VCARD_HAS_VALUE = "vcard:hasValue";
-	
 	private boolean isPhoneValue(String key) {
-		return key.equals(VCARD_HAS_VALUE);
+		String vcardHasValue = VCARD4.PREFIX + ":" + VCARD4.HAS_VALUE.getLocalName();
+		return key.equals(vcardHasValue);
 	}
 
 	/**

@@ -61,9 +61,6 @@ public class SingleInputValidator {
 	private static String ERROR_KEY_OR_VALUE_IS_NULL = "Error validating type: Input X is null";
 	private static String ERROR_NO_CORRESPONDING_INPUT_TYPE = "Error validating type: Key X is not defined";
 	
-	//Predefined frequentry used string
-	private final String TEL_PREFIX = "tel:";
-	
 	/**
 	 * Checks if a value has the correct format according to the InputType definition(regex) mapped to the key
 	 * @param key - The key
@@ -115,21 +112,6 @@ public class SingleInputValidator {
 				return true;
 			}
 			
-			//TODO: Write a regex for this
-			/**
-			 * Special case for phonenumer...my BAD
-			 * 
-			 */
-			if(inputType.equals(InputType.PHONENUMBER)) {
-				if(value.contains(TEL_PREFIX)) {
-					String[] split = value.split(TEL_PREFIX);
-					if(pattern.matcher(split[1]).matches()) {
-						return true;
-					}
-				}
-					
-			}
-			
 			if(pattern.matcher(value).matches()) {
 				return true;
 			}
@@ -170,7 +152,7 @@ public class SingleInputValidator {
 		inputTypeToRegexMap.put(InputType.DATETIME, Pattern.compile("[1|2]{1}[0-9]{3}[-]{1}[0-9]{2}[-]{1}[0-9]{2}[T]{1}[0-9]{2}[:]{1}[0-9]{2}[:]{1}[0-9]{2}"));
 		inputTypeToRegexMap.put(InputType.GYEAR, Pattern.compile("[0-9]{4}"));
 		inputTypeToRegexMap.put(InputType.DURATION, Pattern.compile("P(?:(?:\\d+D|\\d+M(?:\\d+D)?|\\d+Y(?:\\d+M(?:\\d+D)?)?)(?:T(?:\\d+H(?:\\d+M(?:\\d+S)?)?|\\d+M(?:\\d+S)?|\\d+S))?|T(?:\\d+H(?:\\d+M(?:\\d+S)?)?|\\d+M(?:\\d+S)?|\\d+S)|\\d+W)"));
-		inputTypeToRegexMap.put(InputType.PHONENUMBER, Pattern.compile("^(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)$"));
+		inputTypeToRegexMap.put(InputType.PHONENUMBER, Pattern.compile("^(?:tel:)?(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)$"));
 	}
 	
 	//Predefined errormessage
