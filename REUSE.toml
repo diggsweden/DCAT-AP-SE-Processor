@@ -8,6 +8,8 @@ version = 1
 path = [
   "renovate.json",
   "docs/Licenser/*.txt",
+  "src/main/resources/shapes/*",
+  "src/main/resources/shapes/vocabularies/*.rdf"
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2022 Agency for Digital Government"

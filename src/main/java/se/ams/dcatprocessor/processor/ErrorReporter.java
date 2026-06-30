@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
+
+import se.ams.dcatprocessor.rdf.validate.RDFValidationError;
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 
 @Component
@@ -15,7 +17,7 @@ public class ErrorReporter {
 
     private static final String DOCS_URL = "https://docs.dataportal.se/dcat/sv/";
 
-    public String buildErrorReport(Map<String, String> exceptions, Map<String, List<ValidationError>> validationErrors) {
+    public String buildErrorReport(Map<String, String> exceptions, Map<String, List<ValidationError>> validationErrors,  List<RDFValidationError> rdfValidationErrors) {
         StringBuilder report = new StringBuilder();
 
         // Errors from ApiDefinitionParser, Converters or general errors
@@ -46,7 +48,21 @@ public class ErrorReporter {
                 report.append("\n");
             });
         }
-   
+
+        // RDFValidations failures
+        else if(!rdfValidationErrors.isEmpty()){
+            report.append("ERROR - Validation of generated RDF file failed\n");
+            report.append("Check DCAT-AP-SE specification for info\n");
+            report.append(DOCS_URL + "\n");
+            report.append("-------------------------------------------\n");
+            rdfValidationErrors.forEach(x -> {
+                report.append("\n");
+                report.append("RDFValidation error");
+                report.append("\n");
+                report.append(x.toString() + ":\n");
+            });
+        }
+           
         return report.toString();
     }
 }

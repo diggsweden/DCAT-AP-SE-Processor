@@ -25,6 +25,8 @@ import se.ams.dcatprocessor.parser.ApiDefinitionParser;
 import se.ams.dcatprocessor.rdf.DcatException;
 import se.ams.dcatprocessor.rdf.RDFWorker;
 import se.ams.dcatprocessor.models.FileStorage;
+import se.ams.dcatprocessor.rdf.validate.RDFValidationError;
+import se.ams.dcatprocessor.rdf.validate.RDFValidator;
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
 
@@ -41,6 +43,7 @@ public class Manager {
 
     private final ObjectProvider<RDFWorker> rdfWorkerProvider;
     private final ErrorReporter errorReporter;
+    private final RDFValidator rdfValidator;
 
     private final ObjectProvider<ConverterFiles> converterFilesProvider;
     private final ObjectProvider<ConverterCatalog> converterCatalogProvider;
@@ -53,11 +56,13 @@ public class Manager {
     public Manager(
         ObjectProvider<RDFWorker> rdfWorkerProvider,
         ErrorReporter errorReporter,
+        RDFValidator rdfValidator,
         ObjectProvider<ConverterFiles> converterFilesProvider,
         ObjectProvider<ConverterCatalog> converterCatalogProvider
     ) {
         this.rdfWorkerProvider = rdfWorkerProvider;
         this.errorReporter = errorReporter;
+        this.rdfValidator = rdfValidator;
         this.converterFilesProvider = converterFilesProvider;
         this.converterCatalogProvider = converterCatalogProvider;
     }
@@ -158,6 +163,7 @@ public class Manager {
 
         HashMap<String, String> exceptions = new HashMap<>();
         Map<String, List<ValidationError>> validationErrorsPerFileMap = new HashMap<>();
+        List<RDFValidationError> rdfValidationErrors = new ArrayList<>();
         String result = "Kunde inte generera en dcat fil";
 
         for (String apiFileName : apiSpecMap.keySet()) {
@@ -181,6 +187,9 @@ public class Manager {
             // Creates dcat file if catalog exist
             if (catalog != null && catalog.about != null) {
                 result = rdfWorker.createDcatFile(catalog, fileStorages);
+
+                // Validate RDF
+                rdfValidationErrors = rdfValidator.validate(result);
             }
         } catch (DcatException e) {
             // holds validation errors
@@ -196,7 +205,7 @@ public class Manager {
             }
         }
 
-        String errorReport = errorReporter.buildErrorReport(exceptions, validationErrorsPerFileMap);
+        String errorReport = errorReporter.buildErrorReport(exceptions, validationErrorsPerFileMap, rdfValidationErrors);
 
         // If any errors, return report
         if(!errorReport.isEmpty()){

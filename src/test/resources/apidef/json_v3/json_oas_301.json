@@ -198,10 +198,8 @@
           "accessService": "https://www.example.se/#dataserviceC",
           "temporalResolution": "P1Y",
           "spatialResolutionInMeters": "1.4",
-          "byteSize": "3000",
           "issued": "2021-05-04",
           "modified": "2021-05-20",
-          "status": "Completed",
           "availability": "Stable",
           "applicableLegislation": "http://data.europa.eu/eli/reg_impl/2023/138/oj",
           "license": "CC BY-NC-ND 4.0",
@@ -223,9 +221,6 @@
             },
             "jurisdiction": "www.copyrightwebjurisdiction.com",
             "reuserGuidelines": "www.guidelines.se"
-          },
-          "checksum": {
-            "value": "0A23DF"
           },
           "page": {
             "about": "https://www.example.se/#distributionC/page",
