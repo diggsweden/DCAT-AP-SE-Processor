@@ -1,0 +1,352 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:atold="http://publications.europa.eu/resource/authority/"
+         xmlns:at="http://publications.europa.eu/ontology/authority/"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xml:base="http://publications.europa.eu/resource/authority/distribution-status">
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/distribution-status/WITHDRAWN"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:definition xml:lang="en">distribution no longer intended for publication</skos:definition>
+      <skos:prefLabel xml:lang="hr">povučeno</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">stiahnutý</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">tagasi võetud</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">peruutettu</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">tillbakadragen</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">έχει αποσυρθεί</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">conținut retras</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">retiré</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">trekt tilbake</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">visszavonva</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">obsah stažen</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">aistarraingthe</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">irtirat</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">wycofany</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">withdrawn</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">trukket tilbake</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">trukket tilbake</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">atsaukts</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">umaknjeno</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">trukket tilbage</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">оттеглен</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">ingetrokken</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">ritirato</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">eingestellt</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">retirado</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">retirado</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">atšauktas</skos:prefLabel>
+      <dc:identifier>WITHDRAWN</dc:identifier>
+      <atold:op-code>WITHDRAWN</atold:op-code>
+      <at:op-code>WITHDRAWN</at:op-code>
+      <at:start.use>2015-10-23</at:start.use>
+      <at:authority-code>WITHDRAWN</at:authority-code>
+   </skos:Concept>
+   <skos:ConceptScheme rdf:about="http://publications.europa.eu/resource/authority/distribution-status"
+                       at:table.id="distribution-status"
+                       at:table.version.number="20260617-0">
+      <skos:prefLabel xml:lang="en">Distribution status</skos:prefLabel>
+      <owl:versionInfo>20260617-0</owl:versionInfo>
+      <rdfs:label xml:lang="en">Distribution status</rdfs:label>
+      <at:prefLabel xml:lang="en">Distribution status</at:prefLabel>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/distribution-status/WITHDRAWN"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/distribution-status/PLANNED"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/distribution-status/OP_DATPRO"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/distribution-status/ONGOING"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/distribution-status/DEVELOP"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/distribution-status/REQUIRED"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/distribution-status/COMPLETED"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/distribution-status/DEPRECATED"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/distribution-status/ARCHIVE"/>
+   </skos:ConceptScheme>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/distribution-status/PLANNED"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:definition xml:lang="en">distribution scheduled for creation or update on an established date</skos:definition>
+      <skos:prefLabel xml:lang="pt">previsto</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">previsto</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">prévu</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">previsto</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">kavandatud</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">geplant</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">naplánováno</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">planificată</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">planirano</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">suunniteltu</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">планиран</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">pleanáilte</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">ippjanata</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">planerat</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">planowany</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">tervezett</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">planlagt</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">plánované</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">έχει προγραμματιστεί</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">plānoti</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">načrtovano</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">planned</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">gepland</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">planuojama</skos:prefLabel>
+      <dc:identifier>PLANNED</dc:identifier>
+      <atold:op-code>PLANNED</atold:op-code>
+      <at:op-code>PLANNED</at:op-code>
+      <at:start.use>2026-05-29</at:start.use>
+      <at:authority-code>PLANNED</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/distribution-status/OP_DATPRO"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:prefLabel xml:lang="sk">Predbežné údaje</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Datos provisionales</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Esialgsed andmed</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Dane tymczasowe</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Ideiglenes adatok</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Laikinieji duomenys</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Provisional data</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Alustavat tiedot</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Voorlopige gegevens</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Začasni podatki</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Προσωρινά δεδομένα</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Midlertidige data</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Sonraí sealadacha</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Date provizorii</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Předběžné údaje</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Données provisoires</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Dati provvisori</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Dados provisórios</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Provizoriski dati</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Неокончателни данни</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Tillfälliga uppgifter</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Vorläufige Daten</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Privremeni podaci</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Dejta provviżorja</skos:prefLabel>
+      <dc:identifier>OP_DATPRO</dc:identifier>
+      <atold:op-code>OP_DATPRO</atold:op-code>
+      <at:op-code>OP_DATPRO</at:op-code>
+      <at:start.use>1952-07-23</at:start.use>
+      <at:authority-code>OP_DATPRO</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/distribution-status/ONGOING"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:definition xml:lang="en">distribution undergoing continual updating</skos:definition>
+      <skos:prefLabel xml:lang="de">laufend</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">prebieha</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">in corso</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">probíhá</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">текущ</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">em curso</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">meħtieġa</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">en curso</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">pågående</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">meneillään</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">σε εξέλιξη</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">igangværende</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">aktualizowany</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">vykdoma</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">doorlopend</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">nõutav</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">á nuashonrú go leanúnach</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">atjaunināti</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">folyamatos</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">ongoing</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">în curs</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">poteka</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">u tijeku</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">en cours</skos:prefLabel>
+      <dc:identifier>ONGOING</dc:identifier>
+      <atold:op-code>ONGOING</atold:op-code>
+      <at:op-code>ONGOING</at:op-code>
+      <at:start.use>2026-05-29</at:start.use>
+      <at:authority-code>ONGOING</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/distribution-status/DEVELOP"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:definition xml:lang="en">distribution being assembled and possibly incomplete or erroneous</skos:definition>
+      <skos:prefLabel xml:lang="bg">в процес на създаване</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">υπό κατασκευή</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">ve fázi vývoje</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">töös</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">în curs de pregătire</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">in ontwikkeling</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">en fase de elaboración</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">under udvikling</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">under utvikling</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">under utvikling</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">im Aufbau</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">under utvikling</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">em desenvolvimento</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">izstrādes stadijā</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">in corso di sviluppo</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">á fhorbairt</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">v pripravi</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">prace w toku</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">kehitteillä</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">sudaromas</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">en cours d’élaboration</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">qed jiġi żviluppat</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">kidolgozás alatt</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">vo fáze vývoja</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">u izradi</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">under utveckling</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">under development</skos:prefLabel>
+      <dc:identifier>DEVELOP</dc:identifier>
+      <atold:op-code>DEVELOP</atold:op-code>
+      <at:op-code>DEVELOP</at:op-code>
+      <at:start.use>2015-10-23</at:start.use>
+      <at:authority-code>DEVELOP</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/distribution-status/REQUIRED"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:definition xml:lang="en">distribution needing creation or update</skos:definition>
+      <skos:prefLabel xml:lang="fi">edellytetty</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">de dhíth</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">requis</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">wymagany</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">obvezno</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">påkrævet</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">necesară</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">għadha għaddejja</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">vyžadované</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">required</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">vyžadováno</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">richiesto</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">изисква се</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">krävs</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">απαιτείται</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">prasīti</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">potrebno</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">erforderlich</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">reikalaujama</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">vereist</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">käimasolev</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">előírt</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">requerido</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">obrigatório</skos:prefLabel>
+      <dc:identifier>REQUIRED</dc:identifier>
+      <atold:op-code>REQUIRED</atold:op-code>
+      <at:op-code>REQUIRED</at:op-code>
+      <at:start.use>2026-05-29</at:start.use>
+      <at:authority-code>REQUIRED</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/distribution-status/COMPLETED"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:definition xml:lang="en">distribution containing all information intended for publication</skos:definition>
+      <skos:prefLabel xml:lang="it">completato</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">færdiggjort</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">komplut</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">dokončano</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">complété</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">completo</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">completed</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">πλήρη δεδομένα</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">valmis</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">kész</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">täielik</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">dokončený</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">voltooid</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">vollständig</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">ukończony</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">färdig</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">baigtas</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">dokončen</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">pabeigts</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">finalizat</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">ferdigstilt</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">completado</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">ferdigstilt</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">ferdigstilt</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">lánchríochnaithe</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">potpun</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">пълен</skos:prefLabel>
+      <dc:identifier>COMPLETED</dc:identifier>
+      <atold:op-code>COMPLETED</atold:op-code>
+      <at:op-code>COMPLETED</at:op-code>
+      <at:start.use>2015-10-23</at:start.use>
+      <at:authority-code>COMPLETED</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/distribution-status/DEPRECATED"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:definition xml:lang="en">distribution no longer recommended for use</skos:definition>
+      <skos:prefLabel xml:lang="no">frarådet</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">frarådet</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">непрепоръчителен</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">frarådd</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">deprecated</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">verouderd</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">zastaralý</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">desaconsejado</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">παρωχημένα δεδομένα</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">nerecomandat</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">veraltet</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">avvecklad</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">déconseillé</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">nerekomenduojamas</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">dímholta</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">odsvetovano</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">mhux aktar fl-użu</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">taunitav</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">nevažeći</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">hylättävä</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">desaconselhado</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">elavult</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">nieaktualny</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">novecojis</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">zastaraný</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">sconsigliato</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">frarådet</skos:prefLabel>
+      <dc:identifier>DEPRECATED</dc:identifier>
+      <atold:op-code>DEPRECATED</atold:op-code>
+      <at:op-code>DEPRECATED</at:op-code>
+      <at:start.use>2015-10-23</at:start.use>
+      <at:authority-code>DEPRECATED</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/distribution-status/ARCHIVE"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/distribution-status"/>
+      <skos:definition xml:lang="en">distribution stored in an offline storage facility</skos:definition>
+      <skos:prefLabel xml:lang="ga">i gcartlann stairiúil</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">офлайн архив</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">archivio storico</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">zgodovinski arhiv</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">előzményarchívum</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">ιστορικό αρχείο</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">archive historique</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">archivo histórico</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">historisk arkiv</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Historisches Archiv</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">historický archiv</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">historisch archief</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">arquivo histórico</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">historical archive</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">historický archív</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">povijesni arhiv</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">arkiverat</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">istorinis archyvas</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">arhivă istorică</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">vēstures arhīvs</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">w archiwum historycznym</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">historiallinen arkisto</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">arkivju storiku</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">ajalooline arhiiv</skos:prefLabel>
+      <dc:identifier>ARCHIVE</dc:identifier>
+      <atold:op-code>ARCHIVE</atold:op-code>
+      <at:op-code>ARCHIVE</at:op-code>
+      <at:start.use>2026-05-29</at:start.use>
+      <at:authority-code>ARCHIVE</at:authority-code>
+   </skos:Concept>
+</rdf:RDF>

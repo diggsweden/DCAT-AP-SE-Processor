@@ -26,18 +26,6 @@ public class Converter {
         errors.clear();
     }
 
-    /*
-     * Takes one specFile for a Catalog and creates a Catalog Object */
-    public DataClass catalogToDcat(JSONObject apiSpec) throws Exception {
-        return catalog;
-    }
-
-    /*
-     * Takes one specFile for a Api and creates an Object with ApiSpec tags, DataSet, DataService, Distribution etc. */
-    public DataClass fileToDcat(JSONObject apiSpec) throws Exception {
-        return fileHandler;
-    }
-
     void processToDcat(JSONObject subConvert, JSONObject file, Optional<String> subCat, Optional<DataClass> preData, Optional<DataClass> preDist) throws Exception {
     }
 

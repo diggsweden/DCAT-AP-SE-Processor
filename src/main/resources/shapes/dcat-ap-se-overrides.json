@@ -1,0 +1,77 @@
+{
+  "_comment": "DCAT-AP-SE overrides to the EU DCAT-AP 3.0 SHACL shapes. Each entry lists a (path, constraintType) pair that should be filtered out of the SHACL validation report because the Swedish profile diverges from EU. Read by RDFValidator. Source for SE rules: https://docs.dataportal.se/dcat/3.0.1/en/",
+
+  "overrides": [
+    {
+      "path": "http://www.w3.org/ns/dcat#accessURL",
+      "ignoreConstraints": ["ClassConstraintComponent"],
+      "reason": "SE template: nodetype URI + pattern, no rdf:type required."
+    },
+    {
+      "path": "http://www.w3.org/ns/dcat#downloadURL",
+      "ignoreConstraints": ["ClassConstraintComponent"],
+      "reason": "SE template: nodetype URI + pattern, no rdf:type required."
+    },
+    {
+      "path": "http://www.w3.org/ns/dcat#endpointURL",
+      "ignoreConstraints": ["ClassConstraintComponent"],
+      "reason": "SE template: nodetype URI, no rdf:type required."
+    },
+    {
+      "path": "http://www.w3.org/ns/dcat#endpointDescription",
+      "ignoreConstraints": ["ClassConstraintComponent"],
+      "reason": "SE template: nodetype URI, no rdf:type required."
+    },
+    {
+      "path": "http://www.w3.org/ns/dcat#landingPage",
+      "ignoreConstraints": ["ClassConstraintComponent"],
+      "reason": "SE template: nodetype URI + pattern, no rdf:type required."
+    },
+    {
+      "path": "http://xmlns.com/foaf/0.1/homepage",
+      "ignoreConstraints": ["ClassConstraintComponent"],
+      "reason": "SE template: nodetype URI + pattern, no rdf:type required."
+    },
+    {
+      "path": "http://purl.org/dc/terms/relation",
+      "ignoreConstraints": ["ClassConstraintComponent"],
+      "reason": "SE template: nodetype URI + pattern, no rdf:type required."
+    },
+    {
+      "path": "http://purl.org/dc/terms/isReferencedBy",
+      "ignoreConstraints": ["ClassConstraintComponent"],
+      "reason": "SE template: nodetype URI + pattern, no rdf:type required."
+    },
+    {
+      "path": "http://www.w3.org/ns/dcat#dataset",
+      "ignoreConstraints": [ "ClassConstraintComponent"],
+      "reason": "SE template: dataset reference can be a bare IRI."
+    },
+    {
+      "path": "http://www.w3.org/ns/dcat#contactPoint",
+      "ignoreConstraints": ["ClassConstraintComponent"],
+      "reason": "SE template: vcard:Organization/Individual/Kind, not strictly vcard:Kind."
+    },
+    {
+      "path": "http://purl.org/dc/terms/format",
+      "ignoreConstraints": [
+        "ClassConstraintComponent",
+        "NodeKindConstraintComponent"
+      ],
+      "reason": "SE template: nodetype LITERAL for dcterms:format. String values like 'application/json' are accepted in SE."
+    },
+    {
+      "path": "http://www.w3.org/ns/adms#identifier",
+      "ignoreConstraints": [
+        "ClassConstraintComponent",
+        "NodeKindConstraintComponent"
+      ],
+      "reason": "DCAT-AP-SE accepts string identifiers for adms:identifier. EU SHACL requires a typed adms:Identifier node."
+    },
+    {
+      "path": "http://purl.org/dc/terms/rights",
+      "ignoreConstraints": ["ClassConstraintComponent"],
+      "reason": "DCAT-AP-SE uses odrs:RightsStatement for rights statements. EU SHACL requires dc:RightsStatement."
+    }
+  ]
+}

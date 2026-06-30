@@ -5,7 +5,7 @@
     "title": "Annotation exempel api 3.0.1",
     "description": "Testfil för uppgradering 2.0 => 3.0.1. Bygger på full_example_oas.json med samtliga nya 3.0.1-fält tillagda.",
     "x-dcat": {
-      "dcat-catalog": {
+      "dcat-catalog": { 
         "about": "https://www.af.se",
         "title-sv": "Exempel på catalog för en organisation med flera api'n",
         "title-en": "Example of a catalog for an organistaion with several api's",
@@ -26,6 +26,12 @@
         "issued": "2021-04-01",
         "homepage": "www.arbetsformedlingen.se",
         "modified": "2021-04-02",
+        "location": {
+          "about": "https://www.af.se#location",
+          "bbox": "POLYGON((0 0, 1 0, 1 1, 0 1, 0 0))",
+          "centroid": "POINT(10.0 51.0)",
+          "geometry": "POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))"
+        },
         "rights": {
           "attributionText-sv": "Detta är ett exempel på rättighetstext för Catalog",
           "attributionURL": "www.rattighetstextcatalog.se",
@@ -52,7 +58,7 @@
         "title-en": "Dataset series C",
         "description-sv": "Exempel av Datasetseries (ny primärklass i 3.0.1)",
         "description-en": "Example of Datasetseries (new primaryclass in 3.0.1)",
-        "subject": "http://eurovoc.europa.eu/100142; http://eurovoc.europa.eu/5237",
+        "subject": "https://dataportal.se/concepts/grunddata/foretag",
         "hvdCategory": "http://data.europa.eu/bna/c_a9135398; http://data.europa.eu/bna/c_dd313021",
         "modified": "2021-02-15",
         "contactPoint": {
@@ -68,11 +74,12 @@
         "keyword-en": "series; example",
         "theme": "TRAN",
         "issued": "2021-02-01",
-        "spatialUrl": "https://www.geonames.org/6695072/european-union.html",
+        "spatialUrl": "http://sws.geonames.org/6695072",
         "location": {
           "about": "https://www.example.se/#datasetseriesC/spatial",
-          "bbox": "POLYGON((0 0, 1 0, 1 1, 0 1, 0 0))",
-          "centroid": "POINT(10.0 51.0)"
+          "bbox": "POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))",
+          "centroid": "POINT (12.83 56.4)",
+          "geometry": "POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))"
         },
         "temporal": {
           "startDate": "2021-01-01",
@@ -108,7 +115,7 @@
         "description-sv": "Exempel beskrivning datamängd C",
         "inSeries": "https://www.example.se/#datasetseriesC",
         "version": "3.7.5",
-        "subject": "http://eurovoc.europa.eu/100142; http://eurovoc.europa.eu/5237",
+        "subject": "https://dataportal.se/concepts/grunddata/person; https://dataportal.se/concepts/grunddata/foretag",
         "applicableLegislation": "http://data.europa.eu/eli/reg_impl/2023/138/oj",
         "hvdCategory": "http://data.europa.eu/bna/c_a9135398; http://data.europa.eu/bna/c_dd313021",
         "creator": {
@@ -148,7 +155,12 @@
         "theme": "TRAN; EDUC",
         "issued": "2021-03-05",
         "modified": "2021-03-15",
-        "spatialUrl": "https://www.geonames.org/6695072/european-union.html",
+        "location": {
+          "about": "https://www.example.se/#datasetC/spatial",
+          "bbox": "POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))",
+          "centroid": "POINT (12.83 56.4)",
+          "geometry": "POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))"
+        },
         "versionNotes": "Exempel på VersionsNoteringar; Fler versionsnoteringar",
         "landingPage": "www.exempelsida.se",
         "temporalResolution": "P1Y",
@@ -186,10 +198,8 @@
           "accessService": "https://www.example.se/#dataserviceC",
           "temporalResolution": "P1Y",
           "spatialResolutionInMeters": "1.4",
-          "byteSize": "3000",
           "issued": "2021-05-04",
           "modified": "2021-05-20",
-          "status": "Completed",
           "availability": "Stable",
           "applicableLegislation": "http://data.europa.eu/eli/reg_impl/2023/138/oj",
           "license": "CC BY-NC-ND 4.0",
@@ -212,9 +222,6 @@
             "jurisdiction": "www.copyrightwebjurisdiction.com",
             "reuserGuidelines": "www.guidelines.se"
           },
-          "checksum": {
-            "value": "A23DF"
-          },
           "page": {
             "about": "https://www.example.se/#distributionC/page",
             "title-sv": "Nytt Exempel Dokument",
@@ -234,7 +241,7 @@
         "endpointURL": "www.datatjanstC.se",
         "endpointDescription": "www.beskrivningDatatjanstC.se",
         "format": "application/json",
-        "subject": "http://eurovoc.europa.eu/100142; http://eurovoc.europa.eu/1082",
+        "subject": "https://dataportal.se/concepts/grunddata/person",
         "applicableLegislation": "http://data.europa.eu/eli/reg_impl/2023/138/oj",
         "hvdCategory": "http://data.europa.eu/bna/c_a9135398",
         "publisher": {
