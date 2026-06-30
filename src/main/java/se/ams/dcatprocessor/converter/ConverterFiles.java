@@ -51,9 +51,17 @@ public class ConverterFiles extends Converter {
 
             // Check if tag is Mandatory
             boolean isMandatory = isKeyMandatory(key, subCat);
-
+            
+            // Do if key is DATASETSERIES
+            if (key.equals(DCAT.DATASET_SERIES.getLocalName())) { 
+                ConverterDatasetSeries converterDatasetSeries = new ConverterDatasetSeries();
+                converterDatasetSeries.orgConvert = orgConvert;
+                converterDatasetSeries.fileHandler = fileHandler;
+                converterDatasetSeries.jsonObjectMandatoryDcat = jsonObjectMandatoryDcat;
+                converterDatasetSeries.createSubset(file, key, annotationName, Optional.empty(), Optional.empty(), isMandatory);
+            }
             // Do if key is DATASET
-            if (key.contains(DCAT.DATASET.getLocalName())) {
+            else if (key.contains(DCAT.DATASET.getLocalName())) {
                 ConverterDataSet convertDataSet = new ConverterDataSet();
                 convertDataSet.orgConvert = orgConvert;
                 convertDataSet.jsonObjectMandatoryDcat = jsonObjectMandatoryDcat;

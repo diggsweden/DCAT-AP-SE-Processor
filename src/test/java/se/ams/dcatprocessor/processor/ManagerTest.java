@@ -33,7 +33,7 @@ public class ManagerTest {
     private ObjectProvider<Manager> managerProvider;
 
     private Manager manager;
-  
+
     // region Testdata
     private static String expectedRDF = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<rdf:RDF\n" +
@@ -49,6 +49,8 @@ public class ManagerTest {
             "\txmlns:adms=\"http://www.w3.org/ns/adms#\"\n" +
             "\txmlns:odrs=\"http://schema.theodi.org/odrs#\"\n" +
             "\txmlns:spdx=\"http://spdx.org/rdf/terms#\"\n" +
+            "\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n" +
+	        "\txmlns:org=\"http://www.w3.org/ns/org#\"\n" +
             "\txmlns:dcatap=\"http://data.europa.eu/r5r#\"\n" +
             "\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\">\n" +
             "<foaf:Agent rdf:about=\"https://www.example.se/result.rdf#publisher\">\n" +
@@ -71,14 +73,15 @@ public class ManagerTest {
             "\t\t<dcat:Dataset rdf:about=\"https://www.example.se/result.rdf#dataset1\">\n" +
             "\t\t\t<dcterms:accessRights rdf:resource=\"http://publications.europa.eu/resource/authority/access-right/PUBLIC\"/>\n" +
             "\t\t\t<dcat:keyword xml:lang=\"en\">profession</dcat:keyword>\n" +
-            "\t\t\t<dcat:keyword xml:lang=\"en\"> info</dcat:keyword>\n" +
-            "\t\t\t<dcat:keyword xml:lang=\"en\"> redpill</dcat:keyword>\n" +
-            "\t\t\t<dcat:keyword xml:lang=\"en\"> linpro</dcat:keyword>\n" +
+            "\t\t\t<dcat:keyword xml:lang=\"en\">info</dcat:keyword>\n" +
+            "\t\t\t<dcat:keyword xml:lang=\"en\">redpill</dcat:keyword>\n" +
+            "\t\t\t<dcat:keyword xml:lang=\"en\">linpro</dcat:keyword>\n" +
             "\t\t\t<dcat:keyword xml:lang=\"sv\">yrke</dcat:keyword>\n" +
-            "\t\t\t<dcat:keyword xml:lang=\"sv\"> info</dcat:keyword>\n" +
-            "\t\t\t<dcat:keyword xml:lang=\"sv\"> redpill</dcat:keyword>\n" +
-            "\t\t\t<dcat:keyword xml:lang=\"sv\"> linpro</dcat:keyword>\n" +
+            "\t\t\t<dcat:keyword xml:lang=\"sv\">info</dcat:keyword>\n" +
+            "\t\t\t<dcat:keyword xml:lang=\"sv\">redpill</dcat:keyword>\n" +
+            "\t\t\t<dcat:keyword xml:lang=\"sv\">linpro</dcat:keyword>\n" +
             "\t\t\t<dcterms:spatial rdf:resource=\"https://www.geonames.org/6695072/european-union.html\"/>\n" +
+            "\t\t\t<dcat:version rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">1.0</dcat:version>\n" +
             "\t\t\t<dcterms:language rdf:resource=\"http://publications.europa.eu/resource/authority/language/ENG\"/>\n" +
             "\t\t\t<dcterms:language rdf:resource=\"http://publications.europa.eu/resource/authority/language/SWE\"/>\n" +
             "\t\t\t<dcterms:description xml:lang=\"sv\">Exempel beskrivning</dcterms:description>\n" +
@@ -199,13 +202,12 @@ public class ManagerTest {
             "      temporalResolution: string\n" +
             "      spatialResolutionInMeters: string\n" +
             "      accrualPeriodicity: string\n" +
-            "      versionInfo: string\n" +
+            "      version: string\n" +
             "      versionNotes: string\n" +
             "      source: string\n" +
             "      accessRights: string\n" +
             "      offers: string\n" +
             "      hasVersion: string\n" +
-            "      isVersionOf: string\n" +
             "      isReferencedBy: string\n" +
             "      relation: string\n" +
             "      qualifiedRelation: string\n" +
@@ -284,6 +286,7 @@ public class ManagerTest {
             "    startDate: 2021-03-16\n" +
             "    endDate: 2021-03-25\n" +
             "  accessRights: Public\n" +
+            "  version: 1.0\n" +
             "\n";
 
 	@BeforeEach

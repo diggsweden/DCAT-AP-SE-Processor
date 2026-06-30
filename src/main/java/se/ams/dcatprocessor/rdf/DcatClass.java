@@ -12,7 +12,8 @@ package se.ams.dcatprocessor.rdf;
 public enum DcatClass {
 		
 	CATALOG("catalog"),
-	DATASET("dataset"), 
+	DATASET("dataset"),
+	DATASETSERIES( "datasetseries"),  
 	DISTRIBUTION("distribution"),
 	DATASERVICE("dataservice"),
 	AGENT("agent"),

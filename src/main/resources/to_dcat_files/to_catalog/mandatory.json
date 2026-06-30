@@ -22,13 +22,8 @@
     },
     "Catalog-license": {
         "isMandatory" : true
+    },
+    "publisher-dcterms:type": {
+        "isMandatory": true
     }
 }
-
-
-
-
-
-
-
-

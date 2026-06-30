@@ -51,6 +51,18 @@
         },
         "Document": {
             "metadata": "page"
+        },
+        "dcterms:format": { 
+            "metadata": "format" 
+        },
+        "dcterms:subject": { 
+            "metadata": "subject" 
+        },
+        "dcatap:applicableLegislation": { 
+            "metadata": "applicableLegislation" 
+        }, 
+        "dcatap:hvdCategory": { 
+            "metadata": "hvdCategory" 
         }
     },
     "Dataset": {
@@ -121,9 +133,6 @@
         "dcterms:accrualPeriodicity": {
             "metadata": "accrualPeriodicity"
         },
-        "owl:versionInfo": {
-            "metadata": "versionInfo"
-        },
         "adms:versionNotes": {
             "metadata": "versionNotes"
         },
@@ -139,9 +148,6 @@
         "dcat:hasVersion": {
             "metadata": "hasVersion"
         },
-        "dcat:isVersionOf": {
-            "metadata": "isVersionOf"
-        },
         "dcterms:isReferencedBy": {
             "metadata": "isReferencedBy"
         },
@@ -156,6 +162,87 @@
         },
         "provenance": {
             "metadata": "provenance"
+        },
+        "dcat:inSeries": { 
+            "metadata": "inSeries" 
+        },
+        "dcat:version": { 
+            "metadata": "version" 
+        },
+        "dcterms:subject": {
+            "metadata": "subject"
+                },
+        "dcatap:applicableLegislation": { 
+            "metadata": "applicableLegislation" 
+        },
+        "dcatap:hvdCategory": { 
+            "metadata": "hvdCategory" 
+        }
+    },
+    "DatasetSeries": {
+        "metadata": "dcat-datasetseries",
+        "about": {
+            "metadata": "about"
+        },
+        "dcterms:title": {
+            "metadata": "title"
+        },
+        "dcterms:description": {
+            "metadata": "description"
+        },
+        "dcat:keyword": {
+            "metadata": "keyword"
+        },
+        "dcat:theme": {
+            "metadata": "theme"
+        },
+        "dcterms:spatial": {
+            "metadata": "spatialUrl"
+        },
+        "spatial": {
+            "metadata": "location"
+        },
+        "dcatap:applicableLegislation": {
+            "metadata": "applicableLegislation"
+        },
+        "dcterms:issued": {
+            "metadata": "issued"
+        },
+        "contactPoint": {
+            "metadata": "contactPoint"
+        },
+        "temporal": {
+            "metadata": "temporal"
+        },
+        "dcterms:subject": { 
+            "metadata": "subject" 
+        },
+        "dcatap:hvdCategory": {
+            "metadata": "hvdCategory" 
+        }, 
+        "dcterms:modified": {
+             "metadata": "modified" 
+        },
+        "dcat:landingPage": { 
+            "metadata": "landingPage" 
+        }, 
+        "dcterms:accrualPeriodicity": { 
+            "metadata": "accrualPeriodicity" 
+        },
+        "dcterms:relation": {
+             "metadata": "relation" 
+        },
+        "Standard": { 
+            "metadata": "conformsTo" 
+        },
+        "qualifiedRelation": {
+            "metadata": "qualifiedRelation"
+        },
+        "Document": { 
+            "metadata": "page" 
+        },
+        "publisher": {
+            "metadata": "publisher"
         }
     },
     "publisher": {
@@ -174,6 +261,18 @@
         },
         "foaf:mbox": {
             "metadata": "mbox"
+        },
+        "dcterms:description": { 
+            "metadata": "description" 
+        },
+        "dcterms:identifier": {
+             "metadata": "identifier" 
+        },
+        "owl:sameAs": { 
+            "metadata": "sameAs" 
+        },
+        "org:classification": { 
+            "metadata": "classification" 
         }
     },
     "creator": {
@@ -192,6 +291,18 @@
         },
         "foaf:mbox": {
             "metadata": "mbox"
+        },
+        "dcterms:description": { 
+            "metadata": "description" 
+        },
+        "dcterms:identifier": {
+             "metadata": "identifier" 
+        },
+        "owl:sameAs": { 
+            "metadata": "sameAs" 
+        },
+        "org:classification": { 
+            "metadata": "classification" 
         }
     },
     "Attribution": {
@@ -213,6 +324,18 @@
         },
         "dcat:hadRole":{
             "metadata": "role"
+        },
+        "dcterms:description": { 
+            "metadata": "description" 
+        },
+        "dcterms:identifier": {
+             "metadata": "identifier" 
+        },
+        "owl:sameAs": { 
+            "metadata": "sameAs" 
+        },
+        "org:classification": { 
+            "metadata": "classification" 
         }
     },
     "spatial": {
@@ -249,6 +372,9 @@
         },
         "Address": {
             "metadata": "address"
+        },
+        "vcard:hasURL": { 
+            "metadata": "url" 
         }
     },
     "LicenseDocument": {
@@ -342,6 +468,9 @@
         },
         "Standard": {
             "metadata": "conformsTo"
+        },
+        "dcatap:applicableLegislation": { 
+            "metadata": "applicableLegislation" 
         }
     },
     "temporal": {
@@ -417,11 +546,3 @@
         }
     }
 }
-
-
-
-
-
-
-
-

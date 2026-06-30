@@ -41,6 +41,7 @@ info:
         startDate: 2021-03-16
         endDate: 2021-03-25
       accessRights: Public
+      version: 1.0
 paths:
   /users:
     get:

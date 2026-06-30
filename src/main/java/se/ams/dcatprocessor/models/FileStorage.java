@@ -11,4 +11,5 @@ public class FileStorage extends DataClass {
     public String fileName;
     public List<DataService> dataService = new ArrayList<>();
     public List<DataSet> dcat_dataset = new ArrayList<>();
+    public List<DatasetSeries> dcat_datasetSeries = new ArrayList<>();
 }

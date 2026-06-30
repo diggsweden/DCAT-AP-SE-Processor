@@ -29,6 +29,8 @@ import org.eclipse.rdf4j.model.vocabulary.DCAT;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
 import org.eclipse.rdf4j.model.vocabulary.LOCN;
+import org.eclipse.rdf4j.model.vocabulary.OWL;
+import org.eclipse.rdf4j.model.vocabulary.ORG;
 import org.eclipse.rdf4j.model.vocabulary.PROV;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.model.vocabulary.VCARD4;
@@ -45,6 +47,7 @@ import se.ams.dcatprocessor.models.Catalog;
 import se.ams.dcatprocessor.models.DataClass;
 import se.ams.dcatprocessor.models.DataService;
 import se.ams.dcatprocessor.models.DataSet;
+import se.ams.dcatprocessor.models.DatasetSeries;
 import se.ams.dcatprocessor.models.Distribution;
 import se.ams.dcatprocessor.models.FileStorage;
 import se.ams.dcatprocessor.models.Organization;
@@ -154,7 +157,13 @@ public class RDFWorker {
 				model.add(catalogAndAgent[0], DCAT.DATA_SERVICE, dataServiceIRI);
 			}
 			
-			
+			/*
+			 * Create DatasetSeries and add them to the model
+			 */
+			for (DatasetSeries datasetSeries : fileStorage.dcat_datasetSeries) {
+    			IRI iriDatasetSeries = createDatasetSeries(datasetSeries, catalogAndAgent[1]);
+    			model.add(catalogAndAgent[0], DCAT.HAS_DATASET, iriDatasetSeries);
+			}
 		}
 		
 		multipleURIValidator.validate();
@@ -184,6 +193,8 @@ public class RDFWorker {
 		model.setNamespace(ADMS.NS);
 		model.setNamespace(ODRS.NS);
 		model.setNamespace(SPDX.NS);
+		model.setNamespace(OWL.NS);
+		model.setNamespace(ORG.NS);
 		model.setNamespace(new SimpleNamespace("dcatap", "http://data.europa.eu/r5r#"));
 	}
 
@@ -456,11 +467,7 @@ public class RDFWorker {
 		 * Add the licensedocuments as anonymous nodes
 		 */
 		addNodes(distributionIRI, DCTERMS.LICENSE, DCTERMS.LICENSE_DOCUMENT, distribution.licenseDocuments);
-		
-		for (DataClass dataClass : distribution.licenseDocuments) {
 			
-		}
-		
 		/*
 		 * Add the Documentation...foaf:page as anonymous nodes
 		 */
@@ -550,6 +557,43 @@ public class RDFWorker {
 		}
 		
 		return dataServiceIRI;
+	}
+
+	/**
+	 * Creates a DatasetSeries with all its data
+	 * @see <a href="https://www.w3.org/ns/dcat#DatasetSeries">DataService</a>
+	 * @param datasetSeries - The object containing the data for datasetSeries
+	 * @return DatasetSeries - The DatasetSeries
+	 */
+	private IRI createDatasetSeries(DatasetSeries datasetSeries, IRI agentIRI) throws IOException {
+		/**
+		 * Special check that subject exist and is valid URI because this is a stopping error
+		 */	
+    	checkSubject("DatasetSeries.about", datasetSeries.about);
+
+    	List<String> checkedElsewhere = List.of("dcterms:publisher"); //Items that will not be checked now
+    	CardinalityValidator.getInstance().validate(DcatClass.DATASETSERIES, datasetSeries.dcData, checkedElsewhere);
+
+    	IRI datasetSeriesIRI = createIri(datasetSeries.about);
+    	model.add(datasetSeriesIRI, RDF.TYPE, DCAT.DATASET_SERIES);
+
+    	addToModel(model, datasetSeriesIRI, datasetSeries.dcData);
+
+		//Add the reference to the external element publisher (publisher from Catalog)
+    	model.add(datasetSeriesIRI, DCTERMS.PUBLISHER, agentIRI);
+
+    	addNodes(datasetSeriesIRI, DCTERMS.SPATIAL, DCTERMS.LOCATION, datasetSeries.spatial);
+    	addNodes(datasetSeriesIRI, DCTERMS.TEMPORAL, DCTERMS.PERIOD_OF_TIME, datasetSeries.temporals);
+    	addNodes(datasetSeriesIRI, DCTERMS.CONFORMS_TO, DCTERMS.STANDARD, datasetSeries.conformsTo);
+    	addNodes(datasetSeriesIRI, FOAF.PAGE, FOAF.DOCUMENT, datasetSeries.documents);
+		addNodes(datasetSeriesIRI, DCAT.QUALIFIED_RELATION, DCAT.RELATIONSHIP, datasetSeries.qualifiedRelations);
+
+    	for (Organization org : datasetSeries.organizations) {
+    	    IRI organizationIRI = createOrganization(org);
+    	    model.add(datasetSeriesIRI, DCAT.CONTACT_POINT, organizationIRI);
+    	}
+
+    	return datasetSeriesIRI;
 	}
 	
 	/**
