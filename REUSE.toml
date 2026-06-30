@@ -8,7 +8,7 @@ version = 1
 path = [
   "renovate.json",
   "docs/Licenser/*.txt",
-  "src/main/resources/shapes/*",
+  "src/main/resources/shapes/dcat-ap-SHACL.ttl",
   "src/main/resources/shapes/vocabularies/*.rdf"
 ]
 precedence = "aggregate"
@@ -27,7 +27,9 @@ path = [
   "src/**/*.json",
   "src/**/*.raml",
   "src/**/*.yaml",
-  "src/main/resources/templates/*.ftlh"
+  "src/main/resources/templates/*.ftlh",
+  "src/main/resources/shapes/dcat-ap-se-overrides.json",
+  "src/main/resources/shapes/dcat-ap-se-additions.ttl",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2022 Agency for Digital Government"
