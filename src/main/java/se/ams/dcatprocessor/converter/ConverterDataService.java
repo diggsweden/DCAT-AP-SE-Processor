@@ -9,6 +9,9 @@ import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
 import org.eclipse.rdf4j.model.vocabulary.VCARD4;
 import org.json.JSONObject;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import se.ams.dcatprocessor.models.ConverterHelpClass;
 import se.ams.dcatprocessor.models.DataClass;
 import se.ams.dcatprocessor.models.DataService;
@@ -16,7 +19,8 @@ import se.ams.dcatprocessor.models.Organization;
 
 import java.util.Optional;
 
-
+@Component
+@Scope("prototype")
 public class ConverterDataService extends Converter {
 
     /*
