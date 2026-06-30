@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -44,19 +43,14 @@ class MultipleURIValidatorTest {
 	
 	@BeforeEach
 	void setup() throws Exception {
-		//Reset Singleton before each test
-		Field instance = ValidationErrorStorage.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(ValidationErrorStorage.class, null);
-        
 		multipleURIValidator = new MultipleURIValidator();
-		validationErrorStorage = ValidationErrorStorage.getInstance();
+		validationErrorStorage.resetErrors();
 	}
 	
 	//Bad
 	//No current file set...expect Exception in return
 	@Test
-	void testCurrentFileNotSet() throws Exception {
+	void testThatFileNotSetThrowsException() throws Exception {
 		try {
 			multipleURIValidator.addUri(uri1);
 			fail("Expected Exception when adding an URI when the filename for the file being validated is not set");
@@ -69,7 +63,7 @@ class MultipleURIValidatorTest {
 	//Bad
 	//Submitted URI is null...expect Exception in return
 	@Test
-	void testSubmittedURIIsNull() throws Exception {
+	void testThatNullUriThrowsException() throws Exception {
 		//Set filename to provoke next error
 		multipleURIValidator.setCurrentFileName(fileName1);
 		try {
@@ -83,7 +77,7 @@ class MultipleURIValidatorTest {
 	
 	//Two unique URI within the same file
 	@Test
-	void testValidationOK1() throws Exception {
+	void testThatUniqueUrisWithinSameFilePassValidation() throws Exception {
 		multipleURIValidator.setCurrentFileName(fileName1);
 		multipleURIValidator.addUri(uri1);
 		multipleURIValidator.addUri(uri2);
@@ -95,7 +89,7 @@ class MultipleURIValidatorTest {
 	//Good
 	// Three unique URI within the same file
 	@Test
-	void testValidationOK2() throws Exception {
+	void testThatMultipleUniqueUrisWithinSameFilePassValidation() throws Exception {
 		multipleURIValidator.setCurrentFileName(fileName1);
 		multipleURIValidator.addUri(uri1);
 		multipleURIValidator.addUri(uri2);
@@ -108,7 +102,7 @@ class MultipleURIValidatorTest {
 	//Good
 	//Two unique URI in different files
 	@Test
-	void testValidationOK3() throws Exception {
+	void testThatUniqueUrisAcrossFilesPassValidation() throws Exception {
 		multipleURIValidator.setCurrentFileName(fileName1);
 		multipleURIValidator.addUri(uri1);
 		
@@ -122,7 +116,7 @@ class MultipleURIValidatorTest {
 	// Good
 	// Three unique URI in three different files together with other URI:s
 	@Test
-	void testValidationOK4() throws Exception {
+	void testThatUniqueUrisAcrossMultipleFilesPassValidation() throws Exception {
 		multipleURIValidator.setCurrentFileName(fileName1);
 		multipleURIValidator.addUri(uri1);
 		multipleURIValidator.addUri(uri2);
@@ -142,7 +136,7 @@ class MultipleURIValidatorTest {
 	//Bad
 	//Two non-unique URI within the same file
 	@Test
-	void testValidationGeneratesValidationError1() throws Exception {
+	void testThatDuplicateUriWithinFileReturnsValidationError() throws Exception {
 		multipleURIValidator.setCurrentFileName(fileName1);
 		multipleURIValidator.addUri(uri1); //Same URI
 		multipleURIValidator.addUri(uri1); //Same URI
@@ -157,7 +151,7 @@ class MultipleURIValidatorTest {
 	//Bad
 	//Three non-unique URI within the same file
 	@Test
-	void testValidationGeneratesValidationError2() throws Exception {
+	void testThatTripleDuplicateUriWithinFileReturnsSingleValidationError() throws Exception {
 		multipleURIValidator.setCurrentFileName(fileName1);
 		multipleURIValidator.addUri(uri1); //Same URI
 		multipleURIValidator.addUri(uri1); //Same URI
@@ -172,7 +166,7 @@ class MultipleURIValidatorTest {
 	// Bad
 	// 2 x Two non-unique URI within the same file
 	@Test
-	void testValidationGeneratesValidationError3() throws Exception {
+	void testThatTwoDuplicateUrisWithinFileReturnTwoValidationErrors() throws Exception {
 		multipleURIValidator.setCurrentFileName(fileName1);
 		multipleURIValidator.addUri(uri1); //Same URI
 		multipleURIValidator.addUri(uri1);
@@ -195,10 +189,10 @@ class MultipleURIValidatorTest {
 		TestHelper.assertValidationError(validationErrors.get(1), fileName1, ErrorType.DUPLICATE_URI_WITHIN_FILE, null, uri2, "URI: " + uri2 + " exist multiple times in file: " + fileName1);
 	}
 	
-//	// Bad
-//	// Two non-unique URI within two different files
+	// Bad
+	// Two non-unique URI within two different files
 	@Test
-	void testValidationGeneratesValidationError4() throws Exception {
+	void testThatDuplicateUriBetweenFilesReturnsValidationError() throws Exception {
 		multipleURIValidator.setCurrentFileName(fileName1);
 		multipleURIValidator.addUri(uri1); //Same URI
 		
@@ -226,7 +220,7 @@ class MultipleURIValidatorTest {
 	// Bad
 	// Three non-unique URI within three different files + some other URI:s that are unique
 	@Test
-	void testValidationGeneratesValidationError5() throws Exception {
+	void testThatDuplicateUriAcrossMultipleFilesReturnsValidationError() throws Exception {
 		multipleURIValidator.setCurrentFileName(fileName1);
 		multipleURIValidator.addUri(uri1); //Same URI
 
@@ -298,7 +292,7 @@ class MultipleURIValidatorTest {
 	// + non-unique within and between files
 	// + some other URI:s that are unique
 	@Test
-	void testValidationGeneratesValidationError6() throws Exception {
+	void testThatAllDuplicateUriTypesAreDetected() throws Exception {
 		
 		//Add testdata
 		multipleURIValidator.setCurrentFileName(fileName1);

@@ -36,6 +36,10 @@ public class DcatPropertyHandler {
 		
 		return instance;
 	}
+
+	public static void resetInstance(){
+		instance = null;
+	} 
 	
 	/**
 	 * Delimiter for propertyvalues
@@ -91,7 +95,6 @@ public class DcatPropertyHandler {
 			}
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

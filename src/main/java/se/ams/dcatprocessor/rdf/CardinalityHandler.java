@@ -31,6 +31,10 @@ public class CardinalityHandler {
 		}
 		return instance;
 	}
+
+	public static void resetInstance(){
+		instance = null;
+	} 
 		
 	//Regexp for checking correctness of property key=value format
 	private static final String CHARACTER_DOT = "\\.";
