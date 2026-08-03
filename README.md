@@ -1,7 +1,12 @@
 # DCAT-AP-SE Processor
 
-[![License: EUPL 1.2](https://img.shields.io/badge/License-European%20Union%20Public%20Licence%201.2-library?style=for-the-badge&&color=lightblue)](LICENSE)  
+[![License: EUPL 1.2](https://img.shields.io/badge/License-European%20Union%20Public%20Licence%201.2-library?style=for-the-badge&&color=lightblue)](LICENSE)
+
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/diggsweden/DCAT-AP-SE-Processor/badge?style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/diggsweden/DCAT-AP-SE-Processor)
+
+[![REUSE status](https://img.shields.io/reuse/compliance/github.com%2Fdiggsweden%2FDCAT-AP-SE-Processor?style=for-the-badge)](https://api.reuse.software/info/github.com/diggsweden/DCAT-AP-SE-Processor)
+
+[![publiccode.yml](https://img.shields.io/badge/publiccode.yml-library?style=for-the-badge&color=orange)](publiccode.yml)
 
 DCAT-AP-SE Processor är ett verktyg för att automatisera framställningen av metadata enligt metadataspecifikationen [DCAT-AP-SE](https://docs.dataportal.se/dcat/sv/) , som används för att publicera information om datamängder och API:er på [Sveriges dataportal](https://www.dataportal.se/).
 Verktyget tar en API-definition som indata och genererar en RDF-fil redo för skördning av dataportalen. Som indata stöds API-definitioner i formaten OpenAPI och RAML, samt separata metadatafiler på JSON-format för OAS2/RAML0.8 eller för API:er utan en formell definition. Detta verktyg är framtaget för att enkelt kunna integreras i en CI/CD-pipeline eller köras fristående.
