@@ -6,7 +6,6 @@ package se.ams.dcatprocessor.rdf;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.time.Period;
 import java.time.temporal.TemporalAmount;
@@ -757,31 +756,29 @@ public class RDFWorker {
 	}
 
 	/**
-	 * Converts a string to a BigDecimal object if possible. Otherwise returns null
+	 * Returns the numeric datatype matching the InputType
 	 * @param key - Used to get the allowable InputType(s)
-	 * @param value - The value to be converted
-	 * @return - The resulting BigDecimal object or null 
+	 * @return - The matching datatype
 	 */
-	private BigDecimal getBigDecimal(String key, String value) {
-	    if (Util.isNullOrEmpty(key) || Util.isNullOrEmpty(value)) {
-	        return null; 
+	private IRI getNumericDatatype(String key) {
+	    if (Util.isNullOrEmpty(key)) {
+	        return null;
 	    }
-	    
+		
 	    List<InputType> inputTypes = SingleInputValidator.getInstance().getInputTypes(key);
-	    
-	    if(inputTypes.contains(InputType.INTEGER) || inputTypes.contains(InputType.DECIMAL)) {
-	    	try {
-			    return new BigDecimal(value);
-			    /**
-			     * No need to logg error here.
-			     * Its has been already checked in SingleInputValidator
-			     */
-			} catch (NumberFormatException e) {
-				return null;
-			}
+
+	    IRI datatype = null;
+	    if (inputTypes.contains(InputType.NONNEGATIVEINTEGER)) {
+	        datatype = XSD.NON_NEGATIVE_INTEGER;
+	    } else if (inputTypes.contains(InputType.INTEGER)) {
+	        datatype = XSD.INTEGER;
+	    } else if (inputTypes.contains(InputType.DECIMAL)) {
+	        datatype = XSD.DECIMAL;
+	    } else {
+	        return null;
 	    }
 
-	    return null;
+	    return datatype;
 	}
 
 	/**
@@ -863,9 +860,9 @@ public class RDFWorker {
 					/**
 					 * First check if its a numeric value...otherwise it might be interpreted as date value further down
 					 */
-					BigDecimal bigDecimal = getBigDecimal(key, value);
-					if(Util.isNotNullOrEmpty(bigDecimal)) {
-						model.add(sectionIRI, iri, valueFactory.createLiteral(bigDecimal));
+					IRI numericDatatype = getNumericDatatype(key);
+					if(numericDatatype != null) {
+						model.add(sectionIRI, iri, valueFactory.createLiteral(value, numericDatatype));
 					} else {
 						TemporalAmount temporalAmount = getTemporalAmount(key, value);
 						if (Util.isNotNullOrEmpty(temporalAmount)) {
@@ -882,15 +879,11 @@ public class RDFWorker {
 							} else {					//All other values....for now
 								model.add(sectionIRI, iri, valueFactory.createLiteral(value));
 							}
-								
 						}
-
 					}
 				}
-
 			}
 		}
-
 	}
 	
 	// Regexp pattern used for date-format checking
