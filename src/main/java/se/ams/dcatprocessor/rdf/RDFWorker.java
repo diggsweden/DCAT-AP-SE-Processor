@@ -27,6 +27,7 @@ import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.vocabulary.DCAT;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
+import org.eclipse.rdf4j.model.vocabulary.GEO;
 import org.eclipse.rdf4j.model.vocabulary.LOCN;
 import org.eclipse.rdf4j.model.vocabulary.OWL;
 import org.eclipse.rdf4j.model.vocabulary.ORG;
@@ -692,8 +693,10 @@ public class RDFWorker {
 				for (String value : values) {
 					
 					SingleInputValidator.getInstance().validateData(key, value);
-				
-					if (Util.isURI(value) ) { // Check if its an URI and create a resource
+					
+					if (isWKTLiteral(key)) {
+					    model.add(resource, iri, valueFactory.createLiteral(value, GEO.WKT_LITERAL));
+					} else if (Util.isURI(value)) { // Check if its an URI and create a resource
 						model.add(resource, iri, valueFactory.createIRI(value));
 					} else if (isLanguageValue(value)) { // Check if it's a language specific string, Ex en:Some text in english
 						String[] split = value.split(SUN);
@@ -750,6 +753,11 @@ public class RDFWorker {
 	private boolean isPhoneValue(String key) {
 		String vcardHasValue = VCARD4.PREFIX + ":" + VCARD4.HAS_VALUE.getLocalName();
 		return key.equals(vcardHasValue);
+	}
+
+	private boolean isWKTLiteral(String key) {
+		List<InputType> inputTypes = SingleInputValidator.getInstance().getInputTypes(key);
+		return inputTypes.contains(InputType.WKTLITERAL);
 	}
 
 	/**

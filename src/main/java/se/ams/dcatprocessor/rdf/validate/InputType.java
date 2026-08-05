@@ -20,6 +20,7 @@ public enum InputType {
 	DECIMAL("xsd:decimal"),
 	DURATION("xsd:duration"),
 	ANYURI("xsd:anyURI"),
+	WKTLITERAL("geo:wktLiteral"),
 	CLASS("class"),
 	PHONENUMBER("phoneNumber");	//For VCARD phonenumber
 	

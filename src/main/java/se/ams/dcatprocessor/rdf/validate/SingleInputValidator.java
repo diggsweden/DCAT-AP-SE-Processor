@@ -154,6 +154,7 @@ public class SingleInputValidator {
 		inputTypeToRegexMap.put(InputType.GYEAR, Pattern.compile("[0-9]{4}"));
 		inputTypeToRegexMap.put(InputType.DURATION, Pattern.compile("P(?:(?:\\d+D|\\d+M(?:\\d+D)?|\\d+Y(?:\\d+M(?:\\d+D)?)?)(?:T(?:\\d+H(?:\\d+M(?:\\d+S)?)?|\\d+M(?:\\d+S)?|\\d+S))?|T(?:\\d+H(?:\\d+M(?:\\d+S)?)?|\\d+M(?:\\d+S)?|\\d+S)|\\d+W)"));
 		inputTypeToRegexMap.put(InputType.PHONENUMBER, Pattern.compile("^(?:tel:)?(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)$"));
+		inputTypeToRegexMap.put(InputType.WKTLITERAL, Pattern.compile("^(?:<[^>\\s]+>\\s++)?(?i:POINT|LINESTRING|POLYGON|MULTIPOINT|MULTILINESTRING|MULTIPOLYGON|GEOMETRYCOLLECTION)(?:\\s++(?:Z|M|ZM))?\\s*+\\(.*\\)$"));
 	}
 	
 	//Predefined errormessage
