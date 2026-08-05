@@ -149,7 +149,7 @@ public class VocabularyStringToIRI {
 	
 	private static final HashMap<String, IRI> LOCATION = new HashMap<>();
 	static {
-		LOCATION.put("locn:geometry", LOCN.GEOMETRY);
+		LOCATION.put("locn:geometry", LOCN.GEOMETRY_PROP);
 	}
 	
 	private static final HashMap<String, IRI> SCHEMA_MAP = new HashMap<>();
