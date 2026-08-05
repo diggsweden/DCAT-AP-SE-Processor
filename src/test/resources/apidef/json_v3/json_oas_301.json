@@ -30,7 +30,7 @@
           "about": "https://www.af.se#location",
           "bbox": "POLYGON((0 0, 1 0, 1 1, 0 1, 0 0))",
           "centroid": "POINT(10.0 51.0)",
-          "geometry": "POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))"
+          "geometry": "LINESTRING(10.0 51.0, 11.0 52.0, 12.0 53.0)"
         },
         "rights": {
           "attributionText-sv": "Detta är ett exempel på rättighetstext för Catalog",
@@ -76,10 +76,9 @@
         "issued": "2021-02-01",
         "spatialUrl": "http://sws.geonames.org/6695072",
         "location": {
-          "about": "https://www.example.se/#datasetseriesC/spatial",
-          "bbox": "POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))",
-          "centroid": "POINT (12.83 56.4)",
-          "geometry": "POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))"
+          "geometry": "LINESTRING(10.0 51.0, 11.0 52.0, 12.0 53.0)",
+          "bbox": "POLYGON((0 0, 1 0, 1 1, 0 1, 0 0))",
+          "centroid": "POINT(10.0 51.0)"
         },
         "temporal": {
           "startDate": "2021-01-01",
@@ -159,7 +158,7 @@
           "about": "https://www.example.se/#datasetC/spatial",
           "bbox": "POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))",
           "centroid": "POINT (12.83 56.4)",
-          "geometry": "POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))"
+          "geometry": "LINESTRING(10.0 51.0, 11.0 52.0, 12.0 53.0)"
         },
         "versionNotes": "Exempel på VersionsNoteringar; Fler versionsnoteringar",
         "landingPage": "www.exempelsida.se",

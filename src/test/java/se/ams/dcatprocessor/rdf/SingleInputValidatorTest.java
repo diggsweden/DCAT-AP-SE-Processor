@@ -137,7 +137,9 @@ class SingleInputValidatorTest {
 		"vcard:hasValue,					0771-717 717",			// valid phonenumber format
 		"vcard:hasValue,					+46104794000",			// valid phonenumber format
 		"vcard:hasValue,					tel:+46104794000",		// valid phonenumber format
-
+		"locn:geometry,     				'LINESTRING(10.0 51.0, 11.0 52.0, 12.0 53.0)'",	// valid LINESTRING
+		"dcat:bbox,         				'POLYGON((0 0, 1 0, 1 1, 0 1, 0 0))'",         	// valid POLYGON
+		"dcat:centroid,     				POINT(10.0 51.0)",                      		// valid POINT
 	})
 	void testThatValidValuesPassValidation(String key, String value) throws Exception {	
 		SingleInputValidator instance = SingleInputValidator.getInstance();
@@ -164,6 +166,9 @@ class SingleInputValidatorTest {
 		"dcterms:issued,			        2001-0-26",				// invalid Date
 		"dcterms:issued,			        2002-05-30T09:30",		// invalid Datetime
 		"dcterms:issued,			        192",					// invalid Year
+		"locn:geometry,     				LINESTRING 10.0 51.0",	// missing parentheses
+		"dcat:bbox,         				Sverige",         		// invalid geometry
+		"dcat:centroid,     				POINTX(10.0 51.0)",     // unknown geometry type
 	})
 	void testThatInvalidValuesFailValidation(String key, String value) throws Exception {
 		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();	
