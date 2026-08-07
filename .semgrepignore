@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2022 Digg - Agency for Digital Government
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# TODO: OpenGrep SAST in pr-checks fail because .github/workflows/* uses secrets: inherit.
+# These workflows are owned by diggsweden/reusable-ci. Remove this ignore when upstream stops requiring it.
+.github/workflows/pullrequest-workflow.yml
+.github/workflows/release-workflow-dev.yml
+.github/workflows/release-workflow.yml
