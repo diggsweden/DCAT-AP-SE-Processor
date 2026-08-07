@@ -1,0 +1,96 @@
+openapi: 3.1.0
+info:
+  title: DCAT-AP-SE Processor API
+  version: 0.1.0
+  x-api-released: '2022-10-01'
+  x-api-status: beta
+  summary: Converts API specifications into DCAT-AP-SE RDF/XML.
+  description: |
+    A tool for automating the production of metadata according to the
+    [DCAT-AP-SE](https://docs.dataportal.se/dcat/en/) metadata specification,
+    used to publish information about datasets and APIs on
+    [Sveriges dataportal](https://www.dataportal.se/)
+    The processor takes an API definition as input and generates an RDF file
+    ready to be harvested by Sveriges dataportal
+
+    ### Supported input
+    - **OpenAPI** in JSON format, OAS2 and OAS3
+    - **YAML/RAML** — 0.8 and 1.0
+    - **Standalone metadata files** JSON/RAML/YAML for APIs without a formal definition
+
+    ### Output
+    RDF/XML conforming to the DCAT-AP-SE specification
+
+    ### Usage
+    Designed to be integrated into a CI/CD pipeline or run standalone, so that
+    metadata stays in sync with the API definition it describes.
+  license:
+    name: EUPL-1.2
+    url: https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+externalDocs:
+  description: DCAT-AP-SE-processor repository
+  url: https://github.com/diggsweden/DCAT-AP-SE-Processor
+paths:
+  /dcat-generation/files/:
+    get:
+      tags:
+        - generation
+      operationId: generateRdfFromDirectory
+      summary: Generate DCAT-AP-SE metadata from a directory.
+      description: |
+        Reads every API specification in the given directory and returns the
+        resulting DCAT-AP-SE metadata as RDF/XML.
+
+        The directory is resolved on the server running the processor, not on the client.
+      parameters:
+        - name: dir
+          in: query
+          required: false
+          description: Server-side directory containing the API specifications to process.
+          schema:
+            type: string
+            default: /apidef
+      responses:
+        "200":
+          description: RDF/XML was generated, or a processing error message was returned.
+          content:
+            text/plain;charset=UTF-8:
+              schema:
+                type: string
+  /api-info:
+    get:
+      tags:
+        - metadata
+      operationId: getApiInfo
+      summary: Get API information.
+      description: Returns name, semantic version, release date, documentation URL and lifecycle status.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiInfo"
+              examples:
+                default:
+                  value:
+                    apiName: DCAT-AP-SE Processor API
+                    apiVersion: 0.1.0
+                    apiReleased: '2026-08-06'
+                    apiDocumentation: https://example.org/swagger-ui
+                    apiStatus: beta
+components:
+  schemas:
+    ApiInfo:
+      type: object
+      properties:
+        apiName:
+          type: string
+        apiVersion:
+          type: string
+        apiReleased:
+          type: string
+        apiDocumentation:
+          type: string
+        apiStatus:
+          type: string

@@ -18,6 +18,7 @@ Verktyget tar en API-definition som indata och genererar en RDF-fil redo för sk
   - [Bakgrund](#bakgrund)
   - [Instruktioner för att komma igång snabbt](#instruktioner-för-att-komma-igång-snabbt)
   - [Användning](#användning)
+  - [API-dokumentation](#api-dokumentation)
   - [Systemkomponenter](#systemkomponenter)
   - [Lägga till stöd för nya metadata i verktyget](#lägga-till-stöd-för-nya-metadata-i-verktyget)
   - [Arbetsprocess för att publicera api/er på dataportalen](#arbetsprocess-för-att-publicera-apier-på-dataportalen)
@@ -151,6 +152,43 @@ Konvertera en katalog med specifikationsfiler och få DCAT-data till stdout:
 ```text
 java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -d KATALOG
 ```
+
+## API-dokumentation
+
+Applikationen exponerar två endpoints för dokumentation och metadata om sitt API.
+
+### Swagger UI
+
+Interaktiv dokumentation för samtliga endpoints, inklusive parametrar,
+svarsformat och möjlighet att anropa API:et direkt från webbläsaren.
+
+```text
+https://<host>/swagger-ui
+```
+
+Den underliggande OpenAPI-specifikationen finns på `/openapi.yaml`
+
+### api-info
+
+Metadata om API:et
+
+```text
+GET https://<host>/api-info
+```
+
+```json
+{
+  "apiName": "DCAT-AP-SE Processor API",
+  "apiVersion": "0.1.0",
+  "apiReleased": "2026-08-06",
+  "apiDocumentation": "https://<host>/api-docs",
+  "apiStatus": "beta"
+}
+```
+
+`apiDocumentation` pekar som standard på den svarande instansens egen Swagger UI.
+Hostas verktyget bakom en gateway eller med publik dokumentation på annan plats
+kan länken sättas via `api-info.documentation` i `application.properties`.
 
 ## Systemkomponenter
 
