@@ -1,0 +1,69 @@
+# SPDX-FileCopyrightText: 2022 Digg - Agency for Digital Government
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# This repository adheres to the publiccode.yml standard by including this
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/publiccodeyml/publiccode.yml
+
+publiccodeYmlVersion: '0.7'
+
+name: 'DCAT-AP-SE Processor'
+url: 'https://github.com/diggsweden/DCAT-AP-SE-Processor'
+
+softwareVersion: '0.9'
+releaseDate: '2022-10-01'
+
+platforms:
+  - windows
+  - web
+  - linux
+
+categories:
+  - application-development
+  - it-development
+  - compliance-management
+
+developmentStatus: beta
+
+softwareType: 'standalone/web'
+
+description:
+  en:
+    shortDescription: Converts and validates API descriptions into DCAT-AP-SE metadata as RDF
+
+    longDescription: |
+      DCAT-AP-SE Processor generates metadata that conforms to the Swedish
+      application profile DCAT-AP-SE, the profile used to describe datasets and
+      data services published by Swedish public administrations.
+
+      The tool reads an existing API description in YAML, RAML or JSON format and
+      produces an RDF representation of it according to the profile. This means
+      the metadata is derived from the API description that already exists,
+      rather than being written and maintained by hand as a separate artefact,
+      which reduces the risk of the two drifting apart over time.
+
+      The tool is available as a web interface, REST API or CLI, and can be
+      used interactively or run as a step in an existing publishing pipeline.
+
+    features:
+      - Generation of DCAT-AP-SE metadata as RDF from an existing API description
+      - Support for YAML, RAML and JSON input formats
+      - Validates input against DCAT-AP-SE specification
+      - Web interface for interactive use
+      - REST API for use in automated publishing pipelines
+      - Runs interactively or as a step in a CI/CD pipeline
+
+legal:
+  license: EUPL-1.2
+
+maintenance:
+  type: internal
+  contacts:
+    - name: '@diggsweden/bb-api'
+      affiliation: 'Digg - Agency for Digital Government'
+
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - sv
