@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="sv"
+    xmlns:th="http://www.thymeleaf.org"
+    th:fragment="html(content, scripts)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Verktyg för att validera och generera DCAT-AP-SE RDF från OpenAPI-specifikationer.">
+    <meta name="theme-color" content="#e4897b">  
+    <title>DCAT-AP-SE-Processor</title>
+    <link rel="stylesheet" th:href="@{/webjars/picocss__pico/2.1.1/css/pico.min.css}">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="container-fluid">
+            <ul>
+                <li id="nav-title">DCAT-AP-SE Processor</li>
+            </ul>
+            <ul>
+                <li><a th:href="@{/}">Editor</a></li>
+                <li><a th:href="@{/docs}">Docs</a></li>
+            </ul>
+        </nav>
+    </header>
+    <th:block th:replace="${content}"></th:block>
+    <th:block th:replace="${scripts}"></th:block>
+</body>
+</html>

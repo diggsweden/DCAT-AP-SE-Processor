@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="sv" 
+    xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{fragments/layout :: html(~{::main}, ~{::script})}">
+<body>
+    <main class="p-3">
+        <h1 class="visually-hidden">Editor</h1>
+        <div class="editor-grid grid">
+            <div class="editor-panel border">
+                <div class="tools d-flex align-center justify-between">
+                    <div class="d-flex gap-2">
+                        <button id="add-file-btn" class="btn-sm secondary">Lägg till API</button>
+                        <label for="file-input" class="sr-only">Välj fil (JSON, YAML eller RAML)</label>
+                        <input type="file" id="file-input" accept=".json,.yaml,.yml,.raml" hidden>
+                        <details id="language-dropdown" class="dropdown mb-0">
+                            <summary role="button" class="secondary btn-sm">Editor språk</summary>
+                            <ul class="dropdown-sm">
+                                <li><a href="#" data-value="json" class="selected">JSON</a></li>
+                                <li><a href="#" data-value="yaml">YAML/RAML</a></li>
+                            </ul>
+                        </details>
+                    </div>
+                    <button id="clear-btn" class="btn-sm contrast">✕ Rensa</button>
+                </div>
+                <div id="editor" class="flex-1"
+                    th:data-vs-path="@{/webjars/monaco-editor/0.55.1/min/vs}">
+                </div>
+                <div class="tools">
+                    <div class="d-flex align-center">              
+                        <button class="btn" id="validate-btn">Generera RDF</button>
+                    </div>
+                </div>
+            </div>
+            <div id="panel">
+                <nav>
+                  <ul id="info-nav">
+                    <li class="p-0 mr-1"><button id="btn-info" class="selected secondary">Information</button></li>
+                    <li class="p-0 mr-1"><button id="btn-dcat-form" class="secondary">Grundmall</button></li>
+                    <li class="p-0"><button id="btn-result" class="secondary">Resultat</button></li>
+                  </ul>
+                </nav>  
+                <div id="panel-content-container" class="border">
+                    <div id="panel-user-guide" th:insert="~{fragments/info-user-guide :: user-guide}"></div>
+                    <div id="panel-dcat-form" class="hidden" th:insert="~{fragments/dcat-form :: dcat-form}"></div>
+                    <div id="panel-result" class="hidden" th:insert="~{fragments/result :: result}"></div>
+                </div>
+            </div>
+        </div>  
+    </main>
+    <script th:src="@{/webjars/monaco-editor/0.55.1/min/vs/loader.js}" defer></script>
+    <script th:src="@{/js/editor.js}" defer></script>
+    <script th:src="@{/js/app.js}" defer></script>
+    <script th:src="@{/js/dcat-form.js}" defer></script>
+</body>
+</html>

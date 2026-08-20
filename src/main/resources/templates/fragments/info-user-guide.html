@@ -1,0 +1,24 @@
+<div th:fragment="user-guide" class="p-3">
+   <h2 class="mt-2">Användarhandledning</h2>
+   <p class="mb-1"><strong>Generera RDF-katalog</strong></p>
+   <ol class="step-list">
+      <li>Klistra in API-specifikation i editorn, eller lägg innehållet från en fil via knappen "lägg till fil". 
+      Vid behov redigera specifikationen i editorn</li>
+      <li>Klicka på Generera RDF för att skapa en RDF.</li>
+      <li>Resultatet visas i resultatfältet nedanför. Kopiera det med kopiera-knappen och spara som RDF-fil. 
+         Vid fel under generering eller validering visas felmeddelandet under resultat.
+      </li>
+   </ol>
+   <p class="mb-1"><strong>Kompatibilitet</strong></p>
+   <p class="mb-0">Kompatibel med DCAT-AP-SE version 3.0.1.</p>
+   <p>Stödjer formaten: JSON, YAML och RAML.</p>
+
+   <p class="mb-1"><strong>Krav</strong></p>
+   <p>Specen måste innehålla <code>x-dcat</code>-annoteringar för minst en
+      <code>dcat-catalog</code> och en <code>dcat-dataset</code>.
+      Kontaktuppgifter, publisher och licens rekommenderas för att RDF:en ska accepteras av Sveriges dataportal.
+      Se <a th:href="@{/docs}">dokumentationen</a> för fullständig referens och exempel.
+   </p>
+   <p class="mb-1"><strong>Grundmall</strong></p>
+   <p class="mb-0">Använd formuläret under fliken Grundmall för att få hjälp att skapa upp en enkel bas DCAT-AP-SE specifikation  </p>
+</div>

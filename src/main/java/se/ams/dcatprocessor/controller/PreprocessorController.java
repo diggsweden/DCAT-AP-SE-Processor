@@ -44,10 +44,6 @@ class PreprocessorController {
         this.managerProvider = managerProvider;
     }
 
-    @GetMapping("/")
-    public String index(Model model) {
-        return "index";
-    }
  
 	/**
 	 * REST API Endpoint for creating DCAT-AP-SE data in RDF/XML format

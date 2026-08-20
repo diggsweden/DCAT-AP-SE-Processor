@@ -1,0 +1,20 @@
+<div th:fragment="result">
+    <div id="info-container" class="alert alert-info m-3">
+        <h2 class="alert-title">Det finns inget resultat</h2>
+        <p class="mb-0">
+            Ingen generering har körts. Klistra in eller lägg till en API-specifikation och klicka på Generera RDF.
+        </p>
+    </div>
+    <div id="result-container" class="bg-white hidden">
+        <div id="generate-error-container" class="alert alert-danger d-flex m-3 hidden">
+            <svg class="error-icon mb-a mr-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M12 2 1 21h22L12 2zm0 3.8L4.5 19h15L12 5.8zM11 10h2v4h-2v-4zm0 5h2v2h-2v-2z"/>
+            </svg>
+            <pre class="error-text mb-0"></pre>
+        </div>
+        <div class="d-flex justify-end position-relative"> 
+            <button id="copy-result" class="btn outline hidden">Kopiera</button>
+        </div>
+        <pre id="result" class="p-3 mb-0"></pre>
+    </div>
+</div>

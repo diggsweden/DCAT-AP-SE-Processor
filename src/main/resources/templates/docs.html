@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="sv" xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{fragments/layout :: html(~{::main}, ~{})}">
+<main class="container">
+    <article class="bg-white p-3 border">
+        <h1>Dokumentation</h1>
+        <p>DCAT-AP-SE Processor — verktyg för att generera DCAT-AP-SE-kompatibel RDF från API-definitioner.</p>
+        <nav>
+            <ul id="docs-list" class="d-flex flex-column">
+                <li><a href="#bakgrund">- Bakgrund</a></li>
+                <li><a href="#format">- Format som stöds</a></li>
+                <li><a href="#anvandning">- Så här använder du verktyget</a></li>
+                <li><a href="#metadata">- Metadata i API-definitionen</a></li>
+                <li><a href="#publicera">- Publicera på Sveriges dataportal</a></li>
+                <li><a href="#referens">- Referens och exempel</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <section id="bakgrund">
+            <h2>Bakgrund</h2>
+            <p>
+                <a href="https://www.dataportal.se/" target="_blank" rel="noopener">Sveriges dataportal</a>
+                synliggör metadata om datamängder, där själva datamängderna och
+                åtkomstpunkterna finns publicerade hos olika aktörer. Detta sker genom att dataportalen
+                automatiskt hämtar informationen från publicerande aktörer.
+            </p>
+            <p>
+                För att dataportalen ska kunna synliggöra informationen behöver aktörerna publicera den enligt
+                en gemensam metadataspecifikation:
+                <a href="https://docs.dataportal.se/dcat/sv/" target="_blank" rel="noopener">DCAT-AP-SE</a>.<br/>
+                Specifikationen är framtagen för att passa Sveriges dataportal och möjliggör en enhetlig
+                beskrivning av datamängder från olika typer av organisationer.
+            </p>
+            <p>
+                DCAT-AP-SE Processor skapar en RDF-fil enligt DCAT-AP-SE-specifikationen utifrån en
+                API-definition eller en separat metadatafil. RDF (Resource Description Framework) är det
+                språk som används för att uttrycka metadata på webben.
+            </p>
+        </section>
+        <hr>
+        <section id="format">
+            <h2>Format som stöds</h2>
+            <p>Verktyget stödjer följande format för API-definitioner:</p>
+            <ul>
+                <li>
+                    <strong>OpenAPI 3.x</strong> — metadata läggs som en extension med nyckeln
+                    <code>x-dcat</code>.
+                </li>
+                <li>
+                    <strong>RAML 1.x</strong> — metadata läggs via annotations. Definiera en
+                    <code>annotationType</code> och använd den i specen.
+                </li>
+                <li>
+                    <strong>OAS 2.x och RAML 0.8</strong> — dessa format stödjer inte extensions
+                    eller annotations. Metadatan läggs istället i en separat JSON-fil.
+                </li>
+            </ul>
+            <p>
+                Även API:er utan formell definition (code-first) kan beskrivas genom en fristående
+                JSON-metadatafil.
+            </p>
+        </section>
+        <hr>
+        <section id="anvandning">
+            <h2>Så här använder du verktyget</h2>
+            <ol>
+                <li>Gå till <a th:href="@{/}">Editor</a>.</li>
+                <li>Klistra in din API-specifikation i editorn, eller ladda upp en fil.</li>
+                <li>Klicka på <strong>Generera</strong>.</li>
+                <li>Resultatet visas i resultatfältet nedanför. Kopiera det med kopiera-knappen och spara som RDF-fil.</li>
+            </ol>
+            <p>Vid fel under generering eller validering visas felmeddelandet i resultatfältet istället för RDF-resultatet.</p>
+        </section>
+        <hr>
+        <section id="metadata">
+            <h2>Metadata i API-definitionen</h2>
+            <p>
+                För att verktyget ska kunna generera meningsfull metadata behöver API-definitionen
+                kompletteras med DCAT-metadata. Metadatan är organiserad i tre primära klasser:
+            </p>
+            <ul>
+                <li><strong>Katalog</strong> — det övergripande katalogelementet som samlar en eller flera datamängder.</li>
+                <li><strong>Datamängd</strong> — beskriver själva datat: titel, beskrivning, ämne, geografisk täckning, uppdateringsfrekvens, etc.</li>
+                <li><strong>Datatjänst</strong> — beskriver hur datamängden kan nås tekniskt (endpoint, protokoll, etc.).</li>
+            </ul>
+            <p>
+                Varje klass har obligatoriska, rekommenderade och valfria attribut.
+                För att RDF:en ska accepteras av Sveriges dataportal bör åtminstone en katalog och en
+                datamängd finnas, samt kontaktuppgifter, publisher och licens.
+            </p>
+            <p>
+                Se <a href="https://docs.dataportal.se/dcat/docs/recommendations/" target="_blank" rel="noopener">
+                rekommendationerna på dataportalen</a> för vägledning kring vilka attribut som bör användas.
+            </p>
+        </section>
+        <hr>
+        <section id="publicera">
+            <h2>Publicera på Sveriges dataportal</h2>
+            <ol>
+                <li>
+                    <a href="https://docs.dataportal.se/accounts/" target="_blank" rel="noopener">Skapa konto</a>
+                    till dataportal.se, eller kontrollera
+                    <a href="https://admin.dataportal.se/status/public" target="_blank" rel="noopener">status</a>
+                    om organisationen redan finns upplagd.
+                </li>
+                <li>
+                    Upprätta en skördningskälla —
+                    <a href="https://docs.dataportal.se/registry/start/" target="_blank" rel="noopener">komma igång</a>.
+                </li>
+                <li>Inför DCAT-metadata i API-definitionen eller i en separat metadatafil.</li>
+                <li>Använd DCAT-AP-SE Processor för att generera en RDF-fil.</li>
+                <li>Skörda RDF-filen —
+                    <a href="https://docs.dataportal.se/registry/organisationer/#lagga-till-en-organisation"
+                       target="_blank" rel="noopener">
+                        hantera organisationer och skördningskällor</a>.
+                </li>
+                <li>Verifiera att skördningen fungerar.</li>
+            </ol>
+            <p>
+                <a href="https://docs.dataportal.se/" target="_blank" rel="noopener">Dataportalens dokumentation</a>
+                innehåller ingående information om hur skördningen fungerar samt hur en organisation sätter upp sin katalogkälla.
+            </p>
+        </section>
+        <hr>
+        <section id="referens">
+            <h2>Referens och exempel</h2>
+            <p>Fullständig referens över metadata-attribut, exempelfiler och tekniska tillägg finns i projektets GitHub-repository:</p>
+            <ul>
+                <li>
+                    <a href="https://github.com/diggsweden/DCAT-AP-SE-Processor/blob/main/docs/supported_attributes.md"
+                       target="_blank" rel="noopener">
+                        Attribut som stöds
+                    </a> — fullständig lista över alla DCAT-AP-SE-attribut med beskrivning.
+                </li>
+                <li>
+                    <a href="https://github.com/diggsweden/DCAT-AP-SE-Processor/tree/main/src/main/resources/metadataExample"
+                       target="_blank" rel="noopener">
+                        Exempelfiler
+                    </a> — visar hur metadata införs i olika format (RAML, OAS YAML, OAS JSON, separat JSON).
+                </li>
+                <li>
+                    <a href="https://github.com/diggsweden/DCAT-AP-SE-Processor"
+                       target="_blank" rel="noopener">
+                        GitHub-repository
+                    </a> — källkod, DevOps-instruktioner, versionsinformation.
+                </li>
+            </ul>
+        </section>
+    </article>
+</main>
+</html>

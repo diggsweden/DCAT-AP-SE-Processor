@@ -1,0 +1,168 @@
+<div th:fragment="dcat-form" class="p-3">
+    <h2 class="mt-2">DCAT-AP-SE formulär</h2>
+    <p>
+        Fyll i dom obligatoriska fälten och tryck på <strong>Bygg grundmall</strong>
+        för att generera en grundmall direkt i editorn. Har du redan en OpenAPI-definition
+        öppen så läggs <code>x-dcat</code> till under <code>info</code>. Är editorn tom skapas en minimal OpenAPI-struktur.
+        Grundmallen kan justeras i editorn eller via formuläret innan RDF genereras.
+    </p>
+    <form id="dcat-form">
+        <label class="required" for="cat-language">Språk för katalog och datamängd</label>
+        <select id="cat-language" name="catalog.language">
+            <option value="sv" selected>Svenska</option>
+            <option value="en">Engelska</option>
+        </select>
+
+        <div class="d-flex">
+            <h3>Katalog</h3>
+            <a class="icon-link ml-2" 
+                target="_blank" 
+                rel="noopener" 
+                href="https://docs.dataportal.se/dcat/sv/#dcat%3ACatalog">läs mer
+            </a>
+        </div>
+        <label class="required" for="cat-about">URI för katalogen</label>
+        <input type="url" 
+            id="cat-about" 
+            name="catalog.about" 
+            required
+            placeholder="https://exempel.myndighet.se/katalog">
+        <label class="required" for="cat-title">Titel</label>
+        <input type="text" 
+            id="cat-title" 
+            name="catalog.title" 
+            required
+            placeholder="Min organisations datakatalog">
+        <label class="required" for="cat-description">Beskrivning</label>
+        <textarea id="cat-description" 
+            name="catalog.description" 
+            required 
+            rows="2"
+            placeholder="Kort beskrivning av katalogen"></textarea>
+        <label class="required" for="cat-license">Licens</label>
+        <input type="url" 
+            id="cat-license" 
+            name="catalog.license" 
+            required
+            value="https://creativecommons.org/publicdomain/zero/1.0/"
+            placeholder="Url till licens">
+        <small class="text-muted">
+            Ange en URI till licensen. DCAT-AP-SE rekommenderar CC0-1.0 för katalogen.
+        </small>
+
+        <div class="d-flex">
+            <h3>Utgivare (aktör)</h3>
+            <a class="icon-link ml-2" 
+            target="_blank" 
+            rel="noopener" 
+            href="https://docs.dataportal.se/dcat/sv/#foaf%3AAgent">läs mer
+        </a>
+        </div>
+        <label class="required" for="pub-about">URI för utgivaren</label>
+        <input type="url" 
+            id="pub-about" 
+            name="publisher.about" 
+            required
+            placeholder="https://exempel.myndighet.se">
+        <small class="text-muted">
+            Använd samma URI varje gång för er organisation, t.ex. er egen domän.
+            Om URI:n skiljer sig mellan inskick tolkas det som olika utgivare på dataportalen.
+        </small>
+        <label class="required" for="pub-name">Namn</label>
+        <input type="text" 
+            id="pub-name" 
+            name="publisher.name" 
+            required
+            placeholder="Namn på organisation">
+        <label class="required" for="pub-type">Typ</label>
+        <select id="pub-type" name="publisher.type" required>
+            <option value="">Välj typ</option>
+            <option value="NationalAuthority">Statlig myndighet</option>
+            <option value="RegionalAuthority">Regional myndighet</option>
+            <option value="LocalAuthority">Kommunal myndighet</option>
+            <option value="NonProfitOrganisation">Ideell organisation</option>
+            <option value="Company">Företag</option>
+        </select>
+
+        <div class="d-flex">
+            <h3>Datamängd</h3>
+            <a class="icon-link ml-2"
+                target="_blank" 
+                rel="noopener" 
+                href="https://docs.dataportal.se/dcat/sv/#dcat%3ADataset">läs mer
+            </a>
+        </div>
+        <label class="required" for="ds-about">URI för datamängd</label>
+        <input type="url" 
+            id="ds-about" 
+            name="dataset.about" 
+            required
+            placeholder="https://exempel.myndighet.se/datamangd">
+        <label class="required" for="ds-title">Titel</label>
+        <input type="text" 
+            id="ds-title" 
+            name="dataset.title" 
+            required
+            placeholder="Namn på datamängd">
+        <label class="required" for="ds-description">Beskrivning</label>
+        <textarea id="ds-description" 
+            name="dataset.description" 
+            required 
+            rows="2"
+            placeholder="Beskrivning av datamängd"></textarea>
+        <label for="ds-keywords">Nyckelord (kommaseparerade)</label>
+        <input type="text" 
+            id="ds-keywords" 
+            name="dataset.keywords"
+            placeholder="öppna data, statistik, api">
+        <label for="ds-theme">Kategori (EU data theme)</label>
+        <select id="ds-theme" name="dataset.theme">
+            <option value="">Välj kategori</option>
+            <option value="GOVE">Förvaltning</option>
+            <option value="ECON">Ekonomi</option>
+            <option value="EDUC">Utbildning</option>
+            <option value="ENVI">Miljö</option>
+            <option value="HEAL">Hälsa</option>
+            <option value="TECH">Vetenskap och teknik</option>
+            <option value="TRAN">Transport</option>
+        </select>
+
+        <div class="d-flex">
+            <h3>Kontaktuppgift</h3>
+            <a class="icon-link ml-2"
+                target="_blank" 
+                rel="noopener" 
+                href="https://docs.dataportal.se/dcat/sv/#vcard%3AOrganization">läs mer
+            </a>
+        </div>
+        <label class="required" for="cp-about">URI för kontaktuppgift</label>
+        <input type="url" 
+            id="cp-about" 
+            name="contactPoint.about" 
+            required
+            placeholder="https://exempel.myndighet.se/kontakt">
+    
+        <label class="required" for="cp-type">Typ</label>
+        <select id="cp-type" name="contactPoint.type" required>
+            <option value="">Välj typ</option>
+            <option value="Organization">Organisation</option>
+            <option value="Individual">Person</option>
+        </select>
+        <label class="required" for="cp-name">Namn</label>
+        <input type="text" 
+            id="cp-name" 
+            name="contactPoint.name" 
+            required
+            placeholder="Kontakt eller avdelning">
+        <label class="required" for="cp-email">E-post</label>
+        <input type="email" 
+            id="cp-email" 
+            name="contactPoint.email" 
+            required
+            placeholder="kontakt@exempel.se">
+
+        <div class="mt-3">
+            <button id="generate-xdcat" class="btn secondary">Bygg grundmall</button>
+        </div>
+    </form>
+</div>
