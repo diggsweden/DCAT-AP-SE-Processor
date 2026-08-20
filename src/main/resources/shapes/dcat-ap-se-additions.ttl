@@ -1,0 +1,54 @@
+#################################################################
+# DCAT-AP-SE additions to the EU DCAT-AP 3.0 SHACL shapes.
+#
+# This file holds ONLY the constraints where the Swedish profile
+# (DCAT-AP-SE) is stricter than the EU base. It is loaded together
+# with dcat-ap-SHACL.ttl (the unmodified EU base).
+#
+# Source: https://docs.dataportal.se/dcat/3.0.1/en/
+#################################################################
+
+@prefix sh:       <http://www.w3.org/ns/shacl#> .
+@prefix dcat:     <http://www.w3.org/ns/dcat#> .
+@prefix dcterms:  <http://purl.org/dc/terms/> .
+@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
+@prefix dcatapse: <https://diggsweden.github.io/dcat-ap-se/shacl#> .
+
+#################################################################
+# Dataset: publisher is mandatory in DCAT-AP-SE (EU base: 0..1).
+#################################################################
+dcatapse:DatasetShape
+    a sh:NodeShape ;
+    sh:targetClass dcat:Dataset ;
+    sh:property [
+        sh:path dcterms:publisher ;
+        sh:minCount 1 ;
+        sh:message "DCAT-AP-SE requires a publisher (dcterms:publisher) on every Dataset."@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+#################################################################
+# Catalog: license is mandatory in DCAT-AP-SE (EU base: 0..1).
+#################################################################
+dcatapse:CatalogShape
+    a sh:NodeShape ;
+    sh:targetClass dcat:Catalog ;
+    sh:property [
+        sh:path dcterms:license ;
+        sh:minCount 1 ;
+        sh:message "DCAT-AP-SE requires a licence (dcterms:license) on every Catalogue."@en ;
+        sh:severity sh:Violation ;
+    ] .
+
+#################################################################
+# Agent: type is mandatory in DCAT-AP-SE 3.0.1 (EU base: 0..1).
+#################################################################
+dcatapse:AgentShape
+    a sh:NodeShape ;
+    sh:targetClass foaf:Agent ;
+    sh:property [
+        sh:path dcterms:type ;
+        sh:minCount 1 ;
+        sh:message "DCAT-AP-SE requires a type (dcterms:type) on every Agent."@en ;
+        sh:severity sh:Violation ;
+    ] .

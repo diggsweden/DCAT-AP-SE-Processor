@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:at="http://publications.europa.eu/ontology/authority/"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:atold="http://publications.europa.eu/resource/authority/"
+         xml:base="http://publications.europa.eu/resource/authority/data-theme">
+   <skos:ConceptScheme rdf:about="http://publications.europa.eu/resource/authority/data-theme"
+                       at:table.id="data-theme"
+                       at:table.version.number="20241211-0">
+      <owl:versionInfo>20241211-0</owl:versionInfo>
+      <skos:prefLabel xml:lang="en">Data theme</skos:prefLabel>
+      <rdfs:label xml:lang="en">Data theme</rdfs:label>
+      <at:prefLabel xml:lang="en">Data theme</at:prefLabel>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ECON"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/AGRI"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/GOVE"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENER"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENVI"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/EDUC"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/JUST"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/INTR"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/HEAL"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/SOCI"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/OP_DATPRO"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TECH"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TRAN"/>
+   </skos:ConceptScheme>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/ECON"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="ro">Economie şi finanţe</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Ekonomi och finans</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Hospodářství a finance</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Ekonomija i financije</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Talous ja raha-asiat</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Wirtschaft und Finanzen</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">Økonomi og finans</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">Økonomi og finans</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">Økonomi og finans</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Ekonomika ir finansai</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Economy and finance</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Economie en financiën</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Hospodárstvo a financie</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Ekonomija u finanzi</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Économie et finances</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Οικονομία και χρηματοοικονομικά θέματα</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Gospodarka i finanse</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Ekonomika un finanses</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Økonomi og finanser</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Geilleagar agus airgeadas</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Economía y finanzas</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Economia e finanze</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Majandus ja rahandus</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Economia e finanças</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Икономика и финанси</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Gospodarstvo in finance</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Gazdaság és pénzügy</skos:prefLabel>
+      <skos:definition xml:lang="ga">téama tacair sonraí lena gcumhdaítear réimse na gníomhaíochta eacnamaíche, rud a bhaineann le táirgeadh, dáileadh, trádáil agus tomhaltas earraí agus seirbhísí, agus réimse na gníomhaíochta airgeadais, rud lena ndírítear ar bhainistiú airgid ar leibhéal an duine aonair, na cuideachta nó an rialtais</skos:definition>
+      <skos:definition xml:lang="lt">duomenų rinkinio tema, apimanti tokias sritis kaip ekonominė veikla, susijusi su prekių gamyba ir paslaugų teikimu, platinimu, prekyba ir naudojimu, taip pat finansinė veikla, susijusi su pinigų valdymu asmenų, įmonių ar valdžios lygmeniu</skos:definition>
+      <skos:definition xml:lang="fi">tietojoukkoryhmä, joka kattaa sellaiset taloudellisen toiminnan alat, jotka liittyvät tavaroiden ja palveluiden tuotantoon, jakeluun, kauppaan ja kulutukseen, sekä sellaiset rahoitustoiminnan alat, jotka keskittyvät varainhoitoon henkilö-, yritys- tai hallintotasolla</skos:definition>
+      <skos:definition xml:lang="sl">podatkovni nabor, ki pokriva področja gospodarske dejavnosti, tj. izdelavo in razdelitev dobrin in storitev ter trgovanje z njimi, ter finančne dejavnosti, ki se osredotočajo na upravljanje denarja na ravni posameznika, družbe ali države</skos:definition>
+      <skos:definition xml:lang="ro">tema setului de date care vizează domeniile activității economice referitoare la producția, distribuția, comerțul și consumul de bunuri și servicii, precum și la activitatea financiară axată pe gestionarea banilor la nivel individual, la nivel de întreprindere sau de administrație publică</skos:definition>
+      <skos:definition xml:lang="en">dataset theme covering the domains of economic activity which involves production, distribution, trade, and consumption of goods and services, and finance activity focusing on the management of money at the individual, company, or government level</skos:definition>
+      <skos:definition xml:lang="nl">datasetthema dat betrekking heeft op de domeinen economie, waarbij het gaat om de productie, distributie, handel en consumptie van goederen en diensten; en financiën, waarbij het gaat om activiteiten gericht op het beheer van geld op het niveau van personen, bedrijven of de overheid</skos:definition>
+      <skos:definition xml:lang="cs">téma datového souboru týkající se oblasti hospodářské činnosti, jež zahrnuje výrobu a distribuci zboží a služeb, obchodování s nimi a jejich spotřebu, a oblasti finanční činnosti, která se zaměřuje na správu peněz na úrovni jednotlivců, podniků nebo veřejné správy</skos:definition>
+      <skos:definition xml:lang="et">andmestike teema, mis hõlmab selliseid valdkondi nagu majandustegevus, mille alla kuulub kaupade ja teenuste tootmine, levitamine, müük ja tarbimine, ning rahandusega seotud tegevus, mis keskendub raha haldamisele üksikisiku, ettevõtte või valitsuse tasandil</skos:definition>
+      <skos:definition xml:lang="pt">conjunto de dados cujo tema abrange os domínios da atividade económica que envolvem a produção, a distribuição, o comércio e o consumo de bens e serviços, e a atividade financeira centrada na gestão financeira a nível individual, empresarial ou governamental</skos:definition>
+      <skos:definition xml:lang="da">tema for datasæt, som vedrører områderne økonomisk virksomhed, der omfatter produktion, distribution, handel og forbrug af varer og tjenesteydelser, og finansiel virksomhed med fokus på forvaltning af penge på individuelt niveau, virksomhedsniveau eller myndighedsniveau</skos:definition>
+      <skos:definition xml:lang="es">tema de un conjunto de datos que abarca los ámbitos de la actividad económica, que comprende la producción, la distribución, el comercio y el consumo de bienes y servicios, y la actividad financiera, centrada en la gestión del dinero a nivel particular, empresarial o gubernamental</skos:definition>
+      <skos:definition xml:lang="hr">tema podatkovnog skupa koja obuhvaća domenu gospodarskih aktivnosti, što uključuje proizvodnju, distribuciju, trgovinu i potrošnju robe i usluga, te domenu financijskih aktivnosti usmjerenih na upravljanje novčanim sredstvima pojedinaca, poduzeća ili javnih sredstava</skos:definition>
+      <skos:definition xml:lang="de">Datensatzthema für die Bereiche Wirtschaftstätigkeiten, worunter die Herstellung und Verteilung von Waren und Dienstleistungen sowie der Handel mit ihnen und ihr Verbrauch bzw. ihre Inanspruchnahme fallen, und finanzielle Tätigkeiten, die schwerpunktmäßig der Verwaltung von Geld auf individueller, betrieblicher oder staatlicher Ebene gelten</skos:definition>
+      <skos:definition xml:lang="sv">dataset för områdena ekonomisk verksamhet, med produktion, distribution, handel och konsumtion av varor och tjänster, samt finansiell verksamhet med inriktning på förvaltning av pengar på individuell nivå, företagsnivå eller myndighetsnivå.</skos:definition>
+      <skos:definition xml:lang="sk">téma dátového súboru pokrývajúca oblasť hospodárskej činnosti, ktorá zahŕňa výrobu, distribúciu, obchod a spotrebu tovarov a služieb; a oblasť finančnej činnosti zameranej na správu peňazí na úrovni jednotlivcov, spoločnosti alebo verejnej správy</skos:definition>
+      <skos:definition xml:lang="bg">тема на множество от данни, обхващаща следните области: икономическа дейност, която включва производството, разпространението, търговията и потреблението на стоки и услуги; финансова дейност, която е съсредоточена върху управлението на парите на лично, дружествено или държавно равнище</skos:definition>
+      <skos:definition xml:lang="hu">Ez az adatkészlet-téma az áruk és szolgáltatások termelésével, forgalmazásával, kereskedelmével és fogyasztásával kapcsolatos gazdasági tevékenységekre, valamint az egyéni, vállalati vagy kormányzati vagyonok pénzgazdálkodási tevékenységére terjed ki.</skos:definition>
+      <skos:definition xml:lang="pl">temat zbioru danych obejmujący dziedziny działalności gospodarczej, takie jak: produkcja i dystrybucja towarów i usług, obrót nimi oraz korzystanie z nich, a także działalność finansowa koncentrująca się na zarządzaniu pieniędzmi na poziomie osoby fizycznej, przedsiębiorstwa lub na szczeblu rządowym</skos:definition>
+      <skos:definition xml:lang="lv">datu kopa, kura aptver tādas jomas kā saimnieciskā darbība, proti, preču un pakalpojumu ražošana, izplatīšana, tirdzniecība un patēriņš, un finanšu darbība, proti, naudas pārvaldība individuālā līmenī vai uzņēmuma vai valdības līmenī</skos:definition>
+      <skos:definition xml:lang="mt">tema ta’ sett tad-data li tkopri l-oqsma tal-attività ekonomika li tinvolvi l-produzzjoni, id-distribuzzjoni, il-kummerċ, u l-konsum ta’ oġġetti u ta' servizzi, u l-oqsma tal-attività finanzjarja li tiffoka fuq il-ġestjoni tal-flus fil-livell individwali, tal-kumpaniji jew tal-gvern</skos:definition>
+      <skos:definition xml:lang="fr">thème d’un ensemble de données couvrant les domaines de l’activité économique au nombre desquels la production, la distribution, les échanges et la consommation de biens et de services, et l’activité financière axée sur la gestion de l’argent au niveau des individus, des entreprises ou des administrations publiques</skos:definition>
+      <skos:definition xml:lang="el">θέμα συνόλου δεδομένων το οποίο καλύπτει τους τομείς της οικονομικής δραστηριότητας που περιλαμβάνει την παραγωγή, τη διανομή, το εμπόριο και την κατανάλωση αγαθών και υπηρεσιών, καθώς και τη χρηματοοικονομική δραστηριότητα που επικεντρώνεται στη διαχείριση χρημάτων σε ατομικό, εταιρικό ή κυβερνητικό επίπεδο</skos:definition>
+      <skos:definition xml:lang="it">tema di serie di dati relativo ai settori dell'attività economica, che riguarda la produzione, la distribuzione, gli scambi e il consumo di beni e servizi, e dell'attività finanziaria, che è incentrata sulla gestione del denaro a livello individuale, aziendale o di governo</skos:definition>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>ECON</dc:identifier>
+      <atold:op-code>ECON</atold:op-code>
+      <at:op-code>ECON</at:op-code>
+      <at:start.use>2015-10-01</at:start.use>
+      <at:authority-code>ECON</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/AGRI"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="cs">Zemědělství, rybolov, lesnictví a výživa</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Agriculture, pêche, sylviculture et alimentation</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Žemės ūkis, žuvininkystė, miškininkystė ir maistas</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Agricultura, pesca, silvicultura y alimentación</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Agrikoltura, sajd, forestrija u ikel</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Maatalous, kalastus, metsätalous ja elintarvikkeet</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Agricultura, pesca, silvicultura e alimentação</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Селско стопанство, рибарство, горско стопанство и храни</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Põllumajandus, kalandus, metsandus ja toiduained</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">Jordbruk, fiskeri, skogbruk og mat</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">Jordbruk, fiskeri, skogbruk og mat</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">Jordbruk, fiskeri, skogbruk og mat</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Landbrug, fiskeri, skovbrug og fødevarer</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Poľnohospodárstvo, rybné hospodárstvo, lesníctvo a potravinárstvo</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Kmetijstvo, ribištvo, gozdarstvo in prehrana</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Poljoprivreda, ribarstvo, šumarstvo i hrana</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Talmhaíocht, iascach, foraoiseacht agus bia</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Rolnictwo, rybołówstwo, leśnictwo i żywność</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Jordbruk, fiske, skogsbruk och livsmedel</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Agricultură, pescuit, silvicultură şi hrană</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Agricoltura, pesca, silvicoltura e prodotti alimentari</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Landbouw, visserij, bosbouw en voeding</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Lauksaimniecība, zivsaimniecība, mežsaimniecība un pārtika</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Mezőgazdaság, halászat, erdészet és élelmiszer</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Γεωργία, αλιεία, δασοκομία και τρόφιμα</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Agriculture, fisheries, forestry and food</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Landwirtschaft, Fischerei, Forstwirtschaft und Nahrungsmittel</skos:prefLabel>
+      <skos:definition xml:lang="sv">dataset för områdena jordbruk, som omfattar växtodling och boskapsskötsel, fiske, inriktat på uttag av fisk från vilda eller odlade källor skogsbruk, som avser förvaltning och bevarande av skogar och skogsmark, samt livsmedel, som omfattar ämnen som ger näring åt organismer.</skos:definition>
+      <skos:definition xml:lang="el">θέμα συνόλου δεδομένων το οποίο καλύπτει τους τομείς της γεωργίας που περιλαμβάνει την καλλιέργεια φυτών και την κτηνοτροφία· της αλιείας που επικεντρώνεται στην αλίευση ιχθύων, άγριων ή εκτρεφόμενων· της δασοκομίας που σχετίζεται με τη διαχείριση και τη διατήρηση των δασών και των δασικών εκτάσεων· και των τροφίμων που περιλαμβάνουν ουσίες οι οποίες παρέχουν διατροφική υποστήριξη σε οργανισμούς</skos:definition>
+      <skos:definition xml:lang="en">dataset theme covering the domains of agriculture which involves the cultivation of plants and livestock; fisheries which focuses on the harvesting of fish from wild or farmed sources; forestry which relates to the management and conservation of forests and woodlands; and food which includes substances that provide nutritional support to organisms</skos:definition>
+      <skos:definition xml:lang="ga">téama tacair sonraí lena gcumhdaítear réimse na talmhaíochta, rud a bhaineann le saothrú plandaí agus beostoic; réimse an iascaigh, rud lena ndírítear ar shaothrú éisc ó fhoinsí fiáine nó ó fhoinsí saothraithe; réimse na foraoiseachta, rud a bhaineann le bainistiú agus caomhnú foraoisí agus coillearnacha; agus réimse an bhia, rud lena n-áirítear substaintí a thugann tacaíocht chothaitheach d’orgánaigh</skos:definition>
+      <skos:definition xml:lang="fi">tietojoukkoryhmä, joka kattaa seuraavat alat: maatalous, joka sisältää kasvinviljelyn ja karjankasvatuksen; kalastus, joka keskittyy kalojen pyydystämiseen luonnonvaraisista tai kasvatetuista kannoista; metsätalous, joka liittyy metsien ja metsämaiden hoitoon ja säilyttämiseen; sekä elintarvikkeet, myös organismien ravitsemuksellisena tukena käytettävät aineet</skos:definition>
+      <skos:definition xml:lang="et">andmestike teema, mis hõlmab selliseid valdkondi nagu põllumajandus, mille alla kuulub taimede ja kariloomade kasvatamine, kalandus, mis keskendub loodusest või tehistingimustes kasvatatud kalade püügile, metsandus, mis on seotud metsade ja metsamaade majandamise ja säilitamisega, ja toiduained, mis hõlmab aineid, millest organismid toituvad</skos:definition>
+      <skos:definition xml:lang="mt">tema ta’ sett tad-data li tkopri l-oqsma tal-agrikoltura li tinvolvi l-kultivazzjoni tal-pjanti u t-trobbija tal-bhejjem; is-sajd li jiffoka fuq il-ħsad ta’ ħut minn sorsi selvaġġi jew tat-trobbija; il-forestrija li għandha x’taqsam mal-ġestjoni u mal-konservazzjoni tal-foresti u tal-imsaġar; u l-ikel li jinkludi sustanzi li jipprovdu sostenn nutrittiv lill-organiżmi</skos:definition>
+      <skos:definition xml:lang="ro">tema setului de date care vizează domeniile agriculturii referitoare la cultivarea plantelor și creșterea animalelor; activitățile de pescuit care se axează pe recoltarea peștilor din surse sălbatice sau din crescătorii; silvicultura care se referă la gestionarea și conservarea pădurilor și a zonelor împădurite; și alimentele care includ substanțe care furnizează sprijin nutrițional organismelor</skos:definition>
+      <skos:definition xml:lang="lt">duomenų rinkinio tema, apimanti tokias žemės ūkio sritis kaip augalų ir gyvulių auginimas, žuvininkystę, kurios pagrindinė veikla – žuvų gaudymas iš laukinių išteklių arba surinkimas iš ūkiuose auginamų išteklių, miškininkystę, susijusią su miškų ir miškingų vietovių valdymu ir išsaugojimu; ir maistą, t. y. medžiagas, reikalingas organizmų mitybai</skos:definition>
+      <skos:definition xml:lang="it">tema di serie di dati relativo ai settori dell'agricoltura, che comprende la coltivazione di piante e l'allevamento di animali; della pesca, incentrata sul prelievo di pesci selvatici o di allevamento; della silvicoltura, che riguarda la gestione e la conservazione delle foreste e dei boschi; e degli alimenti, in cui rientrano le sostanze che forniscono sostegno nutrizionale agli organismi</skos:definition>
+      <skos:definition xml:lang="pt">conjunto de dados cujo tema abrange os domínios da agricultura que envolvem o cultivo de plantas e a pecuária; as pescas centradas na captura de peixes de origem selvagem ou da aquicultura; a silvicultura relacionada com a gestão e conservação das florestas e dos bosques; e os géneros alimentícios que incluam substâncias que fornecem apoio nutricional aos organismos</skos:definition>
+      <skos:definition xml:lang="cs">téma datového souboru týkající se oblasti zemědělství, jež zahrnuje pěstování rostlin a chov hospodářských zvířat, oblasti rybolovu, který se zaměřuje na výlov volně žijících ryb nebo ryb ve farmovém chovu, oblasti lesnictví, které se vztahuje na obhospodařování a ochranu lesů a zalesněných ploch, a oblasti potravin, jež zahrnuje látky poskytující nutriční podporu živým organismům</skos:definition>
+      <skos:definition xml:lang="fr">thème d’un ensemble de données couvrant les domaines de l’agriculture au nombre desquels la culture de plantes et l’élevage d’animaux, les pêcheries axées sur la pêche de poissons sauvages ou d’élevage, la sylviculture pour la gestion et la conservation des forêts et des zones boisées et l’alimentation, pour les substances qui apportent un soutien nutritionnel aux organismes</skos:definition>
+      <skos:definition xml:lang="lv">datu kopa, kura aptver tādas jomas kā lauksaimniecība, proti, augu un lauksaimniecības dzīvnieku audzēšana, zivsaimniecība, kas koncentrējas uz zivju ieguvi no savvaļas vai kultivētiem avotiem, mežsaimniecība, kas saistīta ar mežu un meža zemju apsaimniekošanu un saglabāšanu, un pārtika, proti, vielas, kas nodrošinoša organismu barošanu</skos:definition>
+      <skos:definition xml:lang="nl">datasetthema dat betrekking heeft op de domeinen landbouw, waarbij het gaat om het telen van planten en vee; visserij, gericht op het oogsten van wilde of gekweekte vis; bosbouw, waarbij het gaat om het beheer en de instandhouding van bossen en bosgebieden; en voeding, waarbij het gaat om stoffen die organismen tot voeding dienen</skos:definition>
+      <skos:definition xml:lang="hr">tema podatkovnog skupa koja obuhvaća domenu poljoprivrede, što uključuje uzgoj biljaka i životinja; domenu ribarstva, što uključuje izlov ribe iz prirodnih i umjetnih izvora; domenu šumarstva koja se odnosi na upravljanje i očuvanje šuma i šumskih područja; i domenu prehrane, što uključuje tvari za prehranu organizama</skos:definition>
+      <skos:definition xml:lang="de">Datensatzthema für die Bereiche Landwirtschaft, die Pflanzenanbau und Viehzucht umfasst, Fischerei, die schwerpunktmäßig im Fang bzw. in der Ernte wild lebender oder gezüchteter Fische besteht, Forstwirtschaft, die sich auf die Bewirtschaftung und Erhaltung von Wäldern und bewaldeten Gebieten bezieht, und Nahrungsmittel, worunter Stoffe fallen, die Organismen als Nahrung dienen können</skos:definition>
+      <skos:definition xml:lang="sl">podatkovni nabor, ki pokriva področja kmetijstva, tj.: pridelavo rastlin in rejo živali, ribištvo, ki se osredotoča predvsem na ulov rib iz naravnih ali gojenih virov, gozdarstvo, ki se nanaša na gospodarjenje in ohranjanje gozdov in pogozdenih območij, ter hrano, kamor spadajo snovi, ki organizmom služijo kot prehrana</skos:definition>
+      <skos:definition xml:lang="pl">temat zbioru danych obejmujący dziedziny rolnictwa, takie jak: uprawa roślin i hodowla zwierząt gospodarskich; rybołówstwo, które koncentruje się na odławianiu ryb dziko żyjących lub z gospodarstw rybackich; leśnictwo związane z zarządzaniem lasami i terenami zalesionymi oraz ich ochroną; a także żywność, która zawiera substancje wspierające żywienie organizmów</skos:definition>
+      <skos:definition xml:lang="hu">Ez az adatkészlet-téma a mezőgazdaságot, azon belül a növénytermesztést és az állattartást, a vadon élő vagy tenyésztett halak fogására összpontosító halászatot, az erdők és fás területek kezelését és megőrzését célzó erdőgazdálkodást, valamint az élelmiszerek és tápanyagok előállítását foglalja magában.</skos:definition>
+      <skos:definition xml:lang="da">tema for datasæt, som vedrører områderne landbrug, der omfatter dyrkning af planter og husdyravl; fiskeri, der fokuserer på høst af fisk fra vildtlevende eller opdrættede fisk; skovbrug, der vedrører forvaltning og bevarelse af skove og skovområder, og fødevarer, herunder stoffer, der tilfører næring til organismer</skos:definition>
+      <skos:definition xml:lang="sk">téma dátového súboru pokrývajúca oblasť poľnohospodárstva, ktoré zahŕňa pestovanie rastlín a chov hospodárskych zvierat; oblasť rybárstva, ktoré sa zameriava na výlov voľne žijúcich rýb alebo rýb z chovných zdrojov; oblasť lesného hospodárstva, ktoré sa vzťahuje na obhospodarovanie a ochranu lesov a zalesnených oblastí; a oblasť potravinárstva, do ktorej patria látky poskytujúce výživovú podporu živým organizmom</skos:definition>
+      <skos:definition xml:lang="bg">тема на множество от данни, обхващаща следните области: селско стопанство (земеделие), което включва растениевъдството и животновъдството; рибарство, което е съсредоточено върху улова на риба от дивата природа или от рибовъдни стопанства; горско стопанство, което се отнася до управлението и опазването на горите и гористите площи; производство на храни, които включват веществата, осигуряващи храненето на организмите</skos:definition>
+      <skos:definition xml:lang="es">tema de un conjunto de datos que abarca los ámbitos de la agricultura, relacionada con el cultivo de plantas y el ganado; la pesca, que se centra en la recolección de peces salvajes o de piscifactoría; la silvicultura, que comprende la gestión y conservación de los bosques y de las superficies forestales arboladas; y los alimentos, que incluyen las sustancias que proporcionan apoyo nutricional a los organismos</skos:definition>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>AGRI</dc:identifier>
+      <atold:op-code>AGRI</atold:op-code>
+      <at:op-code>AGRI</at:op-code>
+      <at:start.use>2015-10-01</at:start.use>
+      <at:authority-code>AGRI</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/GOVE"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="it">Governo e settore pubblico</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">Forvaltning og offentlig sektor</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">Forvaltning og offentlig sektor</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Government and public sector</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Vlada i javni sektor</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Gobierno y sector público</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Regierung und öffentlicher Sektor</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Vláda a verejný sektor</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Правителство и публичен сектор</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Guvern şi sector public</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Κυβέρνηση και δημόσιος τομέας</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Valitsus ja avalik sektor</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Rząd i sektor publiczny</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Vláda a veřejný sektor</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Rialtas agus earnáil phoiblí</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Vyriausybė ir viešasis sektorius</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Governo e setor público</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Valdība un sabiedriskais sektors</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Gvern u settur pubbliku</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Kormányzat és közszféra</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Regeringen og den offentlige sektor</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">Forvaltning og offentleg sektor</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Valtioneuvosto ja julkinen sektori</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Gouvernement et secteur public</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Vlada in javni sektor</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Regeringen och den offentliga sektorn</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Overheid en publieke sector</skos:prefLabel>
+      <skos:definition xml:lang="sl">podatkovni nabor, ki pokriva področji vlade in javnega sektorja, pri čemer je vlada sistem ali skupina posameznikov, ki vlada organizirani skupnosti, navadno državi, javni sektor pa segment gospodarstva, ki obsega javne storitve in podjetja, ki jih lahko upravljajo centralni, regionalni ali lokalni organi</skos:definition>
+      <skos:definition xml:lang="bg">тема на множество от данни, обхващаща държавното управление и публичния сектор; държавното управление е система или група физически лица, управляващи организирана общност, обикновено държава, а публичният (общественият) сектор представлява сегмент от икономиката, който включва обществените услуги и публичните предприятия и който може да бъде управляван от централни, регионални или местни органи на властта</skos:definition>
+      <skos:definition xml:lang="ga">téama tacair sonraí lena gcumhdaítear réimse an rialtais agus réimse na hearnála poiblí, de réir an tsainithe gurb é is rialtas ann an córas nó an grúpa daoine aonair a rialaíonn pobal eagraithe, stát de ghnáth, agus gurb é is earnáil phoiblí ann an chuid sin den gheilleagar a chuimsíonn seirbhísí poiblí agus fiontair, agus ar féidir dóibh a bheith faoi bhainistíocht údarás lárnach, réigiúnach nó áitiúil</skos:definition>
+      <skos:definition xml:lang="fi">tietojoukkoryhmä, joka kattaa hallinnon ja julkisen sektorin alat; hallinto on järjestelmä tai henkilöryhmä, joka hallitsee järjestäytynyttä yhteisöä, yleensä valtiota, ja julkinen sektori kattaa talouden osa-alueen, johon kuuluvat julkiset palvelut ja yritykset ja jonka hallinnoijina voivat toimia keskus-, alue- tai paikallisviranomaiset</skos:definition>
+      <skos:definition xml:lang="ro">tema setului de date care vizează domeniile administrației publice și sectorului public, administrația publică fiind sistemul sau grupul de persoane care guvernează o comunitate organizată, de obicei un stat, iar sectorul public entitatea care cuprinde segmentul economiei care implică servicii și întreprinderi publice, domenii care pot fi gestionate de autoritățile centrale, regionale sau locale</skos:definition>
+      <skos:definition xml:lang="it">tema di serie di dati relativo agli ambiti del governo e del settore pubblico, ove il governo è il sistema o il gruppo di individui che governa una comunità organizzata, di norma uno stato, mentre il settore pubblico comprende il segmento dell'economia riguardante i servizi pubblici e le imprese pubbliche, che può essere gestito da autorità centrali, regionali o locali</skos:definition>
+      <skos:definition xml:lang="lt">duomenų rinkinio tema, apimanti valdžios ir viešojo sektoriaus sritis, kur valdžia – tai asmenų sistema ar grupė, valdanti organizuotą bendruomenę, paprastai valstybę, o viešasis sektorius – ekonomikos segmentas, kuris apima viešąsias paslaugas bei įmones ir gali būti valdomas centrinės, regioninės ar vietos valdžios institucijų</skos:definition>
+      <skos:definition xml:lang="mt">tema ta’ sett tad-data li tkopri l-oqsma tal-gvern u tas-settur pubbliku, bil-gvern ikun is-sistema jew il-grupp ta’ individwi li jirregolaw komunità organizzata, normalment stat, u s-settur pubbliku jkun jinkludi s-segment tal-ekonomija li jinvolvi s-servizzi pubbliċi u l-intrapriżi, li jistgħu jkunu ġestiti minn awtoritajiet ċentrali, reġjonali jew lokali</skos:definition>
+      <skos:definition xml:lang="pl">temat zbioru danych obejmujący obszary administracji publicznej i sektora publicznego, rząd będący systemem lub grupą osób zarządzających zorganizowaną społecznością, zazwyczaj państwem, oraz sektor publiczny obejmujący segment gospodarki obejmujący usługi publiczne i przedsiębiorstwa, którym mogą zarządzać władze centralne, regionalne lub lokalne</skos:definition>
+      <skos:definition xml:lang="de">Datensatzthema für die Bereiche Regierung und öffentlicher Sektor, wobei die Regierung das System oder die Gruppe von Personen darstellt, die eine organisierte Gemeinschaft, normalerweise einen Staat, führen, während der öffentliche Sektor das Wirtschaftssegment der öffentlichen Dienste und Unternehmen umfasst, die von zentralstaatlichen, regionalen oder lokalen Behörden verwaltet werden können</skos:definition>
+      <skos:definition xml:lang="fr">thème d’un ensemble de données couvrant les domaines des administrations et du secteur public, les administrations étant le système ou le groupe de personnes qui gouvernent une communauté organisée, généralement un État, et le secteur public comprenant le segment de l’économie qui concerne les services publics et les entreprises et qui peut être géré par des autorités centrales, régionales ou locales</skos:definition>
+      <skos:definition xml:lang="sk">téma dátového súboru pokrývajúca oblasti verejnej správy a verejného sektora, pričom verejná správa predstavuje systém alebo skupinu jednotlivcov, ktorí riadia organizovanú komunitu, zvyčajne štát, a verejný sektor sa skladá zo segmentu hospodárstva zahŕňajúceho verejné služby a podniky a môže byť riadený ústrednými, regionálnymi alebo miestnymi orgánmi</skos:definition>
+      <skos:definition xml:lang="da">tema for datasæt, som vedrører områderne regeringen og den offentlige sektor, hvor regeringen er det system eller den gruppe af enkeltpersoner, der leder et organiseret fællesskab, sædvanligvis en stat, mens den offentlige sektor omfatter det segment af økonomien, der vedrører offentlige tjenester og virksomheder, som kan forvaltes af centrale, regionale eller lokale myndigheder</skos:definition>
+      <skos:definition xml:lang="et">andmestike teema, mis hõlmab selliseid valdkondi nagu valitsus ja avalik sektor; valitsuse puhul on tegu süsteemi või isikute rühmaga, mille valitsemise all on korrastatud ühiskond, enamasti riik, avalik sektor aga hõlmab majandussegmenti, millesse kuuluvad avalikud teenused ja avaliku sektori ettevõtted, mida võidakse juhtida keskvõimu, piirkondliku või kohaliku ametivõimu tasandil</skos:definition>
+      <skos:definition xml:lang="lv">datu kopa, kas aptver tādas jomas kā valdība un publiskais sektors; valdība ir sistēma vai personu grupa, kas pārvalda organizētu kopienu, parasti valsti, bet publiskais sektors – ekonomikas segments, kurā iesaistīti sabiedriskie pakalpojumi un uzņēmumi, kuru pārvaldi var organizēt centrālās, reģionālās vai vietējās iestādes</skos:definition>
+      <skos:definition xml:lang="hu">Ez az adatkészlet-téma a kormányzat és a közigazgatás területeivel foglalkozik, ahol a kormányzat egy szervezett közösséget – általában egy államot – irányító rendszer vagy csoport, a közigazgatás pedig a közszolgáltatásokat és az állami vállalkozásokat magában foglaló gazdasági szegmens, amelyet központi, regionális vagy helyi hatóságok irányíthatnak.</skos:definition>
+      <skos:definition xml:lang="cs">téma datového souboru týkající se oblastí správy a veřejného sektoru, přičemž správou se rozumí systém nebo skupina jednotlivců řídící organizovanou komunitu, obvykle stát, a veřejný sektor se skládá ze segmentu hospodářství zahrnujícího veřejné služby a veřejné podniky, který může být řízen ústředními, regionálními nebo místními orgány</skos:definition>
+      <skos:definition xml:lang="pt">conjunto de dados cujo tema abrange os domínios da administração pública e do setor público, sendo a administração pública o sistema ou grupo de indivíduos que governam uma comunidade organizada, geralmente um Estado, e compreendendo o setor público o segmento da economia que envolve os serviços públicos e as empresas, podendo ser gerido por autoridades centrais, regionais ou locais</skos:definition>
+      <skos:definition xml:lang="hr">tema podatkovnog skupa koja obuhvaća djelovanje vlade i javnog sektora, u kojoj vlada znači sustav ili skupina pojedinaca koji upravljaju organiziranom zajednicom, obično državom, a javni sektor je dio gospodarstva koji uključuje javne usluge i poduzeća, kojima mogu upravljati središnja, regionalna ili lokalna tijela</skos:definition>
+      <skos:definition xml:lang="sv">dataset för områdena myndigheter och offentlig sektor, där myndigheter avser det system eller den grupp av individer som styr ett organiserat samhälle, vanligtvis en stat, och offentliga sektor, omfattar offentliga tjänster och företag och kan styras av centrala, regionala eller lokala myndigheter.</skos:definition>
+      <skos:definition xml:lang="en">dataset theme covering the areas of government and the public sector, government being the system or group of individuals governing an organised community, usually a state, and the public sector comprising the segment of the economy involving public services and enterprises, which may be managed by central, regional or local authorities</skos:definition>
+      <skos:definition xml:lang="el">θέμα συνόλου δεδομένων το οποίο καλύπτει τους τομείς της δημόσιας διοίκησης και του δημόσιου τομέα, όπου η δημόσια διοίκηση αποτελεί το σύστημα ή την ομάδα ατόμων που διοικεί μια οργανωμένη κοινότητα, συνήθως ένα κράτος, και ο δημόσιος τομέας περιλαμβάνει το τμήμα της οικονομίας που αφορά δημόσιες υπηρεσίες και επιχειρήσεις, οι οποίες μπορεί να τελούν υπό τη διαχείριση κεντρικών, περιφερειακών ή τοπικών αρχών</skos:definition>
+      <skos:definition xml:lang="es">tema de un conjunto de datos que abarca los ámbitos de la Administración pública, que es el sistema o grupo de personas que rigen una comunidad organizada —normalmente un Estado—, y el sector público, definido como el segmento de la economía en el que participan los servicios y empresas públicos, que pueden ser gestionados por las autoridades centrales, regionales o locales</skos:definition>
+      <skos:definition xml:lang="nl">datasetthema dat betrekking heeft op de domeinen overheid en publieke sector, waarbij overheid een systeem of groep personen is die een georganiseerde gemeenschap, gewoonlijk een staat, bestuurt, en publieke sector het economische segment is dat gevormd wordt door overheidsdiensten en -ondernemingen, die door centrale, regionale of lokale overheden kunnen worden beheerd</skos:definition>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>GOVE</dc:identifier>
+      <atold:op-code>GOVE</atold:op-code>
+      <at:op-code>GOVE</at:op-code>
+      <at:start.use>2015-10-01</at:start.use>
+      <at:authority-code>GOVE</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/ENER"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="en">Energy</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Fuinneamh</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Energie</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Energie</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Energie</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Energie</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Energetika</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Énergie</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Energetika</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Energetika</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Energetika</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Energeetika</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Enerģētika</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Ενέργεια</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">Energi</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Energía</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Energia</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Energia</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Energia</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Energi</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Енергетика</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Energi</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">Energi</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">Energi</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Energia</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Enerġija</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Energia</skos:prefLabel>
+      <skos:definition xml:lang="et">andmestike teema, mis hõlmab sellist valdkonda nagu energia/energeetika; oma olemuselt on energia töö sooritamiseks või objektide soojendamiseks vajalik kvantitatiivne omadus, mis kujutab enesest keskset elementi elusorganismide jaoks ja tsivilisatsiooni funktsioneerimise seisukohast</skos:definition>
+      <skos:definition xml:lang="lt">duomenų rinkinio tema, apimanti tokią sritį kaip energetika, kuri apibūdinama kaip kiekybinė savybė, būtina darbui atlikti arba objektams šildyti, ir yra gyvybiškai svarbus gyvųjų organizmų ir žmogaus civilizacijos veikimo elementas</skos:definition>
+      <skos:definition xml:lang="fi">tietojoukkoryhmä, joka kattaa energia-alan, jota voidaan pitää kohteiden työstämisen tai niiden lämmittämisen edellyttämänä määrällisenä ominaisuutena sekä elävien organismien ja ihmiskunnan toiminnan elinehtona</skos:definition>
+      <skos:definition xml:lang="sv">dataset för området energi, som är förmågan att utföra arbete eller avge värme, och som är en förutsättning för levande organismer och den mänskliga civilisationen.</skos:definition>
+      <skos:definition xml:lang="fr">thème d’un ensemble de données couvrant le domaine de l’énergie, définie comme la propriété quantitative nécessaire pour effectuer un travail sur l’objet ou pour le chauffer, et comme un élément vital pour les organismes vivants et le fonctionnement de la civilisation humaine</skos:definition>
+      <skos:definition xml:lang="pl">temat zbioru danych obejmujący dziedzinę energii, zdefiniowaną jako właściwość ilościowa niezbędna do wykonywania prac na przedmiotach lub do ich ogrzewania oraz jako istotny element żywych organizmów i działalności cywilizacji ludzkiej</skos:definition>
+      <skos:definition xml:lang="mt">tema ta’ sett ta’ data li tkopri d-dominju tal-enerġija, definita bħala l-proprjetà kwantitattiva meħtieġa biex jiġi eżegwit xogħol fuq oġġetti jew biex dawn jissaħħnu, u bħala l-element vitali għall-organiżmi ħajjin u għall-funzjonament taċ-ċiviltà umana</skos:definition>
+      <skos:definition xml:lang="en">dataset theme covering the domain of energy, characterised as the quantitative property necessary to perform work on or heat objects, and vital element of living organisms and the operation of human civilisation</skos:definition>
+      <skos:definition xml:lang="da">tema for datasæt, som vedrører området energi, karakteriseret som den kvantitative egenskab, der er nødvendig for at udføre arbejde på eller opvarme genstande, og et vitalt element for levende organismer og den menneskelige civilisations funktion</skos:definition>
+      <skos:definition xml:lang="it">tema di serie di dati relativo al settore dell'energia, descritta come la capacità di un corpo di compiere lavoro o di trasferire calore e che è l'elemento vitale per gli organismi viventi e il funzionamento della società umana</skos:definition>
+      <skos:definition xml:lang="cs">téma datového souboru týkající se oblasti energie, charakterizované jako kvantitativní vlastnost nezbytná k výkonu práce na tělesech nebo k ohřevu těles a jako prvek se zásadním významem pro živé organismy a pro fungování lidské civilizace</skos:definition>
+      <skos:definition xml:lang="el">θέμα συνόλου δεδομένων το οποίο καλύπτει τον τομέα της ενέργειας που χαρακτηρίζεται ως το ποσοτικό χαρακτηριστικό που απαιτείται για την εκτέλεση εργασιών σε αντικείμενα ή τη θέρμανση αντικειμένων, και ζωτικό στοιχείο των ζώντων οργανισμών και της λειτουργίας του ανθρώπινου πολιτισμού</skos:definition>
+      <skos:definition xml:lang="bg">тема на множество от данни, обхващаща областта на енергията, която представлява количественото свойство, необходимо за извършване на работа върху предмети или за загряването им, и жизненоважен елемент за живите организми, както и осъществяването на човешката цивилизация</skos:definition>
+      <skos:definition xml:lang="nl">datasetthema dat betrekking heeft op het domein energie, gekarakteriseerd als de kwantitatieve eigenschap die nodig is voor het bewerken of verwarmen van objecten, en die een vitaal element vormt van levende organismen en voor de werking van de menselijke beschaving</skos:definition>
+      <skos:definition xml:lang="hr">tema podatkovnog skupa koja obuhvaća domenu energije, što je količinsko svojstvo nužno za izvođenje radova na predmetima ili za njihovo grijanje, i neophodna je za žive organizme i funkcioniranje ljudske civilizacije</skos:definition>
+      <skos:definition xml:lang="hu">Az energia területére kiterjedő adatkészlet-téma, ahol az energia munka vagy hő létrehozásához szükséges kvantitatív jellemző, valamint az élő szervezetek és az emberi civilizáció működésének létfontosságú eleme.</skos:definition>
+      <skos:definition xml:lang="es">tema de un conjunto de datos que abarca el ámbito de la energía, definida como la propiedad cuantitativa necesaria para efectuar trabajos sobre objetos o para aumentar la temperatura de estos, y como un elemento vital para los organismos vivos y para el funcionamiento de la civilización humana</skos:definition>
+      <skos:definition xml:lang="sk">téma dátového súboru pokrývajúca oblasť energetiky, ktorá je charakterizovaná ako kvantitatívna vlastnosť potrebná na výkon práce na objektoch alebo na ich ohrievanie a nevyhnutná pre život organizmov a fungovanie ľudskej civilizácie</skos:definition>
+      <skos:definition xml:lang="ga">téama tacair sonraí lena gcumhdaítear réimse an fhuinnimh, arb é is saintréith dó an t-airí cainníochtúil atá riachtanach chun oibriú ar réada nó chun réada a théamh, agus atá ina ghné bhunthábhachtach d’orgánaigh bheo agus d’oibriú na sibhialtachta daonna</skos:definition>
+      <skos:definition xml:lang="lv">datu kopa, kura aptver enerģētikas jomu, kas raksturojama kā kvantitatīva īpašība, kas vajadzīga, lai veiktu darbu ar priekšmetiem vai tos apsildītu, un kas ietver dzīvu organismu dzīvības elementu un cilvēku civilizācijas darbību</skos:definition>
+      <skos:definition xml:lang="pt">conjunto de dados cujo tema abrange o domínio da energia, caracterizada como a propriedade quantitativa necessária para executar trabalhos sobre objetos ou aquecer objetos, enquanto elemento vital para os organismos vivos e para o funcionamento da civilização humana</skos:definition>
+      <skos:definition xml:lang="sl">podatkovni nabor, ki pokriva področje energije, ki je količinska lastnost, potrebna za delo na predmetih ali njihovo segrevanje, ter nepogrešljiva za žive organizme in delovanje človeške civilizacije</skos:definition>
+      <skos:definition xml:lang="de">Datensatzthema für den Bereich Energie, bei der es sich um die quantitative Eigenschaft handelt, die notwendig ist, um Arbeit an Gegenständen zu verrichten oder diese zu erwärmen, und die unerlässlich für das Leben von Organismen und das Funktionieren einer menschlichen Zivilisation ist</skos:definition>
+      <skos:definition xml:lang="ro">tema setului de date care vizează domeniul energiei, caracterizată ca fiind proprietatea cantitativă necesară exercitării unor acțiuni asupra obiectelor sau încălzirii obiectelor și totodată elementul vital al organismelor vii și al funcționării civilizației umane</skos:definition>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>ENER</dc:identifier>
+      <atold:op-code>ENER</atold:op-code>
+      <at:op-code>ENER</at:op-code>
+      <at:start.use>2015-10-01</at:start.use>
+      <at:authority-code>ENER</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/ENVI"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="nl">Milieu</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Vide</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Ambjent</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">Miljø</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Environment</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Aplinka</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Mediu</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Miljø</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">Miljø</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">Miljø</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Životní prostředí</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Околна среда</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Ambiente</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Ambiente</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Umwelt</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Ympäristö</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Környezet</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Comhshaol</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Medio ambiente</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Environnement</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Περιβάλλον</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Okolje</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Okoliš</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Keskkond</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Środowisko</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Miljö</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Životné prostredie</skos:prefLabel>
+      <skos:definition xml:lang="lv">datu kopa, kura aptver vides jomu, ko definē kā visu dzīvo sugu, klimata, laikapstākļu un dabas resursu mijiedarbību, kas ietekmē cilvēka izdzīvošanu un saimniecisko darbību</skos:definition>
+      <skos:definition xml:lang="en">dataset theme covering the domain of environment, defined as the interaction of all living species, climate, weather, and natural resources that impact human survival and economic activity</skos:definition>
+      <skos:definition xml:lang="da">tema for datasæt, som vedrører området miljø, der defineres som samspillet mellem alle levende arter, klima, vejr og naturressourcer, der påvirker menneskets overlevelse og den økonomiske aktivitet</skos:definition>
+      <skos:definition xml:lang="ga">téama tacair sonraí lena gcumhdaítear réimse an chomhshaoil, arb é atá ann, de réir sainmhíniú, idirghníomhú na speiceas beo uile, na haeráide, na haimsire agus na n-acmhainní nádúrtha a mbíonn tionchar acu ar mharthanas an duine agus ar an ngníomhaíocht eacnamaíoch</skos:definition>
+      <skos:definition xml:lang="fi">tietojoukkoryhmä, joka kattaa ympäristöalan, joka määritellään kaikkien elävien lajien, ilmaston, sään ja luonnonvarojen vuorovaikutukseksi, joka vaikuttaa ihmiskunnan selviytymiseen ja taloudelliseen toimintaan</skos:definition>
+      <skos:definition xml:lang="lt">duomenų rinkinio tema, apimanti aplinkos sritį, kuri apibrėžiama kaip visų gyvųjų rūšių organizmų, klimato, oro ir gamtos išteklių sąveika, daranti poveikį žmonių išlikimui ir ekonominei veiklai</skos:definition>
+      <skos:definition xml:lang="nl">datasetthema dat betrekking heeft op het domein milieu, gedefinieerd als de interactie van alle levende organismen, het klimaat, het weer en de natuurlijke hulpbronnen die van invloed zijn op het voortbestaan van de mens en diens economische activiteiten</skos:definition>
+      <skos:definition xml:lang="pt">conjunto de dados cujo tema abrange o domínio do ambiente, definido como a interação entre todas as espécies vivas, o clima, as condições meteorológicas e os recursos naturais que afetam a sobrevivência humana e a atividade económica</skos:definition>
+      <skos:definition xml:lang="fr">thème d’un ensemble de données couvrant le domaine de l’environnement, défini comme l’interaction entre l’ensemble des espèces vivantes, le climat, les conditions météorologiques, et les ressources naturelles qui ont une incidence sur la survie humaine et l’activité économique</skos:definition>
+      <skos:definition xml:lang="sv">dataset för området miljö, definierat som samspelet mellan alla levande arter, klimat, väder och naturresurser som påverkar människors överlevnad och den ekonomiska verksamheten.</skos:definition>
+      <skos:definition xml:lang="it">tema di serie di dati relativo al settore dell'ambiente, definito come l'interazione di tutte le specie viventi, il clima, il tempo meteorologico e le risorse naturali che incidono sulla sopravvivenza umana e sull'attività economica</skos:definition>
+      <skos:definition xml:lang="sl">podatkovni nabor, ki pokriva področje okolja, ki je opredeljeno kot interakcija med živimi organizmi, podnebjem, vremenom in naravnimi viri, ki vplivajo na človekovo preživetje in gospodarsko dejavnost</skos:definition>
+      <skos:definition xml:lang="pl">temat zbioru danych obejmujący dziedzinę środowiska, zdefiniowaną jako interakcja wszystkich żywych gatunków, klimatu, pogody i zasobów naturalnych, które mają wpływ na przetrwanie ludzi i działalność gospodarczą</skos:definition>
+      <skos:definition xml:lang="el">θέμα συνόλου δεδομένων το οποίο καλύπτει τον τομέα του περιβάλλοντος που ορίζεται ως η αλληλεπίδραση όλων των έμβιων όντων, του κλίματος, των καιρικών συνθηκών και των φυσικών πόρων τα οποία επηρεάζουν την επιβίωση του ανθρώπου και την οικονομική δραστηριότητα</skos:definition>
+      <skos:definition xml:lang="mt">tema ta’ sett tad-data li tkopri d-dominju tal-ambjent, definita bħala l-interazzjoni tal-ispeċijiet ħajjin kollha, il-klima, it-temp u r-riżorsi naturali li jħallu impatt fuq is-sopravivenza tal-bniedem u fuq l-attività ekonomika</skos:definition>
+      <skos:definition xml:lang="et">andmestike teema, mis hõlmab sellist valdkonda nagu keskkond, mida määratletakse kui kõigi elusolendite liikide, kliima, ilma ja loodusvarade koostoimet, mis mõjutavad inimkonna püsimajäämist ja majandustegevust</skos:definition>
+      <skos:definition xml:lang="de">Datensatzthema für den Bereich Umwelt, definiert als Interaktion aller lebenden Arten, des Klimas, des Wetters und natürlicher Ressourcen, die sich auf das Überleben des Menschen und seine Wirtschaftstätigkeit auswirken</skos:definition>
+      <skos:definition xml:lang="es">tema de un conjunto de datos que abarca el ámbito del medio ambiente, definido como la interacción entre el conjunto de las especies vivas, el clima, las condiciones meteorológicas y los recursos naturales que inciden sobre la supervivencia humana y la actividad económica</skos:definition>
+      <skos:definition xml:lang="bg">тема на множество от данни, обхващаща областта на околната среда, определяна като взаимодействието между всички живи същества, климата, времето и природните ресурси, които влияят върху оцеляването на човека и икономическата му дейност</skos:definition>
+      <skos:definition xml:lang="ro">tema setului de date care vizează domeniul mediului, definit ca interacțiunea tuturor speciilor vii, a climei, a elementelor meteorologice și a resurselor naturale care influențează supraviețuirea speciei umane și activitatea economică</skos:definition>
+      <skos:definition xml:lang="cs">téma datového souboru týkající se oblasti životního prostředí, definované jako interakce všech živých druhů, klimatu, počasí a přírodních zdrojů, jež ovlivňuje přežití lidstva a hospodářskou činnost</skos:definition>
+      <skos:definition xml:lang="hr">tema podatkovnog skupa koja obuhvaća domenu okoliša, definiranog kao međudjelovanje svih živih vrsta, klime, vremenskih uvjeta i prirodnih resursa koji utječu na preživljavanje ljudi i gospodarsku aktivnost</skos:definition>
+      <skos:definition xml:lang="hu">A környezettel, azaz az összes élő faj, az éghajlat, az időjárás és a természeti erőforrások kölcsönhatásaival, mint az emberi túléléshez és gazdasági tevékenységekhez hozzájáruló tényezőkkel foglalkozó adatkészlet-téma.</skos:definition>
+      <skos:definition xml:lang="sk">téma dátového súboru pokrývajúca oblasť životného prostredia vymedzeného ako interakcia všetkých živých druhov, klímy, počasia a prírodných zdrojov, ktoré majú vplyv na prežitie človeka a hospodársku činnosť</skos:definition>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>ENVI</dc:identifier>
+      <atold:op-code>ENVI</atold:op-code>
+      <at:op-code>ENVI</at:op-code>
+      <at:start.use>2015-10-01</at:start.use>
+      <at:authority-code>ENVI</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/EDUC"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="sv">Utbildning, kultur och sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Vzdelávanie, kultúra a šport</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Éducation, culture et sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Education, culture and sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Obrazovanje, kultura i sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Educação, cultura e desporto</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Izobraževanje, kultura in šport</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Edukazzjoni, kultura u sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Bildung, Kultur und Sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Vzdělávání, kultura a sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Istruzione, cultura e sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Educación, cultura y deportes</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">Utdanning, kultur og sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">Utdanning, kultur og sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">Utdanning, kultur og sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Uddannelse, kultur og sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Onderwijs, cultuur en sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Образование, култура и спорт</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Koulutus, kulttuuri ja urheilu</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Educaţie, cultură şi sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Švietimas, kultūra ir sportas</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Oktatás, kultúra és sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Izglītība, kultūra un sports</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Παιδεία, πολιτιστικά θέματα και αθλητισμός</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Oideachas, cultúr agus spórt</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Edukacja, kultura i sport</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Haridus, kultuur ja sport</skos:prefLabel>
+      <skos:definition xml:lang="sv">dataset för områdena utbildning, som handlar om inlärning och förvärvande av kunskaper, färdigheter, värderingar, övertygelser och vanor, kultur, som inbegriper socialt beteende, normer, kunskap, trosuppfattningar, konst, lagar, sedvänjor, förmågor och vanor i mänskliga samhällen, samt idrott, med tävlingsaktiviteter eller spel som förbättrar den fysiska förmågan och färdigheterna och som är ett nöje för deltagarna och underhållning för åskådarna.</skos:definition>
+      <skos:definition xml:lang="hu">Ez az adatkészlet-téma az oktatás, mint a tanulás elősegítését és az ismeretek, készségek, értékek, meggyőződések és szokások megszerzését célzó tevékenység különböző területeire terjed ki. Magában foglalja a kultúrát, amely az emberi társadalmakban fellelhető viselkedésformák, normák, ismeretek, meggyőződések, művészetek, szabályok, szokások, képességek és minták sokasága; valamint a sportot, amely olyan versengő jellegű fizikai tevékenységeket és játékokat jelent, amelyek javítják az állóképességet és az ügyességet, valamint élvezetesek a résztvevők és a nézők számára egyaránt.</skos:definition>
+      <skos:definition xml:lang="bg">тема на множество от данни, обхващаща следните области: образование, което улеснява ученето и придобиването на знания, умения, добродетели, вярвания и навици; култура, която включва социално поведение, норми, знания, вярвания, изкуства, закони, обичаи, способности и навици, наблюдавани в човешките общества; спорт, който обхваща състезателните физически дейности или игри, подобряващи физическите способности и умения, доставящи удоволствие на участниците и развличащи зрителите</skos:definition>
+      <skos:definition xml:lang="pt">conjunto de dados cujo tema abrange os domínios da educação destinada a facilitar a aprendizagem e a aquisição de conhecimentos, competências, valores, opiniões e hábitos; da cultura, incluindo o comportamento social, as normas, o conhecimento, as crenças, as artes, as leis, os costumes, as capacidades e os hábitos existentes nas sociedades humanas; e do desporto, englobando atividades físicas ou jogos de competição que melhorem a capacidade física e as competências e que constituam uma fonte de entertenimento tanto para os participantes como para os espetadores</skos:definition>
+      <skos:definition xml:lang="mt">tema ta’ sett tad-data li tkopri l-oqsma tal-edukazzjoni li tiffaċilita t-tagħlim u l-kisba tal-għarfien, il-ħiliet, il-valuri, it-twemmin, u l-abitudnijiet; il-kultura, li tinkludi l-imġiba soċjali, in-normi, l-għarfien, it-twemmin, l-arti, il-liġijiet, id-drawwiet, il-kapaċitajiet, u l-abitudnijiet li jinsabu fis-soċjetajiet umani; u l-isport, li jinkludi attivitajiet fiżiċi kompetittivi jew logħob li jtejjeb il-kapaċità fiżika u l-ħiliet, u li jipprovdi kemm gost lill-parteċipanti kif ukoll divertiment lill-ispettaturi</skos:definition>
+      <skos:definition xml:lang="cs">téma datového souboru týkající se oblasti vzdělávání, které zprostředkovává učení a získávání znalostí, dovedností, hodnot, přesvědčení a zvyklostí, oblasti kultury, jež zahrnuje společenské chování, normy, znalosti, přesvědčení, umění, právní předpisy, obyčeje, schopnosti a zvyklosti existující v lidské společnosti, a oblasti sportu, jenž zahrnuje závodní fyzické aktivity nebo hry, které zlepšují fyzické schopnosti a dovednosti účastníků, a to jak pro jejich potěšení, tak pro zábavu diváků</skos:definition>
+      <skos:definition xml:lang="hr">tema podatkovnog skupa koja obuhvaća domenu obrazovanja, kojom se olakšava učenje i stjecanje znanja, vještina, vrijednosti, uvjerenja i navika; domenu kulture, koja uključuje društveno ponašanje, norme, znanje, uvjerenja, umjetnost, pravo, sposobnosti i navike zabilježene u ljudskim društvima; te domenu sporta, što obuhvaća natjecateljske tjelesne aktivnosti ili igre kojima se poboljšavaju tjelesne sposobnosti i vještine te pruža zabava sudionicima i gledateljima</skos:definition>
+      <skos:definition xml:lang="lv">datu kopa, kura aptver tādas jomas kā izglītība, kas atvieglo mācīšanos un zināšanu, prasmju, vērtību, uzskatu un ieradumu apguvi, kultūra, kas ietver sociālo uzvedību, normas, zināšanas, uzskatus, mākslu, likumus, paražas, spējas un ieradumus cilvēku sabiedrībā, un sports, proti, konkurētspējīgas fiziskās aktivitātes vai spēles, kas uzlabo fiziskās spējas, prasmes un sniedz dalībniekiem iespēju baudīt, bet skatītājiem – izklaidi</skos:definition>
+      <skos:definition xml:lang="fr">thème d’un ensemble de données couvrant les domaines de l’éducation, qui permet l’apprentissage et l’acquisition de connaissances, de compétences, de valeurs, d’opinions et d’habitudes, de la culture, qui englobe le comportement social, les normes, les connaissances, les croyances, les arts, les lois, les coutumes, les capacités et les habitudes dans les sociétés humaines et du sport, qui englobe des activités physiques ou des jeux sous forme de compétition qui améliorent les aptitudes et les compétences physiques en procurant du plaisir aux participants et du divertissement aux spectateurs</skos:definition>
+      <skos:definition xml:lang="es">tema de un conjunto de datos que abarca los ámbitos de la educación, que facilita el aprendizaje y la adquisición de conocimientos, capacidades, valores, creencias y hábitos; la cultura, que incluye el comportamiento social, las normas, el conocimiento, las creencias, las artes, las leyes, las costumbres, las capacidades y los hábitos de las sociedades humanas; y el deporte, que comprende las actividades físicas o los juegos de competición que mejoran la aptitud física y las capacidades, y con las que los participantes disfrutan y los espectadores se entretienen</skos:definition>
+      <skos:definition xml:lang="ro">tema setului de date care vizează domeniile educației, care facilitează învățarea și dobândirea de cunoștințe, competențe, valori, convingeri și obiceiuri; cultura, care include comportamentul social, normele, cunoștințele, convingerile, artele, legile, obiceiurile, capacitățile și obiceiurile care se întâlnesc în societățile umane; și sportul, care cuprinde activități fizice sau jocuri competitive care îmbunătățesc capacitățile și abilitățile fizice, aducând satisfacții participanților și generând divertisment în rândul spectatorilor</skos:definition>
+      <skos:definition xml:lang="nl">datasetthema dat betrekking heeft op de domeinen onderwijs, waarbij het gaat om het faciliteren van leren en het verwerven van kennis, vaardigheden, waarden, overtuigingen en gewoonten; cultuur, waarbij het onder meer gaat om het sociaal gedrag en de normen, kennis, overtuigingen, kunsten, regels, gebruiken, vaardigheden en gewoonten in menselijke samenlevingen; en sport, waaronder fysieke activiteiten of spelen met een competitie-element vallen die het fysieke vermogen en de vaardigheden van de deelnemers verbeteren, hun plezier verschaffen en toeschouwers amusement bieden</skos:definition>
+      <skos:definition xml:lang="sl">podatkovni nabor, ki pokriva področja izobrazbe, ki olajšuje učenje in pridobivanje znanj, spretnosti, vrednosti, prepričanj in navad; kulture, ki obsega družbena vedenja, merila, znanja, prepričanja, umetnost, pravo, navade, sposobnosti in navade, ki jih najdemo v človeških družbah, ter športa, ki obsega tekmovalno udejstvovanje v telesnih dejavnostih ali igrah, ki izboljšujejo fizične sposobnosti in veščine ter so udeležencem v zadovoljstvo in gledalcem v zabavo</skos:definition>
+      <skos:definition xml:lang="fi">tietojoukkoryhmä, joka kattaa seuraavat alat: koulutus, joka helpottaa oppimista sekä tietojen, taitojen, arvojen, uskomusten ja tapojen hankkimista; kulttuuri, johon sisältyvät ihmiskuntien sosiaalinen käyttäytyminen, normit, tiedot, uskomukset, taide, lait, tavat, kyvyt ja tottumukset; sekä urheilu, joka kattaa kilpailulliset liikuntamuodot tai pelit, jotka parantavat fyysisiä kykyjä ja valmiuksia sekä tuottavat osallistujille nautintoa ja katsojille viihdettä</skos:definition>
+      <skos:definition xml:lang="ga">téama tacair sonraí lena gcumhdaítear réimse an oideachais, rud lena n-éascaítear an fhoghlaim agus sealbhú eolais, scileanna, luachanna, tuiscintí, agus nósanna; réimse an chultúir, rud lena n-áirítear an t-iompar sóisialta, na noirm, an t-eolas, na tuiscintí, na healaíona, na dlíthe, na gnásanna, na cumais agus na nósanna sna sochaithe daonna; agus réimse an spóirt, rud lena gcuimsítear gníomhaíochtaí nó cluichí fisiciúla iomaíocha a fheabhsaíonn cumas fisiciúil agus scileanna, agus a mbaineann rannpháirtithe taitneamh astu agus a mbaineann lucht féachana siamsaíocht astu</skos:definition>
+      <skos:definition xml:lang="lt">duomenų rinkinio tema, apimanti tokias sritis kaip švietimas, kuris sudaro galimybes mokytis ir įgyti žinių, įgūdžių, vertybių, įsitikinimų bei įpročių, kultūra, kuri apima socialinį elgesį, normas, žinias, įsitikinimus, menus, teisę, papročius, gebėjimus ir įpročius, egzistuojančius žmonių visuomenėse, ir sportas, apimantis fizinio aktyvumo varžantis arba dalyvaujant žaidimuose formas, kurios gerina dalyvių fizinius gebėjimus bei įgūdžius ir teikia jiems malonumą, taip pat yra pramoga žiūrovams</skos:definition>
+      <skos:definition xml:lang="pl">temat zbioru danych obejmujący dziedziny edukacji, które ułatwiają uczenie się oraz zdobywanie wiedzy, umiejętności, wartości, przekonań i nawyków; kulturę, w tym zachowania społeczne, normy, wiedzę, przekonania, sztukę, prawo, zwyczaje, zdolności i zwyczaje występujące w społeczeństwach ludzkich; oraz sport, w tym zajęcia fizyczne lub gry polegające na współzawodnictwie, które poprawiają sprawność fizyczną, umiejętności, zapewniają przyjemność uczestnikom i rozrywkę widzom</skos:definition>
+      <skos:definition xml:lang="en">dataset theme covering the domains of education, which facilitates learning and the acquisition of knowledge, skills, values, beliefs, and habits; culture, which includes the social behaviour, norms, knowledge, beliefs, arts, laws, customs, capabilities, and habits found in human societies; and sport, encompassing competitive physical activities or games that improve physical ability, skills, and provide enjoyment to participants as well as entertainment to spectators</skos:definition>
+      <skos:definition xml:lang="el">θέμα συνόλου δεδομένων το οποίο καλύπτει τους τομείς της εκπαίδευσης που διευκολύνει τη μάθηση και την απόκτηση γνώσεων, δεξιοτήτων, αξιών, πεποιθήσεων και συνηθειών· του πολιτισμού που περιλαμβάνει την κοινωνική συμπεριφορά, τα πρότυπα, τις γνώσεις, τις πεποιθήσεις, τις τέχνες, τους νόμους, τα έθιμα, τις ικανότητες και τις συνήθειες που επικρατούν στις ανθρώπινες κοινωνίες· και του αθλητισμού που περιλαμβάνει ανταγωνιστικές σωματικές δραστηριότητες ή παιχνίδια τα οποία βελτιώνουν τη σωματική ικανότητα, τις δεξιότητες και παρέχουν διασκέδαση στους συμμετέχοντες, καθώς και ψυχαγωγία στους θεατές</skos:definition>
+      <skos:definition xml:lang="sk">téma dátového súboru pokrývajúca oblasť vzdelávania, ktoré uľahčuje učenie sa a získavanie vedomostí, zručností, hodnôt, presvedčení a návykov; oblasť kultúry, ktorá zahŕňa spoločenské správanie, normy, vedomosti, presvedčenie, umenie, zákony, zvyky, schopnosti a návyky v ľudskej spoločnosti; a oblasť športu, do ktorej patria súťažné fyzické aktivity alebo hry zlepšujúce fyzické schopnosti a zručnosti a poskytujúce radosť účastníkom a zábavu divákom</skos:definition>
+      <skos:definition xml:lang="it">tema di serie di dati relativo ai settori dell'istruzione, volta a promuovere l'apprendimento e l'acquisizione di conoscenze, competenze, valori, opinioni e abitudini; della cultura, che include comportamento sociale, norme, conoscenze, credenze, arti, leggi, costumi, capacità e abitudini rilevati nelle società umane; e dello sport che comprende le attività fisiche competitive o i giochi che migliorano l'abilità fisica e le competenze e sono fonte di piacere per i partecipanti e di intrattenimento per gli spettatori</skos:definition>
+      <skos:definition xml:lang="de">Datensatzthema für die Bereiche Bildung, durch die das Lernen sowie der Erwerb von Kenntnissen, Fertigkeiten, Werten, Überzeugungen und Gewohnheiten erleichtert werden, Kultur, die das soziale Verhalten, die Normen, Kenntnisse, Überzeugungen, künstlerischen Ausdrucksformen, rechtlichen Vorschriften, Bräuche, Fähigkeiten und Gewohnheiten umfasst, die in menschlichen Gesellschaften zu finden sind, und Sport, worunter als Wettkampf betriebene körperliche Aktivitäten oder Spiele fallen, welche der Verbesserung der körperlichen Leistungsfähigkeit und körperlicher Fertigkeiten, dem Vergnügen der Teilnehmer sowie der Unterhaltung von Zuschauern dienen</skos:definition>
+      <skos:definition xml:lang="et">andmestike teema, mis hõlmab selliseid valdkondi nagu haridus, mis võimaldab õppimist ning teadmiste, oskuste, väärtuste, veendumuste ja harjumuste omandamist, kultuur, mille alla kuuluvad inimühiskonnale iseloomulik sotsiaalne käitumine, reeglid, teadmised, uskumused, tegutsemine, seadused, tavad, võimalused ja harjumused, ning sport, mis hõlmab võistluselementi sisaldavat füüsilist tegevust või mänge, mis suurendavad füüsilisi võimeid ja oskusi, on nende harrastajate jaoks nauditavad ja pakuvad pealtvaatajatele meelelahutust</skos:definition>
+      <skos:definition xml:lang="da">tema for datasæt, som vedrører områderne uddannelse, der fremmer læring og erhvervelse af viden, færdigheder, værdier, overbevisninger og vaner; kultur, der omfatter social adfærd, normer, viden, overbevisninger, kunst, love, skikke, evner og vaner i menneskelige samfund, og sport, der omfatter konkurrenceprægede fysiske aktiviteter eller spil, der forbedrer de fysiske evner og færdigheder og er til glæde for deltagerne samt bringer underholdning til tilskuerne</skos:definition>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>EDUC</dc:identifier>
+      <atold:op-code>EDUC</atold:op-code>
+      <at:op-code>EDUC</at:op-code>
+      <at:start.use>2015-10-01</at:start.use>
+      <at:authority-code>EDUC</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/JUST"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="lt">Teisingumas, teisės sistema ir visuomenės sauga</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Igazságügy, jogrendszer és közbiztonság</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Ceartas, córas dlí agus sábháilteacht an phobail</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Spravedlnost, právní systém a veřejná bezpečnost</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Giustizia, sistema giuridico e sicurezza pubblica</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Sprawiedliwość, ustrój sądów i bezpieczeństwo publiczne</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Justice, système juridique et sécurité publique</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Justicia, sistema judicial y seguridad pública</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Pravosodje, pravni sistem in javna varnost</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Δικαιoσύνη, νομικό σύστημα και δημόσια ασφάλεια</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Pravosuđe, pravni sustav i javna sigurnost</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Tieslietas, tiesību sistēma un sabiedrības drošība</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Retfærdighed, retssystem og offentlig sikkerhed</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Justitie, rechtsstelsel en openbare veiligheid</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Justice, legal system and public safety</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Rättvisa, rättsliga system och allmän säkerhet</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Правосъдие, съдебна система и обществена безопасност</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Justiție, sistem juridic și siguranță publică</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Ġustizzja, sistema legali u sigurtà pubblika</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Justiça, sistema judiciário e segurança pública</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Oikeus, oikeusjärjestelmä ja yleinen turvallisuus</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">Justis, rettssystem og allmenn sikkerhet</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Spravodlivosť, právny systém a verejná bezpečnosť</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Justiz, Rechtssystem und öffentliche Sicherheit</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">Justis, rettssystem og allmenn sikkerhet</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">Justis, rettssystem og allmenn tryggleik</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Õigusemõistmine, õigussüsteem ja avalik turvalisus</skos:prefLabel>
+      <skos:definition xml:lang="pl">temat zbioru danych obejmujący dziedziny wymiaru sprawiedliwości, systemu prawnego i bezpieczeństwa publicznego, gdzie wymiar sprawiedliwości odnosi się do uczciwości proceduralnej w stosowaniu prawa; system prawny obejmuje różne ramy prawne, w tym prawo cywilne, powszechne, ustawowe i religijne; a bezpieczeństwo publiczne oznacza odpowiedzialność rządu za ochronę osób fizycznych, organizacji i instytucji przed zagrożeniami dla ich dobrostanu i dobrobytu społeczności.</skos:definition>
+      <skos:definition xml:lang="el">θέμα συνόλου δεδομένων το οποίο καλύπτει τους τομείς της δικαιοσύνης, του νομικού συστήματος και της δημόσιας ασφάλειας, όπου η δικαιοσύνη αναφέρεται στον δίκαιο χαρακτήρα των διαδικασιών κατά την εφαρμογή του δικαίου· το νομικό σύστημα περιλαμβάνει διάφορα πλαίσια, συμπεριλαμβανομένου του αστικού, κοινού, γραπτού και θρησκευτικού δικαίου· και η δημόσια ασφάλεια αναφέρεται στην κυβερνητική ευθύνη για την προστασία των ατόμων, των οργανισμών και των θεσμικών οργάνων από απειλές για την ευημερία τους, καθώς και των τοπικών κοινοτήτων τους</skos:definition>
+      <skos:definition xml:lang="da">tema for datasæt, som vedrører områderne retfærdighed, retssystem og offentlig sikkerhed, hvor retfærdighed henviser til principperne om en retfærdig rettergang i forbindelse med anvendelse af loven, mens retssystemet omfatter forskellige rammer, herunder civilret, common law, almindelig lov og religiøs ret, og offentlig sikkerhed betegner statens ansvar for at beskytte enkeltpersoner, organisationer og institutioner mod trusler mod deres trivsel og samfundets velstand</skos:definition>
+      <skos:definition xml:lang="fr">thème d’un ensemble de données couvrant les domaines de la justice, du système juridique et de la sécurité publique, la notion de justice faisant référence à l’équité procédurale dans l’application du droit, le système juridique comprenant différents cadres, dont le droit civil, la common law, le droit statutaire et le droit religieux et la sécurité publique faisant référence à la responsabilité gouvernementale en matière de protection des personnes, des organisations et des institutions contre les menaces pesant sur leur bien-être et leur prospérité communautaire</skos:definition>
+      <skos:definition xml:lang="it">tema di serie di dati relativo ai settori della giustizia, del sistema giuridico e della sicurezza pubblica, ove la giustizia riguarda l'equità procedurale nell'applicazione della legge; il sistema giuridico comprende diversi quadri normativi, tra cui il diritto civile, il common law, la legge ordinaria e il diritto religioso; mentre la sicurezza pubblica consiste nella responsabilità governativa di proteggere le persone, le organizzazioni e le istituzioni dalle minacce al loro benessere e alla prosperità generale</skos:definition>
+      <skos:definition xml:lang="en">dataset theme covering the domains of justice, legal system and public safety, where justice refers to the procedural fairness in the application of law; legal system comprises various frameworks including civil, common, statutory, and religious law; and public safety denotes the governmental responsibility to protect individuals, organisations, and institutions from threats to their well-being and community prosperity</skos:definition>
+      <skos:definition xml:lang="sl">podatkovni nabor, ki pokriva področja pravosodja, pravnega reda in javne varnosti, pri čemer se pravosodje nanaša na pravično izvajanje postopkov in uporabo prava, medtem ko pravni sistem obsega različne pravne okvire, vključno s civilnim, sodniško izoblikovanim (t. i. common law), zapisanim in verskim pravom, javna varnost pa se nanaša na odgovornost države, da zaščiti posameznike, organizacije in ustanove pred grožnjami za njihovo dobro in blagor</skos:definition>
+      <skos:definition xml:lang="es">tema de un conjunto de datos que abarca los ámbitos de la justicia, que se entiende como la equidad procesal en la aplicación del Derecho; el sistema jurídico, que comprende diversos marcos, entre ellos el Derecho civil, consuetudinario, positivo o religioso; y la seguridad pública, que denota la responsabilidad gubernamental de proteger a las personas, las organizaciones y las instituciones contra las amenazas que afectan a su bienestar y a la prosperidad de la comunidad</skos:definition>
+      <skos:definition xml:lang="pt">conjunto de dados cujo tema abrange os domínios da justiça, do sistema jurídico e da segurança pública, em que a justiça se refere à equidade processual na aplicação da lei; o sistema jurídico compreende vários quadros, incluindo o direito civil, consuetudinário, comum e religioso; e a segurança pública representa a responsabilidade dos governos de proteger as pessoas, as organizações e as instituições contra ameaças ao seu bem-estar e à prosperidade da comunidade</skos:definition>
+      <skos:definition xml:lang="sv">dataset för områdena rättivsa, rättssystem och allmän säkerhet, där rättvisa handlar om rättvisa förfaranden vid rättstillämpningen, rättssystem omfattar olika rättsliga ramar, t.ex. civilrätt, sedvanerätt, skrivna lagar och religiösa lagar, och den allmänna säkerheten avser regeringens ansvar att skydda enskilda personer, organisationer och institutioner från hot mot deras välbefinnande och samhällets välmåga.</skos:definition>
+      <skos:definition xml:lang="bg">тема на множество от данни, обхващаща областите на правосъдието, правната система и обществената безопасност; правосъдието се отнася до процесуалната справедливост при прилагането на закона; правната система се състои от различни правни уредби, в т.ч. гражданско право, общо (англосаксонско) право, писано право, религиозно право; обществената безопасност се отнася до отговорността на държавата да защитава гражданите, организациите и институциите от заплахи за добруването им и за благоденствието на общността</skos:definition>
+      <skos:definition xml:lang="lt">duomenų rinkinio tema, apimanti teisingumo, teisinės sistemos ir visuomenės saugumo sritis, kur teisingumas siejamas su proceso sąžiningumu taikant teisės aktus; teisinę sistemą sudaro įvairios teisės šakos, kaip antai civilinė, bendroji, institucijų ir religinė teisė; viešasis saugumas reiškia vyriausybės pareigą apsaugoti asmenis, organizacijas ir institucijas nuo grėsmių jų gerovei ir bendruomenės klestėjimui</skos:definition>
+      <skos:definition xml:lang="lv">datu kopa, kas aptver tādas jomas kā tiesiskums, tiesību sistēma un sabiedrības drošība, kur ar tiesiskumu saprot procesuālo taisnīgumu tiesību aktu piemērošanā, ar tiesību sistēmu – dažādas sistēmas, proti, civiltiesības, vispārējās tiesības, likumiskās un reliģiskās tiesības, bet ar sabiedrības drošību – valdības pienākumu aizsargāt indivīdus, organizācijas un iestādes no viņu labklājības un sabiedrības labklājības apdraudējuma</skos:definition>
+      <skos:definition xml:lang="hu">Ez az adatkészlet-téma az igazságszolgáltatás, a jogrendszerek és a közbiztonság területére terjed ki, ahol az igazságszolgáltatás a méltányos jogalkalmazásra utal. A jogrendszer különböző kereteket foglal magában, többek között a polgári jogot, a szokásjogot, az írott jogot és a vallásos jogot; a közbiztonság pedig kormányzati kötelesség az egyének, szervezetek és intézmények védelmére a jóllétüket és közösségi jólétüket fenyegető veszélyekkel szemben.</skos:definition>
+      <skos:definition xml:lang="nl">datasetthema dat betrekking heeft op de domeinen justitie, rechtsstelsel en openbare veiligheid, waarbij justitie verwijst naar de procedurele billijkheid bij de toepassing van het recht; het rechtsstelsel verschillende kaders omvat, waaronder burgerlijk recht, gewoonterecht, wettelijk recht en religieus recht; en openbare veiligheid betrekking heeft op de verantwoordelijkheid van de overheid om personen, organisaties en instellingen te beschermen tegen bedreigingen voor hun welzijn en de welvaart van de gemeenschap</skos:definition>
+      <skos:definition xml:lang="hr">tema podatkovnog skupa koja obuhvaća domenu pravosuđa, pravnog sustava i javne sigurnosti, u kojoj se pravosuđe odnosi na postupovnu pravednost u primjeni prava; pravni sustav uključuje različite okvire uključujući građansko pravo, običajno pravo, zakonske propise i vjersko pravo; a javna sigurnost znači zadaću vlade da zaštiti pojedince, organizacije i institucije od prijetnji njihovoj dobrobiti i blagostanju zajednice</skos:definition>
+      <skos:definition xml:lang="et">andmestike teema, mis hõlmab selliseid valdkondi nagu õigusemõistmine, õigussüsteem ja avalik julgeolek, kusjuures õigusemõistmine tähendab õiglast menetlust õigusaktide kohaldamisel, õigussüsteemi kuuluvad mitmesugused raamistikud, nagu tsiviilõigus, üldine õigus, õigusaktid ja religioossed normid, avalik julgeolek aga tähendab valitsuse kohustust kaitsta üksikisikuid, organisatsioone ja institutsioone nende ja kogukonna heaolu ähvardavate ohtude eest</skos:definition>
+      <skos:definition xml:lang="ro">tema setului de date care vizează domeniile justiției, sistemului juridic și siguranței publice, unde justiția se referă la echitatea procedurală în aplicarea legii; sistemul juridic cuprinde diferite cadre, inclusiv dreptul civil, dreptul comun, dreptul statutar și dreptul religios; iar siguranța publică denotă responsabilitatea autorităților publice de a proteja persoanele, organizațiile și instituțiile de amenințările la adresa bunăstării și prosperității lor comunitare</skos:definition>
+      <skos:definition xml:lang="ga">téama tacair sonraí lena gcumhdaítear réimsí an cheartais, an chórais dlí agus na sábháilteachta poiblí, de réir an tsainithe gurb é is ábhar don cheartas an chothroime nós imeachta i gcur i bhfeidhm an dlí; go gcuimsíonn an córas dlí creataí éagsúla lena n-áirítear an dlí sibhialta, an dlí coiteann, an dlí reachtúil agus an dlí reiligiúnach; agus gurb é rud a chiallaíonn an tsábháilteacht phoiblí an fhreagracht atá ar rialtais daoine aonair, eagraíochtaí agus institiúidí a chosaint ar bhagairtí ar a bhfolláine agus ar a rathúnas mar phobal</skos:definition>
+      <skos:definition xml:lang="cs">téma datového souboru týkající se oblastí spravedlnosti, právního systému a veřejné bezpečnosti, kde spravedlnost znamená procesní spravedlnost při uplatňování práva, právní systém zahrnuje různé právní rámce, zahrnující občanské, zvykové, statutární a náboženské právo, a veřejná bezpečnost označuje vládní odpovědnost za ochranu jednotlivců, organizací a institucí před hrozbami pro jejich blahobyt a společenskou prosperitu</skos:definition>
+      <skos:definition xml:lang="sk">téma dátového súboru pokrývajúca oblasti spravodlivosti, právneho systému a verejnej bezpečnosti, pričom spravodlivosť znamená procesnú spravodlivosť pri uplatňovaní práva; právny systém zahŕňa rôzne rámce vrátane občianskeho, zvykového, všeobecného a náboženského práva; a verejná bezpečnosť označuje vládnu zodpovednosť za ochranu jednotlivcov, organizácií a inštitúcií pred ohrozením ich dobrého fungovania a prosperity komunít</skos:definition>
+      <skos:definition xml:lang="de">Datensatzthema, das die Bereiche Justiz, Rechtssystem und öffentliche Sicherheit abdeckt, wobei „Justiz“ die Grundsätze des fairen Verfahrens bei der Rechtsanwendung bezeichnet, „Rechtssystem“ verschiedene Rechtsrahmen wie Civil Law, Common Law, Gesetzesrecht und religiöses Recht umfasst und „öffentliche Sicherheit“ die Verantwortung des Staates für den Schutz von Personen, Organisationen und Einrichtungen vor Bedrohungen ihres Wohlergehens und des Wohlstandes von Gemeinschaften bezeichnet</skos:definition>
+      <skos:definition xml:lang="mt">tema ta’ sett tad-data li tkopri l-oqsma tal-ġustizzja, is-sistema legali u s-sikurezza pubblika, fejn il-ġustizzja tirreferi għall-ekwità proċedurali fl-applikazzjoni tal-liġi; is-sistema legali li tinkludi diversi oqfsa inklużi l-liġi ċivili, komuni, statutorja u reliġjuża; u s-sikurezza pubblika li tirrappreżenta r-responsabbiltà governattiva li tipproteġi lill-individwi, lill-organizzazzjonijiet u lill-istituzzjonijiet minn theddid għall-benesseri tagħhom u għall-prosperità tal-komunità tagħhom</skos:definition>
+      <skos:definition xml:lang="fi">tietojoukkoryhmä, joka kattaa oikeuden, oikeusjärjestelmän ja yleisen turvallisuuden alat: oikeus viittaa oikeudenmukaisuuteen lain soveltamisessa, oikeusjärjestelmä kattaa eri kehykset, joihin sisältyvät muun muassa yksityisoikeus, common law, tavanomaiset lait ja uskonnolliset lait, ja yleinen turvallisuus tarkoittaa valtioiden vastuuta suojella yksityishenkilöitä, organisaatioita, instituutioita hyvinvointiin ja yhteisöjen vaurauteen kohdistuvilta uhilta</skos:definition>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>JUST</dc:identifier>
+      <atold:op-code>JUST</atold:op-code>
+      <at:op-code>JUST</at:op-code>
+      <at:start.use>2015-10-01</at:start.use>
+      <at:authority-code>JUST</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/REGI"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="hr">Regije i gradovi</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Regions and cities</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">Regioner og byer</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Regioner og byer</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">Regioner og byer</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Regiones y ciudades</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Regije in mesta</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Reģioni un pilsētas</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Regioni e città</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Περιφέρειες και πόλεις</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">Regionar og byar</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Regionen und Städte</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Régiók és városok</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Réigiúin agus cathracha</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Alueet ja kaupungit</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Regiões e cidades</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Piirkonnad ja linnad</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Régions et villes</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Regiuni şi orașe</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Regiony i miasta</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Regionai ir miestai</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Regio's en steden</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Regioner och städer</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Региони и градове</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Regiony a města</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Regióny a mestá</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Reġjuni u bliet</skos:prefLabel>
+      <skos:definition xml:lang="en">dataset theme covering the domains of regions and cities, where regions is defined by political geography units including sovereign states, subnational administrative areas, and multinational groupings, and cities are characterised as large human settlements</skos:definition>
+      <skos:definition xml:lang="sv">dataset för områdena regioner och städer, där regionerna definieras av politiska geografiska enheter, inbegripet suveräna stater, subnationella administrativa områden och multinationella grupperingar, och städer beskrivs som stora bosättningar.</skos:definition>
+      <skos:definition xml:lang="sk">téma dátového súboru pokrývajúca oblasti regiónov a miest, pričom regióny sú vymedzené politickými geografickými jednotkami, a to vrátane zvrchovaných štátov, správnych oblastí na nižšej ako celoštátnej úrovni a nadnárodných zoskupení, a mestá sú charakterizované ako veľké ľudské sídla</skos:definition>
+      <skos:definition xml:lang="hu">A régiók és városok ügyét lefedő adatkészlet-téma, ahol a régiók politikai földrajzi egységek, ideértve a szuverén államokat, a nemzeti szint alatti közigazgatási területeket és a multinacionális csoportosulásokat is, míg a városok nagy települések.</skos:definition>
+      <skos:definition xml:lang="pl">temat zbioru danych obejmujący dziedziny dotyczące regionów i miast, gdzie regiony są definiowane jako geograficzne jednostki polityczne, w tym suwerenne państwa, obszary administracyjne na szczeblu niższym niż krajowy, grupy wielonarodowe, a miasta definiuje się jako duże osiedla ludzkie</skos:definition>
+      <skos:definition xml:lang="cs">téma datového souboru týkající se oblastí regionů a měst, kde se pojmem regiony rozumí politicko-geografické jednotky, které zahrnují svrchované státy, správní oblasti na nižší než celostátní úrovni a mnohonárodní uskupení, a města jsou charakterizována jako velká lidská sídla</skos:definition>
+      <skos:definition xml:lang="lt">duomenų rinkinio tema, apimanti regionų ir miestų sritis, kur regionai apibrėžiami kaip politiniai geografiniai vienetai, tokie kaip suverenios valstybės, subnacionalinės administracinės teritorijos ir daugiašalės grupės, o miestai apibūdinami kaip didelės žmonių gyvenvietės</skos:definition>
+      <skos:definition xml:lang="bg">тема на множество от данни, обхващаща областите на регионите и градовете; регионите са определени от политическата география единици, включващи суверенните държави, поднационалните административни подразделения и многонационалните обединения; градовете се определят като големи човешки поселища</skos:definition>
+      <skos:definition xml:lang="el">θέμα συνόλου δεδομένων το οποίο καλύπτει τους τομείς των περιφερειών και των πόλεων, όπου οι περιφέρειες αποτελούν πολιτικές γεωγραφικές ενότητες, συμπεριλαμβανομένων κυρίαρχων κρατών, υποεθνικών διοικητικών περιοχών και πολυεθνικών ομάδων, και οι πόλεις χαρακτηρίζονται ως μεγάλοι ανθρώπινοι οικισμοί</skos:definition>
+      <skos:definition xml:lang="da">tema for datasæt, som vedrører områderne regioner og byer, hvor regionerne er defineret af politisk-geografiske enheder, herunder suveræne stater, subnationale administrative områder og multinationale grupperinger, mens byer er karakteriseret som store menneskelige bosættelser</skos:definition>
+      <skos:definition xml:lang="de">Datensatzthema für die Bereiche Regionen und Städte, wobei Regionen als politisch-geografische Einheiten, darunter souveräne Staaten, subnationale Verwaltungsgebiete und multinationale Gruppierungen, Städte dagegen als große menschliche Siedlungen definiert sind</skos:definition>
+      <skos:definition xml:lang="et">andmestike teema, mis hõlmab selliseid valdkondi nagu piirkonnad ja linnad, kui piirkond on määratletud kui poliitgeograafia üksus ja hõlmab suveräänseid riike, riigi tasandist madalamale tasandil olevaid halduspiirkondi ja rahvusvahelisi rühmi, ning linnade puhul on tegu suurte asulatega</skos:definition>
+      <skos:definition xml:lang="fr">thème d’un ensemble de données couvrant les domaines des régions et des villes, les régions étant définies par des unités de géographie politique, dont les États souverains, les zones administratives infranationales et les groupements multinationaux, et les villes étant définies comme de grands établissements humains</skos:definition>
+      <skos:definition xml:lang="lv">datu kopa, kas aptver tādas jomas kā reģioni un pilsētas, kur reģionus definē pēc politiski ģeogrāfiskām vienībām, tostarp suverēnām valstīm, vietējām administratīvajām teritorijām un daudznacionāliem grupējumiem, bet pilsētas raksturojamas kā lielas apdzīvotas vietas</skos:definition>
+      <skos:definition xml:lang="hr">tema podatkovnog skupa koja obuhvaća domenu regija i gradova, u kojoj su regije definirane kao političke geografske jedinice uključujući suverene države, podnacionalna administrativna područja i multinacionalne grupacije, a gradovi su velika ljudska naselja</skos:definition>
+      <skos:definition xml:lang="sl">podatkovni nabor, ki pokriva področji regij in mest, pri čemer so regije opredeljene kot politične geografske enote, vključno s suverenimi državami, podnacionalnimi upravnimi enotami in večnacionalnimi združbami, medtem ko so za mesta značilna velike človeške naselbine</skos:definition>
+      <skos:definition xml:lang="it">tema di serie di dati relativo ai settori delle regioni e delle città, ove per regioni si intendono unità geografiche e politiche tra cui rientrano gli stati sovrani, le unità amministrative subnazionali e i raggruppamenti multinazionali, mentre le città sono definite come ampi insediamenti umani</skos:definition>
+      <skos:definition xml:lang="ga">téama tacair sonraí lena gcumhdaítear réimse na réigiún agus réimse na gcathracha, agus na réigiúin arna sainiú de réir aonaid tíreolaíochta polaitiúla lena n-áirítear stáit cheannasacha, limistéir riaracháin fhonáisiúnta, agus grúpálacha ilnáisiúnta, agus na cathracha arna sainiú de réir na saintréithe atá acu mar lonnaíochtaí móra daonna</skos:definition>
+      <skos:definition xml:lang="fi">tietojoukkoryhmä, joka kattaa alueiden ja kaupunkien alat: alueet määritellään poliittisiksi maantieteellisiksi yksiköksi, joihin kuuluu suvereeneja valtioita, valtiotasoa alempia hallintoalueita ja monikansallisia ryhmittymiä, ja kaupunkeja voidaan pitää suurina asuinyhdyskuntina</skos:definition>
+      <skos:definition xml:lang="mt">tema ta’ sett tad-data li tkopri l-oqsma tar-reġjuni u l-bliet, fejn ir-reġjuni huma definiti minn unitajiet ġeografiċi politiċi inklużi stati sovrani, żoni amministrattivi sottonazzjonali, u raggruppamenti multinazzjonali, u fejn il-bliet huma definiti bħala insedjamenti umani kbar</skos:definition>
+      <skos:definition xml:lang="nl">datasetthema dat betrekking heeft op de domeinen regio’s en steden, waarbij regio’s het domein is van politieke geografische eenheden, waaronder soevereine staten, subnationale bestuurlijke gebieden en multinationale groeperingen, en het domein steden betrekking heeft op grote menselijke nederzettingen</skos:definition>
+      <skos:definition xml:lang="ro">tema setului de date care vizează domeniile regiunilor și orașelor, în care regiunile sunt definite de unități geografice politice, inclusiv de state suverane, zone administrative subnaționale și grupări multinaționale, iar orașele sunt caracterizate ca așezări omenești mari</skos:definition>
+      <skos:definition xml:lang="pt">conjunto de dados cujo tema abrange os domínios das regiões e dos municípios, em que as regiões são definidas por unidades geográficas políticas, incluindo Estados soberanos, zonas administrativas infranacionais e agrupamentos multinacionais, e os municípios são caracterizados como grandes assentamentos humanos</skos:definition>
+      <skos:definition xml:lang="es">tema de un conjunto de datos que abarca los ámbitos de las regiones, definidas como unidades geográficas políticas —por ejemplo, los Estados soberanos, las zonas administrativas subnacionales y las agrupaciones multinacionales—, y las ciudades, que se caracterizan como grandes asentamientos humanos</skos:definition>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>REGI</dc:identifier>
+      <atold:op-code>REGI</atold:op-code>
+      <at:op-code>REGI</at:op-code>
+      <at:start.use>2015-10-01</at:start.use>
+      <at:authority-code>REGI</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/INTR"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="sv">Internationella frågor</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Asuntos internacionales</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Medzinárodné otázky</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Internationale Themen</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">International issues</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Mednarodna vprašanja</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Saincheisteanna idirnáisiúnta</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Διεθνή θέματα</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Rahvusvahelised küsimused</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Kansainväliset kysymykset</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">Internasjonale tema</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Internationale vraagstukken</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Nemzetközi ügyek</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Questões internacionais</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Questions internationales</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Kwestie międzynarodowe</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Mezinárodní otázky</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Tarptautiniai klausimai</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">Internasjonale temaer</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">Internasjonale temaer</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Starptautiski jautājumi</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Tematiche internazionali</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Internationale spørgsmål</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Chestiuni internaționale</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Međunarodni pitanja</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Kwistjonijiet internazzjonali</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Международни въпроси</skos:prefLabel>
+      <skos:definition xml:lang="sv">dataset för området internationella frågor, som rör viktiga ämnen eller problem som är föremål för debatt eller diskussion med deltagare från minst två olika länder.</skos:definition>
+      <skos:definition xml:lang="hr">tema podatkovnog skupa koja obuhvaća domenu međunarodnih pitanja koja se odnosi na važne teme ili pitanja o kojima raspravljaju ili ih razmatraju sudionici iz barem dvije države</skos:definition>
+      <skos:definition xml:lang="sl">podatkovni nabor, ki pokriva področje mednarodnih vprašanj, ki se nanašajo na različne teme ali probleme, ki so predmet razprav ali posvetovanj, pri katerih sodelujejo udeleženci iz najmanj dveh različnih držav</skos:definition>
+      <skos:definition xml:lang="lt">duomenų rinkinio tema, apimanti tarptautinių klausimų sritį, susijusią su svarbiomis temomis ar problemomis, kurias svarsto ar dėl kurių diskutuoja dalyviai iš bent dviejų skirtingų šalių</skos:definition>
+      <skos:definition xml:lang="el">θέμα συνόλου δεδομένων το οποίο καλύπτει τον τομέα διεθνών θεμάτων και αφορά σημαντικά ζητήματα ή προβλήματα που αποτελούν αντικείμενο συζήτησης, με συμμετέχοντες από τουλάχιστον δύο διαφορετικές χώρες</skos:definition>
+      <skos:definition xml:lang="pl">temat zbioru danych obejmujący dziedzinę zagadnień międzynarodowych dotyczącą istotnych tematów lub problemów będących przedmiotem debaty lub dyskusji z udziałem uczestników z co najmniej dwóch różnych krajów</skos:definition>
+      <skos:definition xml:lang="ga">téama tacair sonraí lena gcumhdaítear réimse na saincheisteanna idirnáisiúnta, rud a bhaineann le topaicí nó fadhbanna suntasacha atá faoi réir díospóireachta nó plé agus lena mbaineann rannpháirtithe ó dhá thír ar a laghad</skos:definition>
+      <skos:definition xml:lang="es">tema de un conjunto de datos que abarca el ámbito de las cuestiones internacionales, que tiene que ver con temas o problemas significativos, objeto de debate o diálogo, que afectan a participantes de al menos dos países distintos</skos:definition>
+      <skos:definition xml:lang="et">andmestike teema, mis hõlmab sellist valdkonda nagu rahvusvahelised küsimused, mis on seotud oluliste teemade või probleemidega, mille üle vaieldakse või arutatakse ja milles osalevad vähemalt kahe eri riigi esindajad</skos:definition>
+      <skos:definition xml:lang="pt">conjunto de dados cujo tema abrange o domínio das questões internacionais relacionadas com assuntos ou problemas importantes, que são objeto de debate ou discussão e que envolvem participantes de, pelo menos, dois países diferentes</skos:definition>
+      <skos:definition xml:lang="hu">A nemzetközi ügyek területét lefedő adatkészlet-téma, olyan jelentős témákkal vagy problémákkal foglalkozik, amelyek legalább két különböző ország képviselői közötti vita vagy egyeztetések tárgyát képezik.</skos:definition>
+      <skos:definition xml:lang="sk">téma dátového súboru pokrývajúca oblasť medzinárodných otázok týkajúcich sa významných tém alebo problémov, ktoré sú predmetom debát alebo diskusií a do ktorých sú zapojení účastníci z najmenej dvoch rôznych krajín</skos:definition>
+      <skos:definition xml:lang="ro">tema setului de date care vizează domeniul chestiunilor internaționale în ceea ce privește subiectele sau problemele semnificative care fac obiectul unor dezbateri sau discuții, implicând participanți din cel puțin două țări diferite</skos:definition>
+      <skos:definition xml:lang="bg">тема на множество от данни, обхващаща областта на международните отношения, които се отнасят до значими теми или проблеми, подлагани на дебати или обсъждания, и в които има участници от най-малко две различни държави</skos:definition>
+      <skos:definition xml:lang="cs">téma datového souboru týkající se oblasti mezinárodních otázek, která se vztahuje na významná témata nebo problémy, o nichž se vede debata nebo diskuse s účastníky z nejméně dvou různých zemí</skos:definition>
+      <skos:definition xml:lang="fi">tietojoukkoryhmä, joka kattaa kansainvälisten kysymysten alan, joka liittyy merkittäviin aiheisiin tai ongelmiin, joista väitellään tai käydään keskustelua ja joissa on mukana osallistujia vähintään kahdesta eri maasta</skos:definition>
+      <skos:definition xml:lang="mt">tema ta’ sett tad-data li tkopri l-qasam ta’ kwistjonijiet internazzjonali li jirrigwardaw suġġetti jew problemi sinifikanti li huma soġġetti għal dibattitu jew diskussjoni u li jinvolvu parteċipanti minn tal-anqas żewġ pajjiżi differenti</skos:definition>
+      <skos:definition xml:lang="fr">thème d’un ensemble de données couvrant le domaine des questions internationales qui se rapportent à des sujets ou à des problèmes importants faisant l’objet d’un débat ou d’une discussion et associant des participants d’au moins deux pays différents</skos:definition>
+      <skos:definition xml:lang="it">tema di serie di dati relativo al settore delle tematiche internazionali riguardante argomenti significativi o problemi oggetto di dibattiti o discussioni che coinvolgono partecipanti di almeno due paesi diversi</skos:definition>
+      <skos:definition xml:lang="de">Datensatzthema für den Bereich internationale Themen, das sich auf bedeutende Fragen oder Probleme bezieht, die Gegenstand von Debatten oder Beratungen von Teilnehmern aus mindestens zwei Ländern sind</skos:definition>
+      <skos:definition xml:lang="da">tema for datasæt, som vedrører området internationale spørgsmål, der omhandler vigtige emner eller problemer, som er genstand for debat eller drøftelser, og som omfatter deltagere fra mindst to forskellige lande</skos:definition>
+      <skos:definition xml:lang="lv">datu kopa, kas aptver starptautisko jautājumu jomu, kura saistīta ar nozīmīgiem tematiem vai problēmām, par kurām tiek debatēts vai diskutēts, un kurā iesaistīti dalībnieki no vismaz divām dažādām valstīm</skos:definition>
+      <skos:definition xml:lang="en">dataset theme covering the domain of international issues which relates to significant topics or problems that are subject to debate or discussion and involve participants from at least two different countries</skos:definition>
+      <skos:definition xml:lang="nl">datasetthema dat betrekking heeft op het domein internationale vraagstukken, waarbij het gaat om belangrijke onderwerpen of problemen die voorwerp van overleg of discussie zijn en waarbij ten minste twee verschillende landen betrokken zijn</skos:definition>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>INTR</dc:identifier>
+      <atold:op-code>INTR</atold:op-code>
+      <at:op-code>INTR</at:op-code>
+      <at:start.use>2015-10-01</at:start.use>
+      <at:authority-code>INTR</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/HEAL"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="cs">Zdraví</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Gesundheit</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Santé</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Tervis</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Salud</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Sundhed</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Здраве</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Egészségügy</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Υγεία</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Hälsa</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Zdrowie</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Saúde</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Zdravje</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">Helse</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Sláinte</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">Helse</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">Helse</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Zdravotníctvo</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Terveys</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Sveikata</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Health</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Salute</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Zdravlje</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Veselība</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Saħħa</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Gezondheid</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Sănătate</skos:prefLabel>
+      <skos:definition xml:lang="ga">téama tacair sonraí lena gcumhdaítear réimse na sláinte, rud lena n-áirítear riochtaí sláinte, galair, cóireálacha, seirbhísí cúraim sláinte agus beartais sláinte</skos:definition>
+      <skos:definition xml:lang="es">tema de un conjunto de datos que abarca el ámbito de la salud, que comprende las enfermedades, los tratamientos, los servicios de atención sanitaria y las políticas sanitarias</skos:definition>
+      <skos:definition xml:lang="en">dataset theme covering the domain of health which includes health conditions, diseases, treatments, healthcare services, and health policies</skos:definition>
+      <skos:definition xml:lang="bg">тема на множество от данни, обхващаща областта на здравеопазването, което включва здравните условия, заболяванията, лечението, здравните услуги и здравната политика</skos:definition>
+      <skos:definition xml:lang="da">tema for datasæt, som vedrører området sundhed, der omfatter sundhedsforhold, sygdomme, behandlinger, sundhedsydelser og sundhedspolitikker</skos:definition>
+      <skos:definition xml:lang="it">tema di serie di dati relativo al settore della salute nel quale rientrano malattie, disturbi, cure, servizi sanitari e politiche sanitarie</skos:definition>
+      <skos:definition xml:lang="sl">podatkovni nabor, ki pokriva področje zdravja ter vključuje zdravstveno stanje, bolezni, zdravljenje, zdrastvene storive in politike zdravja</skos:definition>
+      <skos:definition xml:lang="sk">téma dátového súboru pokrývajúca oblasť zdravia, do ktorej patria zdravotné stavy, choroby, liečby, služby zdravotnej starostlivosti a politiky v oblasti zdravia</skos:definition>
+      <skos:definition xml:lang="pt">conjunto de dados cujo tema abrange o domínio da saúde, o que inclui problemas de saúde, doenças, tratamentos, serviços de saúde e políticas de saúde</skos:definition>
+      <skos:definition xml:lang="cs">téma datového souboru týkající se oblasti zdraví, která zahrnuje zdravotní obtíže, onemocnění, léčbu, zdravotnické služby a zdravotní politiky</skos:definition>
+      <skos:definition xml:lang="fi">tietojoukkoryhmä, joka kattaa terveyden alan, johon sisältyvät terveysolot, taudit, hoidot, terveydenhuoltopalvelut ja terveyspolitiikat</skos:definition>
+      <skos:definition xml:lang="lt">duomenų rinkinio tema, apimanti sveikatos sritį, kuri aprėpia sveikatos būklę, ligas, gydymą, sveikatos priežiūros paslaugas ir sveikatos politiką</skos:definition>
+      <skos:definition xml:lang="lv">datu kopa, kura aptver veselības jomu, kas savukārt ietver veselības stāvokli, slimības, to ārstēšanu, veselības aprūpes pakalpojumus un veselības politiku</skos:definition>
+      <skos:definition xml:lang="et">andmestike teema, mis hõlmab sellist valdkonda nagu tervis, mille alla kuuluvad tervisliku seisundi küsimused, haigused, ravi, tervishoiuteenused ja tervisepoliitika</skos:definition>
+      <skos:definition xml:lang="fr">thème d’un ensemble de données couvrant le domaine de la santé, qui comprend les conditions de santé, les maladies, les traitements, les services de santé et les politiques de santé</skos:definition>
+      <skos:definition xml:lang="nl">datasetthema dat betrekking heeft op het domein gezondheid, waaronder gezondheidstoestanden, ziekten, behandelingen, gezondheidsdiensten en gezondheidsbeleid vallen</skos:definition>
+      <skos:definition xml:lang="el">θέμα συνόλου δεδομένων το οποίο καλύπτει τον τομέα της υγείας που περιλαμβάνει τις παθήσεις, τις νόσους, τις θεραπείες, τις υπηρεσίες υγειονομικής περίθαλψης και τις πολιτικές υγείας</skos:definition>
+      <skos:definition xml:lang="ro">tema setului de date care vizează domeniul sănătății în ceea ce privește afecțiunile, bolile, tratamentele, serviciile de asistență medicală și politicile în domeniul sănătății</skos:definition>
+      <skos:definition xml:lang="hr">tema podatkovnog skupa koja obuhvaća domenu zdravlja, što uključuje zdravstvene uvjete, bolesti, liječenje, zdravstvene usluge i politike u zdravstvu</skos:definition>
+      <skos:definition xml:lang="mt">tema ta’ sett tad-data li tkopri l-qasam tas-saħħa li jinkludi l-kundizzjonijiet tas-saħħa, il-mard, it-trattamenti, is-servizzi tal-kura tas-saħħa, u l-politiki tas-saħħa</skos:definition>
+      <skos:definition xml:lang="sv">dataset för området hälsa, som inbegriper hälsoproblem, sjukdomar, behandlingar, hälso- och sjukvård och hälsopolitik.</skos:definition>
+      <skos:definition xml:lang="hu">Az egészségügy területére vonatkozó adatkészlet-téma, amely magában foglalja az egészségi állapotokat, a betegségeket, a kezeléseket, az egészségügyi szolgáltatásokat és az egészségügyi szakpolitikákat</skos:definition>
+      <skos:definition xml:lang="pl">temat zbioru danych obejmujący dziedzinę zdrowia, w tym: warunki zdrowotne, choroby, leczenie, usługi opieki zdrowotnej i politykę zdrowotną</skos:definition>
+      <skos:definition xml:lang="de">Datensatzthema für den Bereich Gesundheit, der Gesundheitszustände, Krankheiten, Behandlungen, Gesundheitsdienste und Gesundheitspolitik umfasst</skos:definition>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>HEAL</dc:identifier>
+      <atold:op-code>HEAL</atold:op-code>
+      <at:op-code>HEAL</at:op-code>
+      <at:start.use>2015-10-01</at:start.use>
+      <at:authority-code>HEAL</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/SOCI"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="bg">Население и общество</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Obyvateľstvo a spoločnosť</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Bevölkerung und Gesellschaft</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Population et société</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Populaţie şi societate</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Gyventojų skaičius ir visuomenė</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Befolkning och samhälle</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Stanovništvo i društvo</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Iedzīvotāji un sabiedrība</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Prebivalstvo in družba</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">População e sociedade</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Ludność i społeczeństwo</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Befolkning og samfund</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Népesség és társadalom</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Población y sociedad</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Väestö ja yhteiskunta</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Population and society</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">Befolkning og samfunn</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">Befolkning og samfunn</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">Befolkning og samfunn</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Popolazione e società</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Πληθυσμός και κοινωνία</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Elanikkond ja ühiskond</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Bevolking en samenleving</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Popolazzjoni u soċjetà</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Populace a společnost</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Daonra agus sochaí</skos:prefLabel>
+      <skos:definition xml:lang="sk">téma dátového súboru pokrývajúca oblasti obyvateľstva a spoločnosti, pričom obyvateľstvo znamená celkový počet ľudí žijúcich na rôznych geografických úrovniach od miest až po globálnu úroveň, zatiaľ čo spoločnosťou sa označuje skupina jednotlivcov zapojených do nepretržitej sociálnej interakcie na spoločnom území, často na základe rovnakých politických a kultúrnych noriem</skos:definition>
+      <skos:definition xml:lang="fr">thème d’un ensemble de données couvrant les domaines de la population et de la société, la population faisant référence au nombre total de personnes résidant à différents niveaux géographiques, allant des villes jusqu’à l’échelle mondiale, et la société désignant un collectif de personnes engagées dans une interaction sociale continue au sein d’un territoire commun, souvent dans le cadre des mêmes normes politiques et culturelles</skos:definition>
+      <skos:definition xml:lang="fi">tietojoukkoryhmä, joka kattaa väestön ja yhteiskunnan alat: väestöllä tarkoitetaan eri maantieteellisillä tasoilla kaupungeista maailmanlaajuiselle tasolle asuvien ihmisten kokonaismäärää ja yhteiskunta viittaa jatkuvaan sosiaaliseen kanssakäymiseen yhteisellä alueella, usein samojen poliittisen ja kulttuuristen normien puitteissa osallistuvaan henkilöryhmään</skos:definition>
+      <skos:definition xml:lang="lv">datu kopa, kas aptver tādas jomas kā iedzīvotāji un sabiedrība, kur ar iedzīvotājiem saprot to cilvēku kopskaitu, kuri dzīvo dažādos ģeogrāfiskajos līmeņos, sākot no pilsētām līdz pasaules mērogam, bet ar sabiedrību –– to personu grupu, kura iesaistīta nepārtrauktā sociālā mijiedarbībā kādā kopējā teritorijā un kura bieži vien ir pieņēmusi un ievēro vienas un tās pašas politiskās un kultūras normas</skos:definition>
+      <skos:definition xml:lang="mt">tema ta’ sett tad-data li tkopri l-oqsma tal-popolazzjoni u tas-soċjetà, fejn il-popolazzjoni tirreferi għall-għadd totali ta’ persuni li jgħixu f’diversi livelli ġeografiċi mill-bliet sal-iskala dinjija, u fejn is-soċjetà tirrappreżenta grupp ta’ individwi involuti f’interazzjoni soċjali kontinwa f’territorju komuni, spiss taħt l-istess normi politiċi u kulturali</skos:definition>
+      <skos:definition xml:lang="nl">datasetthema dat betrekking heeft op de domeinen bevolking en samenleving, waarbij bevolking verwijst naar het totale aantal mensen dat verblijft op verschillende geografische niveaus van stad tot wereldschaal, en samenleving verwijst naar een collectief van personen die betrokken zijn bij duurzame sociale interactie binnen een gemeenschappelijk gebied, vaak met dezelfde politieke en culturele normen</skos:definition>
+      <skos:definition xml:lang="et">andmestike teema, mis hõlmab selliseid valdkondi nagu elanikkond ja ühiskond, kui rahvastik tähendab selliste inimeste koguarvu, kes elavad eri geograafilistel tasanditel (linnadest üleilmse tasandini); ja mõiste „ühiskond“ tähistab üksikisikute kooslust, mille liikmed suhtlevad üksteisega pidevalt ühise territooriumi piires ning sageli samade poliitiliste ja kultuuriliste reeglite kohaselt</skos:definition>
+      <skos:definition xml:lang="cs">téma datového souboru týkající se oblastí obyvatelstva a společnosti, kde obyvatelstvo znamená celkový počet osob usídlených na různých geografických úrovních, od měst až po celosvětovou úroveň, a společnost označuje seskupení jednotlivců zapojených do nepřetržité sociální interakce na společném území, často na základě stejných politických a kulturních norem</skos:definition>
+      <skos:definition xml:lang="de">Datensatzthema für die Bereiche Bevölkerung und Gesellschaft, wobei „Bevölkerung“ sich auf die Gesamtzahl der Menschen bezieht, die in geografischen Einheiten – von der Städte- bis zur globalen Ebene – ansässig sind, während „Gesellschaft“ eine Gemeinschaft von Individuen bezeichnet, die sich innerhalb eines gemeinsamen Gebiets in ständiger sozialer Interaktion befinden und oft denselben politischen und kulturellen Normen unterliegen</skos:definition>
+      <skos:definition xml:lang="lt">duomenų rinkinio tema, apimanti gyventojų ir visuomenės sritis, kur gyventojai reiškia bendrą žmonių, gyvenančių įvairiais geografiniais lygmenimis – nuo miestų iki pasaulinio masto – skaičių, o visuomenė – asmenų, nuolat sąveikaujančių bendroje teritorijoje, dažnai pagal tas pačias politines ir kultūrines normas, grupė</skos:definition>
+      <skos:definition xml:lang="es">tema de un conjunto de datos que abarca los ámbitos de la población, que se refiere al número total de personas que residen en los distintos niveles geográficos —desde las ciudades hasta la escala mundial—, y la sociedad, que denota un colectivo de personas que participan en una interacción social continua dentro de un territorio común, a menudo con arreglo a las mismas normas políticas y culturales</skos:definition>
+      <skos:definition xml:lang="ro">tema setului de date care vizează domeniile populației și societății, în care populația se referă la numărul total de persoane care locuiesc în diferite niveluri geografice, de la orașe la scară mondială, iar societatea desemnează un colectiv de persoane implicate într-o interacțiune socială continuă în cadrul unui teritoriu comun, adesea în temeiul acelorași norme politice și culturale</skos:definition>
+      <skos:definition xml:lang="da">tema for datasæt, som vedrører områderne befolkning og samfund, hvor befolkning henviser til det samlede antal mennesker, der bor på forskellige geografiske niveauer, fra byer til globalt plan, mens samfund betegner en gruppe af personer, der løbende interagerer socialt inden for et fælles territorium og ofte efter de samme politiske og kulturelle normer</skos:definition>
+      <skos:definition xml:lang="hr">tema podatkovnog skupa koja obuhvaća domenu stanovništva i društva, u kojoj se pojam stanovništva odnosi na ukupni broj stanovnika koji žive unutar različitih razina geografskih područja, od razine gradova do svjetske razine, a pojam društva na skup pojedinaca uključenih u stalno društveno međudjelovanje na zajedničkom teritoriju, često u okviru istih političkih i kulturoloških normi</skos:definition>
+      <skos:definition xml:lang="pl">temat zbioru danych obejmujący dziedziny dotyczące populacji i społeczeństwa, gdzie populacja odnosi się do całkowitej liczby osób mieszkających na różnych poziomach geograficznych, od miast do skali globalnej, a społeczeństwo oznacza zbiorowość osób zaangażowanych w ciągłą interakcję społeczną na wspólnym terytorium, często zgodnie z tymi samymi normami politycznymi i kulturowymi.</skos:definition>
+      <skos:definition xml:lang="ga">téama tacair sonraí lena gcumhdaítear réimse an daonra agus réimse na sochaí, de réir an tsainithe gurb é is daonra ann an líon iomlán daoine atá ina gcónaí laistigh de limistéir gheografacha éagsúla, bídís sin ar leibhéal na gcathracha, ar an leibhéal domhanda nó eile, agus gurb é rud a chiallaíonn an tsochaí ná comharghrúpa daoine aonair atá i mbun idirghníomhaíocht shóisialta leanúnach laistigh de chríoch choiteann, agus an idirghníomhaíocht sin faoi réir noirm choiteanna pholaitiúla agus chultúrtha i roinnt mhaith cásanna</skos:definition>
+      <skos:definition xml:lang="bg">тема на множество от данни, обхващаща областите на населението и обществото; население е съвкупността (общият брой) на хората, които живеят на различни географски равнища – от градско до световно равнище; обществото е колектив от физически лица, осъществяващи постоянно обществено взаимодействие, с обща територия, често при едни и същи политически и културни норми</skos:definition>
+      <skos:definition xml:lang="hu">A népesség és a társadalom területeit lefedő adatkészlet-téma, ahol a népesség a városoktól a globális szintig terjedő különböző földrajzi egységekben élő személyek teljes számát jelenti, a társadalom pedig a közös területen élő, gyakorta ugyanazon politikai és kulturális normákkal rendelkező és folyamatos társadalmi kapcsolatokban részt vevő személyek összességét jelöli.</skos:definition>
+      <skos:definition xml:lang="en">dataset theme covering the domains of population and society, where population refers to the total number of people residing within various geographic levels from cities to the global scale, and society denotes a collective of individuals engaged in continuous social interaction within a common territory, often under the same political and cultural norms</skos:definition>
+      <skos:definition xml:lang="sv">dataset för områdena befolkning och samhälle, där befolkning avser det totala antalet personer som bor på olika geografiska nivåer, från städer till global nivå, medan samhälle avser en grupp individer som deltar i kontinuerlig social interaktion inom ett gemensamt territorium, ofta enligt samma politiska och kulturella normer.</skos:definition>
+      <skos:definition xml:lang="el">θέμα συνόλου δεδομένων το οποίο καλύπτει τους τομείς του πληθυσμού και της κοινωνίας, όπου ο πληθυσμός αναφέρεται στον συνολικό αριθμό ατόμων που διαμένουν σε διάφορα γεωγραφικά επίπεδα από τις πόλεις έως την παγκόσμια κλίμακα, ενώ η κοινωνία αναφέρεται σε μια ομάδα ατόμων που βρίσκονται σε συνεχή κοινωνική αλληλεπίδραση εντός κοινής επικράτειας, συχνά με τα ίδια πολιτικά και πολιτιστικά πρότυπα</skos:definition>
+      <skos:definition xml:lang="pt">conjunto de dados cujo tema abrange os domínios da população e da sociedade, em que a população se refere ao número total de pessoas que residem em vários níveis geográficos, desde os municípios até à escala mundial, e a sociedade designa um coletivo de indivíduos envolvidos numa interação social contínua num território comum, frequentemente segundo as mesmas normas políticas e culturais</skos:definition>
+      <skos:definition xml:lang="sl">podatkovni nabor, ki pokriva področji prebivalstva in družbe, pri čemer se populacija nanaša na skupno število oseb, ki prebivajo v različnih geografskih enotah (od mest do globalne ravni), medtem ko družba označuje skupnost posameznikov, ki so na določenem območju v neprekinjeni družbeni interakciji, navadno z enakimi političnimi in kulturnimi merili</skos:definition>
+      <skos:definition xml:lang="it">tema di serie di dati relativo ai settori della popolazione e della società, ove la popolazione riguarda il numero totale di persone che risiedono in vari livelli geografici, dalle città alla scala mondiale, mentre la società indica un insieme di individui impegnati in un'interazione sociale regolare nell'ambito di un territorio comune, spesso con le stesse norme politiche e culturali</skos:definition>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>SOCI</dc:identifier>
+      <atold:op-code>SOCI</atold:op-code>
+      <at:op-code>SOCI</at:op-code>
+      <at:start.use>2015-10-01</at:start.use>
+      <at:authority-code>SOCI</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/OP_DATPRO"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="it">Dati provvisori</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Provisional data</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Sonraí sealadacha</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Alustavat tiedot</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Dejta provviżorja</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Provizoriski dati</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Midlertidige data</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Datos provisionales</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Date provizorii</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Esialgsed andmed</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Données provisoires</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Ideiglenes adatok</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Vorläufige Daten</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Začasni podatki</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Voorlopige gegevens</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Dane tymczasowe</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Predbežné údaje</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Laikinieji duomenys</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Předběžné údaje</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Tillfälliga uppgifter</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Dados provisórios</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Privremeni podaci</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Неокончателни данни</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Προσωρινά δεδομένα</skos:prefLabel>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>OP_DATPRO</dc:identifier>
+      <atold:op-code>OP_DATPRO</atold:op-code>
+      <at:op-code>OP_DATPRO</at:op-code>
+      <at:start.use>1952-07-23</at:start.use>
+      <at:authority-code>OP_DATPRO</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/TECH"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="hu">Tudomány és technológia</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Ciência e tecnologia</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Veda a technika</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Videnskab og teknologi</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Znanost in tehnologija</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Věda a technika</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Ştiinţă şi tehnologie</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Scienza e tecnologia</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Tiede ja teknologia</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Wissenschaft und Technologie</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">Vitenskap og teknologi</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">Vitenskap og teknologi</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Επιστήμη και τεχνολογία</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Znanost i tehnologija</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Science et technologie</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Vetenskap och teknik</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Wetenschap en technologie</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Teadus ja tehnoloogia</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Nauka i technologia</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Eolaíocht agus teicneolaíocht</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Xjenza u teknoloġija</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">Vitskap og teknologi</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Science and technology</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Zinātne un tehnoloģija</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Ciencia y tecnología</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Наука и tехнологии</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Mokslas ir technologijos</skos:prefLabel>
+      <skos:definition xml:lang="cs">téma datového souboru týkající se oblastí vědy a techniky, kde věda je systematické získávání poznatků prostřednictvím ověřitelných vysvětlení a prognóz v přírodních, sociálních a formálních oborech a technologie zahrnuje kolektivní techniky, dovednosti, metody a postupy používané při výrobě zboží, poskytování služeb nebo dosahování cílů, mezi něž patří například vědecký výzkum</skos:definition>
+      <skos:definition xml:lang="el">θέμα συνόλου δεδομένων το οποίο καλύπτει τους τομείς της επιστήμης και της τεχνολογίας, με την επιστήμη να αποτελεί τη συστηματική επιδίωξη της γνώσης μέσω ελέγξιμων εξηγήσεων και προβλέψεων σε όλους τους φυσικούς, κοινωνικούς και επίσημους κλάδους, και με την τεχνολογία να περιλαμβάνει τις συλλογικές τεχνικές, δεξιότητες, μεθόδους και διαδικασίες που χρησιμοποιούνται για την παραγωγή αγαθών, την παροχή υπηρεσιών ή την επίτευξη στόχων όπως η επιστημονική έρευνα</skos:definition>
+      <skos:definition xml:lang="nl">datasetthema dat betrekking heeft op de domeinen wetenschap en technologie, waarbij wetenschap wordt gekarakteriseerd als het systematisch nastreven van kennis door middel van testbare verklaringen en voorspellingen in natuurlijke, sociale en formele disciplines, en technologie het geheel aan technieken, vaardigheden, methoden en processen omvat dat wordt gebruikt bij het produceren van goederen, het verlenen van diensten of het bereiken van doelstellingen zoals wetenschappelijk onderzoek</skos:definition>
+      <skos:definition xml:lang="pl">temat zbioru danych obejmujący dziedziny nauki i technologii, gdzie nauka polega na systematycznym dążeniu do zdobywania wiedzy poprzez możliwe do sprawdzenia wyjaśnienia i prognozy w dyscyplinach przyrodniczych, społecznych i formalnych, a technologia obejmuje wspólnie uznane techniki, umiejętności, metody i procesy wykorzystywane do produkcji towarów, świadczenia usług lub osiągania celów takich jak badania naukowe</skos:definition>
+      <skos:definition xml:lang="sk">téma dátového súboru pokrývajúca oblasti vedy a techniky, pričom veda je systematické získavanie vedomostí prostredníctvom merateľných vysvetlení a predpovedí v prírodných, sociálnych a formálnych disciplínach a technika zahŕňa kolektívne techniky, zručnosti, metódy a procesy používané pri výrobe tovaru, poskytovaní služieb alebo dosahovaní cieľov, ako je vedecký výskum</skos:definition>
+      <skos:definition xml:lang="mt">tema ta’ sett tad-data li tkopri l-oqsma tax-xjenza u tat-teknoloġija, fejn ix-xjenza tkun l-insegwiment sistematiku tal-għarfien permezz ta’ spjegazzjonijiet u previżjonijiet verifikabbli fid-dixxiplini naturali, soċjali u formali, u fejn it-teknoloġija tinkludi t-tekniki, il-ħiliet, il-metodi, u l-proċessi kollettivi użati fil-produzzjoni ta’ oġġetti, fil-forniment ta’ servizzi, jew fil-kisba ta’ objettivi bħar-riċerka xjentifika</skos:definition>
+      <skos:definition xml:lang="sl">podatkovni nabor, ki pokriva področji znanosti in tehnologije, pri čemer je znanost sistematično stremenje po znanju s preverljivimi razlagami in predvidevanji v vseh naravoslovnih, družboslovnih in formalnih disciplinah, medtem ko tehnologija obsega skupek tehnik, spretnosti, metod in procesov, ki se uporabljajo za proizvodnjo dobrin, zagotavljanje storitev ali doseganje ciljev, kot so znanstvene raziskave</skos:definition>
+      <skos:definition xml:lang="bg">тема на множество от данни, обхващаща областите на науката и технологиите; науката е системното търсене на знания чрез проверими обяснения и предвиждания в различни природни, обществени и формални дисциплини; технологията обхваща колективните способи, умения, методи и процеси, използвани при производството на стоки, предоставянето на услуги или постигането на цели, като научните изследвания</skos:definition>
+      <skos:definition xml:lang="en">dataset theme covering the domains of science and technology, with science being the systematic pursuit of knowledge through testable explanations and predictions across natural, social, and formal disciplines, and technology encompassing the collective techniques, skills, methods, and processes used in producing goods, providing services, or achieving objectives like scientific research</skos:definition>
+      <skos:definition xml:lang="sv">dataset för områdena vetenskap och teknik, där vetenskap är en systematisk strävan efter kunskap genom testbara förklaringar och förutsägelser inom olika naturliga, sociala och formella vetenskapliga områden, och teknik omfattar de kollektiva tekniker, färdigheter, metoder och processer som används för att producera varor, tillhandahålla tjänster eller uppnå mål, t.ex. vetenskaplig forskning.</skos:definition>
+      <skos:definition xml:lang="ro">tema setului de date care vizează domeniile științei și tehnologiei, știința fiind urmărirea sistematică a cunoștințelor prin explicații și previziuni verificabile la nivelul disciplinelor naturale, sociale și formale și al tehnologiei, cuprinzând tehnicile, competențele, metodele și procesele colective utilizate pentru producerea de bunuri, furnizarea de servicii sau atingerea unor obiective precum cercetarea științifică</skos:definition>
+      <skos:definition xml:lang="lt">duomenų rinkinio tema, apimanti mokslo ir technologijų sritis, kur mokslas yra sistemingas žinių siekimas pateikiant galimus patikrinti paaiškinimus bei prognozes įvairiose gamtos, socialinėse ir formaliose disciplinose, o technologijos apima kolektyvinius būdus, įgūdžius, metodus ir procesus, naudojamus prekėms gaminti, paslaugoms teikti arba mokslinių tyrimų tikslams pasiekti</skos:definition>
+      <skos:definition xml:lang="fi">tietojoukkoryhmä, joka kattaa tieteen ja teknologian alat: tieteellä tarkoitetaan testattavissa oleviin selityksiin ja ennustuksiin perustuvaa uuden tiedon järjestelmällistä etsintää luonnon-, yhteiskunta- ja käsitteellisten tieteiden aloilla ja teknologia käsittää tavaroita tuotettaessa, palveluja tarjottaessa tai tieteellisen tutkimuksen kaltaisia tavoitteita saavutettaessa käytettävät kollektiiviset tekniikat, taidot, menetelmät ja prosessit</skos:definition>
+      <skos:definition xml:lang="es">tema de un conjunto de datos que abarca los ámbitos de la ciencia, que es la búsqueda sistemática del conocimiento a través de explicaciones y predicciones verificables en las disciplinas naturales, sociales y formales, y la tecnología, que comprende las técnicas, capacidades, métodos y procesos colectivos utilizados para producir bienes, prestar servicios o alcanzar objetivos, como la investigación científica</skos:definition>
+      <skos:definition xml:lang="de">Datensatzthema für die Gebiete Wissenschaft und Technologie, wobei „Wissenschaft“ das systematische Streben nach Wissen durch überprüfbare Erklärungen und Vorhersagen in allen natur-, sozial- und formalwissenschaftlichen Disziplinen bezeichnet, während „Technologie“ die Gesamtheit der Techniken, Fertigkeiten, Methoden und Verfahren umfasst, die eingesetzt werden, um Waren herzustellen, Dienstleistungen zu erbringen oder Ziele wie wissenschaftliche Forschung zu erreichen</skos:definition>
+      <skos:definition xml:lang="hr">tema podatkovnog skupa koja obuhvaća domene znanosti i tehnologije, u kojoj se znanost odnosi na sustavno traganje za spoznajom u okviru provjerljivih objašnjenja i predviđanja u prirodoslovnim, društvenim i formalnim disciplinama, a tehnologija obuhvaća skup tehnika, vještina, metoda i postupaka u proizvodnji robe, pružanju usluga ili ostvarivanju ciljeva poput znanstvenog istraživanja</skos:definition>
+      <skos:definition xml:lang="ga">téama tacair sonraí lena gcumhdaítear réimse na heolaíochta agus réimse na teicneolaíochta, de réir an tsainithe gurb é is eolaíocht ann saothrú córasach an eolais trí mhínithe agus tuartha intástáilte i ndisciplíní nádúrtha, sóisialta agus foirmiúla, agus gurb é a chuimsítear leis an teicneolaíocht na teicnící, na scileanna, na modhanna agus na próisis chomhchoiteanna a úsáidtear chun earraí a tháirgeadh, chun seirbhísí a sholáthar, nó chun cuspóirí a bhaint amach, sa taighde eolaíoch, mar shampla</skos:definition>
+      <skos:definition xml:lang="lv">datu kopa, kura aptver tādas jomas kā zinātne un tehnoloģijas, kur zinātne ir sistemātiska zināšanu ieguve, izmantojot pārbaudāmus skaidrojumus un prognozes dabas, sociālajā un formālajās disciplīnās bet tehnoloģijas ir kolektīvie paņēmieni, prasmes, metodes un procesi, ko izmanto preču ražošanā, pakalpojumu sniegšanā vai tādu mērķu kā zinātniskā pētniecība sasniegšanā</skos:definition>
+      <skos:definition xml:lang="it">tema di serie di dati relativo ai settori della scienza e della tecnologia, ove la scienza consiste nella ricerca sistematica di conoscenza mediante spiegazioni verificabili e previsioni nelle discipline naturali, sociali e formali, e la tecnologia comprende l'insieme delle tecniche, delle competenze, dei metodi e dei processi usati per la produzione di beni, la prestazione di servizi o il conseguimento di obiettivi, ad esempio della ricerca scientifica</skos:definition>
+      <skos:definition xml:lang="pt">conjunto de dados cujo tema abrange os domínios da ciência e da tecnologia, sendo a ciência a procura sistemática do conhecimento através de explicações e previsões suscetíveis de serem testadas em todas as disciplinas naturais, sociais e formais, e em que a tecnologia inclui técnicas, competências, métodos e processos coletivos utilizados na produção de bens, na prestação de serviços ou na consecução de objetivos como a investigação científica</skos:definition>
+      <skos:definition xml:lang="da">tema for datasæt, som vedrører områderne videnskab og teknologi, hvor videnskab er den systematiske stræben efter viden gennem forklaringer og forudsigelser, som kan afprøves, på tværs af naturlige, sociale og formelle discipliner, mens teknologi omfatter alle de teknikker, færdigheder, metoder og processer, der anvendes til at producere varer, levere tjenesteydelser eller nå mål såsom videnskabelig forskning</skos:definition>
+      <skos:definition xml:lang="fr">thème d’un ensemble de données couvrant les domaines de la science et de la technologie, la science étant la recherche systématique de connaissances au moyen d’explications et de prédictions exploitables dans toutes les disciplines naturelles, sociales et formelles, et la technologie englobant les techniques, compétences, méthodes et processus collectifs mis en œuvre pour produire des biens, fournir des services ou atteindre des objectifs tels que la recherche scientifique</skos:definition>
+      <skos:definition xml:lang="et">andmestike teema, mis hõlmab selliseid valdkondi nagu teadus ja tehnoloogia, kui teadus on süstemaatiline püüdlemine teadmiste poole katsetega tõestatavate selgituste ja eelduste varal loodus-, sotsiaal- ja formaalteaduste vallas ning tehnoloogia alla kuuluvad ühised tehnilised võtted, oskused, meetodid ja protsessid, mida kasutatakse esemete valmistamiseks, teenuste osutamiseks või sellistel eesmärkidel nagu teadusuuringud</skos:definition>
+      <skos:definition xml:lang="hu">Ez az adatkészlet-téma a tudomány és a technológia területeit öleli fel, ahol a tudomány a természeti, társadalmi és formális területeken a tesztelhető magyarázatok és előrejelzések segítségével ismeretek megszerzésére irányuló tevékenység, a technológia pedig a javak előállításához, szolgáltatások nyújtásához vagy egyes célkitűzések, például a tudományos kutatás megvalósításához alkalmazott technikák, készségek, módszerek és folyamatok összessége.</skos:definition>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>TECH</dc:identifier>
+      <atold:op-code>TECH</atold:op-code>
+      <at:op-code>TECH</at:op-code>
+      <at:start.use>2015-10-01</at:start.use>
+      <at:authority-code>TECH</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/data-theme/TRAN"
+                 at:deprecated="false">
+      <skos:prefLabel xml:lang="hu">Közlekedés</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Transportes</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">Liikenne</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Doprava</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Doprava</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Trasporti</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Promet</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Verkehr</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Transport</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Transport</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">Transport</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Transport</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">Transport</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Transport</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Transport</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Transport</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Transport</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">Transport</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Trasport</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Транспорт</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Transports</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Transports</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Vervoer</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Transporte</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Iompar</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Μεταφορές</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Transportas</skos:prefLabel>
+      <skos:definition xml:lang="sk">téma dátového súboru pokrývajúca oblasť dopravy, ktorá zahŕňa pohyb ľudí, zvierat a tovaru z jedného miesta na druhé s použitím rôznych druhov dopravy, ako je letecká, pozemná (železničná a cestná), vodná, lanová, potrubná a vesmírna doprava</skos:definition>
+      <skos:definition xml:lang="fi">tietojoukkoryhmä, joka kattaa liikennealan, johon sisältyy ihmisten, eläinten ja tavaroiden siirtäminen paikasta toiseen käyttäen eri liikennemuotoja, kuten ilma-, maa- (rautatiet ja maantiet), vesi-, kaapeli-, putkijohto- ja avaruusliikennettä</skos:definition>
+      <skos:definition xml:lang="ga">téama tacair sonraí lena gcumhdaítear réimse an iompair, rud a bhaineann le gluaiseacht daoine, ainmhithe agus earraí ó áit go háit trí bhíthin modhanna iompair éagsúla, cuir i gcás an t-aeriompar, an t-iompar ar talamh (iarnróid agus bóithre), an t-iompar ar uiscebhealaigh, trí cháblaí, trí phíblínte agus sa spás</skos:definition>
+      <skos:definition xml:lang="sv">dataset för området transport, som innebär förflyttning av människor, djur och varor från en plats till en annan med hjälp av olika transportsätt, t.ex. transport i luften, på land (på järnväg och väg), på vatten, med linbana, med rörledning och i rymden.</skos:definition>
+      <skos:definition xml:lang="lv">datu kopa, kas aptver transporta jomu jeb cilvēku, dzīvnieku un preču pārvietošanu no vienas vietas uz citu ar dažādu transporta veidu palīdzību, piemēram, pa gaisu, zemi (dzelzceļu un autoceļiem), ūdensceļiem, kabeļiem, cauruļvadiem un kosmosā</skos:definition>
+      <skos:definition xml:lang="pt">conjunto de dados cujo tema abrange o domínio dos transportes, o que inclui a circulação de seres humanos, animais e mercadorias de um local para outro, utilizando vários modos, como o transporte aéreo, terrestre (ferroviário e rodoviário), por vias navegáveis, cabo, gasoduto e espacial</skos:definition>
+      <skos:definition xml:lang="lt">duomenų rinkinio tema, apimanti transporto sritį, kuri yra susijusi su žmonių, gyvūnų ir prekių judėjimu iš vienos vietos į kitą įvairiu būdu, kaip antai oru, žeme (geležinkeliais ir keliais), vandeniu, laidais, vamzdynais ir erdve</skos:definition>
+      <skos:definition xml:lang="cs">téma datového souboru týkající se oblasti dopravy, jež zahrnuje přepravu lidí, zvířat a zboží z jednoho místa do druhého za použití různých prostředků, jako je letecká, pozemní (železniční a silniční), vodní, lanová, potrubní a kosmická doprava</skos:definition>
+      <skos:definition xml:lang="es">tema de un conjunto de datos que abarca el ámbito del transporte, que comprende el desplazamiento de personas, animales y mercancías de un lugar a otro mediante diversos modos de transporte; por ejemplo, el transporte aéreo, terrestre (por ferrocarril y por carretera), por vías navegables, por cable, por tubería o espacial</skos:definition>
+      <skos:definition xml:lang="nl">datasetthema dat betrekking heeft op vervoer, waarbij mensen, dieren en goederen van de ene plaats naar de andere worden vervoerd met gebruikmaking van verschillende vervoersmodaliteiten, zoals lucht, land (spoor en weg), water, kabel, pijpleiding en ruimte</skos:definition>
+      <skos:definition xml:lang="et">andmestike teema, mis hõlmab sellist valdkonda nagu transport, mis tähendab inimeste, loomade ja kaupade viimist ühest kohast teise, kasutades mitmesuguseid vahendeid nagu õhu-, maismaa-(nii raudtee- kui maantee-), vee-, köistee-, toru- ja kosmosetransport</skos:definition>
+      <skos:definition xml:lang="fr">thème d’un ensemble de données couvrant le domaine du transport, qui implique le déplacement d’êtres humains, d’animaux et de biens d’un endroit à un autre en faisant appel à différents modes de transports tels que le transport aérien, le transport terrestre (ferroviaire ou routier), le transport par voies navigables, le transport par câble, le transport par conduites et le transport spatial</skos:definition>
+      <skos:definition xml:lang="mt">tema ta’ sett tad-data li tkopri d-dominju tat-trasport, li jinvolvi l-moviment tal-bnedmin, l-annimali, u l-oġġetti minn post għal ieħor bl-użu ta’ diversi modi tat-trasport bħall-ajru, l-art (bil-ferrovija u bit-triq), l-ilma, il-kejbil, il-pipeline u l-ispazju</skos:definition>
+      <skos:definition xml:lang="pl">temat zbioru danych obejmujący dziedzinę transportu, która dotyczy przemieszczania ludzi, zwierząt i towarów z jednego miejsca do drugiego przy użyciu różnych rodzajów transportu, takich jak transport lotniczy powietrze, lądowy (kolejowy i drogowy), wodny, a także kable, rurociągi i transport w przestrzeni kosmicznej</skos:definition>
+      <skos:definition xml:lang="da">tema for datasæt, som vedrører området transport, der omfatter flytning af mennesker, dyr og varer fra et sted til et andet ved hjælp af forskellige former for transport, bl.a. i luften, til lands (bane og vej), til vands, via kabler, via rørledninger og i rummet</skos:definition>
+      <skos:definition xml:lang="it">tema di serie di dati relativo al settore dei trasporti, che riguarda il trasferimento di persone, animali e merci da un luogo a un altro ricorrendo a varie modalità, come il trasporto aereo, terrestre (ferroviario e stradale), per via d'acqua, tramite cavo o condotta e spaziale</skos:definition>
+      <skos:definition xml:lang="hr">tema podatkovnog skupa koja obuhvaća domenu prijevoza, što uključuje kretanje ljudi, životinja i robe od jednog mjesta do drugog upotrebom različitih načina prijevoza, kao što je zračni prijevoz, kopneni prijevoz (željeznički i cestovni), prijevoz plovilima, prijenosom putem kabela, cjevovodima i u svemiru</skos:definition>
+      <skos:definition xml:lang="ro">tema setului de date care vizează domeniul transporilor, care se referă la circulația oamenilor, a animalelor și a mărfurilor dintr-un loc în altul utilizând diferite moduri de transport, cum ar fi transportul aerian, terestru (feroviar și rutier), transportul pe apă, transportul pe cablu, transportul prin conductă și transportul în spațiu</skos:definition>
+      <skos:definition xml:lang="en">dataset theme covering the domain of transport, which involves the movement of humans, animals, and goods from one location to another using various modes such as air, land (rail and road), water, cable, pipeline and space</skos:definition>
+      <skos:definition xml:lang="de">Datensatzthema für den Bereich Verkehr, der die Bewegungen von Menschen, Tieren und Waren von einem Ort zu anderen mittels verschiedener Beförderungsarten, etwa Luft- und Landverkehrsmitteln (per Schiene und Straße), Verkehrsmitteln zu Wasser, Kabeln, Rohrleitungen und Raumtransportmitteln umfasst</skos:definition>
+      <skos:definition xml:lang="sl">podatkovni nabor, ki pokriva področje prometa, tj. premik ljudi, živali in dobrin iz enega kraja v drugega po različnih poteh, kot so zrak, kopno (železnica in cesta), voda, kabli, napeljave in prostor</skos:definition>
+      <skos:definition xml:lang="hu">A szállítás területét lefedő adatkészlet-téma, amely magában foglalja az emberek, az állatok és az áruk egyik helyről a másikra történő mozgatását különböző módokon, például a levegőn, a szárazföldön (vasúton és közúton), vízen, kábeleken, csővezetékeken és az űrön keresztül.</skos:definition>
+      <skos:definition xml:lang="el">θέμα συνόλου δεδομένων το οποίο καλύπτει τον τομέα των μεταφορών που περιλαμβάνει τη μετακίνηση ανθρώπων, ζώων και αγαθών από μια τοποθεσία σε άλλη με τη χρήση διαφόρων τρόπων μεταφοράς, όπως οι αεροπορικές, χερσαίες (σιδηροδρομικές και οδικές) και πλωτές μεταφορές, καθώς και οι μεταφορές με καλώδια κι αγωγούς και οι διαστημικές μεταφορές</skos:definition>
+      <skos:definition xml:lang="bg">тема на множество от данни, обхващаща областта на транспорта, който включва превозването на хора, животни и стоки от едно място до друго с помощта на различни видове транспорт (превоз и пренос), в т.ч. въздушен, сухоземен (железопътен и пътен) и воден транспорт, пренос по кабели и тръбопроводи, космически транспорт</skos:definition>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+      <dc:identifier>TRAN</dc:identifier>
+      <atold:op-code>TRAN</atold:op-code>
+      <at:op-code>TRAN</at:op-code>
+      <at:start.use>2015-10-01</at:start.use>
+      <at:authority-code>TRAN</at:authority-code>
+   </skos:Concept>
+</rdf:RDF>

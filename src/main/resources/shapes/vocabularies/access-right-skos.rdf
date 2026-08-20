@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:atold="http://publications.europa.eu/resource/authority/"
+         xmlns:at="http://publications.europa.eu/ontology/authority/"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xml:base="http://publications.europa.eu/resource/authority/access-right">
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/access-right"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/access-right"/>
+      <skos:prefLabel xml:lang="fi">julkinen</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">avalik</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">viešas</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">offentligt</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">publiski pieejams</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">pubbliku</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">public</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">public</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">public</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">δημόσιο</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">público</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">público</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">pubblico</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">verejné</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">javno</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">публичен</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">openbaar</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">allmenn tilgang</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">publiczny</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">öffentlich</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">nyilvános</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">allmenn tilgang</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">poiblí</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">offentlig</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">allmenn tilgang</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">veřejné</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">za javnu objavu</skos:prefLabel>
+      <skos:definition xml:lang="en">access status for resources that are publicly accessible</skos:definition>
+      <skos:scopeNote xml:lang="en">The presence or absence of personal data is not a defining criterion for this concept. Information on the presence of personal data should be provided separately. Requirements such as registration or requests for API keys are compatible with this concept, provided that anyone can request such registration or API keys.</skos:scopeNote>
+      <dc:identifier>PUBLIC</dc:identifier>
+      <atold:op-code>PUBLIC</atold:op-code>
+      <at:op-code>PUBLIC</at:op-code>
+      <at:start.use>2013-01-01</at:start.use>
+      <at:authority-code>PUBLIC</at:authority-code>
+   </skos:Concept>
+   <skos:ConceptScheme rdf:about="http://publications.europa.eu/resource/authority/access-right"
+                       at:table.id="access-right"
+                       at:table.version.number="20260617-0">
+      <skos:prefLabel xml:lang="en">Access right</skos:prefLabel>
+      <owl:versionInfo>20260617-0</owl:versionInfo>
+      <rdfs:label xml:lang="en">Access right</rdfs:label>
+      <at:prefLabel xml:lang="en">Access right</at:prefLabel>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/access-right/NORMAL"/>
+      <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/access-right/OP_DATPRO"/>
+   </skos:ConceptScheme>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/access-right"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/access-right"/>
+      <skos:prefLabel xml:lang="en">non-public</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">não público</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">mhux pubbliku</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">ikkje-allmenn tilgang</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">nem nyilvános</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">icke-offentligt</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">neviešas</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">neaccesibil publicului</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">non pubblico</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">μη δημόσιο</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">non public</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">mitteavalik</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">neveřejné</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">ei-julkinen</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">nicht öffentlich</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">niepubliczny</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">neamhphoiblí</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">nije za javnu objavu</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">niet-openbaar</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">nejavno</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">neverejné</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">no público</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">nav publisks</skos:prefLabel>
+      <skos:prefLabel xml:lang="nb">ikke-allmenn tilgang</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">ikke-allmenn tilgang</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">непубличен</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">ikke-offentlig</skos:prefLabel>
+      <skos:definition xml:lang="en">access status for resources that are not publicly accessible for privacy, security or other reasons</skos:definition>
+      <skos:scopeNote xml:lang="en">Non-public resources may contain personal data, but this is not a defining criterion. Information on the presence of personal data should be indicated separately.</skos:scopeNote>
+      <dc:identifier>NON_PUBLIC</dc:identifier>
+      <atold:op-code>NON_PUBLIC</atold:op-code>
+      <at:op-code>NON_PUBLIC</at:op-code>
+      <at:start.use>2013-01-01</at:start.use>
+      <at:authority-code>NON_PUBLIC</at:authority-code>
+      <skos:narrower rdf:resource="http://publications.europa.eu/resource/authority/access-right/CONFIDENTIAL"/>
+      <skos:narrower rdf:resource="http://publications.europa.eu/resource/authority/access-right/RESTRICTED"/>
+      <skos:narrower rdf:resource="http://publications.europa.eu/resource/authority/access-right/SENSITIVE"/>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/access-right/NORMAL"
+                 at:deprecated="true">
+      <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/access-right"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/access-right"/>
+      <skos:prefLabel xml:lang="sv">normal åtkomst</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">normálta</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">obvyklé</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">normal</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">normal</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">normal</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">normal</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">normal</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">normal</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">tavaline</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">normal</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">zwykły</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">normale</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">tipično</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">normaal</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">običajno</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">tavanomainen</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">κανονικό</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">нормален</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">normalus</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">parasts</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">normali</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">normál</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">normálne</skos:prefLabel>
+      <skos:definition xml:lang="en">Publicly accessible. This concept has been used in the schemas of IMMC, the Interinstitutional Metadata Maintenance Committee, as the predecessor of the current concept ‘public’.</skos:definition>
+      <dc:identifier>NORMAL</dc:identifier>
+      <atold:op-code>NORMAL</atold:op-code>
+      <at:op-code>NORMAL</at:op-code>
+      <at:start.use>2009-12-01</at:start.use>
+      <at:authority-code>NORMAL</at:authority-code>
+      <at:end.use>2022-03-16</at:end.use>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/access-right/OP_DATPRO"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/access-right"/>
+      <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/access-right"/>
+      <skos:prefLabel xml:lang="fi">Alustavat tiedot</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">Midlertidige data</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">Sonraí sealadacha</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">Dados provisórios</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">Date provizorii</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">Začasni podatki</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">Dati provvisori</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">Esialgsed andmed</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">Provizoriski dati</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">Predbežné údaje</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">Předběžné údaje</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">Voorlopige gegevens</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">Ideiglenes adatok</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">Privremeni podaci</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">Tillfälliga uppgifter</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">Dane tymczasowe</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">Provisional data</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">Vorläufige Daten</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">Laikinieji duomenys</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">Προσωρινά δεδομένα</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">Datos provisionales</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">Неокончателни данни</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">Données provisoires</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">Dejta provviżorja</skos:prefLabel>
+      <dc:identifier>OP_DATPRO</dc:identifier>
+      <atold:op-code>OP_DATPRO</atold:op-code>
+      <at:op-code>OP_DATPRO</at:op-code>
+      <at:start.use>1952-07-23</at:start.use>
+      <at:authority-code>OP_DATPRO</at:authority-code>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/access-right/CONFIDENTIAL"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/access-right"/>
+      <skos:prefLabel xml:lang="it">riservato</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">konfidentiellt</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">bizalmas</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">поверителен</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">dôverné</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">důvěrné</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">konfidenciāls</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">zaupno</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">povjerljivo</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">confidențial</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">confidencial</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">confidencial</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">luottamuksellinen</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">vertraulich</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">konfidentsiaalne</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">rúnda</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">vertrouwelijk</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">confidentiel</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">confidential</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">poufny</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">konfidencialus</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">kunfidenzjali</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">εμπιστευτικό</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">fortrolig</skos:prefLabel>
+      <skos:definition xml:lang="en">access status for resources containing undisclosed information, the disclosure of which could cause damage to interested parties, such as public administrations and businesses</skos:definition>
+      <skos:scopeNote xml:lang="en">Confidential resources may contain personal data, but this is not a defining criterion. Information on the presence of personal data should be provided separately. This may refer to personal or professional information, or to information relating to business, commerce or trade.</skos:scopeNote>
+      <dc:identifier>CONFIDENTIAL</dc:identifier>
+      <atold:op-code>CONFIDENTIAL</atold:op-code>
+      <at:op-code>CONFIDENTIAL</at:op-code>
+      <at:start.use>2021-03-17</at:start.use>
+      <at:authority-code>CONFIDENTIAL</at:authority-code>
+      <skos:broader rdf:resource="http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"/>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/access-right/RESTRICTED"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/access-right"/>
+      <skos:prefLabel xml:lang="nb">betinget tilgang</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">restringido</skos:prefLabel>
+      <skos:prefLabel xml:lang="nn">tilgang på visse vilkår</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">taikomi ribojimai</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">eingeschränkt</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">restrito</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">restreint</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">rajoitettu</skos:prefLabel>
+      <skos:prefLabel xml:lang="el">περιορισμένης χρήσης</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">vyhrazeno</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">teoranta</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">beperkt</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">piiratud</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">begrænset</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">с ограничен достъп</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">restricted</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">korlátozott terjesztésű</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">interno</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">begränsad åtkomst</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">ierobežotas pieejamības</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">cu acces restricționat</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">limitato</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">ograničen pristup</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">ristrett</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">vyhradené</skos:prefLabel>
+      <skos:prefLabel xml:lang="no">betinget tilgang</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">zastrzeżony</skos:prefLabel>
+      <skos:definition xml:lang="en">access status for resources that are available only under certain conditions</skos:definition>
+      <skos:scopeNote xml:lang="en">Restricted resources may contain personal data, but this is not a defining criterion. Information on the presence of personal data should be provided separately. This category may include resources that require payment, resources shared under non-disclosure agreements, and resources for which the publisher or owner has not yet decided whether they can be publicly released.</skos:scopeNote>
+      <dc:identifier>RESTRICTED</dc:identifier>
+      <atold:op-code>RESTRICTED</atold:op-code>
+      <at:op-code>RESTRICTED</at:op-code>
+      <at:start.use>2013-01-01</at:start.use>
+      <at:authority-code>RESTRICTED</at:authority-code>
+      <skos:broader rdf:resource="http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"/>
+   </skos:Concept>
+   <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/access-right/SENSITIVE"
+                 at:deprecated="false">
+      <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/access-right"/>
+      <skos:prefLabel xml:lang="el">ευαίσθητο</skos:prefLabel>
+      <skos:prefLabel xml:lang="pt">sensível</skos:prefLabel>
+      <skos:prefLabel xml:lang="de">sensibel</skos:prefLabel>
+      <skos:prefLabel xml:lang="sl">občutljivo</skos:prefLabel>
+      <skos:prefLabel xml:lang="sv">känsligt</skos:prefLabel>
+      <skos:prefLabel xml:lang="mt">sensittiv</skos:prefLabel>
+      <skos:prefLabel xml:lang="ro">sensibil</skos:prefLabel>
+      <skos:prefLabel xml:lang="lv">sensitīvs</skos:prefLabel>
+      <skos:prefLabel xml:lang="pl">sensytywny</skos:prefLabel>
+      <skos:prefLabel xml:lang="lt">neskelbtinas</skos:prefLabel>
+      <skos:prefLabel xml:lang="fi">arkaluonteinen</skos:prefLabel>
+      <skos:prefLabel xml:lang="ga">íogair</skos:prefLabel>
+      <skos:prefLabel xml:lang="da">følsom</skos:prefLabel>
+      <skos:prefLabel xml:lang="et">tundlik</skos:prefLabel>
+      <skos:prefLabel xml:lang="cs">citlivé</skos:prefLabel>
+      <skos:prefLabel xml:lang="en">sensitive</skos:prefLabel>
+      <skos:prefLabel xml:lang="sk">citlivé</skos:prefLabel>
+      <skos:prefLabel xml:lang="bg">чувствителен</skos:prefLabel>
+      <skos:prefLabel xml:lang="hr">osjetljivo</skos:prefLabel>
+      <skos:prefLabel xml:lang="it">sensibile</skos:prefLabel>
+      <skos:prefLabel xml:lang="es">sensible</skos:prefLabel>
+      <skos:prefLabel xml:lang="fr">sensible</skos:prefLabel>
+      <skos:prefLabel xml:lang="nl">gevoelig</skos:prefLabel>
+      <skos:prefLabel xml:lang="hu">érzékeny</skos:prefLabel>
+      <skos:definition xml:lang="en">statut d'accès aux ressources contenant des informations sensibles non classifiées (SNC), c'est-à-dire des informations dont la divulgation non autorisée pourrait porter préjudice à la Commission ou à d'autres parties concernées, telles que des entreprises, des sociétés, la propriété intellectuelle ou des données à caractère personnel, mais qui ne constituent pas des informations classifiées de l'UE</skos:definition>
+      <skos:definition xml:lang="en">access status for resources containing sensitive non-classified (SNC) information, that is, information whose unauthorised disclosure could cause damage to the Commission or other interested parties, such as businesses, companies, intellectual property, or personal data, but which is not EU classified information</skos:definition>
+      <skos:scopeNote xml:lang="en">Sensitive non-classified resources may contain personal data, but this is not a defining criterion. Information on the presence of personal data should be provided separately. This category covers information that requires protection even though it is not subject to formal EU security classification.</skos:scopeNote>
+      <dc:identifier>SENSITIVE</dc:identifier>
+      <atold:op-code>SENSITIVE</atold:op-code>
+      <at:op-code>SENSITIVE</at:op-code>
+      <at:start.use>2020-03-18</at:start.use>
+      <at:authority-code>SENSITIVE</at:authority-code>
+      <skos:broader rdf:resource="http://publications.europa.eu/resource/authority/access-right/NON_PUBLIC"/>
+   </skos:Concept>
+</rdf:RDF>
