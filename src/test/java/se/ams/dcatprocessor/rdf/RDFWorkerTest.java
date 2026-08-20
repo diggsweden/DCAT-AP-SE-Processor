@@ -470,10 +470,7 @@ class RDFWorkerTest {
 				List.of("Erkännandetext 1", "http://www.attributionURL1.com", "Meddelande om upphovsrätt 1", "2021", "http://www.jurisdictionURL1.com", "http://www.reuserGuidelinesURL1.com"));
 				
 		//Add geographic area
-		DataClass spatial = new DataClass();
-		spatial.dcData.put("dcat:centroid", "en¤The geographic center of a resource 1");
-		spatial.dcData.put("dcat:bbox", "sv¤The geographic bounding box of a resource 1");
-		spatial.dcData.put("locn:geometry", "Any resource with the corresponding geometry 1");
+		DataClass spatial = createSpatial();
 		catalog.spatial.add(spatial);
 
 		DataClass agent = new DataClass();
@@ -537,13 +534,8 @@ class RDFWorkerTest {
 		temporal.dcData.put("dcat:endDate", "2022-02-26");
 		dataSet2.temporals.add(temporal);
 
-		//TODO: Add dcat:centroid, dcat:bbox and locn:geometry on the correct format. Find it!! 
 		//Add geographic area
-		DataClass spatial = new DataClass();
-		spatial = new DataClass();
-		spatial.dcData.put("dcat:centroid", "en¤The geographic center of a resource 2");
-		spatial.dcData.put("dcat:bbox", "sv¤The geographic bounding box of a resource 2");
-		spatial.dcData.put("locn:geometry", "Any resource with the corresponding geometry 2");
+		DataClass spatial = createSpatial();
 		dataSet2.spatial.add(spatial);
 
 		fileStorage.dcat_dataset.add(dataSet2);
@@ -873,6 +865,14 @@ class RDFWorkerTest {
 		dataService1.agents.add(agent3);
 		
 		return List.of(fileStorage);
+	}
+
+	private DataClass createSpatial() {
+		DataClass spatial = new DataClass();
+		spatial.dcData.put("dcat:centroid", "POINT(18.07 59.33)");
+		spatial.dcData.put("dcat:bbox", "POLYGON((10.9 55.3, 24.2 55.3, 24.2 69.1, 10.9 69.1, 10.9 55.3))");
+		spatial.dcData.put("locn:geometry", "LINESTRING(18.07 59.33, 17.64 59.86, 16.19 58.59)");
+		return spatial;
 	}
 	
 	private DataClass createOtherAgent(List<String> key, List<String> value) {

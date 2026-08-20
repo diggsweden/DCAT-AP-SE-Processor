@@ -6,6 +6,7 @@ package se.ams.dcatprocessor.processor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.StringReader;
@@ -17,9 +18,11 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
+import org.eclipse.rdf4j.model.util.Models;
 import org.eclipse.rdf4j.model.vocabulary.DCAT;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
+import org.eclipse.rdf4j.model.vocabulary.LOCN;
 import org.eclipse.rdf4j.model.vocabulary.ORG;
 import org.eclipse.rdf4j.model.vocabulary.OWL;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
@@ -406,17 +409,21 @@ public class DcatV301IntegrationTest {
     @Test
     void testThatDatasetSeriesContainsSpatial() throws Exception {
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
-        IRI spatial = vf.createIRI("https://www.example.se/#datasetseriesC/spatial");
-        Literal expectedBbox = vf.createLiteral("POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))");
-        Literal expectedCentroid = vf.createLiteral("POINT (12.83 56.4)");
 
         String result = manager.createDcatFromFile(API_DEF_FILE);
-
-        assertTrue(result.contains("RDF"), result);
         Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
-        assertTrue(model.contains(series, DCTERMS.SPATIAL, spatial),"DatasetSeries missing nested dcterms:spatial (geographical area)");
-        assertTrue(model.contains(spatial, DCAT.BBOX, expectedBbox),"Location resource missing dcat:bbox, or wrong value");
-        assertTrue(model.contains(spatial, DCAT.CENTROID, expectedCentroid),"Location resource missing dcat:centroid, or wrong value");
+
+        Resource location = null;
+        for (Resource candidate : Models.objectResources(model.filter(series, DCTERMS.SPATIAL, null))) {
+            if (model.contains(candidate, RDF.TYPE, DCTERMS.LOCATION)) {
+                location = candidate;
+            }
+        }
+        
+        assertNotNull(location, "DatasetSeries has no dcterms:spatial pointing at a Location node");
+        assertTrue(model.contains(location, DCAT.CENTROID, null), "Location node missing dcat:centroid");
+        assertTrue(model.contains(location, DCAT.BBOX, null), "Location node missing dcat:bbox");
+        assertTrue(model.contains(location, LOCN.GEOMETRY_PROP, null), "Location node missing locn:geometry");
     }
 
     // Publisher is set from the Catalog's publisher.

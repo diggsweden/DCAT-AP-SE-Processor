@@ -16,6 +16,8 @@ import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.Models;
 import org.eclipse.rdf4j.model.vocabulary.DCAT;
+import org.eclipse.rdf4j.model.vocabulary.GEO;
+import org.eclipse.rdf4j.model.vocabulary.LOCN;
 import org.eclipse.rdf4j.model.vocabulary.XSD;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.RDFParseException;
@@ -60,5 +62,41 @@ public class IntegrationTest {
 
         assertEquals("3000", actual.getLabel(), "byteSize value");
         assertEquals(XSD.NON_NEGATIVE_INTEGER, actual.getDatatype(), "byteSize datatype");
+    }
+
+    @Test
+    void testThatCentroidIsWktLiteral() throws RDFParseException, UnsupportedRDFormatException, IOException {
+        String result = manager.createDcatFromFile(API_DEF_FILE);
+        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+
+        Literal centroid = Models.objectLiteral(model.filter(null, DCAT.CENTROID, null))
+                .orElseThrow(() -> new AssertionError("No dcat:centroid in generated RDF"));
+
+        assertEquals("POINT(10.0 51.0)", centroid.getLabel(), "Centroid value");
+        assertEquals(GEO.WKT_LITERAL, centroid.getDatatype(), "Centroid datatype");
+    }
+
+    @Test
+    void testThatBboxIsWktLiteral() throws RDFParseException, UnsupportedRDFormatException, IOException {
+        String result = manager.createDcatFromFile(API_DEF_FILE);
+        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+
+        Literal bbox = Models.objectLiteral(model.filter(null, DCAT.BBOX, null))
+                .orElseThrow(() -> new AssertionError("No dcat:bbox in generated RDF"));
+
+        assertEquals("POLYGON((0 0, 1 0, 1 1, 0 1, 0 0))", bbox.getLabel(), "bbox value");
+        assertEquals(GEO.WKT_LITERAL, bbox.getDatatype(), "bbox datatype");
+    }
+
+    @Test
+    void testThatGeometryIsWktLiteral() throws RDFParseException, UnsupportedRDFormatException, IOException {
+        String result = manager.createDcatFromFile(API_DEF_FILE);
+        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+
+        Literal geometry = Models.objectLiteral(model.filter(null, LOCN.GEOMETRY_PROP, null))
+                .orElseThrow(() -> new AssertionError("No locn:geometry in generated RDF"));
+
+        assertEquals("LINESTRING(10.0 51.0, 11.0 52.0, 12.0 53.0)", geometry.getLabel(), "geometry value");
+        assertEquals(GEO.WKT_LITERAL, geometry.getDatatype(), "geometry datatype");
     }
 }
