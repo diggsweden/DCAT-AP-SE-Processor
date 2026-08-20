@@ -147,6 +147,7 @@ public class SingleInputValidator {
 		inputTypeToRegexMap = new HashMap<InputType, Pattern>();
 		inputTypeToRegexMap.put(InputType.STRING, Pattern.compile(".*"));
 		inputTypeToRegexMap.put(InputType.INTEGER, Pattern.compile("^\\d{1,10}$"));
+		inputTypeToRegexMap.put(InputType.NONNEGATIVEINTEGER, Pattern.compile("^\\d+$"));
 		inputTypeToRegexMap.put(InputType.DECIMAL, Pattern.compile("^[0-9]+([\\.][0-9]+)?$"));
 		inputTypeToRegexMap.put(InputType.DATE, Pattern.compile("[1|2]{1}[0-9]{3}[-]{1}[0-9]{2}[-]{1}[0-9]{2}"));
 		inputTypeToRegexMap.put(InputType.DATETIME, Pattern.compile("[1|2]{1}[0-9]{3}[-]{1}[0-9]{2}[-]{1}[0-9]{2}[T]{1}[0-9]{2}[:]{1}[0-9]{2}[:]{1}[0-9]{2}"));

@@ -16,6 +16,7 @@ public enum InputType {
 	DATETIME("xsd:dateTime"),
 	GYEAR("xsd:gYear"),
 	INTEGER("xsd:integer"),
+	NONNEGATIVEINTEGER("xsd:nonNegativeInteger"),
 	DECIMAL("xsd:decimal"),
 	DURATION("xsd:duration"),
 	ANYURI("xsd:anyURI"),

@@ -129,8 +129,8 @@ class SingleInputValidatorTest {
 		"dcat:temporalResolution,			P5Y2M10D",				// valid duration
 		"dcat:spatialResolutionInMeters,	1.093",					// valid decimal
 		"dcat:spatialResolutionInMeters,	50.0",					// valid decimal
-		"dcat:byteSize,						1093",					// valid integer
-		"dcat:byteSize,						1",						// valid integer
+		"dcat:byteSize,						1093",					// valid nonNegativeInteger
+		"dcat:byteSize,						1",						// valid nonNegativeInteger
 		"dcterms:issued,					2001-10-26",			// valid Date
 		"dcterms:issued,					2002-05-30T09:30:10",	// valid Datetime
 		"dcterms:issued,					1982",					// valid year
@@ -155,7 +155,9 @@ class SingleInputValidatorTest {
 		"foaf:homepage, 					://ams.se", 			// URI wrong format
 		"dcat:temporalResolution, 			5Y2M10D", 				// Duration wrong format
 		"dcat:spatialResolutionInMeters,	',01'",					// invalid decimal
-		"dcat:byteSize,						12345Y",				// invalid integer
+		"dcat:byteSize,						12345Y",				// invalid nonNegativeInteger
+		"dcat:byteSize,						-100",					// invalid nonNegativeInteger
+		"dcat:byteSize,						64.5",					// invalid nonNegativeInteger
 		"vcard:hasValue,			        0771-71u 7178",			// invalid phonenumber format
 		"vcard:hasValue,			        -0711 7178",			// invalid phonenumber format
 		"vcard:hasValue,			        ?46104794000",			// invalid phonenumber format
