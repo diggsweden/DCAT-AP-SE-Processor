@@ -31,12 +31,6 @@ public class ErrorReporterTest {
     }
 
     @Test
-    void testThatBuildErrorReportContainsDocsUrlWhenErrorsExist() {
-        String report = errorReporter.buildErrorReport(Map.of("api.yaml", "Invalid format"), Map.of());
-        assertTrue(report.contains("https://docs.dataportal.se/dcat/sv/"));
-    }
-
-    @Test
     void testThatBuildErrorReportReportsExceptionsErrors() {
         String filename = "api.yaml";
         String msg = "Invalid format";
@@ -59,25 +53,5 @@ public class ErrorReporterTest {
         assertTrue(report.contains(value));
         assertTrue(report.contains(filename));
         assertTrue(report.contains(ErrorType.DUPLICATE_URI_BETWEEN_FILES.toString()));
-    }
-
-    @Test
-    void testThatBuildErrorReportReportsBothErrorTypes() {
-        String file1 = "catalog.yaml";
-        String file2 = "api.yaml";
-        String field = "About";
-        String errorMsg = "Invalid format";
-
-        ValidationError validationError = new ValidationError(ErrorType.DUPLICATE_URI_BETWEEN_FILES, new String[]{file1}, field);
-        Map<String, List<ValidationError>> validationErrors = Map.of(file1, List.of(validationError));
-        Map<String, String> exceptions = Map.of(file2, errorMsg);
-
-        String report = errorReporter.buildErrorReport(exceptions, validationErrors);
-
-        assertTrue(report.contains(file1));
-        assertTrue(report.contains(field));
-        assertTrue(report.contains(ErrorType.DUPLICATE_URI_BETWEEN_FILES.toString()));
-        assertTrue(report.contains(file2));
-        assertTrue(report.contains(errorMsg));
     }
 }

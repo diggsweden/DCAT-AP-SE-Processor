@@ -40,17 +40,26 @@ import java.util.*;
 public class Manager {
 
     private final ObjectProvider<RDFWorker> rdfWorkerProvider;
-    private final ErrorReporter errorReporter; 
+    private final ErrorReporter errorReporter;
+
+    private final ObjectProvider<ConverterFiles> converterFilesProvider;
+    private final ObjectProvider<ConverterCatalog> converterCatalogProvider;
 
     private static final Logger logger = LoggerFactory.getLogger(Manager.class);
     
     Catalog catalog = new Catalog();
     List<FileStorage> fileStorages = new ArrayList<>();
 
-    
-    public Manager(ObjectProvider<RDFWorker> rdfWorkerProvider, ErrorReporter errorReporter){
+    public Manager(
+        ObjectProvider<RDFWorker> rdfWorkerProvider,
+        ErrorReporter errorReporter,
+        ObjectProvider<ConverterFiles> converterFilesProvider,
+        ObjectProvider<ConverterCatalog> converterCatalogProvider
+    ) {
         this.rdfWorkerProvider = rdfWorkerProvider;
         this.errorReporter = errorReporter;
+        this.converterFilesProvider = converterFilesProvider;
+        this.converterCatalogProvider = converterCatalogProvider;
     }
 
     public String createDcatFromDirectory(String dir) throws Exception {
@@ -174,10 +183,16 @@ public class Manager {
                 result = rdfWorker.createDcatFile(catalog, fileStorages);
             }
         } catch (DcatException e) {
-            if (e.getValidationResults().isEmpty()) {
+            // holds validation errors
+            validationErrorsPerFileMap = e.getValidationResults();
+
+            // system exceptions
+            if(validationErrorsPerFileMap == null){
+                exceptions.put("Error", e.getMessage());
+            }
+            // RDFWorker exceptions
+            else if (e.getValidationResults().isEmpty()) {
                 exceptions.put("RDFWorker", e.fillInStackTrace().getMessage());
-            } else {
-                validationErrorsPerFileMap = e.getValidationResults();
             }
         }
 
@@ -185,9 +200,8 @@ public class Manager {
 
         // If any errors, return report
         if(!errorReport.isEmpty()){
-            result = "There are Errors in the following files: \n" + errorReport;
-            logger.error(result);
-            return result;
+            logger.error(errorReport);
+            return errorReport;
         }
 
         if (result.contains("RDF")) {
@@ -197,9 +211,9 @@ public class Manager {
     }
 
     private void addCatalog(JSONObject json, String fileName, Map<String, String> exceptions) {
-        ConverterCatalog catalogConverter = new ConverterCatalog();
         try {
-            catalog = (Catalog) catalogConverter.catalogToDcat(json);
+            ConverterCatalog converterCatalog = converterCatalogProvider.getObject();
+            catalog = (Catalog) converterCatalog.catalogToDcat(json);
             catalog.fileName = fileName;
         } catch (Exception e) {
             exceptions.put(fileName, e.fillInStackTrace().getMessage());
@@ -208,8 +222,8 @@ public class Manager {
 
     private void addFileStorage(JSONObject json, String fileName, Map<String, String> exceptions) {
         try {
-            ConverterFiles filesConverter = new ConverterFiles();
-            FileStorage fileStorage = (FileStorage) filesConverter.fileToDcat(json);
+            ConverterFiles converterFiles = converterFilesProvider.getObject();
+            FileStorage fileStorage = (FileStorage) converterFiles.fileToDcat(json);
             fileStorage.fileName = fileName;
             fileStorages.add(fileStorage);
         } catch (Exception e) {

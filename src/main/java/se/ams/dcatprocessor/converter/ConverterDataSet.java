@@ -6,12 +6,16 @@ package se.ams.dcatprocessor.converter;
 
 import org.eclipse.rdf4j.model.vocabulary.*;
 import org.json.JSONObject;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import se.ams.dcatprocessor.models.*;
 import se.ams.dcatprocessor.rdf.namespace.SCHEMA;
 
 import java.util.Optional;
 
-
+@Component
+@Scope("prototype")
 public class ConverterDataSet extends Converter {
 
     /* Process the spec to find elements for dcat-ap-se and add them to an Object to return */

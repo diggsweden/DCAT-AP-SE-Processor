@@ -7,16 +7,19 @@ package se.ams.dcatprocessor.converter;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.eclipse.rdf4j.model.vocabulary.*;
 import org.json.JSONObject;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import se.ams.dcatprocessor.models.*;
 
 import java.io.IOException;
 import java.util.*;
 
-
+@Component
+@Scope("prototype")
 public class ConverterCatalog extends Converter {
 
     /* Takes one specFile for a Catalog and creates a Catalog Object */
-    @Override
     public DataClass catalogToDcat(JSONObject apiSpec) throws Exception {
         setConvertAndMandatoryFile(ConverterHelpClass.uriToDcatCatalog);
         processToDcat(orgConvert, apiSpec, Optional.empty(), Optional.empty(), Optional.empty());
@@ -133,10 +136,10 @@ public class ConverterCatalog extends Converter {
             jsonSupportiveDcat = getSupportiveFile(key, subCat.get());
 
         String[] splitValue = value.split(";");
+
         for (String s : splitValue) {
-            String mapValue = s;
+            String mapValue = s.trim();
             if (jsonSupportiveDcat != null) {
-                mapValue = mapValue.trim();
                 if (jsonSupportiveDcat.has(mapValue)) {
                     mapValue = (String) ((JSONObject) (jsonSupportiveDcat.get(mapValue))).get("url");
                 } else if (!mapValue.contains("http://") && !key.contains("format")) {
@@ -144,7 +147,6 @@ public class ConverterCatalog extends Converter {
                 }
             }
             if (ConverterHelpClass.tagWithUri.contains(key)) {
-                mapValue = mapValue.trim();
                 if (!(mapValue.contains("http"))) {
                     mapValue = "http://" + mapValue;
                 }
@@ -153,7 +155,6 @@ public class ConverterCatalog extends Converter {
                 key = "dcterms:" + key;
             }
             if (ConverterHelpClass.tagWithUriMail.contains(key)) {
-                mapValue = mapValue.trim();
                 mapValue = "mailTo:" + mapValue;
             }
             valueMap.put(key, mapValue);

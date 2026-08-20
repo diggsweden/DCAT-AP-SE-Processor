@@ -43,9 +43,9 @@ public class CardinalityValidator {
 	 * Compares the inputvalues with the DCAT-AP-SE Specification and throws exception if
 	 * values are not included in the specification or if any value occurs more frequently than allowed
 	 * in the specification
-	 * @param dcatClass //TODO describe
+	 * @param dcatClass - The DCAT class to validate against (e.g., Dataset, Catalog, Distribution).
 	 * @param values - The input values to check
-	 * @param checkedElsewhere //TODO describe
+	 * @param checkedElsewhere - A list of property URIs (e.g., "dcterms:publisher") that have already been validated
 	 * @throws DcatException - Is thrown if there is a disconformity
 	 */
 	public boolean validate(DcatClass dcatClass, MultiValuedMap<String, String> values, List<String> checkedElsewhere) {

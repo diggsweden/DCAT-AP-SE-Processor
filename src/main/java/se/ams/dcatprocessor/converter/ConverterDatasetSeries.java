@@ -6,11 +6,15 @@ package se.ams.dcatprocessor.converter;
 
 import org.eclipse.rdf4j.model.vocabulary.*;
 import org.json.JSONObject;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import se.ams.dcatprocessor.models.*;
 
 import java.util.Optional;
 
+@Component
+@Scope("prototype")
 public class ConverterDatasetSeries extends Converter {
 
     @Override

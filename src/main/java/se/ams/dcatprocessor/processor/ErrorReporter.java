@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
-
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 
 @Component
@@ -17,33 +16,37 @@ public class ErrorReporter {
     private static final String DOCS_URL = "https://docs.dataportal.se/dcat/sv/";
 
     public String buildErrorReport(Map<String, String> exceptions, Map<String, List<ValidationError>> validationErrors) {
-        StringBuilder errors = new StringBuilder();
         StringBuilder report = new StringBuilder();
 
-        // Errors from ApiDefinitionParser or Converters
+        // Errors from ApiDefinitionParser, Converters or general errors
         if (!exceptions.isEmpty()) {
-            errors.append("\n");
-            exceptions.forEach((key, value) -> errors.append(key).append(":\n").append(value).append("\n\n"));
+            report.append("ERROR - Failed to process API specification\n");
+            report.append("-------------------------------------------\n");
+            report.append("\n");
+
+            exceptions.forEach((key, value) -> {
+                report.append(key).append(":\n").append(value).append("\n\n");  
+            });
         }
 
         // Errors from RDFWorker
-        if (!validationErrors.isEmpty()) {
-            errors.append("\n");
+        else if (!validationErrors.isEmpty()) {
+            report.append("There are Errors in the following files:\n");
+            report.append("Check DCAT-AP-SE specification for info\n");
+            report.append(DOCS_URL + "\n");
+            report.append("---------------------------------------\n");
+
+            report.append("\n");
             validationErrors.forEach((key, value) -> {
-                errors.append(key).append(":\n");
+                report.append(key).append(":\n");
                 for (ValidationError error : value) {
-                    errors.append("Errortype: ").append(error.getErrorType())
-                          .append(" Description: ").append(error.getDescription()).append("\n");
+                    report.append("Errortype: ").append(error.getErrorType());
+                    report.append(" Description: ").append(error.getDescription() + "\n");
                 }
-                errors.append("\n");
+                report.append("\n");
             });
         }
-        
-        if(!errors.isEmpty()){
-            report.append("Check DCAT-AP-SE specification for info. " + DOCS_URL + "\n---------------------------------\n");
-            report.append(errors);
-        }
-        
+   
         return report.toString();
     }
 }

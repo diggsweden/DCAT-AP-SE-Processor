@@ -36,13 +36,13 @@ public class ApiDefinitionParser {
         JSONObject jsonObjectFile;
         try {
             jsonObjectFile = new JSONObject(apiJsonString);
+            
+            if (jsonObjectFile.has("info")) {
+                jsonObjectFile = jsonObjectFile.getJSONObject("info");
+                jsonObjectFile = jsonObjectFile.getJSONObject("x-dcat");
+            }
         } catch (JSONException e) {
             throw new DcatException("Failed to parse JSON: " + e.getMessage());
-        }
-
-        if (jsonObjectFile.has("info")) {
-            jsonObjectFile = jsonObjectFile.getJSONObject("info");
-            jsonObjectFile = jsonObjectFile.getJSONObject("x-dcat");
         }
         return jsonObjectFile;
     }

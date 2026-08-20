@@ -165,8 +165,8 @@ public class DcatV301IntegrationTest {
 
     @ParameterizedTest
     @CsvSource({
-        "subject,                   http://purl.org/dc/terms/,      http://eurovoc.europa.eu/100142",
-        "subject,                   http://purl.org/dc/terms/,      http://eurovoc.europa.eu/5237",
+        "subject,                   http://purl.org/dc/terms/,      https://dataportal.se/concepts/grunddata/person",
+        "subject,                   http://purl.org/dc/terms/,      https://dataportal.se/concepts/grunddata/foretag",
         "hvdCategory,               http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_a9135398",
         "hvdCategory,               http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_dd313021",
         "applicableLegislation,     http://data.europa.eu/r5r#,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
@@ -210,8 +210,7 @@ public class DcatV301IntegrationTest {
 
     @ParameterizedTest
     @CsvSource({
-        "subject,                   http://purl.org/dc/terms/,      http://eurovoc.europa.eu/100142",
-        "subject,                   http://purl.org/dc/terms/,      http://eurovoc.europa.eu/1082",
+        "subject,                   http://purl.org/dc/terms/,      https://dataportal.se/concepts/grunddata/person",
         "hvdCategory,               http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_a9135398",
         "applicableLegislation,     http://data.europa.eu/r5r#,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
     })
@@ -296,9 +295,8 @@ public class DcatV301IntegrationTest {
         "hvdCategory,           http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_a9135398",
         "hvdCategory,           http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_dd313021",
         "applicableLegislation, http://data.europa.eu/r5r#,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
-        "spatial,               http://purl.org/dc/terms/,      https://www.geonames.org/6695072/european-union.html",
-        "subject,               http://purl.org/dc/terms/,      http://eurovoc.europa.eu/100142",
-        "subject,               http://purl.org/dc/terms/,      http://eurovoc.europa.eu/5237",
+        "spatial,               http://purl.org/dc/terms/,      http://sws.geonames.org/6695072",
+        "subject,               http://purl.org/dc/terms/,      https://dataportal.se/concepts/grunddata/foretag",
         "relation,              http://purl.org/dc/terms/,      https://www.example.se/relaterad-resurs",
         "accrualPeriodicity,    http://purl.org/dc/terms/,      http://publications.europa.eu/resource/authority/frequency/ANNUAL",
     })
@@ -409,8 +407,8 @@ public class DcatV301IntegrationTest {
     void testThatDatasetSeriesContainsSpatial() throws Exception {
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
         IRI spatial = vf.createIRI("https://www.example.se/#datasetseriesC/spatial");
-        Literal expectedBbox = vf.createLiteral("POLYGON((0 0, 1 0, 1 1, 0 1, 0 0))");
-        Literal expectedCentroid = vf.createLiteral("POINT(10.0 51.0)");
+        Literal expectedBbox = vf.createLiteral("POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))");
+        Literal expectedCentroid = vf.createLiteral("POINT (12.83 56.4)");
 
         String result = manager.createDcatFromFile(API_DEF_FILE);
 

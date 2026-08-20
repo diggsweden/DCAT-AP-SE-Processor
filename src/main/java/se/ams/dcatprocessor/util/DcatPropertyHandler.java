@@ -11,6 +11,7 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 import se.ams.dcatprocessor.ApplicationProperties;
+import se.ams.dcatprocessor.rdf.DcatException;
 
 public class DcatPropertyHandler {
 	
@@ -93,11 +94,10 @@ public class DcatPropertyHandler {
 				typeValues.put(key, valueSplit[1].split(COMMA));
 	
 			}
-			
+	
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new DcatException("Failed to load DCAT properties: " + e.getMessage());
 		}
-		
 	}
 	
 	public String[] getPropertyKeys() {
