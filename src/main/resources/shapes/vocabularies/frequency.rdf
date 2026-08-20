@@ -1,0 +1,234 @@
+
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:ns5="http://publications.europa.eu/ontology/euvoc#"
+	xmlns:ns6="http://www.w3.org/2008/05/skos-xl#"
+	xmlns:ns7="http://publications.europa.eu/ontology/authority/" >
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/OTHER">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/10MIN">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/12HRS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/15MIN">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/1MIN">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/30MIN">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/5MIN">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/ANNUAL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/ANNUAL_2">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/ANNUAL_3">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/AS_NEEDED">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/BIDECENNIAL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/BIENNIAL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/BIHOURLY">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/BIMONTHLY">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/BIWEEKLY">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/CONT">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/DAILY">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/DAILY_2">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/DECENNIAL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/HOURLY">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/IRREG">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/MONTHLY">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/MONTHLY_2">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/MONTHLY_3">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/NEVER">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/NOT_PLANNED">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/OP_DATPRO">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/QUADRENNIAL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/QUARTERLY">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/QUINQUENNIAL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/SEXENNIAL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/TRIDECENNIAL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/TRIENNIAL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/TRIHOURLY">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/UNKNOWN">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/WEEKLY_2">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/WEEKLY_3">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/WEEKLY_5">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology" />
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme" />
+    <owl:imports rdf:resource="http://publications.europa.eu/ontology/euvoc" />
+    <rdfs:comment rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">Frequency</rdfs:comment>
+    <owl:versionInfo>20260617-0</owl:versionInfo>
+    <skos:prefLabel xml:lang="en">Frequency</skos:prefLabel>
+    <rdfs:label xml:lang="en">Frequency</rdfs:label>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2009-03-31</dcterms:created>
+    <owl:versionIRI rdf:resource="http://publications.europa.eu/resource/authority/frequency/20260617-0" />
+    <ns5:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2009-03-31</ns5:startDate>
+    <ns6:prefLabel rdf:resource="http://publications.europa.eu/resource/authority/frequency/d4e12775" />
+    <dcterms:identifier>http://publications.europa.eu/resource/authority/frequency</dcterms:identifier>
+    <dcterms:title xml:lang="en">Frequency</dcterms:title>
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/10MIN" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/5MIN" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/30MIN" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/1MIN" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/WEEKLY_3" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/WEEKLY_5" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/TRIHOURLY" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/UNKNOWN" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/WEEKLY_2" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/QUINQUENNIAL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/SEXENNIAL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/TRIDECENNIAL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/TRIENNIAL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/NOT_PLANNED" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/OP_DATPRO" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/QUADRENNIAL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/QUARTERLY" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/OTHER" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/15MIN" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/MONTHLY" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/MONTHLY_2" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/MONTHLY_3" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/NEVER" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/DAILY_2" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/DECENNIAL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/WEEKLY" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/HOURLY" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/IRREG" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/BIMONTHLY" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/BIWEEKLY" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/CONT" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/DAILY" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/AS_NEEDED" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/BIDECENNIAL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/BIENNIAL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/BIHOURLY" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/ANNUAL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/ANNUAL_2" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/ANNUAL_3" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/frequency/12HRS" />
+    <ns7:prefLabel xml:lang="en">Frequency</ns7:prefLabel>
+    <ns7:table.id>frequency</ns7:table.id>
+    <ns7:table.version.number>20260617-0</ns7:table.version.number>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/frequency/WEEKLY">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/frequency" />
+  </rdf:Description>
+</rdf:RDF>

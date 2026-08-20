@@ -1,0 +1,1163 @@
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:ns5="http://publications.europa.eu/ontology/euvoc#"
+	xmlns:ns6="http://www.w3.org/2008/05/skos-xl#"
+	xmlns:ns7="http://publications.europa.eu/ontology/authority/" >
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SKOS_XML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XLSX">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/7Z">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/AAB">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/AAC">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/AKN4EU">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/AKN4EU_LEG">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/APK">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/APPX">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ARC">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ARCINFO_COV">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ARC_GZ">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ARFF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ARJ">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ARROW_FILE">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ARROW_STREAM">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ATOM">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/AZW">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/BIN">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/BITS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/BMP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/BWF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/BZIP2">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/CSS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/CSV">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DAPK">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DBF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DCR">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DEB">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DGN">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DMG">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DMP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DOC">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DOCX">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DTD_SGML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DTD_XML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DWCA">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DWG">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DXF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/E00">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/EAR">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ECW">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/EFORMS_XML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/EPS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/EPUB">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ETSI_TSL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ETSI_XML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/EXE">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/FMX2">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/FMX3">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/FMX4">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/FMX4_ZIP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GDB">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GEOJSON">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GEOTIFF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GIF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GMZ">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GPKG">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GPX">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GRID">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GRID_ASCII">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GTFS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GZIP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/HDF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/HDT">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/HTML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/HTML5">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/HTML_SIMPL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ICS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/IMMC_XML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/INDD">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/IPA">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ISO">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ISO_ZIP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/JAR">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/JATS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/JPEG">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/JPEG2000">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/JS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/JSON">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/JSON_LD">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/KML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/KMZ">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/LAS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/LAZ">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/LEG">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/LEGALHTML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/LHA">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/LPK">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/LZIP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/LZMA">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/LZO">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MAP_PRVW">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MAP_SRVC">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MARKDOWN">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MATHML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MATLAB_MAT">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MBOX">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MDB">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/METS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/METS_ZIP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MHTML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MIF_MID">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MOBI">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MOP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MOV">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MP3">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MPEG2">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MPEG4">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MPEG4_AVC">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MRSID">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MSG_HTTP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MSI">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/MXD">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/N3">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/NETCDF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/OAPK">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/OCTET">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ODB">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ODC">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ODF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ODG">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ODP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ODS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ODT">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/OP_DATPRO">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/OVF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/OWL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PARQUET">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDF1X">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDFA1A">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDFA1B">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDFA2A">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDFA2B">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDFA3">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDFA3A">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDFA3B">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDFA3U">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDFUA">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDFX">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDFX1A">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDFX2A">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PDFX4">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PNG">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PPS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PPSX">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PPT">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PPTX">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PSD">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PWP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/QGS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RAR">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDATA">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDFA">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_N_QUADS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_N_TRIPLES">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_THRIFT">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_TRIG">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_TRIX">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_XML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/REST">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RPM">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RSS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RTF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SAS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SB3">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SCH">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SCHEMA_XML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SDMX">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SGML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SHP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SPARQLQ">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SPARQLQRES">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SPSS_SAV">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SQL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/STATA_DTA">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/STL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SVG">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/SWM">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TAB">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TAB_RSTR">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TAR">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TAR_GZ">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TAR_XZ">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/THRIFT_BINARY">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/THRIFT_COMPACT">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/THRIFT_JSON">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TIFF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TIFF_FX">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TMX">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TSV">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TXT">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/UNGEN">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/VCF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/WAR">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/WARC">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/WARC_GZ">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/WAV">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/WCS_SRVC">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/WEBP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/WFS_SRVC">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/WIM">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/WMS_SRVC">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/WMTS_SRVC">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/WORLD">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XHTML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XHTML5">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XHTML_SIMPL">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XLIFF">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XLS">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XLSB">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XLSM">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XSLFO">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XSLT">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XYZ">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XZ">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/YAML">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/Z">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology" />
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme" />
+    <owl:imports rdf:resource="http://publications.europa.eu/ontology/euvoc" />
+    <rdfs:comment rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">File type</rdfs:comment>
+    <owl:versionInfo>20260318-0</owl:versionInfo>
+    <skos:prefLabel xml:lang="en">File type</skos:prefLabel>
+    <rdfs:label xml:lang="en">File type</rdfs:label>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2012-11-22</dcterms:created>
+    <owl:versionIRI rdf:resource="http://publications.europa.eu/resource/authority/file-type/20260318-0" />
+    <ns5:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2012-11-22</ns5:startDate>
+    <ns6:prefLabel rdf:resource="http://publications.europa.eu/resource/authority/file-type/d4e12802" />
+    <dcterms:identifier>http://publications.europa.eu/resource/authority/file-type</dcterms:identifier>
+    <dcterms:title xml:lang="en">File type</dcterms:title>
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SKOS_XML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/VCF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/WAR" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/WARC" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/WARC_GZ" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/WAV" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/WCS_SRVC" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/WEBP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/WFS_SRVC" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/WIM" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/WMS_SRVC" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/WMTS_SRVC" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/WORLD" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/XHTML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/XHTML5" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/XHTML_SIMPL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLIFF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSB" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSM" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/XSLFO" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/XSLT" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/XYZ" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/XZ" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/YAML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/Z" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFA2A" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFA2B" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFA3" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFA3A" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFA3B" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFA3U" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFUA" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFX" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFX1A" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFX2A" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFX4" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PNG" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PPS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PPSX" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PPT" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PPTX" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PSD" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RDF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PWP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/QGS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RAR" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RDATA" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RDFA" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RDF_N_QUADS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RDF_N_TRIPLES" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RDF_THRIFT" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RDF_TRIG" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RDF_TRIX" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RDF_XML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/REST" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RPM" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RSS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/RTF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SAS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SB3" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SCH" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SCHEMA_XML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SDMX" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SGML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SHP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SPARQLQ" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SPARQLQRES" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SPSS_SAV" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SQL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/STATA_DTA" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/STL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SVG" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/SWM" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/TAB" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/TAB_RSTR" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/TAR" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/TAR_GZ" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/TAR_XZ" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/THRIFT_BINARY" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/THRIFT_COMPACT" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/THRIFT_JSON" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/TIFF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/TIFF_FX" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/TMX" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/TSV" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/TXT" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/UNGEN" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ICS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/IMMC_XML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/INDD" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/IPA" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ISO" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ISO_ZIP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/JAR" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/JATS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/JPEG" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/JPEG2000" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/JS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/JSON" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/JSON_LD" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/KML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/KMZ" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/LAS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ZIP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/LAZ" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/LEG" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/LEGALHTML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/LHA" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/LPK" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/LZIP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/LZMA" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/LZO" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MAP_PRVW" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MAP_SRVC" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MARKDOWN" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MATHML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MATLAB_MAT" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MBOX" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MDB" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/METS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/METS_ZIP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MHTML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MIF_MID" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MOBI" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MOP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MOV" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MP3" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MPEG2" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MPEG4" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MPEG4_AVC" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MRSID" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/7Z" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MSG_HTTP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MSI" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/MXD" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/N3" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/NETCDF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/OAPK" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/OCTET" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ODB" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ODC" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ODF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ODG" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ODP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ODS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ODT" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/OP_DATPRO" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/OVF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/OWL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PARQUET" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDF1X" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFA1A" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/PDFA1B" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/AKN4EU_LEG" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/AKN4EU_ZIP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/APK" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/APPX" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ARC" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ARCINFO_COV" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ARC_GZ" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ARFF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ARJ" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ARROW_FILE" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ARROW_STREAM" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ATOM" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/AZW" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/BIN" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/BITS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/BMP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/BWF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/BZIP2" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/CSV" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DAPK" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DBF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DCR" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DEB" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DGN" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DMG" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DMP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DOC" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DOCX" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DTD_SGML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DTD_XML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DWCA" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DWG" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/DXF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/E00" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/EAR" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ECW" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/EFORMS_XML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/EPS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/EPUB" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ETSI_TSL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/ETSI_XML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/EXE" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/FMX2" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/FMX3" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/FMX4" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/FMX4_ZIP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/GDB" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/GEOJSON" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/GEOTIFF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/GIF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/GML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/GMZ" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/GPKG" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/GPX" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/GRID" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/GRID_ASCII" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/GTFS" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/GZIP" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/HDF" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/HDT" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/HTML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/HTML5" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/HTML_SIMPL" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/XML" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/AAB" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/AAC" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/AKN4EU" />
+    <skos:hasTopConcept rdf:resource="http://publications.europa.eu/resource/authority/file-type/XLSX" />
+    <ns7:prefLabel xml:lang="en">File type</ns7:prefLabel>
+    <ns7:table.id>file-type</ns7:table.id>
+    <ns7:table.version.number>20260318-0</ns7:table.version.number>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ZIP">
+    <skos:inScheme rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+    <skos:topConceptOf rdf:resource="http://publications.europa.eu/resource/authority/file-type" />
+  </rdf:Description>
+</rdf:RDF>
