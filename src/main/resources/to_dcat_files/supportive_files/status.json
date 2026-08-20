@@ -1,26 +1,18 @@
 {
     "Deprecated": {
-        "title" : "Avvecklad",
-        "url": "http://purl.org/adms/status/Deprecated"
+        "title": "Avvecklad",
+        "url": "http://publications.europa.eu/resource/authority/distribution-status/DEPRECATED"
     },
     "Completed": {
-        "title" : "Färdig",
-        "url": "http://purl.org/adms/status/Completed"
+        "title": "Färdig",
+        "url": "http://publications.europa.eu/resource/authority/distribution-status/COMPLETED"
     },
     "Withdrawn": {
-        "title" : "Tillbakadragen",
-        "url": "http://purl.org/adms/status/Withdrawn"
+        "title": "Tillbakadragen",
+        "url": "http://publications.europa.eu/resource/authority/distribution-status/WITHDRAWN"
     },
     "UnderDevelopment": {
-        "title" : "Under utveckling",
-        "url": "http://purl.org/adms/status/UnderDevelopment"
+        "title": "Under utveckling",
+        "url": "http://publications.europa.eu/resource/authority/distribution-status/DEVELOP"
     }
 }
-
-
-
-
-
-
-
-
