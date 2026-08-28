@@ -44,7 +44,8 @@ public class ConverterHelpClass {
         supportiveFile.put("creator-dcterms:type", "type.json");
         supportiveFile.put("Attribution-dcterms:type", "type.json");
         supportiveFile.put("DataService-dcterms:type", "arcitectureStyle.json");
-        supportiveFile.put("dcat:hadRole", "userRole.json");
+        supportiveFile.put("Attribution-dcat:hadRole", "userRole.json");
+        supportiveFile.put("qualifiedRelation-dcat:hadRole", "resourceRole.json");
         supportiveFile.put("adms:status", "status.json");
         supportiveFile.put("dcterms:accrualPeriodicity", "accrualPeriodicity.json");
     }
