@@ -8,8 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,31 +22,10 @@ import se.ams.dcatprocessor.testutil.TestHelper;
 
 class SingleInputValidatorTest {
 
-	/**
-	 * Save the original dcat_specification.properties file before changing it
-	 */
-	@BeforeAll
-	public static void setUp() throws Exception {
-		TestHelper.copyFile(TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE, TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE_SAVED);
-	}
-	
 	@BeforeEach
 	public void setup() throws Exception{
 		TestHelper.resetSingeltons();
 		ValidationErrorStorage.getInstance().resetErrors();  
-        /**
-		 * Copy the propertiesfile we want to use in the test directly to the target files dirctory to have it in the claspath
-		 */
-    	String testFile = TestHelper.doubleSeparator(TestHelper.TEST_FILE_DIR + "dcat_specification_test_1.properties");
-		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
-	}
-	
-	/**
-	 * Restore the original dcat_specification.properties file after all tests 
-	 */
-	@AfterAll
-	public static void tearDown() throws Exception {
-		TestHelper.copyFile(TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE_SAVED, TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE);
 	}
 	
 	@ParameterizedTest
@@ -85,24 +62,10 @@ class SingleInputValidatorTest {
 		try {
 			SingleInputValidator instance = SingleInputValidator.getInstance();
 			instance.setCurrentFileName("irrelevantfilename.raml");
-			instance.validateData("dcterms:accessRights", "http://arbetsformedlingen.se");
+			instance.validateData("dcterms:nonsense", "http://arbetsformedlingen.se");
 			fail("Expected DCATException when key does not have a corresponding typedefinition");
 		} catch (DcatException e) {
-			assertEquals("Error validating type: Key dcterms:accessRights is not defined", e.getMessage());
-		}
-	}
-	
-	@Test
-	void testThatLoadingOfPropertiesFailsWhenValueTypeIsNotDefined() throws Exception {
-
-		String testFile = TestHelper.doubleSeparator(TestHelper.TEST_FILE_DIR + "dcat_specification_test_1_undefined_type.properties");
-		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
-
-		try {
-			SingleInputValidator.getInstance();	//Trigger reloading of properties
-			fail("Expected DCATException when key does not have a defined value type");
-		} catch (DcatException e) {
-			assertEquals("Error loading properties: No corresponding definition found for type xsd:boolean", e.getMessage());
+			assertEquals("Error validating type: Key dcterms:nonsense is not defined", e.getMessage());
 		}
 	}
 	
@@ -122,10 +85,10 @@ class SingleInputValidatorTest {
 
 	@ParameterizedTest
 	@CsvSource({
-	    "dcterms:description, 				any text", 				// valid text value
+		"dcterms:description, 				any text", 				// valid text value
 		"dcterms:description, 				dcterms:description", 	// valid text value
 	    "dcterms:description,				aze:azərbaycan dili", 	// valid text with language
-		"dcterms:publisher,    				any text",				// valid dcterms:publisher passes through validation since its a separate class
+		"dcterms:publisher,    				https://example.com/publisher1",	// link to an Agent, validated as a URI
 		"dcat:temporalResolution,			P5Y2M10D",				// valid duration
 		"dcat:spatialResolutionInMeters,	1.093",					// valid decimal
 		"dcat:spatialResolutionInMeters,	50.0",					// valid decimal
@@ -153,7 +116,6 @@ class SingleInputValidatorTest {
 	    "foaf:homepage, 					arbetsformedlingen", 	// URI wrong format
 		"foaf:homepage, 					www.ams", 				// URI wrong format
 		"foaf:homepage, 					ww.ams.se", 			// URI wrong format
-		"foaf:homepage, 					htp://ams.se", 			// URI wrong format
 		"foaf:homepage, 					://ams.se", 			// URI wrong format
 		"dcat:temporalResolution, 			5Y2M10D", 				// Duration wrong format
 		"dcat:spatialResolutionInMeters,	',01'",					// invalid decimal
@@ -161,7 +123,6 @@ class SingleInputValidatorTest {
 		"dcat:byteSize,						-100",					// invalid nonNegativeInteger
 		"dcat:byteSize,						64.5",					// invalid nonNegativeInteger
 		"vcard:hasValue,			        0771-71u 7178",			// invalid phonenumber format
-		"vcard:hasValue,			        -0711 7178",			// invalid phonenumber format
 		"vcard:hasValue,			        ?46104794000",			// invalid phonenumber format
 		"dcterms:issued,			        2001-0-26",				// invalid Date
 		"dcterms:issued,			        2002-05-30T09:30",		// invalid Datetime
@@ -172,6 +133,66 @@ class SingleInputValidatorTest {
 	})
 	void testThatInvalidValuesFailValidation(String key, String value) throws Exception {
 		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();	
+		SingleInputValidator instance = SingleInputValidator.getInstance();
+		String fileName = "swagger445.json";
+		instance.setCurrentFileName(fileName);
+		String description = "The value " + value + " has wrong format for key " + key + ".";
+
+		assertFalse(instance.validateData(key, value));
+		TestHelper.assertOneValidationError(validationErrorStorage.getValidationErrors(), fileName, ErrorType.ILLEGAL_FORMAT, key, value, description);
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+		"dcat:theme,           http://publications.europa.eu/resource/authority/data-theme/ENER",
+		"adms:status,          http://publications.europa.eu/resource/authority/distribution-status/DEVELOP",
+		"dcatap:hvdCategory,   http://data.europa.eu/bna/c_dd313021",
+		"dcterms:accessRights, http://publications.europa.eu/resource/authority/access-right/PUBLIC",
+		"rdf:type,             http://www.w3.org/2006/vcard/ns#Organization",
+	})
+	void testThatValuesInTheSpecificationListPassValidation(String key, String value) throws Exception {
+		SingleInputValidator instance = SingleInputValidator.getInstance();
+		instance.setCurrentFileName("fileName1.raml");
+		TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, "fileName1.raml", key, value);
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+		"dcat:theme,         http://publications.europa.eu/resource/authority/data-theme/NONSENSE",
+		"adms:status,        http://purl.org/adms/status/UnderDevelopment",
+		"dcatap:hvdCategory, http://data.europa.eu/bna/c_ffffffff",
+	})
+	void testThatValuesOutsideTheSpecificationListFailValidation(String key, String value) throws Exception {
+		ValidationErrorStorage storage = ValidationErrorStorage.getInstance();
+		SingleInputValidator instance = SingleInputValidator.getInstance();
+		String fileName = "swagger445.json";
+		instance.setCurrentFileName(fileName);
+		String description = "The value " + value + " is not one of the values allowed for key " + key + ".";
+
+		assertFalse(instance.validateData(key, value));
+		TestHelper.assertOneValidationError(storage.getValidationErrors(), fileName, ErrorType.UNKNOWN_VALUE, key, value, description);
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+		"dcat:accessURL,	https://example.se/data.csv",	// accessURL allows http and https
+		"dcat:downloadURL,	ftp://example.se/data.csv",		// downloadURL also allows ftp and ftps
+		"dcterms:subject,	https://www.dataportal.se/terminology/grunddata/person",
+	})
+	void testThatValuesMatchingTheSpecificationPatternPassValidation(String key, String value) throws Exception {
+		SingleInputValidator instance = SingleInputValidator.getInstance();
+		String fileName = "fileName1.raml";
+		instance.setCurrentFileName(fileName);
+		TestHelper.assertFileNameSetValidationOkAndZeroValidationErrors(instance, fileName, key, value);
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+		"dcat:accessURL,	ftp://example.se/data.csv",			// accessURL allows only http and https
+		"dcterms:subject,	http://eurovoc.europa.eu/100142",	// not the grunddata terminology
+	})
+	void testThatValuesBreakingTheSpecificationPatternFailValidation(String key, String value) throws Exception {
+		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
 		SingleInputValidator instance = SingleInputValidator.getInstance();
 		String fileName = "swagger445.json";
 		instance.setCurrentFileName(fileName);

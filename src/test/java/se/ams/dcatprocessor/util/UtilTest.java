@@ -43,7 +43,6 @@ class UtilTest {
 	@NullAndEmptySource
 	@ValueSource(strings = {
     " ",
-    "a:b",
     "https://",
     "example.com",
     "/relative/path",

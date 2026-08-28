@@ -401,7 +401,7 @@ class RDFWorkerTest {
 			List<ValidationError> validationErrors3 = validationErrorsMap.get(iter.next());
 
 			assertEquals(1, validationErrors1.size());
-			assertEquals(2, validationErrors2.size());
+			assertEquals(3, validationErrors2.size());
 			assertEquals(1, validationErrors3.size());
 
 			String fileName1 = testFileStorageList1.get(0).fileName;
@@ -409,14 +409,18 @@ class RDFWorkerTest {
 			String fileName1_2 = testFileStorageList1.get(0).fileName + "," + testFileStorageList1.get(1).fileName;
 
 			//Test ValidationErrors for file 1
-			TestHelper.assertValidationError(validationErrors1.get(0), fileName1, ErrorType.ILLEGAL_FORMAT, "dcat:theme", "Invalid URI",
-					"The value Invalid URI has wrong format for key dcat:theme.");
+			TestHelper.assertValidationError(validationErrors1.get(0), fileName1, ErrorType.UNKNOWN_VALUE, "dcat:theme", "Invalid URI",
+					"The value Invalid URI is not one of the values allowed for key dcat:theme.");
 
 			//Test ValidationErrors for file 2
-			TestHelper.assertValidationError(validationErrors2.get(0), fileName2, ErrorType.ILLEGAL_FORMAT,	"dcterms:issued", "1277273",
+			TestHelper.assertValidationError(validationErrors2.get(0), fileName2, ErrorType.VALUE_OUTSIDE_OF_SPEC,	"dcterms:issued", null,
+					"The key dcterms:issued occurs 2 times but the allowed range is 0..1");
+			
+			//Test ValidationErrors for file 2
+			TestHelper.assertValidationError(validationErrors2.get(1), fileName2, ErrorType.ILLEGAL_FORMAT,	"dcterms:issued", "1277273",
 					"The value 1277273 has wrong format for key dcterms:issued.");
 			
-			TestHelper.assertValidationError(validationErrors2.get(1), fileName2, ErrorType.DUPLICATE_URI_WITHIN_FILE,
+			TestHelper.assertValidationError(validationErrors2.get(2), fileName2, ErrorType.DUPLICATE_URI_WITHIN_FILE,
 					null, duplicateDataSetURI2,
 					"URI: " + duplicateDataSetURI2 + " exist multiple times in file: " + fileName2);
 
@@ -444,7 +448,35 @@ class RDFWorkerTest {
 			TestHelper.assertOneValidationError(validationErrorsMap, catalogFileName, ErrorType.UNKNOWN_KEY, madeUpKey, null, description);
 		}
 	}
-	
+
+	@Test
+	void testThatHvdCategoryIsNotRequiredWithoutTheHvdLegislation() {
+		DataSet dataSet = testFileStorageList1.get(0).dcat_dataset.get(0);
+		dataSet.dcData.put("dcatap:applicableLegislation", "http://data.europa.eu/eli/dir/2019/1024/oj");
+
+		try {
+			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
+		} catch (Exception e) {
+			fail("hvdCategory must not be required for legislation other than the high value data regulation: " + e.getMessage());
+		}
+	}
+
+	@Test
+	void testThatHvdCategoryIsRequiredUnderTheHvdLegislation() throws Exception {
+		String removedKey = "dcatap:hvdCategory";
+		DataSet dataSet = testFileStorageList1.get(0).dcat_dataset.get(0);
+		dataSet.dcData.put("dcatap:applicableLegislation", "http://data.europa.eu/eli/reg_impl/2023/138/oj");
+
+		try {
+			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
+			fail("Expected DCATException when hvdCategory is missing under the high value data regulation");
+		} catch (DcatException e) {
+			Map<String, List<ValidationError>> validationErrorsMap = e.getValidationResults();
+			String description = "The key " + removedKey + " occurs 0 times but the allowed range is 1..n";
+			TestHelper.assertOneValidationError(validationErrorsMap, testFileStorageList1.get(0).fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
+		}
+	}
+
 	/**
 	 * @return
 	 */
@@ -542,7 +574,7 @@ class RDFWorkerTest {
 		
 		Organization org1 = new Organization();
 		org1.about = "https://example.com/contactpoint1";
-		org1.dcData.put("rdf:type", "Organisation1");
+		org1.dcData.put("rdf:type", "http://www.w3.org/2006/vcard/ns#Organization");
 		org1.dcData.put("vcard:fn", "Arne Andersson1");
 		org1.dcData.put("vcard:hasEmail", "mailto:open@skovde.se");
 		DataClass adress = new DataClass();
@@ -562,7 +594,7 @@ class RDFWorkerTest {
 
 		Organization org2 = new Organization();
 		org2.about = "https://example.com/contactpoint2";
-		org2.dcData.put("rdf:type", "Organisation2");
+		org2.dcData.put("rdf:type", "http://www.w3.org/2006/vcard/ns#Organization");
 		org2.dcData.put("vcard:fn", "Arne Andersson2");
 		org2.dcData.put("vcard:hasEmail", "mailto:open@skovde.se");
 		DataClass phone = new DataClass();
@@ -610,7 +642,7 @@ class RDFWorkerTest {
 		distribution2.dcData.put("dcterms:title", "en¤Distribution title 2");
 		distribution2.dcData.put("dcterms:description", "en¤Distribution description 2");
 		distribution2.dcData.put("dcat:accessURL", "https://example.com/accessURL2");
-		distribution2.dcData.put("dcterms:format", "text/egedefinierad mediatyp");
+		distribution2.dcData.put("dcterms:format", "text/egedefinierad-mediatyp");
 		
 		//Add Standard
 		distribution2.conformsTo.add(createDataClass("https://conformsToLink_2.com", List.of("dcterms:title", "dcterms:description"), List.of("en¤Conforms to title 2", "sv¤Conforms to beskrivning 2")));
@@ -667,21 +699,21 @@ class RDFWorkerTest {
 		
 		Organization org3 = new Organization();
 		org3.about = "https://example.com/contactpoint3";
-		org3.dcData.put("rdf:type", "Organisation3");
+		org3.dcData.put("rdf:type", "http://www.w3.org/2006/vcard/ns#Organization");
 		org3.dcData.put("vcard:fn", "Arne Andersson3");
 		org3.dcData.put("vcard:hasEmail", "mailto:open@skovde.se");
 		dataSet2.organizations.add(org3);
 		
 		Organization org4 = new Organization();
 		org4.about = "https://example.com/contactpoint4";
-		org4.dcData.put("rdf:type", "Organisation4");
+		org4.dcData.put("rdf:type", "http://www.w3.org/2006/vcard/ns#Organization");
 		org4.dcData.put("vcard:fn", "Arne Andersson4");
 		org4.dcData.put("vcard:hasEmail", "mailto:open@skovde.se");
 		dataService3.organizations.add(org4);
 		
 		Organization org5 = new Organization();
 		org5.about = "https://example.com/contactpoint5";
-		org5.dcData.put("rdf:type", "Organisation5");
+		org5.dcData.put("rdf:type", "http://www.w3.org/2006/vcard/ns#Organization");
 		org5.dcData.put("vcard:fn", "Arne Andersson5");
 		org5.dcData.put("vcard:hasEmail", "mailto:open@skovde.se");
 		dataService3.organizations.add(org5);
@@ -742,8 +774,15 @@ class RDFWorkerTest {
 		dataSet1.dcData.put("dcterms:accrualPeriodicity", "http://publications.europa.eu/resource/authority/frequency/ANNUAL_3");
 		
 		//Add 2 qualified relations
-		dataSet1.qualifiedRelations.add(createDataClass(null, List.of("dcat:hadRole", "dcterms:relation"), List.of("https://role1.com", "https://relation1.com")));
-		dataSet1.qualifiedRelations.add(createDataClass(null, List.of("dcat:hadRole", "dcterms:relation"), List.of("https://role2.com", "https://relation2.com")));
+		dataSet1.qualifiedRelations.add(createDataClass(null, List.of("dcat:hadRole", "dcterms:relation"),
+        	List.of("https://www.dataportal.se/terminology/resource-role/visualization-image","https://relation1.com")));
+		
+		dataSet1.qualifiedRelations.add(createDataClass(null, List.of("dcat:hadRole", "dcterms:relation"),
+        	List.of("https://www.dataportal.se/terminology/resource-role/image", "https://relation2.com")));
+
+
+		// dataSet1.qualifiedRelations.add(createDataClass(null, List.of("dcat:hadRole", "dcterms:relation"), List.of("https://role1.com", "https://relation1.com")));
+		// dataSet1.qualifiedRelations.add(createDataClass(null, List.of("dcat:hadRole", "dcterms:relation"), List.of("https://role2.com", "https://relation2.com")));
 		
 		fileStorage.dcat_dataset.add(dataSet1);
 		
@@ -762,7 +801,7 @@ class RDFWorkerTest {
 		dataSet2.provenances.add(createDataClass(null, List.of("dcterms:description"), List.of("Provenance description 1")));
 		
 		//Add 1 qualified relation
-		dataSet2.qualifiedRelations.add(createDataClass(null, List.of("dcat:hadRole", "dcterms:relation"), List.of("https://role3.com", "https://relation3.com")));
+		dataSet2.qualifiedRelations.add(createDataClass(null, List.of("dcat:hadRole", "dcterms:relation"), List.of("https://www.dataportal.se/concepts/resource-role/visualization-image", "https://www.dataportal.se/concepts/resource-role/example-data")));
 
 		fileStorage.dcat_dataset.add(dataSet2);
 		
@@ -772,14 +811,14 @@ class RDFWorkerTest {
 		
 		Organization org1 = new Organization();
 		org1.about = "https://example.com/contactpoint101";
-		org1.dcData.put("rdf:type", "Organisation1");
+		org1.dcData.put("rdf:type", "http://www.w3.org/2006/vcard/ns#Organization");
 		org1.dcData.put("vcard:fn", "Arne Andersson1");
 		org1.dcData.put("vcard:hasEmail", "mailto:open@skovde.se");
 		dataSet1.organizations.add(org1);
 
 		Organization org2 = new Organization();
 		org2.about = "https://example.com/contactpoint102";
-		org2.dcData.put("rdf:type", "Organisation2");
+		org2.dcData.put("rdf:type", "http://www.w3.org/2006/vcard/ns#Organization");
 		org2.dcData.put("vcard:fn", "Arne Andersson2");
 		org2.dcData.put("vcard:hasEmail", "mailto:open@skovde.se");
 		dataSet1.organizations.add(org2);
@@ -790,7 +829,7 @@ class RDFWorkerTest {
 		distribution1.dcData.put("dcterms:description", "sv¤Distribution beskrivning 1");
 		distribution1.dcData.put("dcat:accessURL", "https://example.com/accessURL101");
 		distribution1.dcData.put("dcat:spatialResolutionInMeters", "0.001");
-		distribution1.dcData.put("adms:status", "http://purl.org/adms/status/UnderDevelopment");
+		distribution1.dcData.put("adms:status", "http://publications.europa.eu/resource/authority/distribution-status/DEVELOP");
 	
 		dataSet1.dcat_distribution.add(distribution1);
 		
@@ -833,21 +872,21 @@ class RDFWorkerTest {
 		
 		Organization org3 = new Organization();
 		org3.about = "https://example.com/contactpoint103";
-		org3.dcData.put("rdf:type", "Organisation3");
+		org3.dcData.put("rdf:type", "http://www.w3.org/2006/vcard/ns#Organization");
 		org3.dcData.put("vcard:fn", "Arne Andersson3");
 		org3.dcData.put("vcard:hasEmail", "mailto:open@skovde.se");
 		dataSet2.organizations.add(org3);
 		
 		Organization org4 = new Organization();
 		org4.about = "https://example.com/contactpoint104";
-		org4.dcData.put("rdf:type", "Organisation4");
+		org4.dcData.put("rdf:type", "http://www.w3.org/2006/vcard/ns#Organization");
 		org4.dcData.put("vcard:fn", "Arne Andersson4");
 		org4.dcData.put("vcard:hasEmail", "mailto:open@skovde.se");
 		dataService3.organizations.add(org4);
 		
 		Organization org5 = new Organization();
 		org5.about = "https://example.com/contactpoint105";
-		org5.dcData.put("rdf:type", "Organisation5");
+		org5.dcData.put("rdf:type", "http://www.w3.org/2006/vcard/ns#Organization");
 		org5.dcData.put("vcard:fn", "Arne Andersson5");
 		org5.dcData.put("vcard:hasEmail", "mailto:open@skovde.se");
 		dataService3.organizations.add(org5);
@@ -874,7 +913,7 @@ class RDFWorkerTest {
 		spatial.dcData.put("locn:geometry", "LINESTRING(18.07 59.33, 17.64 59.86, 16.19 58.59)");
 		return spatial;
 	}
-	
+
 	private DataClass createOtherAgent(List<String> key, List<String> value) {
 		DataClass otherActor = createDataClass(null, List.of(key.get(3)), List.of(value.get(3)));
 		otherActor.agent = createDataClass(value.get(0), List.of(key.get(1), key.get(2)), List.of(value.get(1),value.get(2)));

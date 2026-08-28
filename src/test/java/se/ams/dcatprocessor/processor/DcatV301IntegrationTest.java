@@ -156,7 +156,7 @@ public class DcatV301IntegrationTest {
 
     @Test
     void testThatDistributionContainsApplicableLegislation() throws Exception {
-        IRI applicableLegislation = vf.createIRI("http://data.europa.eu/r5r#", "applicableLegislation");
+        IRI applicableLegislation = vf.createIRI("http://data.europa.eu/r5r/", "applicableLegislation");
         IRI distribution = vf.createIRI("https://www.example.se/#distributionC");
         IRI expectedApplicableLegislation = vf.createIRI("http://data.europa.eu/eli/reg_impl/2023/138/oj");
 
@@ -169,11 +169,9 @@ public class DcatV301IntegrationTest {
 
     @ParameterizedTest
     @CsvSource({
-        "subject,                   http://purl.org/dc/terms/,      https://dataportal.se/concepts/grunddata/person",
-        "subject,                   http://purl.org/dc/terms/,      https://dataportal.se/concepts/grunddata/foretag",
-        "hvdCategory,               http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_a9135398",
-        "hvdCategory,               http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_dd313021",
-        "applicableLegislation,     http://data.europa.eu/r5r#,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
+        "hvdCategory,               http://data.europa.eu/r5r/,     http://data.europa.eu/bna/c_a9135398",
+        "hvdCategory,               http://data.europa.eu/r5r/,     http://data.europa.eu/bna/c_dd313021",
+        "applicableLegislation,     http://data.europa.eu/r5r/,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
         "inSeries,                  http://www.w3.org/ns/dcat#,     https://www.example.se/#datasetseriesC",
     })
     void testThatDatasetContainsNewUriFields(String fieldname, String namespace, String expectedValue) throws Exception {
@@ -187,7 +185,10 @@ public class DcatV301IntegrationTest {
         Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);    
         assertTrue(model.contains(dataset, field, expected),"Dataset missing: " + fieldname + ", or wrong value");
     }
-    
+
+
+
+
     @Test
     void testThatDatasetContainsVersion() throws Exception {
         IRI dataset = vf.createIRI("https://www.example.se/#datasetC");
@@ -214,9 +215,9 @@ public class DcatV301IntegrationTest {
 
     @ParameterizedTest
     @CsvSource({
-        "subject,                   http://purl.org/dc/terms/,      https://dataportal.se/concepts/grunddata/person",
-        "hvdCategory,               http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_a9135398",
-        "applicableLegislation,     http://data.europa.eu/r5r#,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
+        "subject,                   http://purl.org/dc/terms/,      https://www.dataportal.se/terminology/grunddata/person",
+        "hvdCategory,               http://data.europa.eu/r5r/,     http://data.europa.eu/bna/c_a9135398",
+        "applicableLegislation,     http://data.europa.eu/r5r/,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
     })
     void testThatDataServiceContainsNewUriFields (String fieldname, String namespace, String expectedValue) throws Exception {
         IRI field = vf.createIRI(namespace, fieldname);
@@ -296,11 +297,11 @@ public class DcatV301IntegrationTest {
     @CsvSource({
         "theme,                 http://www.w3.org/ns/dcat#,     http://publications.europa.eu/resource/authority/data-theme/TRAN",
         "landingPage,           http://www.w3.org/ns/dcat#,     https://www.example.se/serie-landningssida",
-        "hvdCategory,           http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_a9135398",
-        "hvdCategory,           http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_dd313021",
-        "applicableLegislation, http://data.europa.eu/r5r#,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
+        "hvdCategory,           http://data.europa.eu/r5r/,     http://data.europa.eu/bna/c_a9135398",
+        "hvdCategory,           http://data.europa.eu/r5r/,     http://data.europa.eu/bna/c_dd313021",
+        "applicableLegislation, http://data.europa.eu/r5r/,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
         "spatial,               http://purl.org/dc/terms/,      http://sws.geonames.org/6695072",
-        "subject,               http://purl.org/dc/terms/,      https://dataportal.se/concepts/grunddata/foretag",
+        "subject,               http://purl.org/dc/terms/,      https://www.dataportal.se/terminology/grunddata/foretag",
         "relation,              http://purl.org/dc/terms/,      https://www.example.se/relaterad-resurs",
         "accrualPeriodicity,    http://purl.org/dc/terms/,      http://publications.europa.eu/resource/authority/frequency/ANNUAL",
     })
