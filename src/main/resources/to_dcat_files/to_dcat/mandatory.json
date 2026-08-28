@@ -73,5 +73,20 @@
     },
     "other agent-dcterms:type": {
         "isMandatory": true
+    },
+    "Checksum-spdx:checksumValue": {
+        "isMandatory": true
+    },
+    "Attribution-dcat:hadRole": {
+        "isMandatory": true
+    },
+    "creator-foaf:name": {
+        "isMandatory": true
+    },
+    "Attribution-foaf:name": {
+        "isMandatory": true
+    },
+    "offers-schema:description": {
+        "isMandatory": true
     }
 }

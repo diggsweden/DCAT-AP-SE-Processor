@@ -11,10 +11,11 @@ import java.util.Set;
 
 import org.apache.commons.collections4.MultiValuedMap;
 
-import se.ams.dcatprocessor.rdf.Cardinality;
 import se.ams.dcatprocessor.rdf.CardinalityHandler;
 import se.ams.dcatprocessor.rdf.DcatClass;
 import se.ams.dcatprocessor.rdf.DcatException;
+import se.ams.dcatprocessor.specification.DcatCardinality;
+import se.ams.dcatprocessor.specification.DcatCardinality.Condition;
 import se.ams.dcatprocessor.util.Util;
 
 public class CardinalityValidator {
@@ -55,7 +56,7 @@ public class CardinalityValidator {
 				
 		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
 		
-		Map<String, Cardinality> cardinalities = CardinalityHandler.getInstance().getCardinalities(dcatClass);
+		Map<String, DcatCardinality> cardinalities = CardinalityHandler.getInstance().getCardinalities(dcatClass);
 		
 		HashMap<String, Integer> countedKeyNames = new HashMap<>();
 
@@ -80,8 +81,8 @@ public class CardinalityValidator {
 		 * with the allowed range according to the specification
 		 */
 		Set<String> cKeySet = cardinalities.keySet();
-		for (String cKey : cKeySet) {
-			Cardinality c = cardinalities.get(cKey);
+		for (String cKey : cKeySet) {		
+			DcatCardinality c = cardinalities.get(cKey);
 			Integer number = countedKeyNames.get(cKey);
 
 			/**
@@ -95,7 +96,7 @@ public class CardinalityValidator {
 					/**
 					 * The specification specifies at least one .. create a validationerror
 					 */
-					if (c.isOneOrMore()) {
+					if (c.isOneOrMore() && isRequired(c, values)) {
 						validationErrorStorage.setValidationError(currentFileName, new ValidationError(currentFileName, cKey, 0, c));
 					}
 				} 
@@ -109,9 +110,19 @@ public class CardinalityValidator {
 		}
 		return !validationErrorStorage.hasValidationErrors();
 	}
-		
-	
 
+	/**
+	 * Checks if a mandatory property really is mandatory. Most have no condition and the answer is yes.
+	 */
+	private boolean isRequired(DcatCardinality cardinality, MultiValuedMap<String, String> values) {
+		Condition condition = cardinality.getCondition();
+		if (condition == null) {
+			return true;
+		}
+		boolean conditionIsMet = values.get(condition.property()).contains(condition.value());
+		return conditionIsMet;
+	}
+		
 	public String getCurrentFileName() {
 		return currentFileName;
 	}

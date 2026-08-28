@@ -56,11 +56,12 @@ import se.ams.dcatprocessor.rdf.namespace.ODRS;
 import se.ams.dcatprocessor.rdf.namespace.SCHEMA;
 import se.ams.dcatprocessor.rdf.namespace.SPDX;
 import se.ams.dcatprocessor.rdf.validate.CardinalityValidator;
-import se.ams.dcatprocessor.rdf.validate.InputType;
 import se.ams.dcatprocessor.rdf.validate.MultipleURIValidator;
 import se.ams.dcatprocessor.rdf.validate.SingleInputValidator;
 import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
+import se.ams.dcatprocessor.specification.DcatSpecification;
 import se.ams.dcatprocessor.util.Util;
+
 
 /**
  * @see <a href="https://docs.dataportal.se/dcat/sv/#intro">https://docs.dataportal.se/dcat/sv/#intro</a>
@@ -72,15 +73,18 @@ import se.ams.dcatprocessor.util.Util;
 @Scope("prototype")
 public class RDFWorker {
 	private Model model;
-	
+
 	/**
 	 * Holds the file that is presently being processed
 	 */
 	private String currentFileName;
 
+	private DcatSpecification specification;
+
 	private MultipleURIValidator multipleURIValidator;
 	
-    public RDFWorker(MultipleURIValidator multipleURIValidator) {
+    public RDFWorker(MultipleURIValidator multipleURIValidator, DcatSpecification specification) {
+		this.specification = specification;
         this.multipleURIValidator = multipleURIValidator;
     }
 
@@ -154,7 +158,7 @@ public class RDFWorker {
 			 */
 			for (DataService dataService : fileStorage.dataService) {
 				IRI dataServiceIRI = createDataService(dataService);
-				model.add(catalogAndAgent[0], DCAT.DATA_SERVICE, dataServiceIRI);
+				model.add(catalogAndAgent[0], DCAT.HAS_SERVICE, dataServiceIRI);
 			}
 			
 			/*
@@ -195,7 +199,7 @@ public class RDFWorker {
 		model.setNamespace(SPDX.NS);
 		model.setNamespace(OWL.NS);
 		model.setNamespace(ORG.NS);
-		model.setNamespace(new SimpleNamespace("dcatap", "http://data.europa.eu/r5r#"));
+		model.setNamespace(new SimpleNamespace("dcatap", "http://data.europa.eu/r5r/"));
 	}
 
 	/**
@@ -491,7 +495,7 @@ public class RDFWorker {
 		 */
 		for (DataService dataService : distribution.dataServices) {
 			IRI dataServiceIRI = createDataService(dataService);
-			model.add(distributionIRI, DCAT.DATA_SERVICE, dataServiceIRI);
+			model.add(distributionIRI, DCAT.HAS_SERVICE, dataServiceIRI);
 		}
 				
 		return distributionIRI;
@@ -702,7 +706,7 @@ public class RDFWorker {
 						String[] split = value.split(SUN);
 						model.add(resource, iri, valueFactory.createLiteral(split[1], split[0]));
 					} else {
-						Literal dateLiteral = getDateValue(value);
+						Literal dateLiteral = getDateValue(key, value);
 						if (dateLiteral != null) { 					//Datevalue
 							model.add(resource, iri, dateLiteral);
 						} else if(isPhoneValue(key)) {	//Phone value...needs to handled separately from a URI
@@ -756,8 +760,8 @@ public class RDFWorker {
 	}
 
 	private boolean isWKTLiteral(String key) {
-		List<InputType> inputTypes = SingleInputValidator.getInstance().getInputTypes(key);
-		return inputTypes.contains(InputType.WKTLITERAL);
+		List<String> allowedTypes = specification.datatypesFor(key);
+    	return allowedTypes.contains(GEO.WKT_LITERAL.stringValue());
 	}
 
 	/**
@@ -765,25 +769,17 @@ public class RDFWorker {
 	 * @param key - Used to get the allowable InputType(s)
 	 * @return - The matching datatype
 	 */
+
 	private IRI getNumericDatatype(String key) {
-	    if (Util.isNullOrEmpty(key)) {
-	        return null;
-	    }
-		
-	    List<InputType> inputTypes = SingleInputValidator.getInstance().getInputTypes(key);
+    	List<String> allowedTypes = specification.datatypesFor(key);
 
-	    IRI datatype = null;
-	    if (inputTypes.contains(InputType.NONNEGATIVEINTEGER)) {
-	        datatype = XSD.NON_NEGATIVE_INTEGER;
-	    } else if (inputTypes.contains(InputType.INTEGER)) {
-	        datatype = XSD.INTEGER;
-	    } else if (inputTypes.contains(InputType.DECIMAL)) {
-	        datatype = XSD.DECIMAL;
-	    } else {
-	        return null;
-	    }
-
-	    return datatype;
+    	if (allowedTypes.contains(XSD.NON_NEGATIVE_INTEGER.stringValue())) {
+    	    return XSD.NON_NEGATIVE_INTEGER;
+    	}
+    	if (allowedTypes.contains("xsd:decimal")) {
+    	    return XSD.DECIMAL;
+    	}
+    	return null;
 	}
 
 	/**
@@ -797,9 +793,7 @@ public class RDFWorker {
 	        return null; 
 	    }
 
-	    List<InputType> inputTypes = SingleInputValidator.getInstance().getInputTypes(key);
-	    
-	    if(inputTypes.contains(InputType.DURATION)) {
+	    if(specification.datatypesFor(key).contains("xsd:duration")) {
 	    	try {
 			    return Period.parse(value);
 			    /**
@@ -812,9 +806,8 @@ public class RDFWorker {
 	    }
 
 	    return null;
-
 	}
-	
+
 	private final String INVALID_URI = this.getClass() + " : Unable to create DCAT. Reason: X is not a valid URI";
 	
 	/**
@@ -878,7 +871,7 @@ public class RDFWorker {
 							String[] split = value.split(SUN);
 							model.add(sectionIRI, iri, valueFactory.createLiteral(split[1], split[0]));
 						} else {
-							Literal dateLiteral = getDateValue(value);
+							Literal dateLiteral = getDateValue(key, value);
 							if(dateLiteral != null) {	//Datevalue
 								model.add(sectionIRI, iri, dateLiteral);
 							} else {					//All other values....for now
@@ -913,51 +906,24 @@ public class RDFWorker {
 	 * @param value - The value to test
 	 * @return - Date-formatted literal or null
 	 */
-	private Literal getDateValue(String value) {
-		if(value == null) {
-			return null;
-		}
+	private Literal getDateValue(String key, String value) {
+	    List<String> allowedTypes = specification.datatypesFor(key);
+	    
+		if (allowedTypes.isEmpty()) {
+	        return null;
+	    }
 		
 		ValueFactory valueFactory = SimpleValueFactory.getInstance();
 		
-		if (validateAgainstPattern(XSD_DATE_PATTERN, value)) {				//Datevalue YYYY-MM-DD
-			return valueFactory.createLiteral(value, XSD.DATE); 
-		} else if (validateAgainstPattern(XSD_DATE_TIME_PATTERN, value)) {	//Datevalue YYYY-MM-DDThh:mm:ss
-			return valueFactory.createLiteral(value, XSD.DATETIME); 
-		} else if (validateAgainstPattern(XSD_GYEAR_PATTERN, value)) {		//Datevalue YYYY
-			return valueFactory.createLiteral(value, XSD.GYEAR);
-		} else {
-			return null;
+		if (allowedTypes.contains(XSD.DATE.stringValue()) && validateAgainstPattern(XSD_DATE_PATTERN, value)) {
+		    return valueFactory.createLiteral(value, XSD.DATE);
 		}
-		
+		if (allowedTypes.contains(XSD.DATETIME.stringValue()) && validateAgainstPattern(XSD_DATE_TIME_PATTERN, value)) {
+		    return valueFactory.createLiteral(value, XSD.DATETIME);
+		}
+		if (allowedTypes.contains(XSD.GYEAR.stringValue()) && validateAgainstPattern(XSD_GYEAR_PATTERN, value)) {
+		    return valueFactory.createLiteral(value, XSD.GYEAR);
+		}
+		return null;
 	}
-	
-	
-//	
-//	/**
-//	 * Creates a anonymous node in the .RDF document
-//	 * @param parentIRI - Reference to parent node
-//	 * @param parentIRINodeTypeRef - Parent node reference type
-//	 * @param nodeType - Type of node
-//	 * @param dataClasses - Placeholder for data to be added to this node
-//	 * @return The list of created BNodes
-//	 */
-//	private List<BNode> addAnonymousNodes(@NonNull Resource parentIRI, @NonNull IRI parentIRINodeTypeRef, @Nullable IRI nodeType, @NonNull List<DataClass> dataClasses) {
-//		List<BNode> bNodes = new ArrayList<>();
-//		
-//		ValueFactory valueFactory = SimpleValueFactory.getInstance();
-//		
-//		for (DataClass dataClass : dataClasses) {
-//			BNode bNode = valueFactory.createBNode();			//Create an anonymous node
-//			model.add(parentIRI, parentIRINodeTypeRef, bNode);	//Add reference from parent IRI
-//			if(nodeType != null) {
-//				model.add(bNode, RDF.TYPE, nodeType);	//Add nodetype explicitly if required
-//				bNodes.add(bNode);
-//			}
-//			addDataToBnode(bNode, dataClass.dcData);	//Add data to node
-//		}
-//		
-//		return bNodes;
-//	}
-	
 }

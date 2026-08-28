@@ -20,11 +20,8 @@ public enum InputType {
 	DECIMAL("xsd:decimal"),
 	DURATION("xsd:duration"),
 	ANYURI("xsd:anyURI"),
-	WKTLITERAL("geo:wktLiteral"),
-	CLASS("class"),
-	PHONENUMBER("phoneNumber");	//For VCARD phonenumber
-	
-	
+	WKTLITERAL("geo:wktLiteral");
+
 	private String name;
 	
 	private InputType(String name) {
@@ -34,27 +31,4 @@ public enum InputType {
 	public String getName() {
 		return name;
 	}
-	
-	public static InputType toEnum(String name) {
-		
-		if(name == null) {
-			return null;
-		}
-		
-		InputType[] inputTypes = InputType.values();
-		
-		for (InputType inputType : inputTypes) {
-			if (inputType.getName().equals(name)) {
-				return inputType;
-			}
-		}
-		
-		return null;
-	}
-	
-	@Override
-	public String toString() {
-		return getName();
-	}
-	
 }

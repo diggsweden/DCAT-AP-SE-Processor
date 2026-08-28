@@ -143,8 +143,8 @@ public class VocabularyStringToIRI {
 	private static final HashMap<String, IRI> DCATAP = new HashMap<>();
 	static {
 		DCATAP.put("dcatap:availability", valueFactory.createIRI("http://data.europa.eu/r5r/availability", ""));
-		DCATAP.put("dcatap:applicableLegislation", valueFactory.createIRI("http://data.europa.eu/r5r#", "applicableLegislation"));
-		DCATAP.put("dcatap:hvdCategory", valueFactory.createIRI("http://data.europa.eu/r5r#", "hvdCategory"));
+		DCATAP.put("dcatap:applicableLegislation", valueFactory.createIRI("http://data.europa.eu/r5r/", "applicableLegislation"));
+		DCATAP.put("dcatap:hvdCategory", valueFactory.createIRI("http://data.europa.eu/r5r/", "hvdCategory"));
 	}
 	
 	private static final HashMap<String, IRI> LOCATION = new HashMap<>();
