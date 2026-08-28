@@ -232,7 +232,7 @@ Tar emot en lista av Katalog objekt och skapar matchande RDF utifrån det.
 [Översikt över vad som finns och fungerar enligt DCAT-AP-SE spec](docs/DCATAPSE_completion.md)<br>
 [Tillägg i Converter](docs/converter-tutorial.md)<br>
 [Tillägg i RDFWorker](docs/rdfworker-tutorial.md)<br>
-[specifikationsfil](src/main/resources/dcat_specification.properties)
+[specifikationsfil](src/main/resources/dcat-ap-se-301-bundle.json)
 
 ## Arbetsprocess för att publicera api/er på dataportalen
 
