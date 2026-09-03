@@ -4,7 +4,6 @@
 
 package se.ams.dcatprocessor.util;
 
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -58,23 +57,6 @@ public class Util {
 		return Optional.ofNullable(tList).isEmpty() || tList.isEmpty();
 	}
 
-	/**
-	 * Replaces all keys in msg that equals a key in replace with the
-	 * value at the corresponding index in replacement 
-	 * @param msg - To be changed
-	 * @param replace - Values to replace
-	 * @param replacement - Replacements
-	 * @return - The String containing the new values
-	 */
-	public static String createErrorMsg(String msg, String[] replace, String[] replacement) {
-		if(replace.length == replacement.length) {
-			for (int i = 0; i < replace.length; i++) {
-				msg = msg.replaceAll(replace[i], replacement[i]);
-			}
-		}
-		return msg;
-	}
-	
 	private static final String COMMA = ",";
 	
 	/**
@@ -108,12 +90,13 @@ public class Util {
 		return sb.toString();
 	}
 	
-	public static boolean isURI(String url) {
-	    if (url == null) return false;
+	public static boolean isURI(String uri) {
+	    if (uri == null) {
+	        return false;
+	    }
 	    try {
-	        new URI(url).toURL();
-	        return true;
-	    } catch (URISyntaxException | MalformedURLException | IllegalArgumentException e) {
+	        return new URI(uri).isAbsolute();
+	    } catch (URISyntaxException e) {
 	        return false;
 	    }
 	}

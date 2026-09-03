@@ -58,7 +58,7 @@
         "title-en": "Dataset series C",
         "description-sv": "Exempel av Datasetseries (ny primärklass i 3.0.1)",
         "description-en": "Example of Datasetseries (new primaryclass in 3.0.1)",
-        "subject": "https://dataportal.se/concepts/grunddata/foretag",
+        "subject": "https://www.dataportal.se/terminology/grunddata/foretag",
         "hvdCategory": "http://data.europa.eu/bna/c_a9135398; http://data.europa.eu/bna/c_dd313021",
         "modified": "2021-02-15",
         "contactPoint": {
@@ -93,10 +93,6 @@
           "title-sv": "Standard för serie",
           "description-sv": "Beskrivning av standard för serie"
         },
-        "qualifiedRelation": {
-          "role": "distributor",
-          "relation": "https://www.example.se/relaterad-resurs-i-relation"
-        },
         "page": {
           "about": "https://www.example.se/#datasetseriesC/page",
           "title-sv": "Dokument för serie",
@@ -114,7 +110,6 @@
         "description-sv": "Exempel beskrivning datamängd C",
         "inSeries": "https://www.example.se/#datasetseriesC",
         "version": "3.7.5",
-        "subject": "https://dataportal.se/concepts/grunddata/person; https://dataportal.se/concepts/grunddata/foretag",
         "applicableLegislation": "http://data.europa.eu/eli/reg_impl/2023/138/oj",
         "hvdCategory": "http://data.europa.eu/bna/c_a9135398; http://data.europa.eu/bna/c_dd313021",
         "creator": {
@@ -154,8 +149,8 @@
         "theme": "TRAN; EDUC",
         "issued": "2021-03-05",
         "modified": "2021-03-15",
+        "spatialUrl": "http://sws.geonames.org/6695072",
         "location": {
-          "about": "https://www.example.se/#datasetC/spatial",
           "bbox": "POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))",
           "centroid": "POINT (12.83 56.4)",
           "geometry": "LINESTRING(10.0 51.0, 11.0 52.0, 12.0 53.0)"
@@ -245,7 +240,7 @@
         "endpointURL": "www.datatjanstC.se",
         "endpointDescription": "www.beskrivningDatatjanstC.se",
         "format": "application/json",
-        "subject": "https://dataportal.se/concepts/grunddata/person",
+        "subject": "https://www.dataportal.se/terminology/grunddata/person",
         "applicableLegislation": "http://data.europa.eu/eli/reg_impl/2023/138/oj",
         "hvdCategory": "http://data.europa.eu/bna/c_a9135398",
         "publisher": {

@@ -1,0 +1,22 @@
+{
+    "image": {
+        "title": "Bild",
+        "url": "https://www.dataportal.se/terminology/resource-role/image"
+    },
+    "visualization-image": {
+        "title": "Bild av visualisering",
+        "url": "https://www.dataportal.se/terminology/resource-role/visualization-image"
+    },
+    "showcase": {
+        "title": "Exempel på användning",
+        "url": "https://www.dataportal.se/terminology/resource-role/showcase"
+    },
+    "example-data": {
+        "title": "Exempeldata",
+        "url": "https://www.dataportal.se/terminology/resource-role/example-data"
+    },
+    "idea": {
+        "title": "Idé för användning",
+        "url": "https://www.dataportal.se/terminology/resource-role/idea"
+    }
+}

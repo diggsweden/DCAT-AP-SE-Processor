@@ -25,7 +25,6 @@ import se.ams.dcatprocessor.rdf.validate.SingleInputValidator;
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
 import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
-import se.ams.dcatprocessor.util.DcatPropertyHandler;
 
 public class TestHelper {
 	
@@ -37,13 +36,7 @@ public class TestHelper {
 	public static final String USER_DIR = System.getProperty("user.dir");
 	public static final String EXTENSION_DIR = TestHelper.PS + "src" + TestHelper.PS + "test" + TestHelper.PS + "resources" + TestHelper.PS;
 	public static final String TEST_FILE_DIR = USER_DIR + EXTENSION_DIR;
-	public static final String TARGET_FILE_DIR = USER_DIR + TestHelper.PS + "target" + TestHelper.PS + "classes" + TestHelper.PS;
-	public static final String TARGET_FILE_DIR_UP_ONE_LEVEL = USER_DIR + TestHelper.PS + "target" + TestHelper.PS;
-	public static final String TEST_DECAT_SPECIFICATION_PROPERTIES_FILE = TARGET_FILE_DIR + "dcat_specification.properties";
-	public static final String DECAT_SPECIFICATION_PROPERTIES_FILE = TestHelper.doubleSeparator(TARGET_FILE_DIR + "dcat_specification.properties");
-	public static final String DECAT_SPECIFICATION_PROPERTIES_FILE_SAVED = TestHelper.doubleSeparator(TARGET_FILE_DIR_UP_ONE_LEVEL + "dcat_specification.properties");
-	
-	
+
 	public static void assertOneValidationError(Map<String, List<ValidationError>> validationErrors, String fileName, ErrorType errorType, String key, String value, String description) {
 		Set<String> keySet = validationErrors.keySet();
 		assertEquals(1, keySet.size());
@@ -106,7 +99,6 @@ public class TestHelper {
 	 * Set the instance of singelton classes to null, to force them to re-instansiate
 	 */
 	public static void resetSingeltons() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
-        DcatPropertyHandler.resetInstance();
         SingleInputValidator.resetInstance();
 		CardinalityHandler.resetInstance();
 	}

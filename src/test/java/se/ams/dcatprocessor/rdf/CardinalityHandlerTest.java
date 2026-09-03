@@ -4,106 +4,64 @@
 
 package se.ams.dcatprocessor.rdf;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.Map;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import se.ams.dcatprocessor.testutil.TestHelper;
+import se.ams.dcatprocessor.specification.DcatCardinality;
+import se.ams.dcatprocessor.specification.DcatCardinality.Condition;
 
 class CardinalityHandlerTest {
-	
-	/**
-	 * Save the original dcat_specification.properties file before changing it
-	 */
+
+	private static Map<String, DcatCardinality> dataset;
+	private static Map<String, DcatCardinality> distribution;
+
 	@BeforeAll
-	public static void setUp() throws Exception {
-		TestHelper.copyFile(TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE, TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE_SAVED);
+	static void load() {
+		CardinalityHandler.resetInstance();
+		dataset = CardinalityHandler.getInstance().getCardinalities(DcatClass.DATASET);
+		distribution = CardinalityHandler.getInstance().getCardinalities(DcatClass.DISTRIBUTION);
 	}
 
-	@BeforeEach
-	public void beforeEach() throws Exception {
-		TestHelper.resetSingeltons();
-	}
-	
-	/**
-	 * Restore the original dcat_specification.properties file after all tests 
-	 */
-	@AfterAll
-	public static void tearDown() throws Exception {
-		TestHelper.copyFile(TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE_SAVED, TestHelper.DECAT_SPECIFICATION_PROPERTIES_FILE);
-	}
-	
 	@Test
-	void testThatCardinalitiesAreLoadedCorrectly() throws Exception{
-		
-		//Copy the propertiesfile we want to use in the test directly to the target files dirctory to have it in the claspath
-		String testFile = TestHelper.doubleSeparator(TestHelper.TEST_FILE_DIR + "dcat_specification_test_1.properties");
-		
-		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
-		
-		Map<String, Cardinality> cardinalities = CardinalityHandler.getInstance().getCardinalities(DcatClass.CATALOG);
-		
-		//Expected Cardinality from CATALOG and dcterms:title is 1..n
-		Cardinality actual = cardinalities.get("dcterms:title");
-		assertNotNull(actual);
-		assertEquals(1, actual.getMin());
-		assertEquals(65535, actual.getMax());
-		assertTrue(actual.isOneOrMore());
-		
-		//Expected Cardinality from CATALOG and dcterms:publisher is 1
-		actual = cardinalities.get("dcterms:publisher");
-		assertNotNull(actual);
-		assertEquals(1, actual.getMin());
-		assertEquals(1, actual.getMax());
-		assertTrue(actual.isOne());
-
-		//Expected Cardinality from CATALOG and dcterms:license is 1
-		actual = cardinalities.get("dcterms:license");
-		assertNotNull(actual);
-		assertEquals(1, actual.getMin());
-		assertEquals(1, actual.getMax());
-		assertTrue(actual.isOne());
-		
-		//Expected Cardinality from CATALOG and dcterms:issued is 0..1
-		actual = cardinalities.get("dcterms:issued");
-		assertNotNull(actual);
-		assertEquals(0, actual.getMin());
-		assertEquals(1, actual.getMax());
-		assertTrue(actual.isZeroOrOne());		
-				
-		//Expected Cardinality from CATALOG and dcat:service is 0..n
-		actual = cardinalities.get("dcat:service");
-		assertNotNull(actual);
-		assertEquals(0, actual.getMin());
-		assertEquals(65535, actual.getMax());
-		assertTrue(actual.isZeroOrMore());		
-				
+	void testThatMandatoryPropertiesAreLoaded() {
+		assertEquals(1, dataset.get("dcterms:title").getMin());
+		assertEquals(1, dataset.get("dcterms:publisher").getMin());
+		assertEquals(1, distribution.get("dcat:accessURL").getMin());
 	}
-	
-	// Invalid property key name i propertyfile
+
 	@Test
-	void testThatIllegalPropertyNameIsHandledCorrectly() throws Exception {
-		
-		//Copy the propertiesfile we want to use in the test directly to the target files dirctory to have it in the claspath
-		
-		String testFile = TestHelper.doubleSeparator(TestHelper.TEST_FILE_DIR + "dcat_specification_test_5.properties");
-		TestHelper.copyFile(testFile, TestHelper.TEST_DECAT_SPECIFICATION_PROPERTIES_FILE);
-		try {
-			CardinalityHandler.getInstance();
-			fail("Expected IllegalArgumentException due to incorrect values");
-		} catch (IllegalArgumentException e) {
-			assertEquals("Property: catalogue is not a DCAT-vocabulary", e.getMessage());
-		}
-
+	void testThatOptionalPropertiesAreLoaded() {
+		assertEquals(0, dataset.get("dcat:keyword").getMin());
+		assertEquals(DcatCardinality.MAX, dataset.get("dcat:keyword").getMax());
+		assertEquals(1, dataset.get("dcterms:issued").getMax());
 	}
-	
 
+	@Test
+	void testThatCardinalityIsReadThroughExtends() {
+        DcatCardinality hvdCategory = dataset.get("dcatap:hvdCategory");
+		// The three hvdCategory nodes state only what they extend
+		assertNotNull(hvdCategory);
+		assertEquals(1, hvdCategory.getMin());
+	}
+
+	@Test
+	void testThatHvdCategoryKeepsItsCondition() {
+        DcatCardinality hvdCategory = dataset.get("dcatap:hvdCategory");
+		Condition condition = hvdCategory.getCondition();
+
+		assertNotNull(condition, "hvdCategory must keep the condition from the node it extends");
+		assertEquals("dcatap:applicableLegislation", condition.property());
+		assertEquals("http://data.europa.eu/eli/reg_impl/2023/138/oj", condition.value());
+	}
+
+	@Test
+	void testThatPropertiesWithoutAConditionHaveNone() {
+		assertNull(dataset.get("dcterms:title").getCondition());
+	}
 }

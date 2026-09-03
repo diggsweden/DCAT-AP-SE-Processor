@@ -32,6 +32,7 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -155,7 +156,7 @@ public class DcatV301IntegrationTest {
 
     @Test
     void testThatDistributionContainsApplicableLegislation() throws Exception {
-        IRI applicableLegislation = vf.createIRI("http://data.europa.eu/r5r#", "applicableLegislation");
+        IRI applicableLegislation = vf.createIRI("http://data.europa.eu/r5r/", "applicableLegislation");
         IRI distribution = vf.createIRI("https://www.example.se/#distributionC");
         IRI expectedApplicableLegislation = vf.createIRI("http://data.europa.eu/eli/reg_impl/2023/138/oj");
 
@@ -168,11 +169,9 @@ public class DcatV301IntegrationTest {
 
     @ParameterizedTest
     @CsvSource({
-        "subject,                   http://purl.org/dc/terms/,      https://dataportal.se/concepts/grunddata/person",
-        "subject,                   http://purl.org/dc/terms/,      https://dataportal.se/concepts/grunddata/foretag",
-        "hvdCategory,               http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_a9135398",
-        "hvdCategory,               http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_dd313021",
-        "applicableLegislation,     http://data.europa.eu/r5r#,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
+        "hvdCategory,               http://data.europa.eu/r5r/,     http://data.europa.eu/bna/c_a9135398",
+        "hvdCategory,               http://data.europa.eu/r5r/,     http://data.europa.eu/bna/c_dd313021",
+        "applicableLegislation,     http://data.europa.eu/r5r/,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
         "inSeries,                  http://www.w3.org/ns/dcat#,     https://www.example.se/#datasetseriesC",
     })
     void testThatDatasetContainsNewUriFields(String fieldname, String namespace, String expectedValue) throws Exception {
@@ -186,7 +185,10 @@ public class DcatV301IntegrationTest {
         Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);    
         assertTrue(model.contains(dataset, field, expected),"Dataset missing: " + fieldname + ", or wrong value");
     }
-    
+
+
+
+
     @Test
     void testThatDatasetContainsVersion() throws Exception {
         IRI dataset = vf.createIRI("https://www.example.se/#datasetC");
@@ -213,9 +215,9 @@ public class DcatV301IntegrationTest {
 
     @ParameterizedTest
     @CsvSource({
-        "subject,                   http://purl.org/dc/terms/,      https://dataportal.se/concepts/grunddata/person",
-        "hvdCategory,               http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_a9135398",
-        "applicableLegislation,     http://data.europa.eu/r5r#,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
+        "subject,                   http://purl.org/dc/terms/,      https://www.dataportal.se/terminology/grunddata/person",
+        "hvdCategory,               http://data.europa.eu/r5r/,     http://data.europa.eu/bna/c_a9135398",
+        "applicableLegislation,     http://data.europa.eu/r5r/,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
     })
     void testThatDataServiceContainsNewUriFields (String fieldname, String namespace, String expectedValue) throws Exception {
         IRI field = vf.createIRI(namespace, fieldname);
@@ -295,11 +297,11 @@ public class DcatV301IntegrationTest {
     @CsvSource({
         "theme,                 http://www.w3.org/ns/dcat#,     http://publications.europa.eu/resource/authority/data-theme/TRAN",
         "landingPage,           http://www.w3.org/ns/dcat#,     https://www.example.se/serie-landningssida",
-        "hvdCategory,           http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_a9135398",
-        "hvdCategory,           http://data.europa.eu/r5r#,     http://data.europa.eu/bna/c_dd313021",
-        "applicableLegislation, http://data.europa.eu/r5r#,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
+        "hvdCategory,           http://data.europa.eu/r5r/,     http://data.europa.eu/bna/c_a9135398",
+        "hvdCategory,           http://data.europa.eu/r5r/,     http://data.europa.eu/bna/c_dd313021",
+        "applicableLegislation, http://data.europa.eu/r5r/,     http://data.europa.eu/eli/reg_impl/2023/138/oj",
         "spatial,               http://purl.org/dc/terms/,      http://sws.geonames.org/6695072",
-        "subject,               http://purl.org/dc/terms/,      https://dataportal.se/concepts/grunddata/foretag",
+        "subject,               http://purl.org/dc/terms/,      https://www.dataportal.se/terminology/grunddata/foretag",
         "relation,              http://purl.org/dc/terms/,      https://www.example.se/relaterad-resurs",
         "accrualPeriodicity,    http://purl.org/dc/terms/,      http://publications.europa.eu/resource/authority/frequency/ANNUAL",
     })
@@ -375,21 +377,6 @@ public class DcatV301IntegrationTest {
         assertTrue(model.contains(series, DCTERMS.CONFORMS_TO, conformsTo), "DatasetSeries missing dcterms:conformsTo");
         assertTrue(model.contains(conformsTo, DCTERMS.TITLE, vf.createLiteral("Standard för serie", "sv")), "Standard missing dcterms:title, or wrong value");
         assertTrue(model.contains(conformsTo, DCTERMS.DESCRIPTION, vf.createLiteral("Beskrivning av standard för serie", "sv")),"Standard missing dcterms:description, or wrong value");
-    }
-
-    @Test
-    void testThatDatasetSeriesContainsQualifiedRelation() throws Exception {
-        IRI expectedRole = vf.createIRI("http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/distributor");
-        IRI expectedRelation = vf.createIRI("https://www.example.se/relaterad-resurs-i-relation");
-        IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
-
-        String result = manager.createDcatFromFile(API_DEF_FILE);
-
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
-        Resource relationship = (Resource) model.filter(series, DCAT.QUALIFIED_RELATION, null).objects().iterator().next();
-        assertTrue(model.contains(relationship, DCAT.HAD_ROLE, expectedRole),"Relationship missing dcat:hadRole, or wrong value");
-        assertTrue(model.contains(relationship, DCTERMS.RELATION, expectedRelation),"Relationship missing dcterms:relation, or wrong value");
     }
 
     @Test
@@ -477,5 +464,75 @@ public class DcatV301IntegrationTest {
 
         String error = Converter.errors.get(0);
         assertEquals("Errormessage: email in contactPoint is Mandatory", error);
+    }
+
+    // Disabled because of unresolved issues in Dataportalen.se validation logic
+    // Add subject under dcat-dataset in json_oas_301.json and remove @Disabled from test when issue is resolved.
+    // The test passes as is, but the produced RDF will fail validation at Dataportalen.
+
+    // "dcat-dataset": {
+    //     "subject": "https://www.dataportal.se/terminology/grunddata/foretag"
+    @Disabled("""
+        No valid value can be given for dcterms:subject. The bundle requires
+        www.dataportal.se/terminology/grunddata/ in both its pattern and its
+        skos:inScheme, while the concept scheme itself publishes its concepts
+        under dataportal.se/concepts/grunddata/. 
+        
+        Dataportalen rejects both forms: the concepts form fails
+        the pattern, the terminology form is reported as an unknown value.
+
+        dcat:hadRole has the same problem against the resource-role scheme, so
+        this is one issue with two symptoms. Raised with the DCAT-AP-SE
+        maintainers.
+        """)
+    @Test
+    void testThatDatasetContainsSubjects() throws Exception {
+        IRI field = vf.createIRI("http://purl.org/dc/terms/", "subject");
+        IRI dataset = vf.createIRI("https://www.example.se/#datasetC");
+        IRI expected = vf.createIRI("https://www.dataportal.se/terminology/grunddata/foretag");
+
+        String result = manager.createDcatFromFile(API_DEF_FILE);
+
+        assertTrue(result.contains("RDF"), result);
+        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);    
+        assertTrue(model.contains(dataset, field, expected),"Dataset missing: subject or wrong value");
+    }
+
+    // Disabled because of unresolved issues in Dataportalen.se validation logic
+    // Add qualifiedRelation under dcat-datasetseries in json_oas_301.json and remove @Disabled from test when issue is resolved.
+    // The test passes as is, but the produced RDF will fail validation at Dataportalen.
+
+    // "dcat-datasetseries": {
+    //     "qualifiedRelation": {
+    //         "role": "showcase",
+    //         "relation": "https://www.example.se/relaterad-resurs-i-relation"
+    //     },
+    @Disabled("""
+        No valid value can be given for dcat:hadRole in a qualifiedRelation. The
+        bundle requires www.dataportal.se/terminology/resource-role/ in both its
+        pattern and its skos:inScheme, while the concept scheme itself publishes
+        its concepts under dataportal.se/concepts/resource-role/. 
+        
+        Dataportalen rejects both forms: the concepts
+        form fails the pattern, the terminology form is reported as an unknown
+        value.
+
+        dcterms:subject has the same problem against the grunddata scheme, so
+        this is one issue with two symptoms. Raised with the DCAT-AP-SE
+        maintainers.
+        """)
+    @Test
+    void testThatDatasetSeriesContainsQualifiedRelation() throws Exception {
+        IRI expectedRole = vf.createIRI("https://dataportal.se/concepts/resource-role/image");
+        IRI expectedRelation = vf.createIRI("https://www.example.se/relaterad-resurs-i-relation");
+        IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
+
+        String result = manager.createDcatFromFile(API_DEF_FILE);
+
+        assertTrue(result.contains("RDF"), result);
+        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        Resource relationship = (Resource) model.filter(series, DCAT.QUALIFIED_RELATION, null).objects().iterator().next();
+        assertTrue(model.contains(relationship, DCAT.HAD_ROLE, expectedRole),"Relationship missing dcat:hadRole, or wrong value");
+        assertTrue(model.contains(relationship, DCTERMS.RELATION, expectedRelation),"Relationship missing dcterms:relation, or wrong value");
     }
 }
