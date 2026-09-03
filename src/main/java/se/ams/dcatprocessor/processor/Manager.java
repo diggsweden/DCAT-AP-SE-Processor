@@ -4,6 +4,18 @@
 
 package se.ams.dcatprocessor.processor;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.json.JSONObject;
@@ -15,25 +27,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
-import se.ams.dcatprocessor.controller.Result;
 import se.ams.dcatprocessor.converter.Converter;
 import se.ams.dcatprocessor.converter.ConverterCatalog;
 import se.ams.dcatprocessor.converter.ConverterFiles;
-import se.ams.dcatprocessor.models.ConverterHelpClass;
 import se.ams.dcatprocessor.models.Catalog;
+import se.ams.dcatprocessor.models.ConverterHelpClass;
+import se.ams.dcatprocessor.models.FileStorage;
 import se.ams.dcatprocessor.parser.ApiDefinitionParser;
 import se.ams.dcatprocessor.rdf.DcatException;
 import se.ams.dcatprocessor.rdf.RDFWorker;
-import se.ams.dcatprocessor.models.FileStorage;
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.*;
+import se.ams.dcatprocessor.util.Util;
 
 @Service
 @Scope("prototype")
@@ -88,7 +93,7 @@ public class Manager {
     }
 
     public String createDcatFromFile(String filename) {
-        if (!validateFileExtension(filename)) {
+        if (!Util.validateFileExtension(filename)) {
             return "Invalid file extension: " + filename;
         }
 
@@ -107,8 +112,8 @@ public class Manager {
         return result;
     }
 
-    public List<Result> createFromList(List<MultipartFile> apiFiles, Model model) {
-        List<Result> results = new ArrayList<>();
+    public List<String> createFromList(List<MultipartFile> apiFiles, Model model) {
+        List<String> results = new ArrayList<>();
         MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
         String result;
 
@@ -124,7 +129,7 @@ public class Manager {
                     apiSpecMap.put(apiFile.getOriginalFilename(), apiSpecificationFromFile);
                 } catch (Exception e) {        //Catch and show processing errors in web-gui
                     result = e.getMessage();
-                    results.add(new Result(result));
+                    results.add(result);
                     e.printStackTrace();
                 }
             }
@@ -133,10 +138,10 @@ public class Manager {
             result = createDcat(apiSpecMap);
         } catch (Exception e) {
             result = e.getMessage();
-            results.add(new Result(result));
+            results.add(result);
             e.printStackTrace();
         }
-        results.add(new Result(result));
+        results.add(result);
 
         model.addAttribute("results", results);
         return results;
@@ -229,13 +234,6 @@ public class Manager {
         } catch (Exception e) {
             exceptions.put(fileName, e.fillInStackTrace().getMessage());
         }
-    }
-
-    private boolean validateFileExtension(String filename){
-        if (filename.endsWith(".raml") || filename.endsWith(".yaml") || filename.endsWith(".json")) {
-            return true;
-        }
-        return false;
     }
 
     private void resetValidationErrors(){

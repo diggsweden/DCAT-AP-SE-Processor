@@ -1,0 +1,31 @@
+{
+    "dcat-catalog": {
+        "about": "catalog.about",
+        "title-sv": "catalog.title",
+        "title-en": "catalog.title",
+        "description-sv": "catalog.description",
+        "description-en": "catalog.description",
+        "license": "catalog.license",
+        "publisher": {
+            "about": "publisher.about",
+            "name": "publisher.name",
+            "type": "publisher.type"
+        }
+    },
+    "dcat-dataset": {
+        "about": "dataset.about",
+        "title-sv": "dataset.title",
+        "title-en": "dataset.title",
+        "description-sv": "dataset.description",
+        "description-en": "dataset.description",
+        "keyword-sv": "dataset.keywords",
+        "keyword-en": "dataset.keywords",
+        "theme": "dataset.theme",
+        "contactPoint": {
+            "about": "contactPoint.about",
+            "type": "contactPoint.type",
+            "name": "contactPoint.name",
+            "email": "contactPoint.email"
+        }
+    }
+}
