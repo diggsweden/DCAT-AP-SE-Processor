@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="sv" xmlns:th="http://www.thymeleaf.org" th:fragment="html(content, scripts)">
+<html lang="sv" data-theme="light" xmlns:th="http://www.thymeleaf.org" th:fragment="html(content, scripts)">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,5 +28,7 @@
     </header>
     <th:block th:replace="${content}"></th:block>
     <th:block th:replace="${scripts}"></th:block>
+    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+    <script th:src="@{/js/toast.js}"></script>
   </body>
 </html>

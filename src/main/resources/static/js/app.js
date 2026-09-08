@@ -23,12 +23,16 @@ async function generateRdf(button) {
   let error = false;
   let specs = getSources().filter((source) => source.content.trim() !== '');
 
+  const TOAST_ERROR = 'Kunde inte generera RDF, se resultatfliken';
+  const TOAST_SUCCESS = 'RDF genererad, se resultatfliken';
+
   errorContainer.classList.add('hidden');
   infoContainer.classList.add('hidden');
 
   showResultTab();
   if (specs.length === 0) {
     showError('Fel: Ingen API specifikation angiven.');
+    showToast(TOAST_ERROR, 'error')
     return;
   }
 
@@ -59,8 +63,10 @@ async function generateRdf(button) {
 
   if (error) {
     showError(result);
+    showToast(TOAST_ERROR, 'error')
   } else {
     showRDFResult(result);
+    showToast(TOAST_SUCCESS, 'success')
   }
 }
 
