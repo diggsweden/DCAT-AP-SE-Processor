@@ -7,6 +7,7 @@ version = 1
 [[annotations]]
 path = [
   "renovate.json",
+  ".prettierrc.json",
   "docs/Licenser/*.txt",
 ]
 precedence = "aggregate"
@@ -25,7 +26,9 @@ path = [
   "src/**/*.json",
   "src/**/*.raml",
   "src/**/*.yaml",
-  "src/main/resources/templates/*.ftlh"
+  "src/main/resources/**/*.html",
+  "src/main/resources/**/*.js",
+  "src/main/resources/**/*.css"
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2022 Agency for Digital Government"
@@ -41,3 +44,9 @@ path = [
 precedence = "aggregate"
 SPDX-FileCopyrightText = "Apache Software Foundation (ASF)"
 SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "src/main/resources/static/fonts/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2010-2011 Canonical Ltd."
+SPDX-License-Identifier = "Ubuntu-font-1.0"

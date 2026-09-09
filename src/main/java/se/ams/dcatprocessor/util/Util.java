@@ -100,4 +100,20 @@ public class Util {
 	        return false;
 	    }
 	}
+
+	public static boolean validateFileExtension(String filename){
+		return filename != null && (
+			filename.endsWith(".raml") ||
+			filename.endsWith(".yaml") ||
+			filename.endsWith(".yml") ||
+			filename.endsWith(".json"));
+	}
+
+	public static boolean isRdf(String content) {
+		if(content == null)
+			return false;
+
+		String trimmed = content.stripLeading();
+		return trimmed.startsWith("<?xml") || trimmed.startsWith("<rdf:RDF");
+	}
 }

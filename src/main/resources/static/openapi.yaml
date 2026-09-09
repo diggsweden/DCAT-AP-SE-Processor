@@ -31,6 +31,48 @@ externalDocs:
   description: DCAT-AP-SE-processor repository
   url: https://github.com/diggsweden/DCAT-AP-SE-Processor
 paths:
+  /dcat-generation/spec:
+    post:
+      tags:
+        - generation
+      operationId: restEndpointProduceRdfFromSpecRequest
+      summary: Generate DCAT-AP-SE metadata from supplied specifications.
+      description: |
+        Accepts one or more API specifications in the request body and returns the
+        resulting DCAT-AP-SE metadata as RDF/XML.
+        The file extension in `name` selects the parser, so it must be present and
+        match the format of `content`. Supported: `JSON`, `YAML` and `RAML`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SpecRequest"
+        required: true
+      responses:
+        "200":
+          description: RDF/XML was generated.
+          content:
+            text/plain;charset=UTF-8:
+              schema:
+                type: string
+        "400":
+          description: The request body is invalid. The body lists each problem found.
+          content:
+            text/plain;charset=UTF-8:
+              schema:
+                type: string
+        "422":
+          description: The specifications were processed but produced no valid metadata. The body is an error report.
+          content:
+            text/plain;charset=UTF-8:
+              schema:
+                type: string
+        "500":
+          description: RDF generation failed.
+          content:
+            text/plain;charset=UTF-8:
+              schema:
+                type: string
   /dcat-generation/files/:
     get:
       tags:
@@ -94,3 +136,35 @@ components:
           type: string
         apiStatus:
           type: string
+    ApiSource:
+      type: object
+      description: |
+        A single API specification, supplied as a file name and its raw content.
+      required: [name, content]
+      properties:
+        name:
+          type: string
+          description: |
+            File name including extension. The extension selects the parser and must
+            match the format of `content`. Supported: `.json`, `.yaml`, `.yml`, `.raml`.
+        content:
+          type: string
+          description: |
+            The specification as raw text.
+    SpecRequest:
+      type: object
+      description: |
+        A batch of API specifications to convert in a single request. All sources
+        in one request are processed together and produce a single RDF/XML document,
+        so specifications that reference each other should be sent together rather
+        than in separate calls.
+      required: [sources]
+      properties:
+        sources:
+          type: array
+          description: |
+            The specifications (ApiSource) to convert. At least one is required. Each entry is
+            validated before any processing starts, and a single invalid entry fails
+            the whole request with 400 — nothing is partially converted.
+          items:
+            $ref: "#/components/schemas/ApiSource"

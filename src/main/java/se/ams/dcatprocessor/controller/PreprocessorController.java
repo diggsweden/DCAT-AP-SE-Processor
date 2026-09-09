@@ -3,59 +3,52 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 package se.ams.dcatprocessor.controller;
-import se.ams.dcatprocessor.processor.Manager;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import se.ams.dcatprocessor.processor.Manager;
+import se.ams.dcatprocessor.util.Util;
+
+@RestController
 class PreprocessorController {
 
 	private final ObjectProvider<Manager> managerProvider;
-	Resource resource = new ClassPathResource("application.properties");
-	Properties properties;
-	{
-		try {
-			properties = PropertiesLoaderUtils.loadProperties(resource);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	private static final Logger logger = LoggerFactory.getLogger(PreprocessorController.class);
+
+	public record ApiSource(String name, String content) { }
+
+	public record SpecRequest(List<ApiSource> sources) { }
+
+	public PreprocessorController(ObjectProvider<Manager> managerProvider) {
+		this.managerProvider = managerProvider;
 	}
 
-  	public PreprocessorController(ObjectProvider<Manager> managerProvider) {
-        this.managerProvider = managerProvider;
-    }
-
-    @GetMapping("/")
-    public String index(Model model) {
-        return "index";
-    }
- 
 	/**
 	 * REST API Endpoint for creating DCAT-AP-SE data in RDF/XML format
-	 * 
+	 *
 	 * @param dir The directory location where the API-specifications are
-	 * @return A String containing DCAT-AP-SE data in RDF/XML format or error message
+	 * @return A String containing DCAT-AP-SE data in RDF/XML format or error
+	 *         message
 	 */
-	@RequestMapping(value="/dcat-generation/files/", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+	@RequestMapping(value = "/dcat-generation/files/", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String restEndpointProduceRdf(@RequestParam(name = "dir", defaultValue = "/apidef") String dir) {
 		Manager manager = managerProvider.getObject();
@@ -70,46 +63,80 @@ class PreprocessorController {
 	}
 
 	/**
-	 * View endpoint - Access from web-gui
-	 * 
-	 * @param apiSpecification	The Api-specification as string
-	 * @param create		    The name of the "create" button in web-gui
-	 * @param apiFiles			List of api-definitions files
-	 * @param model				The Model according to Spring MVC pattern
-	 * @return					The index page with the result added
+	 * Generates DCAT-AP-SE in RDF/XML from one or more API specifications
+	 * supplied in the request body.
+	 *
+	 * Expected body:
+	 * { "sources": [ { "name": "catalog.json", "content": "..." } ] }
+	 *
+	 * @param request SpecRequest: the specifications. Each ApiSource carries a file
+	 *                name and the raw
+	 *                specification text. The extension of the name selects the
+	 *                parser (.json, .yaml, .yml or .raml),
+	 *                so it must be present and match the format of the content.
+	 * @return 200 with RDF/XML, 400 if the input is invalid, or 422 with an error
+	 *         report.
 	 */
-	@PostMapping("/dcat-generation/web/") 
-	public String viewEndpoint(	@RequestParam(name = "apispecification", required = false) String apiSpecification, 
-								@RequestParam(name = "create", required = true) String create,
-								@RequestParam(name = "apifile", required = false) List<MultipartFile> apiFiles,
-								Model model) {
-		
-		List<Result> results = new ArrayList<Result>();
-		MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
+	@PostMapping(path = "/dcat-generation/spec", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> restEndpointProduceRdfFromSpecRequest(@RequestBody SpecRequest request) {
+		List<ApiSource> sources = request.sources();
 
-		if (create != null && create.equals("create")) {
-			Manager manager = managerProvider.getObject();
-			String result = "";
-
-			// Generate DCAT-AP-SE from files
-			if(apiSpecification.isEmpty() && !apiFiles.isEmpty()) {
-				results = manager.createFromList(apiFiles,model);
-		
-			// Generate DCAT-AP-SE from string
-			} else if(!apiSpecification.isEmpty()){
-				try {
-					apiSpecMap.put("apifile", apiSpecification);
-					result = manager.createDcat(apiSpecMap);
-				
-				//Catch and show processing errors in web-gui
-				} catch (Exception e) {
-					result = e.getMessage();
-					e.printStackTrace();
-				}
-				results.add(new Result(result));
-			}
-			model.addAttribute("results", results);
+		List<String> errors = validateSources(sources);
+		if (!errors.isEmpty()) {
+			return ResponseEntity.badRequest().body(String.join("\n", errors));
 		}
-		return "index";
+
+		MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
+		for (ApiSource apiSource : sources) {
+			apiSpecMap.put(apiSource.name(), apiSource.content());
+		}
+
+		Manager manager = managerProvider.getObject();
+		try {
+			String result = manager.createDcat(apiSpecMap);
+
+			// createDcat returns either RDF or a plain-text error report, the content decides the status code
+			if (Util.isRdf(result)) {
+				return ResponseEntity.ok(result);
+			}
+			return ResponseEntity.unprocessableContent().body(result);
+
+		} catch (Exception e) {
+			logger.error("DCAT generation failed", e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("RDF generation failed");
+		}
+	}
+
+	private static List<String> validateSources(List<ApiSource> sources) {
+		List<String> errors = new ArrayList<>();
+
+		if (sources == null || sources.isEmpty()) {
+			errors.add("No specification files supplied");
+			return errors;
+		}
+
+		for (int i = 0; i < sources.size(); i++) {
+			ApiSource apiSource = sources.get(i);
+			String label = "File " + (i + 1);
+
+			if (apiSource == null) {
+				errors.add(label + " is missing");
+				continue;
+			}
+
+			if (StringUtils.isBlank(apiSource.name())) {
+				errors.add(label + " is missing a file name");
+			} else {
+				label = "The file '" + apiSource.name() + "'";
+				if (!Util.validateFileExtension(apiSource.name())) {
+					errors.add(label + " has an invalid file extension. Only .json, .yaml, .yml and .raml are supported.");
+				}
+			}
+
+			if (StringUtils.isBlank(apiSource.content())) {
+				errors.add(label + " is empty");
+			}
+		}
+		return errors;
 	}
 }

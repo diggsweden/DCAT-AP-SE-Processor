@@ -1,0 +1,46 @@
+<div th:fragment="result">
+  <div id="info-container" class="alert alert-info m-3">
+    <svg
+      class="alert-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="16.5" x2="12" y2="11.5" />
+      <line x1="12" y1="7.5" x2="12.01" y2="7.5" />
+    </svg>
+    <div class="d-flex">
+      <p class="mb-0 alert-text">
+        Det finns inget resultat. Klistra in eller lägg till en API-specifikation och klicka på Generera RDF.
+      </p>
+    </div>
+  </div>
+  <div id="result-container" class="bg-white hidden">
+    <div id="generate-error-container" class="alert alert-danger m-3 hidden">
+      <span class="alert-icon icon-alert-triangle" aria-hidden="true"></span>
+      <pre class="alert-text mb-0"></pre>
+    </div>
+    <div class="d-flex justify-end position-relative">
+      <button
+        type="button"
+        data-tooltip="Kopiera"
+        data-placement="bottom"
+        class="hidden"
+        id="copy-result"
+        aria-label="Kopiera"
+      >
+        <span>
+          <i class="icon-copy fa-regular fa-copy" aria-hidden="true"></i>
+          <i class="icon-check fa-solid fa-check" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+    <pre id="result" class="p-3 mb-0"></pre>
+    <div id="resultSkeleton" class="hidden p-3" aria-hidden="true"></div>
+  </div>
+</div>
