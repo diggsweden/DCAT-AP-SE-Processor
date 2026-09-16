@@ -19,6 +19,7 @@ path = [
   "pom.xml",
   "Containerfile",
   "README.md",
+  "SECURITY.md",
   "DEVELOPMENT.md",
   "docs/*.md",
   "docs/**/.png",
