@@ -4,11 +4,10 @@
 
 package se.ams.dcatprocessor.processor;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,6 +51,6 @@ public class ErrorReporterTest {
 
         assertTrue(report.contains(value));
         assertTrue(report.contains(filename));
-        assertTrue(report.contains(ErrorType.DUPLICATE_URI_BETWEEN_FILES.toString()));
+        assertTrue(report.contains("Duplicate uri between files"));
     }
 }

@@ -59,6 +59,7 @@ public class CardinalityValidator {
 		Map<String, DcatCardinality> cardinalities = CardinalityHandler.getInstance().getCardinalities(dcatClass);
 		
 		HashMap<String, Integer> countedKeyNames = new HashMap<>();
+		String section = dcatClass.toString();
 
 		//Count the number of occurrences for each value-key E.g.dcterms:title and store in countValueName
 		Set<String> vKeySet = values.keySet();
@@ -72,7 +73,7 @@ public class CardinalityValidator {
 				/**
 				 * The key is unknown..a validationerror
 				 */
-				validationErrorStorage.setValidationError(currentFileName, new ValidationError(currentFileName, vKey));
+				validationErrorStorage.setValidationError(currentFileName, new ValidationError(currentFileName, vKey, section));
 			}
 		}
 
@@ -97,14 +98,14 @@ public class CardinalityValidator {
 					 * The specification specifies at least one .. create a validationerror
 					 */
 					if (c.isOneOrMore() && isRequired(c, values)) {
-						validationErrorStorage.setValidationError(currentFileName, new ValidationError(currentFileName, cKey, 0, c));
+						validationErrorStorage.setValidationError(currentFileName, new ValidationError(currentFileName, cKey, 0, c, section));
 					}
-				} 
+				}
 				else {
 					// Check that the input value occurs within the allowed range
 					if(!c.isInsideCardinality(number.intValue())) {
-						validationErrorStorage.setValidationError(currentFileName, new ValidationError(currentFileName, cKey, number, c));
-					}				
+						validationErrorStorage.setValidationError(currentFileName, new ValidationError(currentFileName, cKey, number, c, section));
+					}
 				}
 			}
 		}

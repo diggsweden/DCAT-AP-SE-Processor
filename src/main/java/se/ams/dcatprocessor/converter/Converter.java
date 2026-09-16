@@ -4,15 +4,26 @@
 
 package se.ams.dcatprocessor.converter;
 
-import org.apache.commons.collections4.MultiValuedMap;
-import org.eclipse.rdf4j.model.vocabulary.*;
-import org.json.JSONObject;
-import se.ams.dcatprocessor.models.*;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.apache.commons.collections4.MultiValuedMap;
+import org.eclipse.rdf4j.model.vocabulary.DCAT;
+import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
+import org.json.JSONObject;
+
+import se.ams.dcatprocessor.models.Catalog;
+import se.ams.dcatprocessor.models.ConverterHelpClass;
+import se.ams.dcatprocessor.models.DataClass;
+import se.ams.dcatprocessor.models.DataSet;
+import se.ams.dcatprocessor.models.FileStorage;
+import se.ams.dcatprocessor.models.Organization;
+import se.ams.dcatprocessor.rdf.validate.ValidationError;
+import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
 
 public class Converter {
     Catalog catalog = new Catalog();
@@ -20,11 +31,8 @@ public class Converter {
     JSONObject jsonObjectMandatoryDcat;
     JSONObject jsonLanguageFile;
     JSONObject orgConvert;
-    public static List<String> errors = new ArrayList<>();
-
-    public static void deleteErrors() {
-        errors.clear();
-    }
+    List<ValidationError> errors = new ArrayList<>();
+    String sourceFilename;
 
     void processToDcat(JSONObject subConvert, JSONObject file, Optional<String> subCat, Optional<DataClass> preData, Optional<DataClass> preDist) throws Exception {
     }
@@ -154,7 +162,7 @@ public class Converter {
                 if (jsonSupportiveDcat.has(mapValue)) {
                     mapValue = (String) ((JSONObject) (jsonSupportiveDcat.get(mapValue))).get("url");
                 } else if (!mapValue.contains("http://") && !key.contains("format")) {
-                    errors.add("Errormessage: " + key + " has a not supported value (" + mapValue + "). Check list for " + key + " to see the correct values that can be used.");
+                    addError(ErrorType.UNKNOWN_VALUE, key, subCat, mapValue);
                 }
             }
             if (ConverterHelpClass.tagWithUri.contains(key)) {
@@ -177,7 +185,7 @@ public class Converter {
 
     /*
      * Create an Address Object from a list and saves it to the Organization Object */
-    void addAddress(DataClass dataObj, String value) {
+    void addAddress(DataClass dataObj, String value, Optional<String> subCat, String key) {
         String[] splitAddress = value.split(";");
         DataClass valueMapAddress = new DataClass();
         if (splitAddress.length == 4) {
@@ -187,9 +195,9 @@ public class Converter {
             valueMapAddress.dcData.put(ConverterHelpClass.addressObject.get("Country"), splitAddress[3]);
             ((Organization) dataObj).adress.add(valueMapAddress);
         } else if (splitAddress.length < 4) {
-            errors.add("Errormessage: " + " Address in Contact point has too few values, should contain street-address, postal-code, locality and country-name");
+            addError(ErrorType.ADDRESS_TO_FEW, key, subCat, "");
         } else {
-            errors.add("Errormessage: " + " Address in Contact point has too many values, should contain street-address, postal-code, locality and country-name");
+            addError(ErrorType.ADDRESS_TO_MANY, key, subCat, "");
         }
     }
 
@@ -211,7 +219,7 @@ public class Converter {
         } else if (key.equals("vcard:hasTelephone")) {
             addPhone(dataObj, value);
         } else if (key.equals("Address")) {
-            addAddress(dataObj, value);
+            addAddress(dataObj, value, subCat, key);
         } else {
             addValue(dataObj.dcData, value, key, subCat);
         }
@@ -258,7 +266,7 @@ public class Converter {
         }
 
         if (!exists && isMandatory) {
-            errors.add("Errormessage: " + annotationName + " is Mandatory");
+            addMandatoryError(annotationName, Optional.empty(), key);
         }
     }
 
@@ -284,12 +292,8 @@ public class Converter {
         return jsonObjectMandatoryDcat.has(mandatoryKey);
     }
 
-    protected void addMandatoryError(String annotationName, Optional<String> subCat) {
-        if (subCat.isPresent()) {
-            errors.add("Errormessage: " + annotationName + " in " + subCat.get() + " is Mandatory");
-        } else {
-            errors.add("Errormessage: " + annotationName + " is Mandatory");
-        }
+    protected void addMandatoryError(String annotationName, Optional<String> subCat, String key) {
+        addError(ErrorType.MANDATORY_VALUE_MISSING, key, subCat, "");
     }
 
     protected void handleAddress(JSONObject file, String key, String annotationName, Organization organizationLocal, Optional<String> subCat) throws Exception {
@@ -298,5 +302,28 @@ public class Converter {
         } else {
             addFieldsContainingName(file, key, annotationName, organizationLocal, subCat);
         }
+    }
+
+    protected void addError(ErrorType errorType, String key, Optional<String> subCat, String value) {
+        String section = buildSection(subCat);
+        ValidationError error = new ValidationError(errorType, sourceFilename, key, value, section);
+        errors.add(error);
+    }
+
+    /*
+     * DCAT class name for error messages.
+     * Subclasses that report errors override this with the matching RDF4J constant;
+     */
+    protected String getSectionName() {
+        return "";
+    }
+
+    private String buildSection(Optional<String> subCat) {
+        String sectionName = getSectionName();
+
+        if (subCat.isEmpty() || subCat.get().equals(sectionName)) {
+            return sectionName;
+        }
+        return sectionName + "." + subCat.get();
     }
 }

@@ -75,7 +75,7 @@ public class TestHelper {
 		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
 		
 		//Validation generated no errors	
-		assertTrue(singleInputValidator.validateData(key, value));
+		assertTrue(singleInputValidator.validateData(key, value, "Dataset"));
 		
 		//Filename is set
 		assertEquals(fileName, singleInputValidator.getCurrentFileName());

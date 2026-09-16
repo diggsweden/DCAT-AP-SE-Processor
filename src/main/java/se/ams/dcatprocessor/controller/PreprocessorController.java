@@ -7,8 +7,6 @@ package se.ams.dcatprocessor.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections4.MultiValuedMap;
-import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,16 +22,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import se.ams.dcatprocessor.models.ApiSource;
+import se.ams.dcatprocessor.processor.DcatResult;
 import se.ams.dcatprocessor.processor.Manager;
 import se.ams.dcatprocessor.util.Util;
 
+
+@RequestMapping("/dcat-generation")
 @RestController
 class PreprocessorController {
 
 	private final ObjectProvider<Manager> managerProvider;
 	private static final Logger logger = LoggerFactory.getLogger(PreprocessorController.class);
-
-	public record ApiSource(String name, String content) { }
+	private final static String UNEXPECTED_ERROR = "Error generating RDF. An unexpected error occurred.";
 
 	public record SpecRequest(List<ApiSource> sources) { }
 
@@ -48,18 +49,23 @@ class PreprocessorController {
 	 * @return A String containing DCAT-AP-SE data in RDF/XML format or error
 	 *         message
 	 */
-	@RequestMapping(value = "/dcat-generation/files/", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+	@RequestMapping(value = "/files/", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String restEndpointProduceRdf(@RequestParam(name = "dir", defaultValue = "/apidef") String dir) {
 		Manager manager = managerProvider.getObject();
-		String result = "";
-
 		try {
-			result = manager.createDcatFromDirectory(dir);
+			DcatResult result = manager.createDcatFromDirectory(dir);
+			if(result.hasErrors()) {
+				return result.errorReport();
+			}
+
+			Util.printToFile(result.rdf(), "dcat.rdf");
+			return result.rdf();
+			
 		} catch (Exception e) {
-			result = e.getMessage();
+			logger.error(UNEXPECTED_ERROR + " When generating DCAT from directory: " + dir, e);
+			return UNEXPECTED_ERROR;
 		}
-		return result;
 	}
 
 	/**
@@ -77,7 +83,7 @@ class PreprocessorController {
 	 * @return 200 with RDF/XML, 400 if the input is invalid, or 422 with an error
 	 *         report.
 	 */
-	@PostMapping(path = "/dcat-generation/spec", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/spec", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> restEndpointProduceRdfFromSpecRequest(@RequestBody SpecRequest request) {
 		List<ApiSource> sources = request.sources();
 
@@ -85,25 +91,19 @@ class PreprocessorController {
 		if (!errors.isEmpty()) {
 			return ResponseEntity.badRequest().body(String.join("\n", errors));
 		}
-
-		MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
-		for (ApiSource apiSource : sources) {
-			apiSpecMap.put(apiSource.name(), apiSource.content());
-		}
-
+		
 		Manager manager = managerProvider.getObject();
 		try {
-			String result = manager.createDcat(apiSpecMap);
+			DcatResult result = manager.createDcat(sources);
 
-			// createDcat returns either RDF or a plain-text error report, the content decides the status code
-			if (Util.isRdf(result)) {
-				return ResponseEntity.ok(result);
+			if(result.hasErrors()){
+				return ResponseEntity.unprocessableContent().body(result.errorReport());
 			}
-			return ResponseEntity.unprocessableContent().body(result);
+			return ResponseEntity.ok(result.rdf());
 
 		} catch (Exception e) {
-			logger.error("DCAT generation failed", e);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("RDF generation failed");
+			logger.error(UNEXPECTED_ERROR, e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(UNEXPECTED_ERROR);
 		}
 	}
 

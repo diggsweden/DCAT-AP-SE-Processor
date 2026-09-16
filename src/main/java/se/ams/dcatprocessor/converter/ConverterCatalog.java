@@ -4,33 +4,41 @@
 
 package se.ams.dcatprocessor.converter;
 
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import org.apache.commons.collections4.MultiValuedMap;
-import org.eclipse.rdf4j.model.vocabulary.*;
+import org.eclipse.rdf4j.model.vocabulary.DCAT;
+import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 import org.json.JSONObject;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import se.ams.dcatprocessor.models.*;
-
-import java.io.IOException;
-import java.util.*;
+import se.ams.dcatprocessor.models.ApiSpecFile;
+import se.ams.dcatprocessor.models.ConverterHelpClass;
+import se.ams.dcatprocessor.models.DataClass;
+import se.ams.dcatprocessor.rdf.DcatException;
+import se.ams.dcatprocessor.rdf.validate.ValidationError;
+import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
 
 @Component
 @Scope("prototype")
 public class ConverterCatalog extends Converter {
 
     /* Takes one specFile for a Catalog and creates a Catalog Object */
-    public DataClass catalogToDcat(JSONObject apiSpec) throws Exception {
+    public DataClass catalogToDcat(ApiSpecFile apiSpecFile) throws Exception {
+        this.sourceFilename = apiSpecFile.name();
         setConvertAndMandatoryFile(ConverterHelpClass.uriToDcatCatalog);
-        processToDcat(orgConvert, apiSpec, Optional.empty(), Optional.empty(), Optional.empty());
+        processToDcat(orgConvert, apiSpecFile.content(), Optional.empty(), Optional.empty(), Optional.empty());
         catalog.dcData.put("dcat:themeTaxonomy", "http://publications.europa.eu/resource/authority/data-theme");
 
-        if (errors.size() > 0) {
-            StringBuilder errorResult = new StringBuilder();
-            for (String error : errors) {
-                errorResult.append(error).append("\n");
-            }
-            throw new Exception(errorResult.toString());
+        if (!errors.isEmpty()) {
+            Map<String, List<ValidationError>> errorMap = new LinkedHashMap<>();
+            errorMap.put(sourceFilename, errors);
+            throw new DcatException("Error converting file " + apiSpecFile.name(), errorMap);
         }
         return catalog;
     }
@@ -98,7 +106,7 @@ public class ConverterCatalog extends Converter {
                             }
                         }
                     } else if (isMandatory) {
-                        addMandatoryError(annotationName, subCat);
+                        addMandatoryError(annotationName, subCat, key);
                     }
                 }
             }
@@ -143,7 +151,7 @@ public class ConverterCatalog extends Converter {
                 if (jsonSupportiveDcat.has(mapValue)) {
                     mapValue = (String) ((JSONObject) (jsonSupportiveDcat.get(mapValue))).get("url");
                 } else if (!mapValue.contains("http://") && !key.contains("format")) {
-                    errors.add("Errormessage: " + key + " has a not supported value (" + mapValue + "). Check list for " + key + " to see the correct values that can be used.");
+                    addError(ErrorType.UNKNOWN_VALUE, key, subCat, mapValue);
                 }
             }
             if (ConverterHelpClass.tagWithUri.contains(key)) {
@@ -168,5 +176,10 @@ public class ConverterCatalog extends Converter {
         } else {
             addValue(dataObj.dcData, value, key, subCat);
         }
+    }
+
+    @Override
+    protected String getSectionName() {
+        return DCAT.CATALOG.getLocalName();
     }
 }

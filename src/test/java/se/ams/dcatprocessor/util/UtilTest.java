@@ -4,11 +4,10 @@
 
 package se.ams.dcatprocessor.util;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -52,5 +51,28 @@ class UtilTest {
 	void testIsURIReturnsFalseForInvalidURI(String uri) {
 		boolean result = Util.isURI(uri);
 	    assertFalse(result);
+	}
+
+	@ParameterizedTest
+    @ValueSource(strings = {
+		"file.json",
+		"file.yaml",
+		"file.raml",
+		"file.yml",
+	})
+	void testThatValidFileExtensionsIsValidated(String name){
+		assertTrue(Util.validateFileExtension(name));
+	}
+
+	@ParameterizedTest
+	@NullAndEmptySource
+    @ValueSource(strings = {
+		"file.pdf",
+		"file.txt",
+		"file.csv",
+		"file.jso",
+	})
+	void testThatInvalidFileExtensionsFail(String name){
+		assertFalse(Util.validateFileExtension(name));
 	}
 }

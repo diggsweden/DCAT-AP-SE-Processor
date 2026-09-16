@@ -4,16 +4,14 @@
 
 package se.ams.dcatprocessor.processor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.commons.collections4.MultiValuedMap;
-import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
+import org.json.JSONObject;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -23,7 +21,7 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import se.ams.dcatprocessor.rdf.DcatException;
+import se.ams.dcatprocessor.models.ApiSource;
 import se.ams.dcatprocessor.testutil.TestHelper;
 
 @SpringBootTest
@@ -303,50 +301,78 @@ public class ManagerTest {
         "src/test/resources/apidef/json_separate",  // with json from dir (separated)
 	})
     void testThatDcatIsCreatedFromDiretory(String apidefDir) throws Exception {
-        String result = manager.createDcatFromDirectory(apidefDir.toString());
+        DcatResult result = manager.createDcatFromDirectory(apidefDir);
+        String rdfResult = result.rdf();
         // nodeIDs are generated dynamically, changing them allows for comparison
-        String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");      
+        String convertedRdf = replaceBetween(rdfResult, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");      
         
         assertEquals(expectedRDF, convertedRdf);        
     }
 
     @Test
     void testThatDcatIsCreatedFromFileWithRaml() throws Exception {
-        MultiValuedMap<String, String> apiSpecMap = new ArrayListValuedHashMap<>();
-        apiSpecMap.put("apifile", ramlApidef);
-       
-        String result = manager.createDcat(apiSpecMap);
+        ApiSource source = new ApiSource("test-spec.raml", ramlApidef);
+
+        DcatResult result = manager.createDcat(List.of(source));
+        String rdfResult = result.rdf();
+
         // nodeIDs are generated dynamically, changing them allows for comparison
-        String convertedRdf = replaceBetween(result, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");
-       
-        
+        String convertedRdf = replaceBetween(rdfResult, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");
         assertEquals(expectedRDF, convertedRdf);
     }
 
     @Test
-    void testThatInvalidJsonThrowsExpectedException(@TempDir Path tempDir) throws Exception {
+    void testThatInvalidJsonIsReportedAsError(@TempDir Path tempDir) throws Exception {
         Path invalidFile = tempDir.resolve("invalid.json");
         Files.writeString(invalidFile, "{ not valid json }");
     
-        Exception exception = assertThrows(DcatException.class, () -> {
-            manager.createDcatFromDirectory(tempDir.toString());
-        });
+        DcatResult result = manager.createDcatFromDirectory(tempDir.toString());
     
-        assertTrue(exception.getMessage().contains("Failed to parse JSON"));
+        assertTrue(result.hasErrors());
+        assertTrue(result.errorReport().contains("Failed to parse JSON, invalid format."));
+        assertTrue(result.errorReport().contains("invalid.json"));
     }
 
     @Test
-    void testThatInvalidAddressLogsCorrectError(@TempDir Path tempDir) throws Exception {
-        Path original = Path.of("src/test/resources/apidef/json_oas/obl_rek_oas.json");
-        String content = Files.readString(original);
+    void testThatToFewAddressValuesLogsCorrectError(@TempDir Path tempDir) throws Exception {
+        Path testFile = Path.of("src/test/resources/apidef/json_oas/obl_rek_oas.json");
 
-        // Make address nonvalid
-        String notValid = content.replace("Testgatan 5; 76543; Tranemo; Sverige", "Testgatan 5; 76543; Tranemo");
-        Files.writeString(tempDir.resolve("api.json"), notValid);
+        // Make address invalid, exactly 4 fields is required
+        Path modified = TestHelper.copyWith((testFile), tempDir,
+            json -> {
+                JSONObject contactPoint = json.getJSONObject("info")
+                    .getJSONObject("x-dcat")
+                    .getJSONObject("dcat-dataset")
+                    .getJSONObject("contactPoint");
+                
+                contactPoint.put("address", "Testgatan 5; 76543; Tranemo");
+            });
 
-        String result = manager.createDcatFromDirectory(tempDir.toString());
-        
-        assertTrue(result.contains("Address in Contact point has too few values"));
+        DcatResult result = manager.createDcatFromFile(modified.toString());
+
+        assertTrue(result.hasErrors());
+        assertTrue(result.errorReport().contains("Address has too few values"));
+    }
+
+    @Test
+    void testThatToManyddressValuesLogsCorrectError(@TempDir Path tempDir) throws Exception {
+        Path testFile = Path.of("src/test/resources/apidef/json_oas/obl_rek_oas.json");
+
+        // Make address invalid, exactly 4 fields is required
+        Path modified = TestHelper.copyWith((testFile), tempDir,
+            json -> {
+                JSONObject contactPoint = json.getJSONObject("info")
+                    .getJSONObject("x-dcat")
+                    .getJSONObject("dcat-dataset")
+                    .getJSONObject("contactPoint");
+                
+                contactPoint.put("address", "Testgatan 5; 76543; Tranemo; Sverige; Sweden");
+            });
+
+        DcatResult result = manager.createDcatFromFile(modified.toString());
+
+        assertTrue(result.hasErrors());
+        assertTrue(result.errorReport().contains("Address has too many values"));
     }
 
     @ParameterizedTest
@@ -356,8 +382,17 @@ public class ManagerTest {
         "testfile.csv"
     })
     void testInvalidFileExtensionReturnsExpectedMessage(String filename) throws Exception {
-        String result = manager.createDcatFromFile(filename);     
-        assertEquals(result, "Invalid file extension: " + filename);
+        DcatResult result = manager.createDcatFromFile(filename); 
+        assertTrue(result.hasErrors()); 
+        assertEquals(result.errorReport(), "Invalid file extension: " + filename);
+    }
+
+    @Test
+    void testThatMissingCatalogIsReportedAsError() throws Exception {
+        DcatResult result = manager.createDcat(List.of());
+
+        assertTrue(result.hasErrors());
+        assertTrue(result.errorReport().contains("No catalog found"));
     }
 
     // region Utility methods

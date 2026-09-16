@@ -91,7 +91,7 @@ public class ConverterDataService extends Converter {
                             }
                         }
                     } else if (isMandatory) {
-                        addMandatoryError(annotationName, subCat);
+                        addMandatoryError(annotationName, subCat, key);
                     }
                 }
             }
@@ -131,5 +131,10 @@ public class ConverterDataService extends Converter {
         } else if (subCatValue.contains(FOAF.DOCUMENT.getLocalName())) {
             parent.documents.add(dataClassLocal);
         }
+    }
+
+    @Override
+    protected String getSectionName() {
+        return DCAT.DATA_SERVICE.getLocalName();
     }
 }

@@ -14,7 +14,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import se.ams.dcatprocessor.processor.DcatResult;
 import se.ams.dcatprocessor.processor.Manager;
+import se.ams.dcatprocessor.util.Util;
 
 @Component
 public class CliRunner implements ApplicationRunner{
@@ -58,22 +60,32 @@ public class CliRunner implements ApplicationRunner{
     }
 
     private void createDcatFromFile(String filename){
-        Manager manager = managerProvider.getObject();
-        String result = manager.createDcatFromFile(filename);
-        System.out.println(result); 
-        exitSpringApplication();
+        try {
+            Manager manager = managerProvider.getObject();
+            DcatResult dcatResult = manager.createDcatFromFile(filename);
+            handleDcatResult(dcatResult);
+        } finally {
+            exitSpringApplication();
+        }
     }
 
-    private void createDcatFromDirectory(String dirname) {
-        Manager manager = managerProvider.getObject();
-
+    private void createDcatFromDirectory(String dirname) {  
         try {
-            String result = manager.createDcatFromDirectory(dirname);
-            System.out.println(result);
-        } catch (Exception e) {
-            System.out.println("Error generating dcat from directory: " + dirname);
+            Manager manager = managerProvider.getObject();
+            DcatResult dcatResult = manager.createDcatFromDirectory(dirname);
+            handleDcatResult(dcatResult);
+        } finally {
+            exitSpringApplication();
         }
-        exitSpringApplication();
+    }
+
+    private void handleDcatResult(DcatResult dcatResult) {
+        if(dcatResult.hasErrors()){
+            System.out.println(dcatResult.errorReport());
+        } else {
+            System.out.println(dcatResult.rdf());
+            Util.printToFile(dcatResult.rdf(), "dcat.rdf");
+        }
     }
 
     private void exitSpringApplication(){

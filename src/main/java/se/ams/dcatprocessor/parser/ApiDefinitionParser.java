@@ -4,50 +4,86 @@
 
 package se.ams.dcatprocessor.parser;
 
-import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.nodes.*;
-import se.ams.dcatprocessor.rdf.DcatException;
+import org.yaml.snakeyaml.error.YAMLException;
+import org.yaml.snakeyaml.nodes.MappingNode;
+import org.yaml.snakeyaml.nodes.Node;
+import org.yaml.snakeyaml.nodes.NodeTuple;
+import org.yaml.snakeyaml.nodes.ScalarNode;
+import org.yaml.snakeyaml.nodes.SequenceNode;
+import org.yaml.snakeyaml.nodes.Tag;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.regex.Pattern;
+import com.fasterxml.jackson.core.JsonEncoding;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import se.ams.dcatprocessor.models.ApiSource;
+import se.ams.dcatprocessor.models.ApiSpecFile;
+import se.ams.dcatprocessor.rdf.DcatException;
 
 public class ApiDefinitionParser {
 
-    public static JSONObject getApiJsonString(String fileString) throws IOException, JSONException  {
+    // Top-level blocks that can appear directly in an input document.
+    public static final List<String> TOP_LEVEL_DCAT_BLOCKS  = List.of(
+        "dcat-catalog",
+        "dcat-dataset",
+        "dcat-dataservice",
+        "dcat-datasetseries"
+    );
+
+    public static ApiSpecFile getApiSpecFile(ApiSource source) throws DcatException {
+        String fileString = source.content();
         String apiJsonString;
         String apiLine1 = fileString.lines().findFirst().orElse("");
 
         if (apiLine1.contains("openapi") || apiLine1.contains("RAML")) {
             apiJsonString = getFileApiYamlRaml(fileString);
-        } else if (apiLine1.contains("{")){
+        } else if (apiLine1.contains("{")) {
             apiJsonString = fileString;
-        }
-        else {
-            throw new DcatException("not supported api definition");
+        } else {
+            throw new DcatException("Failed to read API definition: unrecognized format, expected an OpenAPI specification (YAML or JSON) or a RAML specification");
         }
 
         JSONObject jsonObjectFile;
         try {
             jsonObjectFile = new JSONObject(apiJsonString);
-            
-            if (jsonObjectFile.has("info")) {
-                jsonObjectFile = jsonObjectFile.getJSONObject("info");
-                jsonObjectFile = jsonObjectFile.getJSONObject("x-dcat");
-            }
         } catch (JSONException e) {
-            throw new DcatException("Failed to parse JSON: " + e.getMessage());
+            throw new DcatException("Failed to parse JSON, invalid format.");
         }
-        return jsonObjectFile;
+        return extractDcatMetadata(jsonObjectFile, source.name());
     }
 
-    private static String getFileApiYamlRaml(String apiSpec) throws IOException {
+    private static ApiSpecFile extractDcatMetadata(JSONObject document, String fileName) throws DcatException {
+        if (document.has("info")) {
+            JSONObject info = document.getJSONObject("info");
+            if (!info.has("x-dcat")) {
+                throw new DcatException("Failed to extract DCAT metadata: no x-dcat block under info in the API specification");
+            }
+            return new ApiSpecFile(fileName, info.getJSONObject("x-dcat"));
+        }
+    
+        if (document.has("openapi")) {
+            throw new DcatException("Failed to extract DCAT metadata: no info block found in the OpenAPI specification");
+        }
+
+        // Not an API specification — the document should be DCAT metadata itself
+        if (!hasTopLevelDcatBlock(document)) {
+            throw new DcatException("Could not identify a valid API specification or DCAT metadata in the provided input");
+        }
+
+        return new ApiSpecFile(fileName, document);
+    }
+
+    private static String getFileApiYamlRaml(String apiSpec) throws DcatException {
         JsonFactory factory = new JsonFactory();
 
         try (ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -63,9 +99,25 @@ public class ApiDefinitionParser {
             String jsonString = output.toString(StandardCharsets.UTF_8);
             return new JSONObject(jsonString).toString();
             
-        } catch (JSONException e) {
-            throw new IOException("Failed to parse YAML/RAML as JSON: " + e.getMessage(), e);
+        } catch (IOException | YAMLException | JSONException e) {
+            throw new DcatException("Invalid format, failed to parse YAML/RAML");
         }
+    }
+
+    /*
+     * Checks whether the document contains at least one recognized top-level DCAT block.
+     * Matching is done with contains rather than equals because RAML annotations appear
+     * as "(dcat-dataset)" while JSON uses the bare key.
+     */
+    private static boolean hasTopLevelDcatBlock(JSONObject document) {
+        for (String documentKey : document.keySet()) {
+            for (String blockKey : TOP_LEVEL_DCAT_BLOCKS) {
+                if (documentKey.contains(blockKey)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static void build(Node yaml, JsonGenerator generator) throws IOException {

@@ -18,6 +18,12 @@ import java.util.Optional;
 @Scope("prototype")
 public class ConverterDataSet extends Converter {
 
+    private ConverterDistribution converterDistribution;
+
+    public ConverterDataSet(ConverterDistribution converterDistribution) {
+        this.converterDistribution = converterDistribution;
+    }
+
     /* Process the spec to find elements for dcat-ap-se and add them to an Object to return */
     @Override
     void processToDcat(JSONObject subConvert, JSONObject file, Optional<String> subCat, Optional<DataClass> preData, Optional<DataClass> preDist) throws Exception {
@@ -41,11 +47,13 @@ public class ConverterDataSet extends Converter {
 
             // Do if key is DISTRIBUTION
             if (key.equals(DCAT.DISTRIBUTION.getLocalName())) {
-                ConverterDistribution convertDistribution = new ConverterDistribution();
-                convertDistribution.orgConvert = orgConvert;
-                convertDistribution.jsonObjectMandatoryDcat = jsonObjectMandatoryDcat;
-                convertDistribution.fileHandler = fileHandler;
-                convertDistribution.createSubset(file, key, annotationName, Optional.of(dataSet), Optional.of(distribution), isMandatory);
+                converterDistribution.orgConvert = orgConvert;
+                converterDistribution.jsonObjectMandatoryDcat = jsonObjectMandatoryDcat;
+                converterDistribution.fileHandler = fileHandler;
+                converterDistribution.createSubset(file, key, annotationName, Optional.of(dataSet), Optional.of(distribution), isMandatory);
+                
+                this.errors.addAll(converterDistribution.errors);
+                converterDistribution.errors.clear();
             }
             // Do if key is LICENSE_DOCUMENT
             else if (key.equals(DCTERMS.LICENSE_DOCUMENT.getLocalName())) {
@@ -97,7 +105,7 @@ public class ConverterDataSet extends Converter {
                             }
                         }
                     } else if (isMandatory) {
-                        addMandatoryError(annotationName, subCat);
+                        addMandatoryError(annotationName, subCat, key);
                     }
                 }
             }
@@ -145,5 +153,10 @@ public class ConverterDataSet extends Converter {
         } else if (subCatValue.contains(FOAF.DOCUMENT.getLocalName())) {
             parentData.documents.add(dataClassLocal);
         }
+    }
+
+    @Override
+    protected String getSectionName() {
+        return DCAT.DATASET.getLocalName();
     }
 }

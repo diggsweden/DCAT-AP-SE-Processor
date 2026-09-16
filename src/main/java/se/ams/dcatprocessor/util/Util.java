@@ -4,12 +4,16 @@
 
 package se.ams.dcatprocessor.util;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
 import org.jspecify.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import se.ams.dcatprocessor.rdf.DcatException;
 
@@ -20,6 +24,8 @@ import se.ams.dcatprocessor.rdf.DcatException;
  *
  */
 public class Util {
+
+	private static final Logger logger = LoggerFactory.getLogger(Util.class);
 	
 	/**
 	 * Type-independant variable null/empty check
@@ -109,11 +115,12 @@ public class Util {
 			filename.endsWith(".json"));
 	}
 
-	public static boolean isRdf(String content) {
-		if(content == null)
-			return false;
-
-		String trimmed = content.stripLeading();
-		return trimmed.startsWith("<?xml") || trimmed.startsWith("<rdf:RDF");
-	}
+	// Used when application is running in a pipeline or is selfhosted.
+	public static void printToFile(String content, String fileName) {
+		try (FileOutputStream fos = new FileOutputStream(fileName)) {
+			fos.write(content.getBytes());
+		} catch (IOException e) {
+			logger.error("Error creating file: " + fileName, e);
+		}
+    }
 }

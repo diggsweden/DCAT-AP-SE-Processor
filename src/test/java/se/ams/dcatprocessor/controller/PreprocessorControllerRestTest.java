@@ -26,8 +26,8 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 
-import se.ams.dcatprocessor.controller.PreprocessorController.ApiSource;
 import se.ams.dcatprocessor.controller.PreprocessorController.SpecRequest;
+import se.ams.dcatprocessor.models.ApiSource;
 import se.ams.dcatprocessor.testutil.TestHelper;
 
 /**
@@ -66,18 +66,18 @@ class PreprocessorControllerRestTest {
 	@Test
 	public void testThatFolderWithNoApiFilesReturnsNoFilesFound() throws Exception {
 		String actual = this.restTemplate.getForObject(pathFiles + "?dir=" + tempDir.toString(),String.class);
-		String expected = "Hittade inga filer";
+		String expected = "No API specification files found";
 
-		assertEquals(expected, actual);
+		assertTrue(actual.contains(expected));
 	}
 
 	//Nonexisting folder location
 	@Test
 	public void testThatNonExistingFolderReturnsNoFilesFound() throws Exception {
 		String actual = this.restTemplate.getForObject(pathFiles + "?dir=" + tempDir.resolve("nonexistent").toString(),String.class);
-		String expected = "Hittade inga filer";
+		String expected = "No API specification files found";
 
-		assertEquals(expected, actual);
+		assertTrue(actual.contains(expected));
 	}
 
 	//Correct folder location and existing API-file in folder
@@ -168,7 +168,7 @@ class PreprocessorControllerRestTest {
 
 		assertEquals(422, response.getStatusCode().value());
 		assertNotNull(response.getBody());
-		assertTrue(response.getBody().contains("ERROR - Failed to process API specification"));
+		assertTrue(response.getBody().contains("Could not identify a valid API specification or DCAT metadata in the provided input"));
 	}
 
 	@Test

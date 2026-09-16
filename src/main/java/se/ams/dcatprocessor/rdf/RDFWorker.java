@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.time.Period;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,8 +30,8 @@ import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
 import org.eclipse.rdf4j.model.vocabulary.GEO;
 import org.eclipse.rdf4j.model.vocabulary.LOCN;
-import org.eclipse.rdf4j.model.vocabulary.OWL;
 import org.eclipse.rdf4j.model.vocabulary.ORG;
+import org.eclipse.rdf4j.model.vocabulary.OWL;
 import org.eclipse.rdf4j.model.vocabulary.PROV;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.model.vocabulary.VCARD4;
@@ -39,8 +40,8 @@ import org.eclipse.rdf4j.rio.RDFHandler;
 import org.eclipse.rdf4j.rio.Rio;
 import org.eclipse.rdf4j.rio.helpers.BufferedGroupingRDFHandler;
 import org.eclipse.rdf4j.rio.rdfxml.util.RDFXMLPrettyWriter;
-import org.springframework.context.annotation.Scope;
 import org.jspecify.annotations.NonNull;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import se.ams.dcatprocessor.models.Catalog;
@@ -87,6 +88,17 @@ public class RDFWorker {
 		this.specification = specification;
         this.multipleURIValidator = multipleURIValidator;
     }
+
+	/*
+	 * Predefined errormessage
+	 */
+	private final String UNABLE_CREATE_MISSING_VALUES = this.getClass() + " : Unable to create DCAT. Reason: X is a mandatory but is missing";
+	private final String INVALID_URI = this.getClass() + " : Unable to create DCAT. Reason: X is not a valid URI";
+
+	/**
+	 * Special delimiter for language-prefixed strings since it's not commonly used
+	 */
+	private final String SUN = "¤";
 
 	/**
 	 * 
@@ -214,13 +226,6 @@ public class RDFWorker {
 		return bos.toString(Charset.forName("UTF-8"));
 	}
 
-
-	/*
-	 * Predefined errormessage
-	 */
-	private final String UNABLE_CREATE_MISSING_VALUES = this.getClass() + " : Unable to create DCAT. Reason: X is a mandatory but is missing"; 
-
-
 	/**
 	 * Creates a catalog from data contained in the catalog object
 	 * @see <a href="http://www.w3.org/ns/dcat#Catalog">Catalog</a>
@@ -257,7 +262,7 @@ public class RDFWorker {
 		IRI agentIRI = createAgent(catalog.publisher);
 		catalogAndAgent[1] = agentIRI;
 		
-		addToModel(model, catalogIRI, catalog.dcData);
+		addToModel(model, catalogIRI, catalog.dcData, DCAT.CATALOG.getLocalName());
 				
 		/*
 		 * Add the Rights...if it exist
@@ -294,7 +299,7 @@ public class RDFWorker {
 
 		model.add(agentIRI, RDF.TYPE, FOAF.AGENT);
 
-		addToModel(model, agentIRI, agent.dcData);
+		addToModel(model, agentIRI, agent.dcData, FOAF.AGENT.getLocalName());
 
 		return agentIRI;
 	}
@@ -326,7 +331,7 @@ public class RDFWorker {
 		model.add(dataSetIRI, RDF.TYPE, DCAT.DATASET);
 		
 		//Add all values to dataset
-		addToModel(model, dataSetIRI, dataSet.dcData);
+		addToModel(model, dataSetIRI, dataSet.dcData, DCAT.DATASET.getLocalName());
 
 		//Add the reference to the external element publisher
 		model.add(dataSetIRI, DCTERMS.PUBLISHER, agentIRI);
@@ -460,7 +465,7 @@ public class RDFWorker {
 		model.add(distributionIRI, RDF.TYPE, DCAT.DISTRIBUTION);
 		
 		//Add all values to Organization
-		addToModel(model, distributionIRI, distribution.dcData);
+		addToModel(model, distributionIRI, distribution.dcData, DCAT.DISTRIBUTION.getLocalName());
 		
 		/*
 		 * Add the Uppfyller...conformsTo as anonymous nodes
@@ -525,7 +530,7 @@ public class RDFWorker {
 		model.add(dataServiceIRI, RDF.TYPE, DCAT.DATA_SERVICE);
 		
 		//Add all simple values to Dataservice
-		addToModel(model, dataServiceIRI, dataService.dcData);
+		addToModel(model, dataServiceIRI, dataService.dcData, DCAT.DATA_SERVICE.getLocalName());
 		
 		/*
 		 * Add the Uppfyller...conformsTo as anonymous nodes
@@ -581,7 +586,7 @@ public class RDFWorker {
     	IRI datasetSeriesIRI = createIri(datasetSeries.about);
     	model.add(datasetSeriesIRI, RDF.TYPE, DCAT.DATASET_SERIES);
 
-    	addToModel(model, datasetSeriesIRI, datasetSeries.dcData);
+    	addToModel(model, datasetSeriesIRI, datasetSeries.dcData, DCAT.DATASET_SERIES.getLocalName());
 
 		//Add the reference to the external element publisher (publisher from Catalog)
     	model.add(datasetSeriesIRI, DCTERMS.PUBLISHER, agentIRI);
@@ -624,7 +629,7 @@ public class RDFWorker {
 		model.add(organizationIRI, RDF.TYPE, VCARD4.ORGANIZATION);
 
 		//Add all simple values to Organization
-		addToModel(model, organizationIRI, org.dcData);
+		addToModel(model, organizationIRI, org.dcData, VCARD4.ORGANIZATION.getLocalName());
 
 		/*
 		 * Add addresses as anonymous nodes
@@ -667,7 +672,7 @@ public class RDFWorker {
 			
 			model.add(parentIRI, parentIRINodeTypeRef, resource);	//Add reference from parent IRI
 			model.add(resource, RDF.TYPE, nodeType);
-			addDataToNode(resource, dataClass.dcData);	//Add data to node
+			addDataToNode(resource, dataClass.dcData, nodeType.getLocalName());	//Add data to node
 			
 			resources.add(resource);
 		}
@@ -679,8 +684,9 @@ public class RDFWorker {
 	 * Adds the values in valueMap to the node
 	 * @param resource - The node to add value to
 	 * @param valueMap - Containing the data to be added
+	 * @param section - The section where the node is located (Datset, DatasetService etc. )
 	 */
-	private void addDataToNode(Resource resource, MultiValuedMap<String, String> valueMap) {
+	private void addDataToNode(Resource resource, MultiValuedMap<String, String> valueMap, String section) {
 		
 		ValueFactory valueFactory = SimpleValueFactory.getInstance();
 		
@@ -696,7 +702,7 @@ public class RDFWorker {
 				
 				for (String value : values) {
 					
-					SingleInputValidator.getInstance().validateData(key, value);
+					SingleInputValidator.getInstance().validateData(key, value, section);
 					
 					if (isWKTLiteral(key)) {
 					    model.add(resource, iri, valueFactory.createLiteral(value, GEO.WKT_LITERAL));
@@ -800,7 +806,7 @@ public class RDFWorker {
 			     * No need to logg error here.
 			     * Its has been already checked in SingleInputValidator
 			     */
-			} catch (NumberFormatException e) {
+			} catch (DateTimeParseException | NumberFormatException e) {
 				return null;
 			}
 	    }
@@ -808,8 +814,6 @@ public class RDFWorker {
 	    return null;
 	}
 
-	private final String INVALID_URI = this.getClass() + " : Unable to create DCAT. Reason: X is not a valid URI";
-	
 	/**
 	 * Checks that a value exists and is a valid URI
 	 * @param subjectKey - Name of the value
@@ -824,22 +828,14 @@ public class RDFWorker {
 	}
 	
 	/**
-	 * Special delimiter for language-prefixed strings since it's not commonly used
-	 */
-	private final String SUN = "¤";
-	
-	/**
 	 * Adds all the values in the valueMap to the model inside the sectionIRI(subject)
 	 * @param model - The model to add the values to
 	 * @param sectionIRI - The section where the values are added
 	 * @param valueMap - The map containing the values
+	 * @param section - The section where the key is located (Datset, DatasetService etc. )
 	 */
-	/**
-	 * @param model
-	 * @param sectionIRI
-	 * @param valueMap
-	 */
-	private void addToModel(Model model, IRI sectionIRI, MultiValuedMap<String, String> valueMap) {
+
+	private void addToModel(Model model, IRI sectionIRI, MultiValuedMap<String, String> valueMap, String section) {
 		ValueFactory valueFactory = SimpleValueFactory.getInstance();
 		Set<String> keySet = valueMap.keySet();
 		
@@ -853,7 +849,7 @@ public class RDFWorker {
 
 				for (String value : values) {
 
-					SingleInputValidator.getInstance().validateData(key, value);
+					SingleInputValidator.getInstance().validateData(key, value, section);
 					
 					/**
 					 * First check if its a numeric value...otherwise it might be interpreted as date value further down

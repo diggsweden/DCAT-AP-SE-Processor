@@ -11,7 +11,7 @@ import se.ams.dcatprocessor.util.Util;
 
 /**
  * Placeholder for validation errors created when creating DCAT-AP-SE file
- * 
+ *
  * @author nacbr
  *
  */
@@ -21,21 +21,23 @@ public class ValidationError {
 	 * Enums for defining type of error
 	 */
 	public enum ErrorType {
-	    DUPLICATE_URI_WITHIN_FILE,
-	    DUPLICATE_URI_BETWEEN_FILES,
-	    MANDATORY_VALUE_MISSING,
-	    VALUE_OUTSIDE_OF_SPEC,
-	    UNKNOWN_KEY,
+		DUPLICATE_URI_WITHIN_FILE,
+		DUPLICATE_URI_BETWEEN_FILES,
+		MANDATORY_VALUE_MISSING,
+		VALUE_OUTSIDE_OF_SPEC,
+		UNKNOWN_KEY,
 		UNKNOWN_VALUE,
-	    ILLEGAL_FORMAT
+		ILLEGAL_FORMAT,
+		ADDRESS_TO_FEW,
+		ADDRESS_TO_MANY
 	}
 	
-	private ErrorType errorType;
+	private final ErrorType errorType;
 	
 	/**
 	 * Filename where the error occurred
 	 */
-	private String fileName;
+	private final String fileName;
 	
 	/**
 	 * Key where the error occurred
@@ -50,8 +52,13 @@ public class ValidationError {
 	/**
 	 * Description of the error
 	 */
-	private String description;
+	private final String description;
 
+	/**
+	 * Section where the error occurred
+	 */
+	private String section;
+	
 	//Predefined errormessages
 	private static final String ERROR_DESCRIPTION_DUPLICATE_WITHIN_FILE = "URI: %s exist multiple times in file: %s";
 	private static final String ERROR_DESCRIPTION_DUPLICATE_BETWEEN_FILES = "URI: %s exist in the following files: %s";
@@ -60,8 +67,11 @@ public class ValidationError {
 	private static final String ERROR_DESCRIPTION_GENERAL = "Key %s with value %s";
 	private static final String ERROR_DESCRIPTION_UNKNOWN_KEY = "The key %s does not exist in specification";
 	private static final String ERROR_DESCRIPTION_NUMBER_OUTSIDE_SPEC = "The key %s occurs %s times but the allowed range is %s";
+	private static final String ERROR_MANDATORY_VALUE_MISSING = "The key %s is mandatory";
+	private static final String ERROR_ADDRESS_TO_FEW = "Address has too few values, should contain street-address, postal-code, locality and country-name, separated with ;";
+	private static final String ERROR_ADDRESS_TO_MANY = "Address has too many values, should contain street-address, postal-code, locality and country-name, separated with ;";
 
-	private final String UNABLE_ADD_VALIDATION_ERROR_CURRENT_FILE_MISSING = this.getClass() + " : Error validating input data. Reason: Current filename is not set"; 
+	private final String UNABLE_ADD_VALIDATION_ERROR_CURRENT_FILE_MISSING = this.getClass() + " : Error validating input data. Reason: Current filename is not set";
 
 	
 	/**
@@ -73,6 +83,7 @@ public class ValidationError {
 	 * @param errorType - Type of error
 	 * @param fileNames - Filename(s) where the error occurred
 	 * @param value - Value where the error occurred
+	 * @param section - Section where the error occurred, e.g. Catalog, Dataset
 	 */
 	public ValidationError(@NonNull ErrorType errorType, @NonNull String[] fileNames, @NonNull String value) {
 		this.errorType = errorType;
@@ -84,8 +95,7 @@ public class ValidationError {
 		Util.checkNotNull(fileNames, UNABLE_ADD_VALIDATION_ERROR_CURRENT_FILE_MISSING);
 		
 		fileName = Util.mergeStringsWithSeparator(fileNames, null);
-		
-		setDescription(createDescription(errorType, fileName, null, value));	
+		this.description = createDescription(errorType, fileName, null, value);
 	}
 		
 	/**
@@ -94,18 +104,17 @@ public class ValidationError {
 	 * 
 	 * @param errorType - Type of error
 	 * @param fileName - Filename where the error occurred
-	 * @param key - Key where the error occurred
+	 * @param key - Key where the error occurred, e.g. foaf:homepage, dcterms:issued
 	 * @param value - Value where the error occurred
+	 * @param section - Section where the error occurred, e.g. Catalog, Dataset
 	 */
-	public ValidationError(@NonNull ErrorType errorType, @NonNull String fileName, @NonNull String key, @NonNull String value) {
+	public ValidationError(@NonNull ErrorType errorType, @NonNull String fileName, @NonNull String key, @NonNull String value, @NonNull String section) {
 		this.errorType = errorType;
 		this.fileName = fileName;
 		this.key = key;
 		this.value = value;
-		
-		setDescription(createDescription(errorType, fileName, key, value));
-		
-		//TODO: Add nullcheck for all arguments
+		this.section = section;
+		this.description = createDescription(errorType, fileName, key, value);
 	}
 	
 	/**
@@ -113,17 +122,20 @@ public class ValidationError {
 	 * Creates a description for this particular error
 	 * 
 	 * @param fileName - Filename where the error occurred
-	 * @param key - Key where the error occurred
+	 * @param key - Key where the error occurred, e.g. foaf:homepage, dcterms:issued
 	 * @param value - Value where the error occurred
 	 * @param cardinality - Contains the allowed range FYI
+	 * @param section - Section where the error occurred, e.g. Catalog, Dataset
 	 */
-	public ValidationError(@NonNull String fileName, @NonNull String key, @NonNull Integer value, DcatCardinality cardinality) {
+	public ValidationError(@NonNull String fileName, @NonNull String key, @NonNull Integer value, DcatCardinality cardinality, @NonNull String section) {
 		this.errorType = ErrorType.VALUE_OUTSIDE_OF_SPEC;
 		this.fileName = fileName;
 		this.key = key;
 		this.value = value.toString();
+		this.section = section;
+		this.description = ERROR_DESCRIPTION_NUMBER_OUTSIDE_SPEC.formatted(key, value, cardinality.getInterval());
 		
-		setDescription(ERROR_DESCRIPTION_NUMBER_OUTSIDE_SPEC.formatted(key, value, cardinality.getInterval()));
+
 	}
 
 	/**
@@ -132,58 +144,42 @@ public class ValidationError {
 	 * 
 	 * @param fileName - Filename where the error occurred
 	 * @param key - Key where the error occurred
+	 * @param section - Section where the error occurred, e.g. Catalog, Dataset
 	 */
-	public ValidationError(@NonNull String fileName, @NonNull String key) {
+	public ValidationError(@NonNull String fileName, @NonNull String key, @NonNull String section) {
 		this.errorType = ErrorType.UNKNOWN_KEY;
 		this.fileName = fileName;
 		this.key = key;
-		
-		setDescription(ERROR_DESCRIPTION_UNKNOWN_KEY.formatted(key));
+		this.section = section;
+		this.description = ERROR_DESCRIPTION_UNKNOWN_KEY.formatted(key);
 	}
 
 	public ErrorType getErrorType() {
 		return errorType;
 	}
 
-	public void setErrorType(ErrorType errorType) {
-		this.errorType = errorType;
-	}
-
 	public String getFileName() {
 		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
 	}
 
 	public String getKey() {
 		return key;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
-	}
-
 	public String getValue() {
 		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public String getSection() {
+		return section;
 	}
-	
+
 	/**
-	 * Creates a tailormade description of the validation error depending of
-	 * the type of error
+	 * Creates a description of the validation error depending of the type of error
 	 * @param errorType - Type of error
 	 * @param fileName - Filename where the error occurred
 	 * @param key - Key where the error occurred
@@ -191,20 +187,15 @@ public class ValidationError {
 	 * @return - The description
 	 */
 	private String createDescription(ErrorType errorType, String fileName, String key, String value) {
-
-		if (errorType.equals(ErrorType.DUPLICATE_URI_WITHIN_FILE)) {
-			return ERROR_DESCRIPTION_DUPLICATE_WITHIN_FILE.formatted(value, fileName);
-		}
-		if (errorType.equals(ErrorType.DUPLICATE_URI_BETWEEN_FILES)) {
-			return ERROR_DESCRIPTION_DUPLICATE_BETWEEN_FILES.formatted(value, fileName);
-		}
-		if (errorType.equals(ErrorType.ILLEGAL_FORMAT)) {
-			return ERROR_DESCRIPTION_ILLEGAL_FORMAT.formatted(value, key);
-		}
-		if (errorType.equals(ErrorType.UNKNOWN_VALUE)) {
-			return ERROR_DESCRIPTION_UNKNOWN_VALUE.formatted(value, key);
-		}
-		//General description as none else was found
-		return ERROR_DESCRIPTION_GENERAL.formatted(key, value);	
+        return switch (errorType) {
+            case ErrorType.ADDRESS_TO_FEW -> ERROR_ADDRESS_TO_FEW.formatted(key);
+            case ErrorType.ADDRESS_TO_MANY -> ERROR_ADDRESS_TO_MANY.formatted(key);
+            case ErrorType.UNKNOWN_VALUE -> ERROR_DESCRIPTION_UNKNOWN_VALUE.formatted(value, key);
+            case ErrorType.MANDATORY_VALUE_MISSING -> ERROR_MANDATORY_VALUE_MISSING.formatted(key);
+            case ErrorType.ILLEGAL_FORMAT -> ERROR_DESCRIPTION_ILLEGAL_FORMAT.formatted(value, key);
+            case ErrorType.DUPLICATE_URI_WITHIN_FILE -> ERROR_DESCRIPTION_DUPLICATE_WITHIN_FILE.formatted(value, fileName);
+            case ErrorType.DUPLICATE_URI_BETWEEN_FILES -> ERROR_DESCRIPTION_DUPLICATE_BETWEEN_FILES.formatted(value, fileName);
+            default -> ERROR_DESCRIPTION_GENERAL.formatted(key, value);
+        };
 	}
 }
