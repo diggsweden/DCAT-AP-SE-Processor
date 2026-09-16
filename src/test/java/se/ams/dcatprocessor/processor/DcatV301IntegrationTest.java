@@ -4,11 +4,6 @@
 
 package se.ams.dcatprocessor.processor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.io.StringReader;
 import java.nio.file.Path;
 
@@ -31,6 +26,10 @@ import org.eclipse.rdf4j.model.vocabulary.XSD;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 import org.json.JSONObject;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -42,7 +41,6 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import se.ams.dcatprocessor.converter.Converter;
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
 import se.ams.dcatprocessor.testutil.TestHelper;
@@ -60,9 +58,8 @@ public class DcatV301IntegrationTest {
     private final String API_DEF_FILE = "src/test/resources/apidef/json_v3/json_oas_301.json";
 
     @BeforeEach
-	void setup() throws Exception {
+	public void setup() throws Exception {
         TestHelper.resetSingeltons();
-        Converter.errors.clear();
 		manager = managerProvider.getObject();
 	}
 
@@ -81,10 +78,11 @@ public class DcatV301IntegrationTest {
         IRI dataServicePublisher = vf.createIRI("https://www.example.se/#publisherC2");
         IRI field = vf.createIRI(namespace, fieldname);
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result); 
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString); 
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(catalogPublisher, field, null),"Catalog publisher missing: " + fieldname);
         assertTrue(model.contains(datasetCreator, field, null),"Dataset creator missing: " + fieldname);
         assertTrue(model.contains(attributionAgent, field, null),"Attribution-agent missing: " + fieldname);
@@ -96,10 +94,11 @@ public class DcatV301IntegrationTest {
         IRI creator = vf.createIRI("https://www.example.se/#creatorC");
         IRI expectedSameAs = vf.createIRI("https://www.wikidata.org/wiki/Q123456");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(creator, OWL.SAMEAS, expectedSameAs), "Creator missing owl:sameAs");
     }
 
@@ -108,10 +107,11 @@ public class DcatV301IntegrationTest {
         IRI creator = vf.createIRI("https://www.example.se/#creatorC");
         IRI expectedClassification = vf.createIRI("http://purl.org/adms/publishertype/Company");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(creator, ORG.CLASSIFICATION, expectedClassification), "Creator missing org:classification, or wrong value");
     }
 
@@ -120,10 +120,11 @@ public class DcatV301IntegrationTest {
         IRI creator = vf.createIRI("https://www.example.se/#creatorC");
         Literal expectedDescription = vf.createLiteral("Beskrivning av skaparen (ny agent-egenskap i 3.0.1)", "sv");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(creator, DCTERMS.DESCRIPTION, expectedDescription), "Creator missing dcterms:description, or wrong value");
     }
 
@@ -132,10 +133,11 @@ public class DcatV301IntegrationTest {
         IRI creator = vf.createIRI("https://www.example.se/#creatorC");
         Literal expectedIdentifier = vf.createLiteral("556677-8899");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(creator, DCTERMS.IDENTIFIER, expectedIdentifier), "Creator missing dcterms:identifier, or wrong value");
     }
 
@@ -146,10 +148,11 @@ public class DcatV301IntegrationTest {
         IRI expectedDatasetContact = vf.createIRI("https://www.example.se/kontakt");
         IRI expectedDataServiceContact = vf.createIRI("https://www.organization2.se");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(datasetContact, VCARD4.HAS_URL, expectedDatasetContact),     "Dataset contactPoint: missing vcard:hasURL, or wrong value");
         assertTrue(model.contains(dataServiceContact, VCARD4.HAS_URL, expectedDataServiceContact), "DataService contactPoint: missing vcard:hasURL, or wrong value");
     }
@@ -160,10 +163,11 @@ public class DcatV301IntegrationTest {
         IRI distribution = vf.createIRI("https://www.example.se/#distributionC");
         IRI expectedApplicableLegislation = vf.createIRI("http://data.europa.eu/eli/reg_impl/2023/138/oj");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(distribution, applicableLegislation, expectedApplicableLegislation), "Distribution missing: dcatap:applicableLegislation, or wrong value");
     }
 
@@ -179,10 +183,11 @@ public class DcatV301IntegrationTest {
         IRI dataset = vf.createIRI("https://www.example.se/#datasetC");
         IRI expected = vf.createIRI(expectedValue);
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);    
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);    
         assertTrue(model.contains(dataset, field, expected),"Dataset missing: " + fieldname + ", or wrong value");
     }
 
@@ -194,10 +199,11 @@ public class DcatV301IntegrationTest {
         IRI dataset = vf.createIRI("https://www.example.se/#datasetC");
         Literal expectedVersion = vf.createLiteral("3.7.5");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(dataset, DCAT.VERSION, expectedVersion),"Dataset missing dcat:version, or wrong value");
     }
 
@@ -206,10 +212,11 @@ public class DcatV301IntegrationTest {
         IRI dataService = vf.createIRI("https://www.example.se/#dataserviceC");
         Literal expected = vf.createLiteral("application/json");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
         
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(dataService, DCTERMS.FORMAT, expected),"Dataservice missing dcterms:format, or wrong value");
     }
 
@@ -224,10 +231,11 @@ public class DcatV301IntegrationTest {
         IRI dataService = vf.createIRI("https://www.example.se/#dataserviceC");
         IRI expected = vf.createIRI(expectedValue);
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(dataService, field, expected),"Dataservice missing: " + fieldname + ", or wrong value");
     }
 
@@ -235,10 +243,11 @@ public class DcatV301IntegrationTest {
     void testThatDatasetSeriesIsTypedAsDatasetSeries() throws Exception {
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
         
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
         
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(series, RDF.TYPE, DCAT.DATASET_SERIES),"Model should contain dcat:DatasetSeries");
         assertFalse(model.contains(series, RDF.TYPE, DCAT.DATASET),"DatasetSeries should not be type dcat:Dataset");
     }
@@ -252,10 +261,11 @@ public class DcatV301IntegrationTest {
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
         Literal expected = vf.createLiteral(expectedValue, languageKey);
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(series, DCTERMS.TITLE, expected), "DatasetSeries missing title (" + languageKey + ")");
     }
 
@@ -268,10 +278,11 @@ public class DcatV301IntegrationTest {
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
         Literal expected = vf.createLiteral(expectedValue, languageKey);
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(series, DCTERMS.DESCRIPTION, expected), "DatasetSeries missing description (" + languageKey + ")");
     }
 
@@ -286,10 +297,11 @@ public class DcatV301IntegrationTest {
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
         Literal expected = vf.createLiteral(expectedValue, languageKey);
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(series, DCAT.KEYWORD, expected), "DatasetSeries missing keyword (" + languageKey + ")");
     }
 
@@ -310,10 +322,11 @@ public class DcatV301IntegrationTest {
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
         IRI expected = vf.createIRI(expectedValue);
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
         
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(series, field, expected), "Datasetseries missing " + fieldname + ", or wrong value");
     }
 
@@ -327,10 +340,11 @@ public class DcatV301IntegrationTest {
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
         Literal expected = vf.createLiteral(expectedValue, XSD.DATE);
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
         
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(series, field, expected), "Datasetseries missing " + fieldname + ", or wrong value");
     }
 
@@ -339,10 +353,11 @@ public class DcatV301IntegrationTest {
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
         IRI contact = vf.createIRI("https://www.example.se/#dsseriesContact");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(series, DCAT.CONTACT_POINT, contact), "missing dcat:contactPoint");
         assertTrue(model.contains(contact, VCARD4.FN, vf.createLiteral("Kontakt för serie")), "missing vcard:fn");
         assertTrue(model.contains(contact, VCARD4.HAS_EMAIL, vf.createIRI("mailTo:serie@exempel.se")), "missing vcard:hasEmail");
@@ -356,10 +371,11 @@ public class DcatV301IntegrationTest {
     void testThatDatasetSeriesContainsTemporal() throws Exception {
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
     
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
     
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         Resource period = (Resource) model.filter(series, DCTERMS.TEMPORAL, null).objects().iterator().next();  // Hämta temporal-noden och verifiera start/end
         assertTrue(model.contains(period, DCAT.START_DATE, vf.createLiteral("2021-01-01", XSD.DATE)),"Temporal missing dcat:startDate, or wrong value");
         assertTrue(model.contains(period, DCAT.END_DATE, vf.createLiteral("2021-12-31", XSD.DATE)),"Temporal missing dcat:endDate, or wrong value");
@@ -370,10 +386,11 @@ public class DcatV301IntegrationTest {
         IRI conformsTo = vf.createIRI("https://www.example.se/#datasetseriesC/conformsTo");
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(series, DCTERMS.CONFORMS_TO, conformsTo), "DatasetSeries missing dcterms:conformsTo");
         assertTrue(model.contains(conformsTo, DCTERMS.TITLE, vf.createLiteral("Standard för serie", "sv")), "Standard missing dcterms:title, or wrong value");
         assertTrue(model.contains(conformsTo, DCTERMS.DESCRIPTION, vf.createLiteral("Beskrivning av standard för serie", "sv")),"Standard missing dcterms:description, or wrong value");
@@ -384,10 +401,11 @@ public class DcatV301IntegrationTest {
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
         IRI doc = vf.createIRI("https://www.example.se/#datasetseriesC/page");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(series, FOAF.PAGE, doc), "DatasetSeries missing foaf:page");
         assertTrue(model.contains(doc, DCTERMS.TITLE, vf.createLiteral("Dokument för serie", "sv")),"Document missing dcterms:title, or wrong value");
         assertTrue(model.contains(doc, DCTERMS.DESCRIPTION, vf.createLiteral("Beskrivning av dokument för serie", "sv")),"Document missing dcterms:description, or wrong value");
@@ -397,8 +415,8 @@ public class DcatV301IntegrationTest {
     void testThatDatasetSeriesContainsSpatial() throws Exception {
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        Model model = Rio.parse(new StringReader(result.rdf()), "", RDFFormat.RDFXML);
 
         Resource location = null;
         for (Resource candidate : Models.objectResources(model.filter(series, DCTERMS.SPATIAL, null))) {
@@ -421,10 +439,11 @@ public class DcatV301IntegrationTest {
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
         IRI expectedPublisher = vf.createIRI("https://www.example.se/result.rdf#publisher");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdfString = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdfString.contains("RDF"), rdfString);
+        Model model = Rio.parse(new StringReader(rdfString), "", RDFFormat.RDFXML);
         assertTrue(model.contains(series, DCTERMS.PUBLISHER, expectedPublisher),"DatasetSeries should have the catalog publisher");
     }
 
@@ -449,7 +468,7 @@ public class DcatV301IntegrationTest {
         assertEquals("The key dcterms:" + field + " occurs 0 times but the allowed range is 1..n", validationError.getDescription());
     }
 
-    // Email is mandatory in DatasetSeries.Contactpoint. Error is stored in Converter.errors
+    // Email is mandatory in DatasetSeries.Contactpoint
     @Test
     void testThatMissingEmailInContactpointGeneratesError(@TempDir Path tempDir) throws Exception {
         Path modified = TestHelper.copyWith(Path.of(API_DEF_FILE), tempDir,
@@ -460,10 +479,10 @@ public class DcatV301IntegrationTest {
                     .getJSONObject("contactPoint").remove("email");
             });
 
-        manager.createDcatFromFile(modified.toString());
+        DcatResult result = manager.createDcatFromFile(modified.toString());
 
-        String error = Converter.errors.get(0);
-        assertEquals("Errormessage: email in contactPoint is Mandatory", error);
+        assertTrue(result.errorReport().contains("vcard:hasEmail is mandatory"),
+                () -> "Expected a mandatory-email error, got:" + result.errorReport());
     }
 
     // Disabled because of unresolved issues in Dataportalen.se validation logic
@@ -491,10 +510,11 @@ public class DcatV301IntegrationTest {
         IRI dataset = vf.createIRI("https://www.example.se/#datasetC");
         IRI expected = vf.createIRI("https://www.dataportal.se/terminology/grunddata/foretag");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdf = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);    
+        assertTrue(rdf.contains("RDF"), rdf);
+        Model model = Rio.parse(new StringReader(rdf), "", RDFFormat.RDFXML);
         assertTrue(model.contains(dataset, field, expected),"Dataset missing: subject or wrong value");
     }
 
@@ -527,10 +547,11 @@ public class DcatV301IntegrationTest {
         IRI expectedRelation = vf.createIRI("https://www.example.se/relaterad-resurs-i-relation");
         IRI series = vf.createIRI("https://www.example.se/#datasetseriesC");
 
-        String result = manager.createDcatFromFile(API_DEF_FILE);
+        DcatResult result = manager.createDcatFromFile(API_DEF_FILE);
+        String rdf = result.rdf();
 
-        assertTrue(result.contains("RDF"), result);
-        Model model = Rio.parse(new StringReader(result), "", RDFFormat.RDFXML);
+        assertTrue(rdf.contains("RDF"), rdf);
+        Model model = Rio.parse(new StringReader(rdf), "", RDFFormat.RDFXML);
         Resource relationship = (Resource) model.filter(series, DCAT.QUALIFIED_RELATION, null).objects().iterator().next();
         assertTrue(model.contains(relationship, DCAT.HAD_ROLE, expectedRole),"Relationship missing dcat:hadRole, or wrong value");
         assertTrue(model.contains(relationship, DCTERMS.RELATION, expectedRelation),"Relationship missing dcterms:relation, or wrong value");

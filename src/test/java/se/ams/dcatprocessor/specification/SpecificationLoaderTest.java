@@ -4,12 +4,11 @@
 
 package se.ams.dcatprocessor.specification;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Map;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -19,13 +18,13 @@ public class SpecificationLoaderTest {
 
     private static Map<String, DcatProperty> nodes;
 
-    @BeforeAll  
-    private static void setup(){
+    @BeforeAll
+    public static void setup(){
         nodes = new SpecificationLoader().load();
     }
 
     @Test
-    void testThatLoadReadsEveryTemplate() {    
+    void testThatLoadReadsEveryTemplate() {
         //DCAT-AP-SE v3.0.1 holds 164 nodes.
         assertEquals(164, nodes.size());
     }

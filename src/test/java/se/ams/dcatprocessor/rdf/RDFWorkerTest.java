@@ -75,7 +75,6 @@ class RDFWorkerTest {
 		try {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Unexpected exception when creating a fully functional DCAT-AP-SE with message: " + e.getMessage());
 		}
 	}
@@ -88,7 +87,6 @@ class RDFWorkerTest {
 		try {
 			rdfWorker.createDcatFile(createTestCatalog2(), testFileStorageList1);
 		} catch (Exception e) {
-			e.printStackTrace();
 			fail("Unexpected exception when creating a fully functional DCAT-AP-SE with message: " + e.getMessage());
 		}
 	}
@@ -274,7 +272,6 @@ class RDFWorkerTest {
 		try {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 		} catch (DcatException | IOException e) {
-			e.printStackTrace();
 			fail("Unexpected exception when adding a dcterms:description in a new language");
 		}
 	}

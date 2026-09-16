@@ -4,15 +4,14 @@
 
 package se.ams.dcatprocessor.converter;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.io.IOException;
 import java.util.Optional;
 
 import org.eclipse.rdf4j.model.vocabulary.DCAT;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 import org.json.JSONObject;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,15 +20,16 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import se.ams.dcatprocessor.models.DataClass;
 import se.ams.dcatprocessor.models.DataSet;
+import se.ams.dcatprocessor.rdf.validate.ValidationError;
 
 public class ConverterTest {
 
     private Converter converter;
 
     @BeforeEach
-    void setup(){
+    public void setup(){
         converter = new Converter();
-        Converter.deleteErrors();
+
     }
 
     @Test
@@ -84,14 +84,16 @@ public class ConverterTest {
 
     @Test
     void testThatAddMandatoryErrorAddsMessageWithSubCat() {
-        converter.addMandatoryError("title", Optional.of("dataset"));
-        assertTrue(Converter.errors.contains("Errormessage: title in dataset is Mandatory"));
+        converter.addMandatoryError("title", Optional.of("dataset"), "about");
+        ValidationError error = converter.errors.get(0);
+        assertTrue(error.getDescription().contains("The key about is mandatory"));
     }
 
     @Test
     void testThatAddMandatoryErrorAddsMessageWithoutSubCat() {
-        converter.addMandatoryError("title", Optional.empty());
-        assertTrue(Converter.errors.contains("Errormessage: title is Mandatory"));
+        converter.addMandatoryError("title", Optional.empty(), "about");
+        ValidationError error = converter.errors.get(0);
+        assertTrue(error.getDescription().contains("The key about is mandatory"));
     }
 
     @Test

@@ -4,17 +4,18 @@
 
 package se.ams.dcatprocessor.parser;
 
-import org.junit.jupiter.api.Test;
-
-import se.ams.dcatprocessor.rdf.DcatException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.io.IOException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import se.ams.dcatprocessor.models.ApiSource;
+import se.ams.dcatprocessor.models.ApiSpecFile;
+import se.ams.dcatprocessor.rdf.DcatException;
 
 public class ApiDefinitionParserTest {
 
@@ -179,21 +180,26 @@ public class ApiDefinitionParserTest {
 
     @Test
     void testThatUnsupportedFormatThrowsException() {
-        String invalid = "invalid api spec"; 
-        assertThrows(DcatException.class, () -> ApiDefinitionParser.getApiJsonString(invalid));
+        ApiSource source = new ApiSource("invalid.json", "invalid api spec");
+
+        DcatException exception = assertThrows(DcatException.class, () -> ApiDefinitionParser.getApiSpecFile(source));
+
+        assertTrue(exception.getMessage().contains("Failed to read API definition: unrecognized format"));
     }
 
     @Test
     void testThatRamlApiIsParsedToExpectedJson() throws JSONException, IOException {
-        JSONObject actual = ApiDefinitionParser.getApiJsonString(ramlApi);
+        ApiSource source = new ApiSource("dataset.raml", ramlApi);
+        ApiSpecFile actual = ApiDefinitionParser.getApiSpecFile(source);
         JSONObject expected = new JSONObject(ramlResult);
-        assertEquals(expected.toMap(), actual.toMap());
+        assertEquals(expected.toMap(), actual.content().toMap());
     }
 
     @Test
     void testThatJsonApiIsParsedToExpectedJson() throws JSONException, IOException {
-        JSONObject actual = ApiDefinitionParser.getApiJsonString(jsonApi);
+        ApiSource source = new ApiSource("dataset.json", jsonApi);
+        ApiSpecFile actual = ApiDefinitionParser.getApiSpecFile(source);
         JSONObject expected = new JSONObject(jsonResult);
-        assertEquals(expected.toMap(), actual.toMap());
+        assertEquals(expected.toMap(), actual.content().toMap());
     }
 }

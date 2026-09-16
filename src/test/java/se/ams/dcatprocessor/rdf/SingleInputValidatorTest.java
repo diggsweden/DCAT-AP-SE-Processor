@@ -4,10 +4,9 @@
 
 package se.ams.dcatprocessor.rdf;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,7 +35,7 @@ class SingleInputValidatorTest {
 		try {
 			SingleInputValidator instance = SingleInputValidator.getInstance();
 			instance.setCurrentFileName("irrelevantfilename.raml");
-			instance.validateData(null, value);
+			instance.validateData(null, value, "Dataset");
 			fail("Expected DCATException when all inputparameters are null");
 		} catch (DcatException e) {
 			assertEquals("Error validating type: Input key is null", e.getMessage());
@@ -49,7 +48,7 @@ class SingleInputValidatorTest {
 		try {
 			SingleInputValidator instance = SingleInputValidator.getInstance();
 			instance.setCurrentFileName("irrelevantfilename.raml");
-			instance.validateData("IrrelevantKeyToTriggerNextError", null);
+			instance.validateData("IrrelevantKeyToTriggerNextError", null, "Dataset");
 			fail("Expected DCATException when all inputparameters are null");
 		} catch (DcatException e) {
 			assertEquals("Error validating type: Input value is null", e.getMessage());
@@ -62,7 +61,7 @@ class SingleInputValidatorTest {
 		try {
 			SingleInputValidator instance = SingleInputValidator.getInstance();
 			instance.setCurrentFileName("irrelevantfilename.raml");
-			instance.validateData("dcterms:nonsense", "http://arbetsformedlingen.se");
+			instance.validateData("dcterms:nonsense", "http://arbetsformedlingen.se", "Dataset");
 			fail("Expected DCATException when key does not have a corresponding typedefinition");
 		} catch (DcatException e) {
 			assertEquals("Error validating type: Key dcterms:nonsense is not defined", e.getMessage());
@@ -75,7 +74,7 @@ class SingleInputValidatorTest {
 		try {
 			SingleInputValidator instance = SingleInputValidator.getInstance();
 			//Provoke an error to discover that the filename was not set when saving ValidationError
-			instance.validateData("dcterms:issued", "2001-26");
+			instance.validateData("dcterms:issued", "2001-26", "Dataset");
 			fail("Expected DCATException when currentFile is not set");
 		} catch (DcatException e) {
 			assertEquals("class se.ams.dcatprocessor.rdf.validate.SingleInputValidator Error validating input data. Reason: Filename for the file being validated is not set", e.getMessage());
@@ -136,10 +135,10 @@ class SingleInputValidatorTest {
 		SingleInputValidator instance = SingleInputValidator.getInstance();
 		String fileName = "swagger445.json";
 		instance.setCurrentFileName(fileName);
-		String description = "The value " + value + " has wrong format for key " + key + ".";
+		String expected = "The value " + value + " has wrong format for key " + key + ".";
 
-		assertFalse(instance.validateData(key, value));
-		TestHelper.assertOneValidationError(validationErrorStorage.getValidationErrors(), fileName, ErrorType.ILLEGAL_FORMAT, key, value, description);
+		assertFalse(instance.validateData(key, value, "Dataset"));
+		TestHelper.assertOneValidationError(validationErrorStorage.getValidationErrors(), fileName, ErrorType.ILLEGAL_FORMAT, key, value, expected);
 	}
 
 	@ParameterizedTest
@@ -169,7 +168,7 @@ class SingleInputValidatorTest {
 		instance.setCurrentFileName(fileName);
 		String description = "The value " + value + " is not one of the values allowed for key " + key + ".";
 
-		assertFalse(instance.validateData(key, value));
+		assertFalse(instance.validateData(key, value, "Dataset"));
 		TestHelper.assertOneValidationError(storage.getValidationErrors(), fileName, ErrorType.UNKNOWN_VALUE, key, value, description);
 	}
 
@@ -198,7 +197,7 @@ class SingleInputValidatorTest {
 		instance.setCurrentFileName(fileName);
 		String description = "The value " + value + " has wrong format for key " + key + ".";
 
-		assertFalse(instance.validateData(key, value));
+		assertFalse(instance.validateData(key, value,"Dataset"));
 		TestHelper.assertOneValidationError(validationErrorStorage.getValidationErrors(), fileName, ErrorType.ILLEGAL_FORMAT, key, value, description);
 	}
 }
