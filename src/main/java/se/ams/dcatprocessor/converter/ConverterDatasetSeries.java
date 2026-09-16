@@ -69,7 +69,7 @@ public class ConverterDatasetSeries extends Converter {
                     }
                     
                 } else if (isMandatory) {
-                    addMandatoryError(annotationName, subCat);
+                    addMandatoryError(annotationName, subCat, key);
                 }
             }
         }
@@ -106,5 +106,10 @@ public class ConverterDatasetSeries extends Converter {
         } else if (subCatValue.contains(DCAT.QUALIFIED_RELATION.getLocalName())) {
             ((DatasetSeries) parentData).qualifiedRelations.add(dataClassLocal);
         }
+    }
+
+    @Override
+    protected String getSectionName() {
+        return DCAT.DATASET_SERIES.getLocalName();
     }
 }

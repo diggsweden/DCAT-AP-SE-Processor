@@ -4,14 +4,22 @@
 
 package se.ams.dcatprocessor.converter;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import org.eclipse.rdf4j.model.vocabulary.DCAT;
-import org.json.JSONObject;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import se.ams.dcatprocessor.models.*;
-
-import java.util.*;
+import se.ams.dcatprocessor.models.ApiSpecFile;
+import se.ams.dcatprocessor.models.ConverterHelpClass;
+import se.ams.dcatprocessor.models.DataClass;
+import se.ams.dcatprocessor.models.DataService;
+import se.ams.dcatprocessor.models.DataSet;
+import se.ams.dcatprocessor.rdf.DcatException;
+import se.ams.dcatprocessor.rdf.validate.ValidationError;
 
 @Component
 @Scope("prototype")
@@ -32,28 +40,26 @@ public class ConverterFiles extends Converter {
     }
     
     /* Takes one specFile for a Api and creates an Object with ApiSpec tags, DataSet, DataService and DatasetSeries. */
-    public DataClass fileToDcat(JSONObject apiSpec) throws Exception {
+    public DataClass fileToDcat(ApiSpecFile apiSpecFile) throws Exception {
+        this.sourceFilename = apiSpecFile.name();
         setConvertAndMandatoryFile(ConverterHelpClass.uriToDcat);
-        primaryClassesToDcat(apiSpec);
+        primaryClassesToDcat(apiSpecFile);
         
-        if (errors.size() > 0) {
-            StringBuilder errorResult = new StringBuilder();
-            for (String error : errors) {
-                errorResult.append(error).append("\n");
-            }
-            throw new Exception(errorResult.toString());
+        if (!errors.isEmpty()) {
+            Map<String, List<ValidationError>> errorMap = new LinkedHashMap<>();
+            errorMap.put(sourceFilename, errors);
+            throw new DcatException("Error converting file " + apiSpecFile.name(), errorMap);
         }
         return fileHandler;
     }
     
     /*
-     * This method maps no fields of its own. It runs only at the top level of
-     * an API spec and (if pressent) creates the primary-class blocks:
+     * This method runs at the top level of an API spec and (if present) creates the primary-class blocks:
      * - dcat-datasetseries
      * - dcat-dataset
      * - dcat-dataservice
      */
-    void primaryClassesToDcat(JSONObject file) throws Exception {
+    void primaryClassesToDcat(ApiSpecFile apiSpecFile) throws Exception {
 
         for (String key : orgConvert.keySet()) {
 
@@ -63,31 +69,37 @@ public class ConverterFiles extends Converter {
             
             // Do if key is DATASETSERIES
             if (key.equals(DCAT.DATASET_SERIES.getLocalName())) { 
+                converterDatasetSeries.sourceFilename = this.sourceFilename;
                 converterDatasetSeries.orgConvert = orgConvert;
                 converterDatasetSeries.fileHandler = fileHandler;
                 converterDatasetSeries.jsonObjectMandatoryDcat = jsonObjectMandatoryDcat;
 
                 // builds the complete DatasetSeries block with every tag and nested objects
-                converterDatasetSeries.createSubset(file, key, annotationName, Optional.empty(), Optional.empty(), isMandatory);
+                converterDatasetSeries.createSubset(apiSpecFile.content(), key, annotationName, Optional.empty(), Optional.empty(), isMandatory);
+                this.errors.addAll(converterDatasetSeries.errors);
             }
             // Do if key is DATASET
             else if (key.equals(DCAT.DATASET.getLocalName())) {
+                convertDataSet.sourceFilename = this.sourceFilename;
                 convertDataSet.orgConvert = orgConvert;
                 convertDataSet.jsonObjectMandatoryDcat = jsonObjectMandatoryDcat;
                 convertDataSet.fileHandler = fileHandler;
 
                 // builds the complete Dataset block with every tag and nested objects
-                convertDataSet.createSubset(file, key, annotationName, Optional.of(new DataSet()), Optional.empty(), isMandatory);
+                convertDataSet.createSubset(apiSpecFile.content(), key, annotationName, Optional.of(new DataSet()), Optional.empty(), isMandatory);               
+                this.errors.addAll(convertDataSet.errors);
             }
 
             // Do if key is DATASERVICE
             else if (key.equals(DCAT.DATA_SERVICE.getLocalName())) {
+                convertDataService.sourceFilename = this.sourceFilename;
                 convertDataService.orgConvert = orgConvert;
                 convertDataService.jsonObjectMandatoryDcat = jsonObjectMandatoryDcat;
                 convertDataService.fileHandler = fileHandler;
 
                 // builds the complete DataService block with every tag and nested objects
-                convertDataService.createSubset(file, key, annotationName, Optional.of(new DataService()), Optional.empty(), isMandatory);
+                convertDataService.createSubset(apiSpecFile.content(), key, annotationName, Optional.of(new DataService()), Optional.empty(), isMandatory);
+                this.errors.addAll(convertDataService.errors);
             }
         }  
     }

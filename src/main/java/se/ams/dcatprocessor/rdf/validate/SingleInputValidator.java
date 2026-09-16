@@ -100,10 +100,11 @@ public class SingleInputValidator {
 	 * value the property takes.
 	 * @param key - The key
 	 * @param value - The value
+	 * @param section - The section where the key is located (Datset, DatasetService etc. )
 	 * @return T/F depending of the result
 	 * @throws DcatException - If there is an error during validation
 	 */
-	public boolean validateData(@NonNull String key, @NonNull String value) throws DcatException {
+	public boolean validateData(@NonNull String key, @NonNull String value, String section) throws DcatException {
 
 		Util.checkNotNull(currentFileName, getClass() + " " + ERROR_CURRENT_FILENAME_NOT_SET);
 		Util.checkNotNull(key, ERROR_KEY_OR_VALUE_IS_NULL.formatted("key"));
@@ -113,20 +114,19 @@ public class SingleInputValidator {
 		Util.checkNotNull(inputTypes, ERROR_NO_CORRESPONDING_INPUT_TYPE.formatted(key));
 
 		if (!matchesPattern(key, value)) {
-			return reportError(ErrorType.ILLEGAL_FORMAT, key, value);
+			return reportError(ErrorType.ILLEGAL_FORMAT, key, value, section);
 		}
 		if (!isAllowedValue(key, value)) {
-			return reportError(ErrorType.UNKNOWN_VALUE, key, value);
+			return reportError(ErrorType.UNKNOWN_VALUE, key, value, section);
 		}
-
 		if (!matchesInputType(key, value)) {
-			return reportError(ErrorType.ILLEGAL_FORMAT, key, value);
+			return reportError(ErrorType.ILLEGAL_FORMAT, key, value, section);
 		}
 		return true;
 	}
 
-	private boolean reportError(ErrorType errorType, String key, String value) {
-		ValidationErrorStorage.getInstance().setValidationError(currentFileName, new ValidationError(errorType, currentFileName, key, value));
+	private boolean reportError(ErrorType errorType, String key, String value, String section) {
+		ValidationErrorStorage.getInstance().setValidationError(currentFileName, new ValidationError(errorType, currentFileName, key, value, section));
 		return false;
 	}
 
@@ -192,7 +192,7 @@ public class SingleInputValidator {
 	private void mapInputTypeToRegex() {
 		//TODO: Improve REGEX Check that they cover all OUR cases...verify with tests
 		//Add the patterns to XSD-Types
-		inputTypeToRegexMap = new HashMap<InputType, Pattern>();
+		inputTypeToRegexMap = new HashMap<>();
 		inputTypeToRegexMap.put(InputType.STRING, Pattern.compile(".*"));
 		inputTypeToRegexMap.put(InputType.INTEGER, Pattern.compile("^\\d{1,10}$"));
 		inputTypeToRegexMap.put(InputType.NONNEGATIVEINTEGER, Pattern.compile("^\\d+$"));
