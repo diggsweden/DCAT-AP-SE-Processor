@@ -59,7 +59,7 @@ import se.ams.dcatprocessor.rdf.namespace.SPDX;
 import se.ams.dcatprocessor.rdf.validate.CardinalityValidator;
 import se.ams.dcatprocessor.rdf.validate.MultipleURIValidator;
 import se.ams.dcatprocessor.rdf.validate.SingleInputValidator;
-import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
+import se.ams.dcatprocessor.rdf.validate.ValidationError;
 import se.ams.dcatprocessor.specification.DcatSpecification;
 import se.ams.dcatprocessor.util.Util;
 
@@ -80,14 +80,20 @@ public class RDFWorker {
 	 */
 	private String currentFileName;
 
-	private DcatSpecification specification;
+	private final DcatSpecification specification;
 
-	private MultipleURIValidator multipleURIValidator;
+	private final SingleInputValidator singleInputValidator;
+	private final CardinalityValidator cardinalityValidator;
+	private final MultipleURIValidator multipleURIValidator;
+
+	public List<ValidationError> validationErrors = new ArrayList<>();
 	
-    public RDFWorker(MultipleURIValidator multipleURIValidator, DcatSpecification specification) {
+	public RDFWorker(DcatSpecification specification, CardinalityHandler cardinalityHandler) {
 		this.specification = specification;
-        this.multipleURIValidator = multipleURIValidator;
-    }
+		this.multipleURIValidator = new MultipleURIValidator();
+		this.singleInputValidator = new SingleInputValidator(specification);
+		this.cardinalityValidator = new CardinalityValidator(cardinalityHandler);
+	}
 
 	/*
 	 * Predefined errormessage
@@ -119,14 +125,12 @@ public class RDFWorker {
 
 		createModel();
 		
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
-		
 		/**
 		 * The Catalog data does not come from a file with a name we can access 
 		 * so we use a generic name as an identifier for possible errors in this input data
 		 */
-		SingleInputValidator.getInstance().setCurrentFileName(catalog.fileName);
-		CardinalityValidator.getInstance().setCurrentFileName(catalog.fileName);
+		singleInputValidator.setCurrentFileName(catalog.fileName);
+		cardinalityValidator.setCurrentFileName(catalog.fileName);
 		multipleURIValidator.setCurrentFileName(catalog.fileName);
 
 		/**
@@ -147,8 +151,8 @@ public class RDFWorker {
 			/**
 			 * Save validation errors under the correct filename
 			 */
-			SingleInputValidator.getInstance().setCurrentFileName(currentFileName);
-			CardinalityValidator.getInstance().setCurrentFileName(currentFileName);
+			singleInputValidator.setCurrentFileName(currentFileName);
+			cardinalityValidator.setCurrentFileName(currentFileName);
 			multipleURIValidator.setCurrentFileName(currentFileName);
 			
 			/*
@@ -183,10 +187,14 @@ public class RDFWorker {
 		}
 		
 		multipleURIValidator.validate();
-		
-		if(validationErrorStorage.hasValidationErrors()) {
+
+		validationErrors.addAll(singleInputValidator.getValidationErrors());
+		validationErrors.addAll(cardinalityValidator.getValidationErrors());
+		validationErrors.addAll(multipleURIValidator.getValidationErrors());
+	
+		if(!validationErrors.isEmpty()) {
 			DcatException dcatException = new DcatException("Error creating DCAT-AP-SE due to validationerrors. See enclosed list");
-			dcatException.setValidationResults(validationErrorStorage.getValidationErrors());
+			dcatException.setValidationResults(validationErrors);
 			throw dcatException;
 		} else {
 			return printModel(model);
@@ -253,8 +261,7 @@ public class RDFWorker {
 		 * 2. Occur within the range allowed in the specification
 		 */
 		List<String> checkedElsewhere = List.of("dcat:dataset", "dcterms:publisher"); //Items that will not be checked now
-		CardinalityValidator.getInstance().validate(DcatClass.CATALOG, catalog.dcData, checkedElsewhere);
-		
+		cardinalityValidator.validate(DcatClass.CATALOG, catalog.dcData, checkedElsewhere);
 		IRI catalogIRI = createIri(catalog.about);
 		
 		catalogAndAgent[0] = catalogIRI;
@@ -293,7 +300,7 @@ public class RDFWorker {
 		 * 1. Are defined in the specification
 		 * 2. Occur within the range allowed in the specification
 		 */
-		CardinalityValidator.getInstance().validate(DcatClass.AGENT, agent.dcData, List.of());
+		cardinalityValidator.validate(DcatClass.AGENT, agent.dcData, List.of());
 
 		IRI agentIRI = SimpleValueFactory.getInstance().createIRI(agent.about);
 
@@ -324,9 +331,8 @@ public class RDFWorker {
 		 * 2. Occur within the range allowed in the specification
 		 */
 		List<String> checkedElsewhere = List.of("dcterms:publisher", "dcterms:creator"); //Items that will not be checked now
-		CardinalityValidator.getInstance().validate(DcatClass.DATASET, dataSet.dcData, checkedElsewhere);
+		cardinalityValidator.validate(DcatClass.DATASET, dataSet.dcData, checkedElsewhere);
 		
-	
 		IRI dataSetIRI =  createIri(dataSet.about);
 		model.add(dataSetIRI, RDF.TYPE, DCAT.DATASET);
 		
@@ -459,7 +465,7 @@ public class RDFWorker {
 		 * 2. Occur within the range allowed in the specification
 		 */
 		List<String> checkedElsewhere = List.of("dcat:accessService"); //Items that will not be checked now
-		CardinalityValidator.getInstance().validate(DcatClass.DISTRIBUTION, distribution.dcData, checkedElsewhere);
+		cardinalityValidator.validate(DcatClass.DISTRIBUTION, distribution.dcData, checkedElsewhere);
 		
 		IRI distributionIRI = createIri(distribution.about);
 		model.add(distributionIRI, RDF.TYPE, DCAT.DISTRIBUTION);
@@ -524,7 +530,7 @@ public class RDFWorker {
 		 * 2. Occur within the range allowed in the specification
 		 */
 		List<String> checkedElsewhere = List.of("dcterms:publisher", "dcat:contactPoint"); //Items that will not be checked now
-		CardinalityValidator.getInstance().validate(DcatClass.DATASERVICE, dataService.dcData, checkedElsewhere);
+		cardinalityValidator.validate(DcatClass.DATASERVICE, dataService.dcData, checkedElsewhere);
 		
 		IRI dataServiceIRI = createIri(dataService.about);
 		model.add(dataServiceIRI, RDF.TYPE, DCAT.DATA_SERVICE);
@@ -581,7 +587,7 @@ public class RDFWorker {
     	checkSubject("DatasetSeries.about", datasetSeries.about);
 
     	List<String> checkedElsewhere = List.of("dcterms:publisher"); //Items that will not be checked now
-    	CardinalityValidator.getInstance().validate(DcatClass.DATASETSERIES, datasetSeries.dcData, checkedElsewhere);
+		cardinalityValidator.validate(DcatClass.DATASETSERIES, datasetSeries.dcData, checkedElsewhere);
 
     	IRI datasetSeriesIRI = createIri(datasetSeries.about);
     	model.add(datasetSeriesIRI, RDF.TYPE, DCAT.DATASET_SERIES);
@@ -623,7 +629,7 @@ public class RDFWorker {
 		 * 2. Occur within the range allowed in the specification
 		 */
 		List<String> checkedElsewhere = List.of("vcard:hasTelephone", "vcard:hasAddress"); //Items that will not be checked now
-		CardinalityValidator.getInstance().validate(DcatClass.ORGANISATION, org.dcData, checkedElsewhere);
+		cardinalityValidator.validate(DcatClass.ORGANISATION, org.dcData, checkedElsewhere);
 				
 		IRI organizationIRI = createIri(org.about);
 		model.add(organizationIRI, RDF.TYPE, VCARD4.ORGANIZATION);
@@ -702,7 +708,7 @@ public class RDFWorker {
 				
 				for (String value : values) {
 					
-					SingleInputValidator.getInstance().validateData(key, value, section);
+					singleInputValidator.validateData(key, value, section);
 					
 					if (isWKTLiteral(key)) {
 					    model.add(resource, iri, valueFactory.createLiteral(value, GEO.WKT_LITERAL));
@@ -849,7 +855,7 @@ public class RDFWorker {
 
 				for (String value : values) {
 
-					SingleInputValidator.getInstance().validateData(key, value, section);
+					singleInputValidator.validateData(key, value, section);
 					
 					/**
 					 * First check if its a numeric value...otherwise it might be interpreted as date value further down

@@ -4,6 +4,7 @@
 
 package se.ams.dcatprocessor.rdf.validate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,26 +20,18 @@ import se.ams.dcatprocessor.specification.DcatCardinality.Condition;
 import se.ams.dcatprocessor.util.Util;
 
 public class CardinalityValidator {
-	
-	
-	private static CardinalityValidator instance;
-	
+
+	private final CardinalityHandler cardinalityHandler;
+
 	private String currentFileName;
+
+	private final List<ValidationError> validationErrors = new ArrayList<>();
 	
-	private CardinalityValidator() {}
-	
-	public static CardinalityValidator getInstance() {
-		if(instance == null) {
-			instance = new CardinalityValidator();
-		}
-		return instance;
-	}
-	
-	
-	/*
-	 * Predefined errormessages
-	 */
 	private final String ERROR_CURRENT_FILENAME_NOT_SET = this.getClass() + " Error validating input data. Reason: Filename for the file being validated is not set";
+	
+	public CardinalityValidator(CardinalityHandler cardinalityHandler) {
+		this.cardinalityHandler = cardinalityHandler;
+	}
 	
 	/**
 	 * Compares the inputvalues with the DCAT-AP-SE Specification and throws exception if
@@ -53,10 +46,8 @@ public class CardinalityValidator {
 	
 		//Check that the filename for the file being validated is set
 		Util.checkNotNull(currentFileName, ERROR_CURRENT_FILENAME_NOT_SET);
-				
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
-		
-		Map<String, DcatCardinality> cardinalities = CardinalityHandler.getInstance().getCardinalities(dcatClass);
+					
+		Map<String, DcatCardinality> cardinalities = cardinalityHandler.getCardinalities(dcatClass);
 		
 		HashMap<String, Integer> countedKeyNames = new HashMap<>();
 		String section = dcatClass.toString();
@@ -68,12 +59,12 @@ public class CardinalityValidator {
 			 * Check if key exists in the Map
 			 */
 			if(cardinalities.containsKey(vKey)) {
-				countedKeyNames.put(vKey, Integer.valueOf(values.get(vKey).size()));
+				countedKeyNames.put(vKey, values.get(vKey).size());
 			} else {
 				/**
 				 * The key is unknown..a validationerror
 				 */
-				validationErrorStorage.setValidationError(currentFileName, new ValidationError(currentFileName, vKey, section));
+				validationErrors.add(new ValidationError(currentFileName, vKey, section));
 			}
 		}
 
@@ -98,18 +89,18 @@ public class CardinalityValidator {
 					 * The specification specifies at least one .. create a validationerror
 					 */
 					if (c.isOneOrMore() && isRequired(c, values)) {
-						validationErrorStorage.setValidationError(currentFileName, new ValidationError(currentFileName, cKey, 0, c, section));
+						validationErrors.add(new ValidationError(currentFileName, cKey, 0, c, section));
 					}
 				}
 				else {
 					// Check that the input value occurs within the allowed range
-					if(!c.isInsideCardinality(number.intValue())) {
-						validationErrorStorage.setValidationError(currentFileName, new ValidationError(currentFileName, cKey, number, c, section));
+					if(!c.isInsideCardinality(number)) {
+						validationErrors.add(new ValidationError(currentFileName, cKey, number, c, section));
 					}
 				}
 			}
 		}
-		return !validationErrorStorage.hasValidationErrors();
+		return validationErrors.isEmpty();
 	}
 
 	/**
@@ -123,13 +114,16 @@ public class CardinalityValidator {
 		boolean conditionIsMet = values.get(condition.property()).contains(condition.value());
 		return conditionIsMet;
 	}
-		
+	
 	public String getCurrentFileName() {
 		return currentFileName;
+	}
+
+	public List<ValidationError> getValidationErrors() {
+		return validationErrors;
 	}
 
 	public void setCurrentFileName(String currentFileName) {
 		this.currentFileName = currentFileName;
 	}
-
 }

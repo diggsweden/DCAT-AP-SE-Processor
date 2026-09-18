@@ -26,7 +26,6 @@ import org.eclipse.rdf4j.model.vocabulary.XSD;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 import org.json.JSONObject;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -41,8 +40,6 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import se.ams.dcatprocessor.rdf.validate.ValidationError;
-import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
 import se.ams.dcatprocessor.testutil.TestHelper;
 
 // Integrationtests for new properties and primary class when upgrading DCAT-AP-SE version to 3.0.1 (from 2.0)
@@ -59,7 +56,6 @@ public class DcatV301IntegrationTest {
 
     @BeforeEach
 	public void setup() throws Exception {
-        TestHelper.resetSingeltons();
 		manager = managerProvider.getObject();
 	}
 
@@ -447,7 +443,7 @@ public class DcatV301IntegrationTest {
         assertTrue(model.contains(series, DCTERMS.PUBLISHER, expectedPublisher),"DatasetSeries should have the catalog publisher");
     }
 
-    // Mandatory language fields on the dataset series. Error is stored in ValidationErrorStorage
+    // Mandatory language fields on the dataset series
     @ParameterizedTest
     @ValueSource(strings = {"title", "description"})
     void testThatMissingMandatoryLanguageFieldGeneratesError(String field, @TempDir Path tempDir) throws Exception {
@@ -461,11 +457,9 @@ public class DcatV301IntegrationTest {
                 datasetseries.remove(field + "-en");
             });
 
-        manager.createDcatFromFile(modified.toString());
-        ValidationError validationError = ValidationErrorStorage.getInstance().getValidationErrors().get(modified.toString()).getFirst();
+        DcatResult result = manager.createDcatFromFile(modified.toString());
 
-        assertEquals("dcterms:" + field, validationError.getKey());
-        assertEquals("The key dcterms:" + field + " occurs 0 times but the allowed range is 1..n", validationError.getDescription());
+        assertTrue(result.errorReport().contains("The key dcterms:" + field + " occurs 0 times but the allowed range is 1..n"));
     }
 
     // Email is mandatory in DatasetSeries.Contactpoint

@@ -9,15 +9,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,7 +26,6 @@ import se.ams.dcatprocessor.models.FileStorage;
 import se.ams.dcatprocessor.models.Organization;
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
-import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
 import se.ams.dcatprocessor.testutil.TestHelper;
 
 @SpringBootTest
@@ -53,11 +47,6 @@ class RDFWorkerTest {
 	 * @throws NoSuchFieldException
 	 * @throws IllegalAccessException
 	 */
-	@BeforeEach
-	void reset() throws IOException, NoSuchFieldException, IllegalAccessException{
-		TestHelper.resetSingeltons();
-		ValidationErrorStorage.getInstance().resetErrors();  
-	}
 
 	@BeforeEach
 	void setup() {
@@ -133,9 +122,8 @@ class RDFWorkerTest {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 			fail("Expected DCATException when missing Catalog-dcterms:title");
 		} catch (DcatException e) {
-			Map<String, List<ValidationError>> validationErrorsMap = e.getValidationResults();
 			String description = "The key " + removedKey + " occurs 0 times but the allowed range is 1..n";
-			TestHelper.assertOneValidationError(validationErrorsMap, catalogFileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
+			TestHelper.assertOneValidationError(e.getValidationResults(), catalogFileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
 		}
 	}
 
@@ -147,9 +135,8 @@ class RDFWorkerTest {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 			fail("Expected DCATException when missing Distribution.dcat:accessURL");
 		} catch (DcatException e) {
-			Map<String, List<ValidationError>> validationErrorsMap = e.getValidationResults();
 			String description = "The key " + removedKey + " occurs 0 times but the allowed range is 1";
-			TestHelper.assertOneValidationError(validationErrorsMap, testCatalog1.fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
+			TestHelper.assertOneValidationError(e.getValidationResults(), testCatalog1.fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
 		}
 	}
 
@@ -172,9 +159,8 @@ class RDFWorkerTest {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 			fail("Expected DCATException when missing Publisher.foaf:name");
 		} catch (DcatException e) {
-			Map<String, List<ValidationError>> validationErrorsMap = e.getValidationResults();
 			String description = "The key " + removedKey + " occurs 0 times but the allowed range is 1..n";
-			TestHelper.assertOneValidationError(validationErrorsMap, testCatalog1.fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
+			TestHelper.assertOneValidationError(e.getValidationResults(), testCatalog1.fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
 		}
 	}
 	
@@ -186,9 +172,8 @@ class RDFWorkerTest {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 			fail("Expected DCATException when missing Publisher.foaf:name");
 		} catch (DcatException e) {
-			Map<String, List<ValidationError>> validationErrorsMap = e.getValidationResults();
 			String description = "The key " + removedKey + " occurs 0 times but the allowed range is 1..n";
-			TestHelper.assertOneValidationError(validationErrorsMap, testFileStorageList1.get(0).fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
+			TestHelper.assertOneValidationError(e.getValidationResults(), testFileStorageList1.get(0).fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
 		}
 	}
 
@@ -211,9 +196,8 @@ class RDFWorkerTest {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 			fail("Expected DCATException when missing ContactPoint.vcard:hasEmail");
 		} catch (DcatException e) {
-			Map<String, List<ValidationError>> validationErrorsMap = e.getValidationResults();
 			String description = "The key " + removedKey + " occurs 0 times but the allowed range is 1..n";
-			TestHelper.assertOneValidationError(validationErrorsMap, testFileStorageList1.get(0).fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
+			TestHelper.assertOneValidationError(e.getValidationResults(), testFileStorageList1.get(0).fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
 		}
 	}
 
@@ -225,9 +209,8 @@ class RDFWorkerTest {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 			fail("Expected DCATException when missing Distribution.dcat:accessURL");
 		} catch (DcatException e) {
-			Map<String, List<ValidationError>> validationErrorsMap = e.getValidationResults();
 			String description = "The key " + removedKey + " occurs 0 times but the allowed range is 1";
-			TestHelper.assertOneValidationError(validationErrorsMap, testFileStorageList1.get(0).fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
+			TestHelper.assertOneValidationError(e.getValidationResults(), testFileStorageList1.get(0).fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
 		}
 	}
 
@@ -244,9 +227,8 @@ class RDFWorkerTest {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 			fail("Expected DCATException when multiple Catalog-dcterms:license entrys");
 		} catch (DcatException e) {
-			Map<String, List<ValidationError>> validationErrorsMap = e.getValidationResults();
 			String description = "The key " + addedKey + " occurs 2 times but the allowed range is 1";
-			TestHelper.assertOneValidationError(validationErrorsMap, testCatalog1.fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, addedKey, null, description);
+			TestHelper.assertOneValidationError(e.getValidationResults(), testCatalog1.fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, addedKey, null, description);
 		}
 	}
 	
@@ -259,9 +241,8 @@ class RDFWorkerTest {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 			fail("Expected DCATException when added too many dcat:accessURL");
 		} catch (DcatException e) {
-			Map<String, List<ValidationError>> validationErrorsMap = e.getValidationResults();
 			String description = "The key " + addedKey + " occurs 2 times but the allowed range is 1";
-			TestHelper.assertOneValidationError(validationErrorsMap, testFileStorageList1.get(0).fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, addedKey, null, description);
+			TestHelper.assertOneValidationError(e.getValidationResults(), testFileStorageList1.get(0).fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, addedKey, null, description);
 		}
 	}
 
@@ -296,12 +277,10 @@ class RDFWorkerTest {
 		} catch (DcatException | IOException e) {
 			assertEquals(e.getClass(), DcatException.class);
 			DcatException dcatException = (DcatException) e;
-			Map<String, List<ValidationError>> validationErrorsMap = dcatException.getValidationResults();
 
 			String fileName = testFileStorageList1.get(0).fileName + "," + testFileStorageList1.get(1).fileName;
-			TestHelper.assertOneValidationError(validationErrorsMap, fileName, ErrorType.DUPLICATE_URI_BETWEEN_FILES,
-					null, duplicateDataSetURI1,
-					"URI: " + duplicateDataSetURI1 + " exist in the following files: " + fileName);
+			TestHelper.assertOneValidationError(dcatException.getValidationResults(), fileName, ErrorType.DUPLICATE_URI_BETWEEN_FILES,
+					null, duplicateDataSetURI1, "URI: " + duplicateDataSetURI1 + " exist in the following files: " + fileName);
 		}
 	}	
 	
@@ -331,32 +310,26 @@ class RDFWorkerTest {
 		} catch (DcatException | IOException e) {
 			assertEquals(e.getClass(), DcatException.class);
 			DcatException dcatException = (DcatException) e;
-			Map<String, List<ValidationError>> validationErrorsMap = dcatException.getValidationResults();
-
-			Set<String> keysSet = validationErrorsMap.keySet();
-			assertEquals(2, keysSet.size());
-
-			Iterator<String> iter = keysSet.iterator();
-			List<ValidationError> validationErrors1 = validationErrorsMap.get(iter.next());
-			List<ValidationError> validationErrors2 = validationErrorsMap.get(iter.next());
-
-			assertEquals(1, validationErrors1.size());
-			assertEquals(1, validationErrors2.size());
-
+			List<ValidationError> validationErrors = dcatException.getValidationResults();
+		
+			assertEquals(2, validationErrors.size());
+		
 			String fileName1 = testFileStorageList1.get(1).fileName;
 			String fileName2 = testFileStorageList1.get(0).fileName + "," + testFileStorageList1.get(1).fileName;
 
-			TestHelper.assertValidationError(validationErrors1.get(0), fileName1, ErrorType.DUPLICATE_URI_WITHIN_FILE,
-					null, duplicateDataSetURI2,
-					"URI: " + duplicateDataSetURI2 + " exist multiple times in file: " + fileName1);
-
-			TestHelper.assertValidationError(validationErrors2.get(0), fileName2, ErrorType.DUPLICATE_URI_BETWEEN_FILES,
-					null, duplicateDataSetURI1,
-					"URI: " + duplicateDataSetURI1 + " exist in the following files: " + fileName2);
+			ValidationError withinFileError = TestHelper.findValidationError(validationErrors, ErrorType.DUPLICATE_URI_WITHIN_FILE, duplicateDataSetURI2);
+			ValidationError betweenFilesError = TestHelper.findValidationError(validationErrors, ErrorType.DUPLICATE_URI_BETWEEN_FILES, duplicateDataSetURI1);
+		
+			TestHelper.assertValidationError(withinFileError, fileName1, ErrorType.DUPLICATE_URI_WITHIN_FILE,
+				null, duplicateDataSetURI2,
+				"URI: " + duplicateDataSetURI2 + " exist multiple times in file: " + fileName1);
+			
+			TestHelper.assertValidationError(betweenFilesError, fileName2, ErrorType.DUPLICATE_URI_BETWEEN_FILES,
+			null, duplicateDataSetURI1,
+				"URI: " + duplicateDataSetURI1 + " exist in the following files: " + fileName2);
 		}
 	}
-	
-	
+
 	/*
 	 * Create DCAT with multiple errors and verify the correct ValidationErrors
 	 */	
@@ -387,48 +360,37 @@ class RDFWorkerTest {
 		} catch (DcatException | IOException e) {
 			assertEquals(e.getClass(), DcatException.class);
 			DcatException dcatException = (DcatException) e;
-			Map<String, List<ValidationError>> validationErrorsMap = dcatException.getValidationResults();
+			List<ValidationError> validationErrors = dcatException.getValidationResults();
 
-			Set<String> keysSet = validationErrorsMap.keySet();
-			assertEquals(3, keysSet.size());
-
-			Iterator<String> iter = keysSet.iterator();
-			List<ValidationError> validationErrors1 = validationErrorsMap.get(iter.next());
-			List<ValidationError> validationErrors2 = validationErrorsMap.get(iter.next());
-			List<ValidationError> validationErrors3 = validationErrorsMap.get(iter.next());
-
-			assertEquals(1, validationErrors1.size());
-			assertEquals(3, validationErrors2.size());
-			assertEquals(1, validationErrors3.size());
+			assertEquals(5, validationErrors.size());
 
 			String fileName1 = testFileStorageList1.get(0).fileName;
 			String fileName2 = testFileStorageList1.get(1).fileName;
-			String fileName1_2 = testFileStorageList1.get(0).fileName + "," + testFileStorageList1.get(1).fileName;
+			String fileName1_2 = fileName1 + "," + fileName2;
 
-			//Test ValidationErrors for file 1
-			TestHelper.assertValidationError(validationErrors1.get(0), fileName1, ErrorType.UNKNOWN_VALUE, "dcat:theme", "Invalid URI",
+			// Test ValidationErrors for file 1
+			ValidationError themeError = TestHelper.findValidationError(validationErrors, ErrorType.UNKNOWN_VALUE, "Invalid URI");
+			TestHelper.assertValidationError(themeError, fileName1, ErrorType.UNKNOWN_VALUE, "dcat:theme", "Invalid URI",
 					"The value Invalid URI is not one of the values allowed for key dcat:theme.");
 
-			//Test ValidationErrors for file 2
-			TestHelper.assertValidationError(validationErrors2.get(0), fileName2, ErrorType.VALUE_OUTSIDE_OF_SPEC,	"dcterms:issued", null,
+			// Test ValidationErrors for file 2
+			ValidationError cardinalityError = TestHelper.findValidationError(validationErrors, ErrorType.VALUE_OUTSIDE_OF_SPEC, "2");
+			TestHelper.assertValidationError(cardinalityError, fileName2, ErrorType.VALUE_OUTSIDE_OF_SPEC, "dcterms:issued", "2",
 					"The key dcterms:issued occurs 2 times but the allowed range is 0..1");
-			
-			//Test ValidationErrors for file 2
-			TestHelper.assertValidationError(validationErrors2.get(1), fileName2, ErrorType.ILLEGAL_FORMAT,	"dcterms:issued", "1277273",
+
+			ValidationError formatError = TestHelper.findValidationError(validationErrors, ErrorType.ILLEGAL_FORMAT, "1277273");
+			TestHelper.assertValidationError(formatError, fileName2, ErrorType.ILLEGAL_FORMAT, "dcterms:issued", "1277273",
 					"The value 1277273 has wrong format for key dcterms:issued.");
-			
-			TestHelper.assertValidationError(validationErrors2.get(2), fileName2, ErrorType.DUPLICATE_URI_WITHIN_FILE,
-					null, duplicateDataSetURI2,
+
+			ValidationError duplicateWithinError = TestHelper.findValidationError(validationErrors, ErrorType.DUPLICATE_URI_WITHIN_FILE, duplicateDataSetURI2);
+			TestHelper.assertValidationError(duplicateWithinError, fileName2, ErrorType.DUPLICATE_URI_WITHIN_FILE, null, duplicateDataSetURI2,
 					"URI: " + duplicateDataSetURI2 + " exist multiple times in file: " + fileName2);
 
-			//Test ValidationErrors for file 1 and 2
-			TestHelper.assertValidationError(validationErrors3.get(0), fileName1_2, ErrorType.DUPLICATE_URI_BETWEEN_FILES,
-					null, duplicateDataSetURI1,
+			// Test ValidationErrors for file 1 and 2
+			ValidationError duplicateBetweenError = TestHelper.findValidationError(validationErrors, ErrorType.DUPLICATE_URI_BETWEEN_FILES, duplicateDataSetURI1);
+			TestHelper.assertValidationError(duplicateBetweenError, fileName1_2, ErrorType.DUPLICATE_URI_BETWEEN_FILES, null, duplicateDataSetURI1,
 					"URI: " + duplicateDataSetURI1 + " exist in the following files: " + fileName1_2);
-			
-			printToLog(validationErrorsMap);
 		}
-		
 	}
 	
 	@Test
@@ -440,9 +402,8 @@ class RDFWorkerTest {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 			fail("Expected DCATException when using a key not in specification");
 		} catch (DcatException e) {
-			Map<String, List<ValidationError>> validationErrorsMap = e.getValidationResults();
 			String description = "The key " + madeUpKey + " does not exist in specification";
-			TestHelper.assertOneValidationError(validationErrorsMap, catalogFileName, ErrorType.UNKNOWN_KEY, madeUpKey, null, description);
+			TestHelper.assertOneValidationError(e.getValidationResults(), catalogFileName, ErrorType.UNKNOWN_KEY, madeUpKey, null, description);
 		}
 	}
 
@@ -468,9 +429,8 @@ class RDFWorkerTest {
 			rdfWorker.createDcatFile(testCatalog1, testFileStorageList1);
 			fail("Expected DCATException when hvdCategory is missing under the high value data regulation");
 		} catch (DcatException e) {
-			Map<String, List<ValidationError>> validationErrorsMap = e.getValidationResults();
 			String description = "The key " + removedKey + " occurs 0 times but the allowed range is 1..n";
-			TestHelper.assertOneValidationError(validationErrorsMap, testFileStorageList1.get(0).fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
+			TestHelper.assertOneValidationError(e.getValidationResults(), testFileStorageList1.get(0).fileName, ErrorType.VALUE_OUTSIDE_OF_SPEC, removedKey, null, description);
 		}
 	}
 
@@ -940,25 +900,5 @@ class RDFWorkerTest {
 		}
 		
 		return rights;
-	}
-
-	private void printToLog(Map<String, List<ValidationError>> validationErrorsMap) {
-		Logger logger = LoggerFactory.getLogger(RDFWorkerTest.class);
-		
-		
-		Set<String> keySet = validationErrorsMap.keySet();
-		
-		Iterator<String> keySetIterator = keySet.iterator();
-		
-		while (keySetIterator.hasNext()) {
-			String fileNameKey = (String) keySetIterator.next();
-			
-			List<ValidationError> validationErrorsPerFile = validationErrorsMap.get(fileNameKey);
-			
-			logger.error("The following errors was found in file " + fileNameKey + ":");
-			for (ValidationError validationError : validationErrorsPerFile) {
-				logger.error("File: " + validationError.getFileName() + " Errortype: " + validationError.getErrorType() + " Description: " + validationError.getDescription());		
-			}
-		}
 	}
 }
