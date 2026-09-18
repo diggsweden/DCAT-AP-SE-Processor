@@ -123,4 +123,9 @@ public class TestHelper {
 
 	    return target;
 	}
+
+	public static String bundlePathFromApplicationProperties() throws IOException {
+		Properties properties = PropertiesLoaderUtils.loadProperties(new ClassPathResource("application.properties"));
+		return properties.getProperty("dcat.bundle-path");
+	}
 }
