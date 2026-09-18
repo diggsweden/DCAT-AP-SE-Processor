@@ -4,9 +4,6 @@
 
 package se.ams.dcatprocessor.testutil;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,17 +11,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.Properties;
 import java.util.function.Consumer;
-import org.json.JSONObject;
 
-import se.ams.dcatprocessor.rdf.CardinalityHandler;
+import org.json.JSONObject;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import se.ams.dcatprocessor.rdf.validate.MultipleURIValidator;
 import se.ams.dcatprocessor.rdf.validate.SingleInputValidator;
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
-import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
 
 public class TestHelper {
 	
@@ -37,10 +38,9 @@ public class TestHelper {
 	public static final String EXTENSION_DIR = TestHelper.PS + "src" + TestHelper.PS + "test" + TestHelper.PS + "resources" + TestHelper.PS;
 	public static final String TEST_FILE_DIR = USER_DIR + EXTENSION_DIR;
 
-	public static void assertOneValidationError(Map<String, List<ValidationError>> validationErrors, String fileName, ErrorType errorType, String key, String value, String description) {
-		Set<String> keySet = validationErrors.keySet();
-		assertEquals(1, keySet.size());
-		ValidationError validationError = validationErrors.get(keySet.iterator().next()).get(0);
+	public static void assertOneValidationError(List<ValidationError> validationErrors, String fileName, ErrorType errorType, String key, String value, String description) {
+		assertEquals(1, validationErrors.size());
+		ValidationError validationError = validationErrors.get(0);
 		assertValidationError(validationError, fileName, errorType, key, value, description);
 	}
 	
@@ -60,19 +60,14 @@ public class TestHelper {
 	}
 
 	public static void assertValidationOkAndZeroValidationErrors(MultipleURIValidator multipleURIValidator ) {
-		
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
-		
 		//Validation generated no errors
 		assertTrue(multipleURIValidator.validate());
 		
 		//And there are no ValidationErrors stored
-		assertTrue(!validationErrorStorage.hasValidationErrors());
+		assertTrue(multipleURIValidator.getValidationErrors().isEmpty());
 	}
 	
 	public static void assertFileNameSetValidationOkAndZeroValidationErrors(SingleInputValidator singleInputValidator, String fileName, String key, String value) {
-		
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
 		
 		//Validation generated no errors	
 		assertTrue(singleInputValidator.validateData(key, value, "Dataset"));
@@ -81,7 +76,24 @@ public class TestHelper {
 		assertEquals(fileName, singleInputValidator.getCurrentFileName());
 		
 		//And there are no ValidationErrors stored
-		assertTrue(!validationErrorStorage.hasValidationErrors());
+		assertTrue(singleInputValidator.getValidationErrors().isEmpty());
+	}
+
+	public static ValidationError findValidationError(List<ValidationError> validationErrors, ErrorType errorType, String value) {
+		for (ValidationError error : validationErrors) {
+			boolean valueMatches;
+			if (value == null) {
+				valueMatches = error.getValue() == null;
+			} else {
+				valueMatches = value.equals(error.getValue());
+			}
+			
+			if (error.getErrorType() == errorType && valueMatches) {
+				return error;
+			}
+		}
+		fail("Expected a ValidationError of type " + errorType + " with value " + value + " but found none");
+    	return null; // unreachable, fail() throws
 	}
 	
 	public static void copyFile(String fromFilePath, String toFilePath) throws Exception {
@@ -93,14 +105,6 @@ public class TestHelper {
 	public static String doubleSeparator(String path) {
 		String separator = File.separator;
 		return path.replace(separator, separator + separator);
-	}
-
-	/**
-	 * Set the instance of singelton classes to null, to force them to re-instansiate
-	 */
-	public static void resetSingeltons() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
-        SingleInputValidator.resetInstance();
-		CardinalityHandler.resetInstance();
 	}
 
 	/**

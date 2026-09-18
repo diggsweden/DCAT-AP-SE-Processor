@@ -4,6 +4,7 @@
 
 package se.ams.dcatprocessor.processor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class ErrorReporterTest {
 
     @Test
     void testThatBuildErrorReportWithNoErrorsReturnsEmpty() {
-        String report = errorReporter.buildErrorReport(Map.of(), Map.of());
+        String report = errorReporter.buildErrorReport(Map.of(), new ArrayList<>());
         assertTrue(report.isEmpty());
     }
 
@@ -34,7 +35,7 @@ public class ErrorReporterTest {
         String filename = "api.yaml";
         String msg = "Invalid format";
 
-        String report = errorReporter.buildErrorReport(Map.of(filename, msg), Map.of());
+        String report = errorReporter.buildErrorReport(Map.of(filename, msg), new ArrayList<>());
 
         assertTrue(report.contains(msg));
         assertTrue(report.contains(filename));
@@ -45,9 +46,8 @@ public class ErrorReporterTest {
         String value = "About";
         String filename = "catalog.yaml";
         ValidationError error = new ValidationError(ErrorType.DUPLICATE_URI_BETWEEN_FILES, new String[]{filename}, value);
-        Map<String, List<ValidationError>> validationErrors = Map.of(filename, List.of(error));
 
-        String report = errorReporter.buildErrorReport(Map.of(), validationErrors);
+        String report = errorReporter.buildErrorReport(Map.of(), List.of(error));
 
         assertTrue(report.contains(value));
         assertTrue(report.contains(filename));

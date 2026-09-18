@@ -289,7 +289,6 @@ public class ManagerTest {
 
 	@BeforeEach
 	void setup() throws Exception {
-        TestHelper.resetSingeltons();
 		manager = managerProvider.getObject();
 	}
 

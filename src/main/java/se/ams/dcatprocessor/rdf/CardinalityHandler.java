@@ -7,6 +7,8 @@ package se.ams.dcatprocessor.rdf;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 import se.ams.dcatprocessor.specification.DcatCardinality;
 import se.ams.dcatprocessor.specification.DcatProperty;
 import se.ams.dcatprocessor.specification.DcatSpecification;
@@ -19,29 +21,17 @@ import se.ams.dcatprocessor.specification.DcatSpecification;
  * needs, keyed by property, once at startup.
  * @author nacbr
  */
+@Component
 public class CardinalityHandler {
-
-	private static CardinalityHandler instance;
 
 	private final DcatSpecification specification;
 	
-	private Map<DcatClass, Map<String, DcatCardinality>> cardinalities = new HashMap<>();
-	
-	private CardinalityHandler(DcatSpecification specification) {
+	private final Map<DcatClass, Map<String, DcatCardinality>> cardinalities = new HashMap<>();
+
+	public CardinalityHandler(DcatSpecification specification) {
 		this.specification = specification;
 		loadCardinalities();
 	}
-	
-	public static CardinalityHandler getInstance() {
-		if(instance == null) {
-			instance = new CardinalityHandler(new DcatSpecification());
-		}
-		return instance;
-	}
-
-	public static void resetInstance(){
-		instance = null;
-	} 
 		
 	private void loadCardinalities() {
 		for (DcatClass dcatClass : DcatClass.values()) {

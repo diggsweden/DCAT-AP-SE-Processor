@@ -31,7 +31,6 @@ public class ConverterErrorPropagationTest {
 
     @BeforeEach
 	public void setup() throws Exception {
-        TestHelper.resetSingeltons();
 		manager = managerProvider.getObject();
 	}
 
