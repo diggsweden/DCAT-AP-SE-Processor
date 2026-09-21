@@ -9,6 +9,13 @@
     "maven",
     "dockerfile"
   ],
+  "hostRules": [
+    {
+      "matchHost": "repo.maven.apache.org",
+      "concurrentRequestLimit": 1,
+      "maxRequestsPerSecond": 1
+    }
+  ],
   "packageRules": [
     {
       "description": "Maven dependencies - Major updates",
