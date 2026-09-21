@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "local>diggsweden/.github:renovate-base",
+    ":maintainLockFilesWeekly"
+  ],
+  "enabledManagers": [
+    "github-actions",
+    "maven",
+    "dockerfile"
+  ],
+  "packageRules": [
+    {
+      "description": "Maven dependencies - Major updates",
+      "matchManagers": ["maven"],
+      "matchUpdateTypes": ["major"],
+      "addLabels": ["java", "dependencies", "major-update"],
+      "groupName": "java major"
+    },
+    {
+      "description": "Maven dependencies - Non-major updates",
+      "matchManagers": ["maven"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "addLabels": ["java", "dependencies"],
+      "groupName": "java non-major"
+    },
+    {
+      "description": "Docker base images",
+      "matchManagers": ["dockerfile"],
+      "addLabels": ["docker", "infrastructure"]
+    }
+  ]
+}
