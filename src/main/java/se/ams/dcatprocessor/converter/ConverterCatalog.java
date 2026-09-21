@@ -5,9 +5,6 @@
 package se.ams.dcatprocessor.converter;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.collections4.MultiValuedMap;
@@ -21,7 +18,6 @@ import se.ams.dcatprocessor.models.ApiSpecFile;
 import se.ams.dcatprocessor.models.ConverterHelpClass;
 import se.ams.dcatprocessor.models.DataClass;
 import se.ams.dcatprocessor.rdf.DcatException;
-import se.ams.dcatprocessor.rdf.validate.ValidationError;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
 
 @Component
@@ -36,9 +32,7 @@ public class ConverterCatalog extends Converter {
         catalog.dcData.put("dcat:themeTaxonomy", "http://publications.europa.eu/resource/authority/data-theme");
 
         if (!errors.isEmpty()) {
-            Map<String, List<ValidationError>> errorMap = new LinkedHashMap<>();
-            errorMap.put(sourceFilename, errors);
-            throw new DcatException("Error converting file " + apiSpecFile.name(), errorMap);
+            throw new DcatException("Error converting file " + apiSpecFile.name(), errors);
         }
         return catalog;
     }

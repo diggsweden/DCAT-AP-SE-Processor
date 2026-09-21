@@ -4,6 +4,8 @@
 
 package se.ams.dcatprocessor.processor;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +18,10 @@ public class ErrorReporter {
 
     private static final String DOCS_URL = "https://docs.dataportal.se/dcat/sv/";
 
-    public String buildErrorReport(Map<String, String> exceptions, Map<String, List<ValidationError>> validationErrors) {
+    /** Key used in the exceptions map for errors that don't originate from a specific input file. */
+    public static final String GENERIC_ERROR_KEY = "generic_error";
+
+    public String buildErrorReport(Map<String, String> exceptions, List<ValidationError> validationErrors) {
         StringBuilder report = new StringBuilder();
 
         appendSystemErrors(report, exceptions);
@@ -42,9 +47,8 @@ public class ErrorReporter {
         report.append("\n");
     }
 
-    private void appendValidationErrors(StringBuilder report,
-            Map<String, List<ValidationError>> validationErrorsPerFile) {
-        if (validationErrorsPerFile == null || validationErrorsPerFile.isEmpty()) {
+    private void appendValidationErrors(StringBuilder report, List<ValidationError> validationErrors) {
+        if (validationErrors.isEmpty()) {
             return;
         }
 
@@ -52,6 +56,8 @@ public class ErrorReporter {
                 .append("Check the DCAT-AP-SE specification for info\n")
                 .append(DOCS_URL).append("\n")
                 .append("-".repeat(70)).append("\n");
+
+        Map<String, List<ValidationError>> validationErrorsPerFile = groupByFileName(validationErrors);
 
         for (Map.Entry<String, List<ValidationError>> entry : validationErrorsPerFile.entrySet()) {
             report.append("\n");
@@ -84,7 +90,7 @@ public class ErrorReporter {
 
     /** Filename is omitted when input did not come from a file */
     private void appendFileName(StringBuilder report, String fileName) {
-        if (!fileName.equals("apifile")) {
+        if (!fileName.equals(GENERIC_ERROR_KEY)) {
             report.append(fileName).append(":\n");
         }
     }
@@ -93,5 +99,18 @@ public class ErrorReporter {
     private String toLabel(ValidationError.ErrorType errorType) {
         String words = errorType.name().toLowerCase().replace('_', ' ');
         return Character.toUpperCase(words.charAt(0)) + words.substring(1);
+    }
+
+    private Map<String, List<ValidationError>> groupByFileName(List<ValidationError> validationErrors) {
+        Map<String, List<ValidationError>> errorsByFile = new LinkedHashMap<>();
+        for (ValidationError error : validationErrors) {
+            List<ValidationError> errorsForFile = errorsByFile.get(error.getFileName());
+            if (errorsForFile == null) {
+                errorsForFile = new ArrayList<>();
+                errorsByFile.put(error.getFileName(), errorsForFile);
+            }
+            errorsForFile.add(error);
+        }
+        return errorsByFile;
     }
 }

@@ -4,15 +4,23 @@
 
 package se.ams.dcatprocessor.converter;
 
-import org.eclipse.rdf4j.model.vocabulary.*;
+import java.util.Optional;
+
+import org.eclipse.rdf4j.model.vocabulary.DCAT;
+import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
+import org.eclipse.rdf4j.model.vocabulary.FOAF;
+import org.eclipse.rdf4j.model.vocabulary.PROV;
+import org.eclipse.rdf4j.model.vocabulary.VCARD4;
 import org.json.JSONObject;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import se.ams.dcatprocessor.models.*;
+import se.ams.dcatprocessor.models.ConverterHelpClass;
+import se.ams.dcatprocessor.models.DataClass;
+import se.ams.dcatprocessor.models.DataSet;
+import se.ams.dcatprocessor.models.Distribution;
+import se.ams.dcatprocessor.models.Organization;
 import se.ams.dcatprocessor.rdf.namespace.SCHEMA;
-
-import java.util.Optional;
 
 @Component
 @Scope("prototype")
@@ -47,6 +55,7 @@ public class ConverterDataSet extends Converter {
 
             // Do if key is DISTRIBUTION
             if (key.equals(DCAT.DISTRIBUTION.getLocalName())) {
+                converterDistribution.sourceFilename = this.sourceFilename;
                 converterDistribution.orgConvert = orgConvert;
                 converterDistribution.jsonObjectMandatoryDcat = jsonObjectMandatoryDcat;
                 converterDistribution.fileHandler = fileHandler;

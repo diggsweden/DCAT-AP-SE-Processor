@@ -4,38 +4,29 @@
 
 package se.ams.dcatprocessor.specification;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import se.ams.dcatprocessor.rdf.DcatException;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
-/**
-* TODO: Read bundlePath from application.properties. 
-* CardinalityHandler and SingleInputValidator are static instances, 
-* both uses DcatSpecification which needs the SpecificationLoader.
-* This prevents the usage of @Value to read from the properties file.
-*/
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import se.ams.dcatprocessor.rdf.DcatException;
 
 /**
  * Reads the DCAT-AP-SE bundle from the classpath.
  */
+@Component
 public class SpecificationLoader {
 
-    private static final String DCAT_AP_SE_BUNDLE = "dcat-ap-se-301-bundle.json";
     private final String bundlePath;
 
-    public SpecificationLoader() {
-        this(DCAT_AP_SE_BUNDLE);
-    }
-
-    /** Reads a named bundle. Used by tests and by future version bump. */
-    public SpecificationLoader(String bundlePath) {
+    public SpecificationLoader(@Value("${dcat.bundle-path}") String bundlePath) {
         this.bundlePath = bundlePath;
     }
-         
+
     public Map<String, DcatProperty> load() {
 
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(bundlePath)) {

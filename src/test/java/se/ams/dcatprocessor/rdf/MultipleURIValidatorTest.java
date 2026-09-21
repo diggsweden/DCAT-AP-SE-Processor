@@ -4,30 +4,24 @@
 
 package se.ams.dcatprocessor.rdf;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import se.ams.dcatprocessor.rdf.validate.MultipleURIValidator;
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
-import se.ams.dcatprocessor.rdf.validate.ValidationErrorStorage;
 import se.ams.dcatprocessor.testutil.TestHelper;
 
 class MultipleURIValidatorTest {
 
 	MultipleURIValidator multipleURIValidator;
 
-	ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
-	
 	private String fileName1 = "RamlApiSpec1.raml";
 	private String fileName2 = "RamlApiSpec2.raml";
 	private String fileName3 = "RamlApiSpec3.raml";
@@ -44,7 +38,6 @@ class MultipleURIValidatorTest {
 	@BeforeEach
 	void setup() throws Exception {
 		multipleURIValidator = new MultipleURIValidator();
-		validationErrorStorage.resetErrors();
 	}
 	
 	//Bad
@@ -144,7 +137,7 @@ class MultipleURIValidatorTest {
 	
 		//Validation generated errors
 		assertFalse(multipleURIValidator.validate());
-		TestHelper.assertOneValidationError(validationErrorStorage.getValidationErrors(), fileName1, ErrorType.DUPLICATE_URI_WITHIN_FILE, null, uri1, "URI: " + uri1 + " exist multiple times in file: " + fileName1);	
+		TestHelper.assertOneValidationError(multipleURIValidator.getValidationErrors() , fileName1, ErrorType.DUPLICATE_URI_WITHIN_FILE, null, uri1, "URI: " + uri1 + " exist multiple times in file: " + fileName1);	
 	}	
 	
 	
@@ -160,7 +153,7 @@ class MultipleURIValidatorTest {
 		
 		//Validation generated errors
 		assertFalse(multipleURIValidator.validate());
-		TestHelper.assertOneValidationError(validationErrorStorage.getValidationErrors(), fileName1, ErrorType.DUPLICATE_URI_WITHIN_FILE, null, uri1, "URI: " + uri1 + " exist multiple times in file: " + fileName1);
+		TestHelper.assertOneValidationError(multipleURIValidator.getValidationErrors(), fileName1, ErrorType.DUPLICATE_URI_WITHIN_FILE, null, uri1, "URI: " + uri1 + " exist multiple times in file: " + fileName1);
 	}	
 	
 	// Bad
@@ -176,15 +169,8 @@ class MultipleURIValidatorTest {
 		//Validation generated errors
 		assertFalse(multipleURIValidator.validate());
 
-		Map<String, List<ValidationError>> validationErrorsPerFileMap = validationErrorStorage.getValidationErrors();
-
-		//Assert there are validationerrors for one file only
-		Set<String> keySet = validationErrorsPerFileMap.keySet();
-		assertEquals(1, keySet.size());
-
-		//Get the list of validationerrors for that file
-		List<ValidationError> validationErrors = validationErrorsPerFileMap.get(keySet.iterator().next());
-		
+		List<ValidationError> validationErrors = multipleURIValidator.getValidationErrors();
+		assertEquals(2, validationErrors.size());
 		TestHelper.assertValidationError(validationErrors.get(0), fileName1, ErrorType.DUPLICATE_URI_WITHIN_FILE, null, uri1, "URI: " + uri1 + " exist multiple times in file: " + fileName1);
 		TestHelper.assertValidationError(validationErrors.get(1), fileName1, ErrorType.DUPLICATE_URI_WITHIN_FILE, null, uri2, "URI: " + uri2 + " exist multiple times in file: " + fileName1);
 	}
@@ -202,17 +188,9 @@ class MultipleURIValidatorTest {
 		//Validation generated errors
 		assertFalse(multipleURIValidator.validate());
 
-		Map<String, List<ValidationError>> validationErrorsPerFileMap = validationErrorStorage.getValidationErrors();
-
-		//Check that there are validationerrors for only one file
-		Set<String> keySet = validationErrorsPerFileMap.keySet();
-		assertEquals(1, keySet.size());
-
-		//Check that there is only one validationerror for the file
-		List<ValidationError> validationErrors = validationErrorsPerFileMap.get(keySet.iterator().next());
+		List<ValidationError> validationErrors = multipleURIValidator.getValidationErrors();
 		assertEquals(1, validationErrors.size());
-		assertTrue(keySet.contains(fileName1 + "," + fileName2));
-		
+
 		//Check that the values are correct
 		TestHelper.assertValidationError(validationErrors.get(0), fileName1 + "," + fileName2, ErrorType.DUPLICATE_URI_BETWEEN_FILES, null, uri1, "URI: " + uri1 + " exist in the following files: " + fileName1 + "," + fileName2);
 	}
@@ -239,28 +217,10 @@ class MultipleURIValidatorTest {
 		//Validation generated errors
 		assertFalse(multipleURIValidator.validate());
 
-		Map<String, List<ValidationError>> validationErrorsPerFileMap = validationErrorStorage.getValidationErrors();
-
-		//Check that there are validationerrors for two files: fileName1 and fileName4
-		Set<String> keySet = validationErrorsPerFileMap.keySet();
-		assertEquals(1, keySet.size());
-		
-		/*
-		 * Assert that the key contains all the filenames where the error has occurred
-		 * We can however not know the order of the filenames in the string
-		 */
-		String multipleFilesKey = keySet.iterator().next();
-		assertTrue(multipleFilesKey.contains(fileName1));
-		assertTrue(multipleFilesKey.contains(fileName3));
-		assertTrue(multipleFilesKey.contains(fileName4));
-
-		//Check that there is only one validationerror with the name consisting of multiple files
-		List<ValidationError> validationErrors = validationErrorsPerFileMap.get(multipleFilesKey);
+		List<ValidationError> validationErrors = multipleURIValidator.getValidationErrors();
 		assertEquals(1, validationErrors.size());
-		
-		//Check that the values are correct
-		ValidationError validationError = validationErrors.get(0);
-		assertEquals(ErrorType.DUPLICATE_URI_BETWEEN_FILES, validationError.getErrorType());
+
+		ValidationError validationError = TestHelper.findValidationError(validationErrors, ErrorType.DUPLICATE_URI_BETWEEN_FILES, uri1);
 		/*
 		 * A validationerror that spans multiple files has all the filenames of the affected files concatenated
 		 * We can never really know the order in which the filenames are added
@@ -317,42 +277,20 @@ class MultipleURIValidatorTest {
 		// Validate testdata
 		assertFalse(multipleURIValidator.validate());
 
-		Map<String, List<ValidationError>> validationErrorsPerFileMap = validationErrorStorage.getValidationErrors();
+		List<ValidationError> validationErrors = multipleURIValidator.getValidationErrors();
 
-		// Check that there are validationerrors for two files: fileName1 and fileName4
-		Set<String> keySet = validationErrorsPerFileMap.keySet();
-		assertEquals(4, keySet.size());
+		// Four distinct validationerrors expected
+		assertEquals(4, validationErrors.size());
 
-		/*
-		 * Assert that the key contains all the filenames where the error has occurred
-		 * We can however not know the order of the filenames in the string
-		 */
-		String[] fileNames = keySet.toArray(new String[0]);
-		
-		assertTrue(fileNames[0].contains(fileName1));
-		assertTrue(fileNames[0].contains(fileName3));
-		assertTrue(fileNames[0].contains(fileName4));
-		assertTrue(fileNames[1].contains(fileName1));
-		assertTrue(fileNames[2].contains(fileName2));
-		assertTrue(fileNames[3].contains(fileName2));
-		assertTrue(fileNames[3].contains(fileName4));
-
-		// Check that there is only one validationerror with the name consisting of
-		// multiple files
-		List<ValidationError> validationErrorsFile1 = validationErrorsPerFileMap.get(fileNames[0]);
-		
-		assertEquals(1, validationErrorsFile1.size());
-	
-		// Check that the values are correct
-		ValidationError validationError = validationErrorsFile1.get(0);
-		assertEquals(ErrorType.DUPLICATE_URI_BETWEEN_FILES, validationError.getErrorType());
+		// uri1 is duplicated across fileName1, fileName3 and fileName4
+		ValidationError uri1BetweenFilesError = TestHelper.findValidationError(validationErrors, ErrorType.DUPLICATE_URI_BETWEEN_FILES, uri1);
 
 		/*
 		 * A validationerror that spans multiple files has all the filenames of the
 		 * affected files concatenated We can never really know the order in which the
 		 * filenames are added
 		 */
-		String concatenatedFileName = validationError.getFileName();
+		String concatenatedFileName = uri1BetweenFilesError.getFileName();
 		assertTrue(concatenatedFileName.contains(fileName1));
 		assertTrue(concatenatedFileName.contains(fileName3));
 		assertTrue(concatenatedFileName.contains(fileName4));
@@ -361,50 +299,42 @@ class MultipleURIValidatorTest {
 		 * We can never really know the order in which the filenames are added in the
 		 * errordescription
 		 */
-		String description = validationError.getDescription();
+		String description = uri1BetweenFilesError.getDescription();
 		assertTrue(description.contains(fileName1));
 		assertTrue(description.contains(fileName3));
 		assertTrue(description.contains(fileName4));
 		assertTrue(description.contains("URI: " + uri1 + " exist in the following files: "));
-		assertEquals(uri1, validationError.getValue());
+		assertEquals(uri1, uri1BetweenFilesError.getValue());
 
-		List<ValidationError> validationErrorsFile2 = validationErrorsPerFileMap.get(fileNames[1]);
-		assertEquals(1, validationErrorsFile2.size());
-		
-		//Check that the values are correct for ValidationError file 2 
-		TestHelper.assertValidationError(validationErrorsFile2.get(0), fileName1, ErrorType.DUPLICATE_URI_WITHIN_FILE, null, uri6, "URI: " + uri6 + " exist multiple times in file: " + fileName1);
+		// uri6 is duplicated within fileName1
+		ValidationError uri6WithinFileError = TestHelper.findValidationError(validationErrors, ErrorType.DUPLICATE_URI_WITHIN_FILE, uri6);
+		TestHelper.assertValidationError(uri6WithinFileError, fileName1, ErrorType.DUPLICATE_URI_WITHIN_FILE, null, uri6, "URI: " + uri6 + " exist multiple times in file: " + fileName1);
 
-		List<ValidationError> validationErrorsFile3 = validationErrorsPerFileMap.get(fileNames[2]);
-		assertEquals(1, validationErrorsFile3.size());
-		
-		// Check that the values are correct for ValidationError file 3
-		TestHelper.assertValidationError(validationErrorsFile3.get(0), fileName2, ErrorType.DUPLICATE_URI_WITHIN_FILE, null, uri2, "URI: " + uri2 + " exist multiple times in file: " + fileName2);
-		
-		List<ValidationError> validationErrorsFile4 = validationErrorsPerFileMap.get(fileNames[3]);
-		assertEquals(1, validationErrorsFile4.size());
+		// uri2 is duplicated within fileName2
+		ValidationError uri2WithinFileError = TestHelper.findValidationError(validationErrors, ErrorType.DUPLICATE_URI_WITHIN_FILE, uri2);
+		TestHelper.assertValidationError(uri2WithinFileError, fileName2, ErrorType.DUPLICATE_URI_WITHIN_FILE, null, uri2, "URI: " + uri2 + " exist multiple times in file: " + fileName2);
 
-		// Check that the values are correct for ValidationError file 4
-		validationError = validationErrorsFile4.get(0);
-		assertEquals(ErrorType.DUPLICATE_URI_BETWEEN_FILES, validationError.getErrorType());
-		
+		// uri2 is also duplicated across fileName2 and fileName4
+		ValidationError uri2BetweenFilesError = TestHelper.findValidationError(validationErrors, ErrorType.DUPLICATE_URI_BETWEEN_FILES, uri2);
+
 		/*
 		 * A validationerror that spans multiple files has all the filenames of the
 		 * affected files concatenated We can never really know the order in which the
 		 * filenames are added
 		 */
-		concatenatedFileName = validationError.getFileName();
-		assertTrue(concatenatedFileName.contains(fileName2));
-		assertTrue(concatenatedFileName.contains(fileName4));
+		String concatenatedFileName2 = uri2BetweenFilesError.getFileName();
+		assertTrue(concatenatedFileName2.contains(fileName2));
+		assertTrue(concatenatedFileName2.contains(fileName4));
 		
 		/*
 		 * We can never really know the order in which the filenames are added in the
 		 * errordescription
 		 */
-		description = validationError.getDescription();
-		assertTrue(description.contains(fileName2));
-		assertTrue(description.contains(fileName4));
-		assertTrue(description.contains("URI: " + uri2 + " exist in the following files: "));
-		assertEquals(uri2, validationError.getValue());
+		String description2 = uri2BetweenFilesError.getDescription();
+		assertTrue(description2.contains(fileName2));
+		assertTrue(description2.contains(fileName4));
+		assertTrue(description2.contains("URI: " + uri2 + " exist in the following files: "));
+		assertEquals(uri2, uri2BetweenFilesError.getValue());
 		
 	}
 

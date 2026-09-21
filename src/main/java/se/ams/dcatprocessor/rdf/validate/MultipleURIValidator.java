@@ -4,12 +4,11 @@
 
 package se.ams.dcatprocessor.rdf.validate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import se.ams.dcatprocessor.rdf.validate.ValidationError.ErrorType;
 import se.ams.dcatprocessor.util.Util;
@@ -23,8 +22,6 @@ import se.ams.dcatprocessor.util.Util;
  *
  */
 
-@Component
-@Scope("prototype")
 public class MultipleURIValidator {
 
 	/**
@@ -33,7 +30,8 @@ public class MultipleURIValidator {
 	 * @see se.ams.dcatprocessor.rdf.RDFWorker
 	 */
 	private Map<String, Map<String, Integer>> countedURIsPerFileMap;
-	
+
+	private final List<ValidationError> validationErrors = new ArrayList<>();
 	
 	private String currentFileName;
 	
@@ -43,7 +41,7 @@ public class MultipleURIValidator {
 	private final String ERROR_CURRENT_FILENAME_NOT_SET = this.getClass() + " Error validating input data. Reason: Filename for the file being validated is not set"; 
 	
 	public MultipleURIValidator() {
-		countedURIsPerFileMap = new HashMap<String, Map<String, Integer>>();
+		countedURIsPerFileMap = new HashMap<>();
 	}
 	
 	
@@ -86,7 +84,7 @@ public class MultipleURIValidator {
 			 */
 			if (uriPerFileMap.containsKey(currentFileName)) {
 
-				int numberPerFile = uriPerFileMap.get(currentFileName).intValue();
+				int numberPerFile = uriPerFileMap.get(currentFileName);
 				uriPerFileMap.put(currentFileName, ++numberPerFile);
 
 			} else {
@@ -94,7 +92,7 @@ public class MultipleURIValidator {
 			}
 
 		} else {
-			Map<String, Integer> countsPerFileMap = new HashMap<String, Integer>();
+			Map<String, Integer> countsPerFileMap = new HashMap<>();
 			countsPerFileMap.put(currentFileName, 1);
 			countedURIsPerFileMap.put(uriString, countsPerFileMap);
 		}
@@ -108,8 +106,6 @@ public class MultipleURIValidator {
 	 * @return True if no ValidationErrors exist. False if ValidationErrors exist
 	 */
 	public boolean validate() {
-		
-		ValidationErrorStorage validationErrorStorage = ValidationErrorStorage.getInstance();
 		
 		/**
 		 * Check if each URI is unique within each file and across all the files
@@ -129,8 +125,8 @@ public class MultipleURIValidator {
 				  * Concatenate all the filenams to create an informative errormessage
 				  * then add an tailormade ValidationError for this error
 				  */
-				 String[] names = fileNames.toArray(new String[0]);
-				validationErrorStorage.setValidationError(Util.mergeStringsWithSeparator(names, null), new ValidationError(ErrorType.DUPLICATE_URI_BETWEEN_FILES, names, uriString));
+				String[] names = fileNames.toArray(String[]::new);
+				validationErrors.add(new ValidationError(ErrorType.DUPLICATE_URI_BETWEEN_FILES, names, uriString));
 			 } 
 			 
 			 /**
@@ -143,24 +139,28 @@ public class MultipleURIValidator {
 				  * Then create a tailormade ValidationError for this error
 				  */
 				 if(number > 1) {
-					 validationErrorStorage.setValidationError(fileName, new ValidationError(ErrorType.DUPLICATE_URI_WITHIN_FILE, new String[] {fileName}, uriString));
+					validationErrors.add(new ValidationError(ErrorType.DUPLICATE_URI_WITHIN_FILE, new String[] {fileName}, uriString));
 				 }
 			}
 			
 		}
 				
-		/** 
+		/**
 		 * Validation is OK if there are no ValidationErrors
 		 */
-		return !validationErrorStorage.hasValidationErrors(); 
+		return validationErrors.isEmpty();
 
 	}
 	
 	public String getCurrentFileName() {
 		return currentFileName;
 	}
+
+	public List<ValidationError> getValidationErrors() {
+		return validationErrors;
+	}
+
 	public void setCurrentFileName(String fileName) {
 		currentFileName = fileName;
 	}
-
 }
