@@ -42,6 +42,7 @@
 | | dcat:keyword | 1 |
 | | dcterms:accessRights | 1 |
 | | dcterms:spatial | 1 Weblänk |
+| | dcterms:conformsTo | 1 |
 | | | |
 | Valfri | dcterms:creator | 1 |
 | | prov:qualifiedAttribution | 1 |
@@ -50,22 +51,24 @@
 | | dcterms:modified | 1 |
 | | dcterms:language | 1 |
 | | dcat:landingPage | 1 |
-| | dcterms:conformsTo | 1 |
 | | dcat:temporalResolution | 1 |
 | | dcat:spatialResolutionInMeters | 1 |
 | | dcterms:accrualPeriodicity | 1|
-| | owl:versionInfo | 1 |
 | | adms:versionNotes | 1 |
 | | dcterms:source | 1 |
 | | schema:offers | 1 |
 | | dcat:hasVersion | 1 |
-| | dcat:isVersionOf | 1 |
 | | dcterms:isReferencedBy | 1 |
 | | dcterms:relation | 1 |
-| | dcat:qualifiedRelation | 1 |
+| | dcat:qualifiedRelation | 5 |
 | | foaf:page | 1 |
 | | dcterms:provenance | 1 |
 | | dcat:distribution | 1 |
+| | dcat:inSeries| 1 |
+| | dcat:version | 1 |
+| | dcterms:subject | 5 |
+| | dcatap:applicableLegislation | 1 |
+| | dcatap:hvdCategory* | 1 |
 | | | |
 | Distribution |  |  |
 | Obligatoriska:|dcat:accessURL | 1 |
@@ -92,6 +95,7 @@
 | | spdx:checksum | 1 |
 | | foaf:page | 1 |
 | | dcterms:conformsTo | 1 |
+| | dcatap:applicableLegislation | 1 |
 | | | |
 | DataService |  |  |
 | Obligatoriska | dcterms:title | 1 |
@@ -111,13 +115,44 @@
 | | dcat:servesDataset | 1 |
 | | dcat:landingPage | 1 |
 | | foaf:page | 1 |
+| | dcterms:format | 1 |
+| | dcterms:subject | 5 |
+| | dcatap:applicableLegislation | 1 |
+| | dcatap:hvdCategory* | 1 |
 | | | |
+| DataSetSeries | | |
+| Obligatoriska | dcterms:title | 1 |
+| | dcterms:description | 1 |
+| | dcterms:publisher | 1 |
+| | | |
+| Rekommenderade | dcat:contactPoint | 1 |
+| | dcat:keyword | 1 |
+| | dcat:theme | 1 |
+| | | |
+| Valfri | dcatap:applicableLegislation | 1 |
+| | dcatap:hvdCategory* | 1 |
+| | dcterms:subject | 5 |
+| | dcterms:conformsTo | 1 |
+| | dcterms:issued | 1 |
+| | dcterms:modified | 1 |
+| | dcat:landingPage | 1 |
+| | dcterms:spatial | 1 |
+| | location | 1 |
+| | dcterms:temporal | 1 |
+| | dcterms:accrualPeriodicity | 1 |
+| | dcterms:relation | 1 |
+| | dcat:qualifiedRelation | 5 |
+| | foaf:page | 1 |
 | Aktör | ||
 | Obligatoriska | foaf:name | 1 |
 | | dcterms:type | 1 |
  | |||
 | Valfri | foaf:homepage | 1 |
 | | foaf:mbox | 1 |
+| | dcterms:description| 1 |
+| | dcterms:identifier | 1 |
+| | owl:sameAs | 1 |
+| | org:classification | 1 |
 | | | |
 | Organization | ||
 | Obligatoriska | rdf:type | 1 |
@@ -126,3 +161,21 @@
 | | | |
 | Rekommenderade | vcard:hasTelephone | 1 |
 | | vcard:hasAddress | 1 |
+| Valfri | vcard:hasURL | 1 |
+
+\* Villkorat obligatorisk — endast tillämplig (och obligatorisk, 1..n) om datamängden/datatjänsten klassas som en Högvärdesdatamängd (High Value Dataset, HVD) enligt EU:s genomförandeförordning. Annars ska attributet utelämnas.
+
+## Kända valideringsproblem (status 5)
+
+Bundle-filen är specen för DCAT-AP-SE 3.0.1.
+
+| Property | Klasser | Orsak |
+|:---|:---|:---|
+| `dcterms:subject` | Datamängd, Datatjänst, Datamängdsserie | Mönstret i bundle-filen matchar inte den publicerade vokabulären. |
+| `dcat:qualifiedRelation` | Datamängd, Datamängdsserie | Samma mönsterproblem som för `dcterms:subject`, för underelementet `dcat:hadRole`. |
+| `dcterms:spatial` | Katalog | Bundle-filen tillåter bara en URI, till exempel från Geonames, men applikationen skriver ut ett geografiskt område med centroid, bbox och geometri. |
+| `dcterms:spatial` (geografisk värdemängd) | Datamängd | Valideringen fallerar trots att utdatan verkar följa bundle-filen. Orsaken är inte utredd. |
+
+Mönsterproblemet beror på att bundle-filen kräver URI:er som börjar med
+`https://www.dataportal.se/terminology/`, medan vokabulärerna publiceras under
+`https://dataportal.se/concepts/`. Ett värde kan därför inte både matcha mönstret och vara ett befintligt begrepp.
