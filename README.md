@@ -286,13 +286,12 @@ Se [licens](LICENSES/EUPL-1.2.txt) för mer information.
 
 ## Beroenden
 
-snakeYaml [Apache license](docs/Licenser/Apache.txt)<br>
-RDF4J [EDL v1.0 license](docs/Licenser/edl-v10.txt)<br>
-Spring boot, Spring framework [Apache license](docs/Licenser/Apache.txt)<br>
-commonmark-java [BSD-2 clause simplified license](docs/Licenser/BSD-2.txt)<br>
-jackson-dataformat-yaml [Apache license](docs/Licenser/Apache.txt)<br>
-JSON-java [Public domain](https://github.com/stleary/JSON-java)<br>
-commons-collections4 [Apache license](docs/Licenser/Apache.txt)<br>
+Samtliga tredjepartsberoenden och deras licenser listas i [THIRD-PARTY.txt](docs/THIRD-PARTY.txt),
+som genereras från `pom.xml`. För att uppdatera filen kör:
+
+```text
+mvn license:add-third-party
+```
 
 ## Underhållare
 
