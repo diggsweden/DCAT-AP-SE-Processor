@@ -28,8 +28,6 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import se.ams.dcatprocessor.testutil.TestHelper;
-
 @SpringBootTest 
 public class IntegrationTest {
 
@@ -42,7 +40,6 @@ public class IntegrationTest {
     
     @BeforeEach
 	public void setup() throws Exception {
-        TestHelper.resetSingeltons();
 		manager = managerProvider.getObject();
 	}
 

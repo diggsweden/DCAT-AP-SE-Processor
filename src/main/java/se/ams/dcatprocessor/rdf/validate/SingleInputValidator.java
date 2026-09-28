@@ -28,9 +28,7 @@ import se.ams.dcatprocessor.util.Util;
  */
 public class SingleInputValidator {
 	
-	private static SingleInputValidator instance;
-
-	private DcatSpecification specification;
+	private final DcatSpecification specification;
 	
 	//Map from an InputType to regex
 	private HashMap<InputType, Pattern> inputTypeToRegexMap;
@@ -40,6 +38,8 @@ public class SingleInputValidator {
 
 	// The name of the file currently being validated
 	private String currentFileName;
+
+	private final List<ValidationError> validationErrors = new ArrayList<>();
 	
 	//  Predefined error messages
 	private static final String ERROR_CURRENT_FILENAME_NOT_SET = "Error validating input data. Reason: Filename for the file being validated is not set";
@@ -76,22 +76,11 @@ public class SingleInputValidator {
 		"adms:status",
 		"rdf:type");
 			
-	private SingleInputValidator(DcatSpecification specification) {
+	public SingleInputValidator(DcatSpecification specification){
 		this.specification = specification;
 		mapInputTypeToRegex();
 		loadInputTypeDefinitions();
 	}
-
-	public static SingleInputValidator getInstance() {
-		if(instance == null) {
-			instance = new SingleInputValidator(new DcatSpecification());	
-		}
-		return instance;
-	}
-	
-	public static void resetInstance(){
-		instance = null;
-	} 
 
 	/**
 	 * Checks a value against what the specification.
@@ -126,7 +115,7 @@ public class SingleInputValidator {
 	}
 
 	private boolean reportError(ErrorType errorType, String key, String value, String section) {
-		ValidationErrorStorage.getInstance().setValidationError(currentFileName, new ValidationError(errorType, currentFileName, key, value, section));
+		validationErrors.add(new ValidationError(errorType, currentFileName, key, value, section));
 		return false;
 	}
 
@@ -245,4 +234,8 @@ public class SingleInputValidator {
             types.add(type);
         }
     }
+
+	public List<ValidationError> getValidationErrors() {
+		return validationErrors;
+	}
 }

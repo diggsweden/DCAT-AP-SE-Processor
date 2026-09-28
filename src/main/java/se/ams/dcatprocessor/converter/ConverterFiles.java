@@ -4,9 +4,6 @@
 
 package se.ams.dcatprocessor.converter;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.eclipse.rdf4j.model.vocabulary.DCAT;
@@ -19,7 +16,6 @@ import se.ams.dcatprocessor.models.DataClass;
 import se.ams.dcatprocessor.models.DataService;
 import se.ams.dcatprocessor.models.DataSet;
 import se.ams.dcatprocessor.rdf.DcatException;
-import se.ams.dcatprocessor.rdf.validate.ValidationError;
 
 @Component
 @Scope("prototype")
@@ -46,9 +42,7 @@ public class ConverterFiles extends Converter {
         primaryClassesToDcat(apiSpecFile);
         
         if (!errors.isEmpty()) {
-            Map<String, List<ValidationError>> errorMap = new LinkedHashMap<>();
-            errorMap.put(sourceFilename, errors);
-            throw new DcatException("Error converting file " + apiSpecFile.name(), errorMap);
+            throw new DcatException("Error converting file " + apiSpecFile.name(), errors);
         }
         return fileHandler;
     }

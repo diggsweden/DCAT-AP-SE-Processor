@@ -4,6 +4,7 @@
 
 package se.ams.dcatprocessor.specification;
 
+import java.io.IOException;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,14 +14,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import se.ams.dcatprocessor.rdf.DcatException;
+import se.ams.dcatprocessor.testutil.TestHelper;
 
 public class SpecificationLoaderTest {
 
     private static Map<String, DcatProperty> nodes;
 
     @BeforeAll
-    public static void setup(){
-        nodes = new SpecificationLoader().load();
+    public static void setup() throws IOException{
+        SpecificationLoader specificationLoader = new SpecificationLoader(TestHelper.bundlePathFromApplicationProperties());
+        nodes = specificationLoader.load();
     }
 
     @Test

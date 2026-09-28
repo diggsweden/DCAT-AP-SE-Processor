@@ -4,17 +4,20 @@
 
 package se.ams.dcatprocessor.rdf;
 
+import java.io.IOException;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-
-import java.util.Map;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import se.ams.dcatprocessor.specification.DcatCardinality;
 import se.ams.dcatprocessor.specification.DcatCardinality.Condition;
+import se.ams.dcatprocessor.specification.DcatSpecification;
+import se.ams.dcatprocessor.specification.SpecificationLoader;
+import se.ams.dcatprocessor.testutil.TestHelper;
 
 class CardinalityHandlerTest {
 
@@ -22,10 +25,11 @@ class CardinalityHandlerTest {
 	private static Map<String, DcatCardinality> distribution;
 
 	@BeforeAll
-	static void load() {
-		CardinalityHandler.resetInstance();
-		dataset = CardinalityHandler.getInstance().getCardinalities(DcatClass.DATASET);
-		distribution = CardinalityHandler.getInstance().getCardinalities(DcatClass.DISTRIBUTION);
+	static void load() throws IOException {
+		SpecificationLoader specificationLoader = new SpecificationLoader(TestHelper.bundlePathFromApplicationProperties());
+		CardinalityHandler cardinalityHandler = new CardinalityHandler(new DcatSpecification(specificationLoader));
+		dataset = cardinalityHandler.getCardinalities(DcatClass.DATASET);
+		distribution = cardinalityHandler.getCardinalities(DcatClass.DISTRIBUTION);
 	}
 
 	@Test

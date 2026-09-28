@@ -21,8 +21,8 @@ public class DcatSpecification {
     private final Map<String, DcatProperty> nodes;
     private final Map<String, List<DcatProperty>> nodesByProperty;
 
-    public DcatSpecification() {
-        this.nodes = new SpecificationLoader().load();
+    public DcatSpecification(SpecificationLoader specificationLoader) {
+        this.nodes = specificationLoader.load();
         this.nodesByProperty = indexByProperty(nodes);
     }
 

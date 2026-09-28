@@ -53,7 +53,6 @@ class PreprocessorControllerRestTest {
 
 	@BeforeEach
 	void setup() throws Exception {
-		TestHelper.resetSingeltons();
 		pathFiles = "http://localhost:" + port + "/dcat-generation/files/";
 		pathSpec = "http://localhost:" + port + "/dcat-generation/spec";
 	}
