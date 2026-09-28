@@ -8,7 +8,6 @@
 
 [settings]
 experimental = true  # Enable experimental features
-paranoid = true      # Enable strict security checks and verification
 
 [env]
 # Proxy configuration - available during tool installation AND runtime
