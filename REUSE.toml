@@ -24,6 +24,7 @@ path = [
   "docs/*.md",
   "docs/**/.png",
   "docs/jenkinsfile",
+  "docs/THIRD-PARTY.txt",
   "src/**/*.json",
   "src/**/*.raml",
   "src/**/*.yaml",

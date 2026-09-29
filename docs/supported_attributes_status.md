@@ -5,7 +5,7 @@ Dessa värden finns beskrivna i DCAT-AP-Se specifikationen: [Status - värden](h
 
 | Svensk titel |Metadatatext | Uri |
 |:------------|:------------|:-------------------- |
-|Avvecklad         |Deprecated          | <http://purl.org/adms/status/Deprecated>             |
-|Färdig            |Completed           | <http://purl.org/adms/status/Completed>               |
-|Tillbakadragen    |Withdrawn           | <http://purl.org/adms/status/Withdrawn>              |
-|Under utveckling  |UnderDevelopment    | <http://purl.org/adms/status/UnderDevelopment>               |
+|Avvecklad         |Deprecated          | <http://publications.europa.eu/resource/authority/distribution-status/DEPRECATED>        |
+|Färdig            |Completed           | <http://publications.europa.eu/resource/authority/distribution-status/COMPLETED>         |
+|Tillbakadragen    |Withdrawn           | <http://http://publications.europa.eu/resource/authority/distribution-status/WITHDRAWN>  |
+|Under utveckling  |UnderDevelopment    | <http://publications.europa.eu/resource/authority/distribution-status/DEVELOP>           |

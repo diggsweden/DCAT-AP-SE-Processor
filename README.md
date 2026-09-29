@@ -110,13 +110,12 @@ Verktyget kan användas på följande sätt.
 
 Starta docker container, öppna browser till <http://localhost:8080>
 
-Det finns val för att:
+I gränssnittet finns en editor där det går att lägga till och redigera en/flera API-definitioner
+innan de skickas in för generering. Det finns också en startmalls funktion — ett
+formulär som hjälper till att skapa upp x-dcat-attribut i en API-definition.
 
-- skicka in en sträng med API-definitionen.
-- bifoga en fil med API-definitionen.
-- ange en katalog som håller flera API-definitioner.
-
-Verktyget levererar resultatet som svar på sidan.
+När generering lyckas levereras resultatet som en RDF på sidan. Om något går fel
+visas istället en felrapport.
 
 ### 2. Via anrop till REST gränssnitt
 
@@ -200,11 +199,14 @@ Sekvensdiagram över flödet i verktyget. <br>
 REST API:n för verktyget, följande två är de som finns att använda:
 
 "/dcat-generation/files/" - Skickar man in directory (dir) som sedan skickas vidare till Managern för hantering. <br>
-"/dcat-generation/web/" - Är endpointen för Web-UI som skickar med antingen en sträng med hela apidefinitionen eller en lista med filer som sedan skickas vidare till Managern.
+
+"/" - Är index sidan för Web-UI. Genom UI kan en eller flera filer skickas via endpointen "/dcat-generation/web/spec". Endpoint accepterar objektet SpecRequest vilket innehåller en array av ApiSource, se [openapi.yaml](src/main/resources/static/openapi.yaml) för schema beskrivning. Filerna skickas vidare till Managern.
+
+Se kapitlet [API-dokumentation](#api-dokumentation) för att läsa mer om vilka endpoints som finns tillgängliga.
 
 ### Manager
 
-Tar emot anrop från REST API't eller formuläret och styr parsning, konvertering och uppskapande av RDF-data.
+Tar emot anrop från REST API't eller Cli och styr parsning, konvertering och uppskapande av RDF-data.
 
 ### ApiDefinitionParser
 
@@ -284,13 +286,12 @@ Se [licens](LICENSES/EUPL-1.2.txt) för mer information.
 
 ## Beroenden
 
-snakeYaml [Apache license](docs/Licenser/Apache.txt)<br>
-RDF4J [EDL v1.0 license](docs/Licenser/edl-v10.txt)<br>
-Spring boot, Spring framework [Apache license](docs/Licenser/Apache.txt)<br>
-commonmark-java [BSD-2 clause simplified license](docs/Licenser/BSD-2.txt)<br>
-jackson-dataformat-yaml [Apache license](docs/Licenser/Apache.txt)<br>
-JSON-java [Public domain](https://github.com/stleary/JSON-java)<br>
-commons-collections4 [Apache license](docs/Licenser/Apache.txt)<br>
+Samtliga tredjepartsberoenden och deras licenser listas i [THIRD-PARTY.txt](docs/THIRD-PARTY.txt),
+som genereras från `pom.xml`. För att uppdatera filen kör:
+
+```text
+mvn license:add-third-party
+```
 
 ## Underhållare
 
