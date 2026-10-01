@@ -28,6 +28,7 @@ path = [
   "src/**/*.json",
   "src/**/*.raml",
   "src/**/*.yaml",
+  "src/main/resources/logback-spring.xml",
   "src/main/resources/**/*.html",
   "src/main/resources/**/*.js",
   "src/main/resources/**/*.css"
