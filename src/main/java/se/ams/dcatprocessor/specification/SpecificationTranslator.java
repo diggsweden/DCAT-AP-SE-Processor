@@ -4,15 +4,15 @@
 
 package se.ams.dcatprocessor.specification;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
-import se.ams.dcatprocessor.rdf.DcatException;
-import se.ams.dcatprocessor.specification.DcatCardinality.Condition;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
+import se.ams.dcatprocessor.rdf.DcatException;
+import se.ams.dcatprocessor.specification.DcatCardinality.Condition;
 
 /**
  * Turns the parsed bundle.json into {@link DcatProperty} objects.
@@ -123,24 +123,27 @@ public class SpecificationTranslator {
     }
 
 	/**
-	 * The bundle leaves out min when the property is optional and max when it is
-	 * unbounded. Both are filled in here so that a cardinality is always complete.
+	 * The bundle leaves out min when the property is optional, max when it is
+	 * unbounded and pref when the property is not recommended. All three are
+	 * filled in here so that a cardinality is always complete.
 	 *
 	 * The condition sits on the node rather than inside the cardinality object.
 	 */
     private DcatCardinality toCardinality(JsonNode raw) {
         JsonNode cardinality = raw.get("cardinality");
         if (cardinality == null || !cardinality.isObject()) {
-        	return null;
+            return null;
         }
 
         Integer jsonMin = integer(cardinality, "min");
         Integer jsonMax = integer(cardinality, "max");
+        Integer jsonPref = integer(cardinality, "pref");
 
         Integer min = jsonMin == null ? 0 : jsonMin;
         Integer max = jsonMax == null ? DcatCardinality.MAX : jsonMax;
+        Integer pref = jsonPref == null ? 0 : jsonPref;
 
-        return new DcatCardinality(min, max, toCondition(raw));
+        return new DcatCardinality(min, max, pref, toCondition(raw));
 	}
 
     /**

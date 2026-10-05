@@ -4,15 +4,14 @@
 
 package se.ams.dcatprocessor.specification;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.List;
-import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,10 +30,10 @@ class SpecificationTranslatorTest {
 	void testThatTranslateReadsAllFieldsOfANode() throws Exception {
 		String json = """
 			{"templates":[
-			  {"id":"parent","items":["child",{"property":"dcat:centroid","datatype":"geo:wktLiteral"}]},
-			  {"id":"child","property":"http://www.w3.org/ns/adms#status","nodetype":"URI",
-			   "cardinality":{"min":1,"max":1},"pattern":"https?://.+",
-			   "choices":[{"value":"a","label":{"sv":"A"}},{"value":"b"}]}
+				{"id":"parent","items":["child",{"property":"dcat:centroid","datatype":"geo:wktLiteral"}]},
+				{"id":"child","property":"http://www.w3.org/ns/adms#status","nodetype":"URI",
+					"cardinality":{"min":1,"pref":1, "max":1},"pattern":"https?://.+",
+					"choices":[{"value":"a","label":{"sv":"A"}},{"value":"b"}]}
 			]}""";
 
 		Map<String, DcatProperty> nodes = translate(json);
@@ -45,6 +44,7 @@ class SpecificationTranslatorTest {
 		assertEquals("URI", child.getNodetype());
 		assertEquals(1, child.getCardinality().getMin());
 		assertEquals(1, child.getCardinality().getMax());
+		assertEquals(1, child.getCardinality().getPref());
 		assertEquals("https?://.+", child.getPattern());
 		assertEquals(List.of("a", "b"), child.getChoices());
 
@@ -53,6 +53,18 @@ class SpecificationTranslatorTest {
 		DcatProperty inline = nodes.get("parent").getItems().get(1);
 		assertNull(inline.getId());
 		assertEquals(List.of("geo:wktLiteral"), inline.getDatatype());
+	}
+
+	@Test
+	void testThatTranslateSetsPrefToZeroWhenMissing() throws Exception {
+		String json = """
+			{"templates":[
+				{"id":"node","property":"dcat:keyword","cardinality":{"min":0}}
+			]}""";
+
+		DcatCardinality cardinality = translate(json).get("node").getCardinality();
+
+		assertEquals(0, cardinality.getPref());
 	}
 
 	@Test
