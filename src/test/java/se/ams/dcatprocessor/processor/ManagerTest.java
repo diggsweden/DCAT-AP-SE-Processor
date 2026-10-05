@@ -50,7 +50,8 @@ public class ManagerTest {
             "\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n" +
 	        "\txmlns:org=\"http://www.w3.org/ns/org#\"\n" +
             "\txmlns:dcatap=\"http://data.europa.eu/r5r/\"\n" +
-            "\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\">\n" +
+            "\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n" +
+            "\txmlns:its=\"http://www.w3.org/2005/11/its\">\n" +
             "<foaf:Agent rdf:about=\"https://www.example.se/result.rdf#publisher\">\n" +
             "\t<foaf:name rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Redpill Linpro AB Catalog</foaf:name>\n" +
             "\t<dcterms:type rdf:resource=\"http://purl.org/adms/publishertype/NationalAuthority\"/>\n" +
