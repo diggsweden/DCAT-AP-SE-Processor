@@ -78,6 +78,39 @@ public class DcatSpecification {
         }
     }
 
+    /**
+     * The cardinality of a node. Some nodes state only what they extend and take
+     * the whole cardinality, condition included, from the node they extend.
+     * A node without a cardinality is optional, unbound and not recommended.
+     */
+    public DcatCardinality cardinalityOf(DcatProperty node) {
+        DcatCardinality cardinality = node.getCardinality();
+
+        if (cardinality == null && node.getExtendsId() != null) {
+            cardinality = node(node.getExtendsId()).getCardinality();
+        }
+
+        if (cardinality == null) {
+            return new DcatCardinality(0, DcatCardinality.MAX, 0, null);
+        }
+        return cardinality;
+    }
+
+    /**
+     * The property of a node. Some nodes state only what they extend and take
+     * the property from the node they extend. A group has no property of its
+     * own; its properties sit on its items, so null is returned for a group.
+     */
+    public String propertyOf(DcatProperty node) {
+        if (node.getProperty() != null) {
+            return node.getProperty();
+        }
+        if (node.getExtendsId() != null) {
+            return node(node.getExtendsId()).getProperty();
+        }
+        return null;
+    }
+
     /** The values the specification allows for a property, empty when it states none. */
     public List<String> choicesFor(String property) {
         for (DcatProperty node : nodesFor(property)) {
