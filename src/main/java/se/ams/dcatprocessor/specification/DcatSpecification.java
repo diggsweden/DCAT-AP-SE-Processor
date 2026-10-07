@@ -120,4 +120,42 @@ public class DcatSpecification {
         }
         return List.of();
     }
+
+    /**
+     * The items of a main class template that are optional but preferred.
+     *
+     * @param templateId the bundle id of a main class template, for example "dcat:Dataset"
+     * @return the recommended items
+     *
+     */
+    public List<DcatProperty> recommendedFor(String templateId) {
+        List<DcatProperty> recommended = new ArrayList<>();
+        for (DcatProperty item : node(templateId).getItems()) {
+            if (cardinalityOf(item).isRecommended()) {
+                recommended.add(item);
+            }
+        }
+        return recommended;
+    }
+
+    /**
+	 * The properties a node covers. A node with a property of its own, stated
+	 * directly or taken from the node it extends, covers that one property.
+	 * A group covers the properties of all its items.
+	 */
+	public List<String> propertiesOf(DcatProperty node) {
+		List<String> properties = new ArrayList<>();
+		String property = propertyOf(node);
+		if (property != null) {
+			properties.add(property);
+			return properties;
+		}
+		for (DcatProperty item : node.getItems()) {
+			String itemProperty = propertyOf(item);
+			if (itemProperty != null && !properties.contains(itemProperty)) {
+				properties.add(itemProperty);
+			}
+		}
+		return properties;
+	}
 }
