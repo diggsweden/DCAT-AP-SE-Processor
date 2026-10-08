@@ -132,7 +132,20 @@ Jenkins pipeline exempel
 
 ### 3. Via CLI
 
-Vid användning av CLI kan enstaka filer pekas ut ( -f ) eller en hel mapp ( -d )<br>
+Applikationen kan köras som kommandoradsverktyg för att konvertera en enskild fil eller en hel katalog.
+När argument skickas med körs den i CLI-läge och ingen webbserver startas.
+
+#### Flaggor
+
+| Flagga | Värde | Beskrivning | Exempel |
+|--------|-------|-------------|---------|
+| `-f` | FIL | Konverterar en specifikationsfil (.raml, .yaml, .json) | `java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -f api.yaml` |
+| `-d` | KATALOG | Konverterar alla specifikationsfiler i en katalog | `java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -d ./specs` |
+
+Okända argument, eller en flagga utan värde, avslutas med exitkod 2.
+Argument som börjar med `--`, t.ex. `--server.port=8081`, är Spring-inställningar och påverkar inte vilket läge applikationen startar i.
+
+#### Användning
 
 Bygg en java JAR fil.
 
@@ -140,17 +153,29 @@ Bygg en java JAR fil.
 mvn clean package -DskipTests
 ```
 
-Konvertera en specifikationsfil och få DCAT-data till stdout:
+Konvertera en specifikationsfil:
 
 ```text
 java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -f FIL
 ```
 
-Konvertera en katalog med specifikationsfiler och få DCAT-data till stdout:
+Konvertera en katalog med specifikationsfiler:
 
 ```text
 java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -d KATALOG
 ```
+
+Vid lyckad konvertering skrivs DCAT-datan till stdout och till filen `dcat.rdf` i aktuell katalog.
+Om konverteringen misslyckas skrivs en felrapport till stderr och ingen fil skapas.
+
+#### Exitkoder
+
+| Kod | Betydelse |
+|-----|-----------|
+| 0 | DCAT-data genererad |
+| 1 | Oväntat internt fel |
+| 2 | Felaktiga argument, t.ex. okänd flagga eller saknat värde |
+| 3 | Indata kunde inte konverteras, felrapport skriven till stderr |
 
 ## API-dokumentation
 
