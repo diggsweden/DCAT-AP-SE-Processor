@@ -29,6 +29,8 @@ import se.ams.dcatprocessor.models.FileStorage;
 import se.ams.dcatprocessor.parser.ApiDefinitionParser;
 import se.ams.dcatprocessor.rdf.DcatException;
 import se.ams.dcatprocessor.rdf.RDFWorker;
+import se.ams.dcatprocessor.rdf.quality.DcatQualityChecker;
+import se.ams.dcatprocessor.rdf.quality.QualityReport;
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 import se.ams.dcatprocessor.util.Util;
 
@@ -38,6 +40,7 @@ public class Manager {
 
     private final ObjectProvider<RDFWorker> rdfWorkerProvider;
     private final ErrorReporter errorReporter;
+    private final DcatQualityChecker qualityChecker;
 
     private final ObjectProvider<ConverterFiles> converterFilesProvider;
     private final ObjectProvider<ConverterCatalog> converterCatalogProvider;
@@ -50,11 +53,13 @@ public class Manager {
     public Manager(
         ObjectProvider<RDFWorker> rdfWorkerProvider,
         ErrorReporter errorReporter,
+        DcatQualityChecker qualityChecker,
         ObjectProvider<ConverterFiles> converterFilesProvider,
         ObjectProvider<ConverterCatalog> converterCatalogProvider
     ) {
         this.rdfWorkerProvider = rdfWorkerProvider;
         this.errorReporter = errorReporter;
+        this.qualityChecker = qualityChecker;
         this.converterFilesProvider = converterFilesProvider;
         this.converterCatalogProvider = converterCatalogProvider;
     }
@@ -110,7 +115,7 @@ public class Manager {
      * RDF generation only runs when the conversion produced no errors.
      *
      * @param sources - The API specifications to convert, each carrying a name and its content
-     * @return DcatResult - Containing the generated RDF, or an error report if anything failed
+     * @return DcatResult - Containing the generated RDF and its quality report, or an error report if anything failed
      */
     public DcatResult createDcat(List<ApiSource> sources) {
         RDFWorker rdfWorker = rdfWorkerProvider.getObject();
@@ -154,7 +159,8 @@ public class Manager {
             return DcatResult.errors(errorReport);
         }
 
-        return DcatResult.success(result);
+        QualityReport qualityReport = checkRDFQuality(result);
+        return DcatResult.success(result, qualityReport);
     }
 
     /**
@@ -221,6 +227,15 @@ public class Manager {
         } else {
             // add validation errors from the exception to validationErrors
             validationErrors.addAll(exceptionValidationErrors);
+        }
+    }
+
+    private QualityReport checkRDFQuality(String rdf) {
+        try {
+            return qualityChecker.check(rdf);
+        } catch (RuntimeException e) {
+            logger.error("Quality check of generated RDF failed", e);
+            return QualityReport.notCompleted();
         }
     }
 }

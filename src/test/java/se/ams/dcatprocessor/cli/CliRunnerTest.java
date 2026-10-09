@@ -4,11 +4,13 @@
 
 package se.ams.dcatprocessor.cli;
 
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import static org.mockito.Mockito.mockStatic;
@@ -23,7 +25,9 @@ import org.springframework.context.ApplicationContext;
 
 import se.ams.dcatprocessor.processor.DcatResult;
 import se.ams.dcatprocessor.processor.Manager;
+import se.ams.dcatprocessor.rdf.quality.QualityReport;
 import se.ams.dcatprocessor.util.Util;
+import tools.jackson.databind.json.JsonMapper;
 
 @ExtendWith(MockitoExtension.class)
 public class CliRunnerTest {
@@ -37,9 +41,12 @@ public class CliRunnerTest {
     @Mock
     private ApplicationContext context;
 
-    @InjectMocks
     private CliRunner cliRunner;
 
+    @BeforeEach
+    void setup() {
+        cliRunner = new CliRunner(managerProvider, context, JsonMapper.builder().build());
+    }
 
     @Test
     void testThatCreateDcatFromFileIsCalled() {
@@ -47,7 +54,9 @@ public class CliRunnerTest {
         String flag = "-f";
         String file = "./folder/testfile.yaml";
         ApplicationArguments args = new DefaultApplicationArguments(flag, file);
-        when(manager.createDcatFromFile(file)).thenReturn(DcatResult.success("<rdf:RDF/>"));
+
+        QualityReport qualityReport = new QualityReport(true, List.of());
+        when(manager.createDcatFromFile(file)).thenReturn(DcatResult.success("<rdf:RDF/>", qualityReport));
         
         cliRunner.run(args);
         
@@ -76,8 +85,10 @@ public class CliRunnerTest {
         String flag = "-d";
         String dirname = "./testFiles";
         ApplicationArguments args = new DefaultApplicationArguments(flag, dirname);
+        QualityReport qualityReport = new QualityReport(true, List.of());
+
         when(managerProvider.getObject()).thenReturn(manager);
-        when(manager.createDcatFromDirectory(dirname)).thenReturn(DcatResult.success("<rdf:RDF/>"));
+        when(manager.createDcatFromDirectory(dirname)).thenReturn(DcatResult.success("<rdf:RDF/>", qualityReport));
         
         cliRunner.run(args);
         

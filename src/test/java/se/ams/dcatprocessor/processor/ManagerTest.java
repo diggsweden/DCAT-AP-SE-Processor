@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -306,7 +307,9 @@ public class ManagerTest {
         // nodeIDs are generated dynamically, changing them allows for comparison
         String convertedRdf = replaceBetween(rdfResult, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");      
         
-        assertEquals(expectedRDF, convertedRdf);        
+        assertEquals(expectedRDF, convertedRdf);
+        assertNotNull(result.qualityReport());
+        assertTrue(result.qualityReport().completed());
     }
 
     @Test
@@ -319,6 +322,8 @@ public class ManagerTest {
         // nodeIDs are generated dynamically, changing them allows for comparison
         String convertedRdf = replaceBetween(rdfResult, "rdf:nodeID=\"", "\"", true, true, "rdf:nodeID=\"TESTNODEID\"");
         assertEquals(expectedRDF, convertedRdf);
+        assertNotNull(result.qualityReport());
+        assertTrue(result.qualityReport().completed());
     }
 
     @Test
@@ -331,6 +336,7 @@ public class ManagerTest {
         assertTrue(result.hasErrors());
         assertTrue(result.errorReport().contains("Failed to parse JSON, invalid format."));
         assertTrue(result.errorReport().contains("invalid.json"));
+        assertTrue(result.qualityReport() == null);
     }
 
     @Test
