@@ -21,6 +21,14 @@
   --color-error-25: #edbfbf;
   --color-error-100: #b50000;
 
+  --color-success-10: #EAF5EC;
+  --color-success-25: #CAE6D0;
+  --color-success-100: #2B9B44;
+
+  --color-warn-10: #FEF7E7;
+  --color-warn-25: #FCEBC4;
+  --color-warn-100: #F4B013;
+
   --color-info-10: #e8f0f9;
   --color-info-25: #c5daf1;
   --color-info-100: #186cc6;
@@ -265,7 +273,8 @@ form label {
 
 #panel-user-guide,
 #panel-dcat-form,
-#panel-result {
+#panel-result,
+#panel-quality-report {
   display: flex;
   flex-direction: column;
   background: var(--color-white);
@@ -276,6 +285,33 @@ form label {
 
 #result {
   min-height: calc(100vh - 200px);
+}
+
+.quality-group summary {
+  display: flex;
+  column-gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.125rem;
+  padding: .25rem;
+}
+
+.quality-group summary i {
+  font-size: 1.25rem;
+}
+
+.quality-group section {
+  margin-left: .75rem;
+  margin-bottom: 2rem;
+}
+
+.quality-table thead tr :first-child {
+  width: 175px;
+}
+
+section .section-header {
+  font-weight: 500;
+  margin-bottom: .5rem;
 }
 
 .tools {
@@ -360,6 +396,14 @@ form label {
   border: 0;
 }
 
+.color-warn {
+  color: var(--color-warn-100);
+}
+
+.color-success {
+  color: var(--color-success-100);
+}
+
 .alert {
   display: flex;
   border-width: 1px 1px 1px 5px;
@@ -384,6 +428,18 @@ form label {
   border-color: var(--color-info-100);
   background-color: var(--color-info-10);
   color: var(--color-info-100);
+}
+
+.alert-warn {
+  border-color: var(--color-warn-100);
+  background-color: var(--color-warn-10);
+  color: var(--color-warn-100);
+}
+
+.alert-success {
+  border-color: var(--color-success-100);
+  background-color: var(--color-success-10);
+  color: var(--color-success-100);
 }
 
 .alert pre {
@@ -430,6 +486,7 @@ form label {
 
 #tab-nav {
   margin-left: 0;
+  position: relative;
 }
 
 #tab-nav button {
@@ -450,6 +507,16 @@ form label {
 
 #tab-nav .secondary:not(.selected):hover {
   background: var(--color-brown-50) !important;
+}
+
+#tab-nav li {
+  margin-right: .25rem;
+}
+
+#tab-nav li .badge {
+  position: absolute;
+  top:-5px;
+  right:0;
 }
 
 #copy-result {
@@ -579,6 +646,18 @@ form label {
   animation: toast-out 0.15s ease-in forwards;
 }
 
+.badge {
+  background: var(--color-error-100);
+  color:white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
 @keyframes toast-in {
   from {
     opacity: 0;
@@ -608,13 +687,15 @@ form label {
   }
 }
 
-@media (max-width: 840px) {
+@media (max-width: 1050px) {
   #tab-nav button {
     padding-inline: 1rem;
   }
+}
 
-  #clear-btn-text {
-    display: none;
+@media (max-width: 928px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -623,15 +704,12 @@ form label {
     max-height: unset;
     min-height: 250px;
   }
-
-  #clear-btn-text {
-    display: block;
-  }
 }
 
-@media (max-width: 448px) {
+@media (max-width: 480px) {
   #tab-nav button {
     padding: 0.25rem;
+
   }
 
   #file-tab-bar button {
@@ -640,6 +718,16 @@ form label {
 
   #clear-btn-text {
     display: none;
+  }
+}
+
+@media (max-width: 386px) {
+  #tab-nav button {
+    font-size: 0.9rem;
+  }
+  
+  #tab-nav li {
+    margin-right: .125rem;
   }
 }
 
@@ -705,6 +793,9 @@ form label {
 }
 .align-center {
   align-items: center;
+}
+.align-items-baseline {
+  align-items: baseline;
 }
 .position-relative {
   position: relative;

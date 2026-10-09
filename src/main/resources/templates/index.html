@@ -38,17 +38,25 @@
         <div id="right-main-panel">
           <nav>
             <ul id="tab-nav">
-              <li class="p-0 mr-1">
+              <li class="p-0">
                 <button id="btn-info" class="selected secondary">Information</button>
               </li>
-              <li class="p-0 mr-1"><button id="btn-dcat-form" class="secondary">Grundmall</button></li>
-              <li class="p-0"><button id="btn-result" class="secondary">Resultat</button></li>
+              <li class="p-0">
+                <button id="btn-dcat-form" class="secondary">Grundmall</button>
+              </li>
+              <li class="p-0">
+                <button id="btn-result" class="secondary">Resultat</button>
+              </li>
+              <li class="p-0">
+                <button id="btn-quality-report" class="secondary">Rapport</button>
+              </li>
             </ul>
           </nav>
           <div id="panel-content-container" class="border">
             <div id="panel-user-guide" th:insert="~{fragments/info-user-guide :: user-guide}"></div>
             <div id="panel-dcat-form" class="hidden" th:insert="~{fragments/dcat-form :: dcat-form}"></div>
             <div id="panel-result" class="hidden" th:insert="~{fragments/result :: result}"></div>
+            <div id="panel-quality-report" class="hidden" th:insert="~{fragments/quality-report :: quality-report}"></div>
           </div>
         </div>
       </div>
@@ -56,6 +64,7 @@
     <script th:src="@{/webjars/js-yaml/4.3.1/dist/js-yaml.min.js}" defer></script>
     <script th:src="@{/webjars/monaco-editor/0.56.0/min/vs/loader.js}" defer></script>
     <script th:src="@{/js/editor.js}" defer></script>
+    <script th:src="@{/js/quality-report.js}" defer></script>
     <script th:src="@{/js/app.js}" defer></script>
     <script th:src="@{/js/dcat-form.js}" defer></script>
   </body>

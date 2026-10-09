@@ -7,6 +7,7 @@ function initListeners() {
   document.getElementById('btn-info').addEventListener('click', (e) => showInfoTab());
   document.getElementById('btn-dcat-form').addEventListener('click', (e) => showXDcatFormTab());
   document.getElementById('btn-result').addEventListener('click', (e) => showResultTab());
+  document.getElementById('btn-quality-report').addEventListener('click', (e) => showQualityReportTab());
 
   initFileInput();
   initLanguageDropdown();
@@ -20,11 +21,12 @@ async function generateRdf(button) {
   let infoContainer = document.querySelector('#info-container');
 
   let result = '';
+  let qualityReport = null;
   let error = false;
   let specs = getSources().filter((source) => source.content.trim() !== '');
 
   const TOAST_ERROR = 'Kunde inte generera RDF, se resultatfliken';
-  const TOAST_SUCCESS = 'RDF genererad, se resultatfliken';
+  const TOAST_SUCCESS = 'RDF genererad, se resultat samt rapport fliken';
 
   errorContainer.classList.add('hidden');
   infoContainer.classList.add('hidden');
@@ -46,9 +48,13 @@ async function generateRdf(button) {
       body: JSON.stringify({ sources: specs }),
     });
 
-    result = await res.text();
-    if (!res.ok) {
+    const body = await res.json();
+    if (res.ok) {
+      result = body.rdf;
+      qualityReport = body.qualityReport;
+    } else {
       error = true;
+      result = body.errorReport ?? 'ERROR: ' + res.status;
     }
   } catch (e) {
     error = true;
@@ -62,9 +68,11 @@ async function generateRdf(button) {
   }
 
   if (error) {
+    updateQualityReport(false)
     showError(result);
     showToast(TOAST_ERROR, 'error')
   } else {
+    updateQualityReport(qualityReport)
     showRDFResult(result);
     showToast(TOAST_SUCCESS, 'success')
   }
@@ -157,6 +165,14 @@ function showXDcatFormTab() {
   document.getElementById('btn-dcat-form').classList.add('selected');
 }
 
+function showQualityReportTab() {
+  unsetTabNav();
+  hidePanels();
+  document.getElementById('panel-quality-report').classList.remove('hidden');
+  document.getElementById('btn-quality-report').classList.add('selected');
+  clearReportBadge();
+}
+
 function unsetTabNav() {
   document.querySelectorAll('#tab-nav button').forEach((btn) => {
     btn.classList.remove('selected');
@@ -167,6 +183,7 @@ function hidePanels() {
   document.getElementById('panel-result').classList.add('hidden');
   document.getElementById('panel-user-guide').classList.add('hidden');
   document.getElementById('panel-dcat-form').classList.add('hidden');
+  document.getElementById('panel-quality-report').classList.add('hidden');
 }
 
 function setRDFLoading(button) {

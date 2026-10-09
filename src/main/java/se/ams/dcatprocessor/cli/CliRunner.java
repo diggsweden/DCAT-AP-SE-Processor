@@ -17,14 +17,18 @@ import org.springframework.stereotype.Component;
 import se.ams.dcatprocessor.processor.DcatResult;
 import se.ams.dcatprocessor.processor.Manager;
 import se.ams.dcatprocessor.util.Util;
+import tools.jackson.databind.ObjectWriter;
+import tools.jackson.databind.json.JsonMapper;
 
 @Component
-public class CliRunner implements ApplicationRunner{
+public class CliRunner implements ApplicationRunner {
 
     private final ObjectProvider<Manager> managerProvider;
     private final ApplicationContext context;
+    private final ObjectWriter objectWriter;
 
-    public CliRunner(ObjectProvider<Manager> managerProvider, ApplicationContext context) {
+    public CliRunner(ObjectProvider<Manager> managerProvider, ApplicationContext context, JsonMapper jsonMapper) {
+        this.objectWriter = jsonMapper.writerWithDefaultPrettyPrinter();
         this.managerProvider = managerProvider;
         this.context = context;
     }
@@ -39,7 +43,7 @@ public class CliRunner implements ApplicationRunner{
         .orElse(-1);
 
         // If no CLI args: run application with webserver
-        if(flagIndex == -1){
+        if (flagIndex == -1) {
             return;
         }
         
@@ -53,13 +57,13 @@ public class CliRunner implements ApplicationRunner{
         String flag = nonOptionArgs.get(flagIndex);
         String flagValue = nonOptionArgs.get(flagIndex + 1);
 
-        switch(flag){
+        switch (flag) {
             case "-f" -> createDcatFromFile(flagValue);
             case "-d" -> createDcatFromDirectory(flagValue);
         }
     }
 
-    private void createDcatFromFile(String filename){
+    private void createDcatFromFile(String filename) {
         try {
             Manager manager = managerProvider.getObject();
             DcatResult dcatResult = manager.createDcatFromFile(filename);
@@ -69,7 +73,7 @@ public class CliRunner implements ApplicationRunner{
         }
     }
 
-    private void createDcatFromDirectory(String dirname) {  
+    private void createDcatFromDirectory(String dirname) {
         try {
             Manager manager = managerProvider.getObject();
             DcatResult dcatResult = manager.createDcatFromDirectory(dirname);
@@ -80,15 +84,21 @@ public class CliRunner implements ApplicationRunner{
     }
 
     private void handleDcatResult(DcatResult dcatResult) {
-        if(dcatResult.hasErrors()){
+        if (dcatResult.hasErrors()) {
             System.out.println(dcatResult.errorReport());
         } else {
+            System.out.println("\n============ Generated RDF ============\n");
             System.out.println(dcatResult.rdf());
             Util.printToFile(dcatResult.rdf(), "dcat.rdf");
+
+            String jsonReport = objectWriter.writeValueAsString(dcatResult.qualityReport());
+            System.out.println("\n============ RDF Quality report ============\n");
+            System.out.println(jsonReport);
+            Util.printToFile(jsonReport, "dcat-quality-report.json");
         }
     }
 
-    private void exitSpringApplication(){
+    private void exitSpringApplication() {
         SpringApplication.exit(context, () -> 0);
     }
 }
