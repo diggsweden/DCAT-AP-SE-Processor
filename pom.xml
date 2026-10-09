@@ -117,6 +117,12 @@
 			<version>7.3.0</version>
 			<scope>compile</scope>
 		</dependency>
+
+		<!-- Source: https://mvnrepository.com/artifact/org.webjars/webjars-locator-lite -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator-lite</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
