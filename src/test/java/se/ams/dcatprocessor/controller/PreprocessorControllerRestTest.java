@@ -28,6 +28,7 @@ import org.springframework.http.ResponseEntity;
 
 import se.ams.dcatprocessor.controller.PreprocessorController.SpecRequest;
 import se.ams.dcatprocessor.models.ApiSource;
+import se.ams.dcatprocessor.processor.DcatResult;
 import se.ams.dcatprocessor.testutil.TestHelper;
 
 /**
@@ -141,22 +142,22 @@ class PreprocessorControllerRestTest {
 		list.add(null);
 		SpecRequest request = new SpecRequest(list);
 
-		ResponseEntity<String> response = this.restTemplate.postForEntity(pathSpec, request, String.class);
+		ResponseEntity<DcatResult> response = this.restTemplate.postForEntity(pathSpec, request, DcatResult.class);
 
 		assertEquals(400, response.getStatusCode().value());
 		assertNotNull(response.getBody());
-		assertEquals("File 1 is missing", response.getBody());
+		assertEquals("File 1 is missing", response.getBody().errorReport());
 	}
 
 	@Test
 	public void testThatEmptyContentOnSpecRequestReturnsError() throws IOException {
 		SpecRequest request = new SpecRequest(List.of(new ApiSource("api_def.json", "")));
 
-		ResponseEntity<String> response = this.restTemplate.postForEntity(pathSpec, request, String.class);
+		ResponseEntity<DcatResult> response = this.restTemplate.postForEntity(pathSpec, request, DcatResult.class);
 
 		assertEquals(400, response.getStatusCode().value());
 		assertNotNull(response.getBody());
-		assertEquals("The file 'api_def.json' is empty", response.getBody());
+		assertEquals("The file 'api_def.json' is empty", response.getBody().errorReport());
 	}
 
 	@Test

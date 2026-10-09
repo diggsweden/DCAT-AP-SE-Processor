@@ -1,0 +1,33 @@
+<div th:fragment="quality-report" id="quality-report" class="p-3">
+  <h2 class="mt-0">DCAT-AP-SE Kvalitets kontroll</h2>
+  <div id="quality-report-default-alert" class="alert alert-info mt-3">
+    <svg
+      class="alert-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="16.5" x2="12" y2="11.5" />
+      <line x1="12" y1="7.5" x2="12.01" y2="7.5" />
+    </svg>
+    <div class="d-flex">
+      <p class="mb-0 alert-text">
+        Det finns ingen rapport. Klistra in eller lägg till en API-specifikation och klicka på Generera RDF för att bygga en RDF och en kvalitets rapport.
+      </p>
+    </div>
+  </div>
+  <div id="quality-report-container" class="hidden">
+    <div id="quality-report-alert" class="alert alert-info">
+      <div class="d-flex">
+        <p class="mb-0 alert-text"></p>
+      </div>
+    </div>
+    <h3 class="mt-3">Kontrollerade huvudklasser</h3>
+    <div id="quality-report-content" class="mt-3"></div>
+  </div>
+</div>

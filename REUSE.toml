@@ -30,7 +30,8 @@ path = [
   "src/**/*.yaml",
   "src/main/resources/**/*.html",
   "src/main/resources/**/*.js",
-  "src/main/resources/**/*.css"
+  "src/main/resources/**/*.css",
+  "src/test/resources/rdf/*.rdf",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2022 Agency for Digital Government"

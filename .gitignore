@@ -42,4 +42,6 @@ build/
 /output.json
 /logs/*
 
+### Produced by Application ###
 dcat.rdf
+/dcat-quality-report.json

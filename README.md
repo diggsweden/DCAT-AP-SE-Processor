@@ -114,8 +114,7 @@ I gränssnittet finns en editor där det går att lägga till och redigera en/fl
 innan de skickas in för generering. Det finns också en startmalls funktion — ett
 formulär som hjälper till att skapa upp x-dcat-attribut i en API-definition.
 
-När generering lyckas levereras resultatet som en RDF på sidan. Om något går fel
-visas istället en felrapport.
+När generering lyckas levereras resultatet som en RDF på sidan och en kvalitets rapport blir tillgänglig under fliken rapport. Om något går fel visas en felrapport.
 
 ### 2. Via anrop till REST gränssnitt
 
@@ -140,13 +139,13 @@ Bygg en java JAR fil.
 mvn clean package -DskipTests
 ```
 
-Konvertera en specifikationsfil och få DCAT-data till stdout:
+Konvertera en specifikationsfil, resultatet blir en RDF samt en kvalitets rapport, båda ges som fil och visas via stdout:
 
 ```text
 java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -f FIL
 ```
 
-Konvertera en katalog med specifikationsfiler och få DCAT-data till stdout:
+Konvertera en katalog med specifikationsfiler, resultatet blir en RDF samt en kvalitets rapport, båda ges som fil och visas via stdout:
 
 ```text
 java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -d KATALOG
