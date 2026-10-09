@@ -421,11 +421,12 @@ form label {
   font-weight: 500;
 }
 
-#language-dropdown a.selected::after {
-  content: '✓';
+#language-dropdown a i {
+  visibility: hidden;
+}
+#language-dropdown a.selected i {
+  visibility: visible;
   color: var(--color-green-100);
-  margin-left: 0.5rem;
-  font-weight: bold;
 }
 
 #tab-nav {

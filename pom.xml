@@ -15,7 +15,6 @@
 	<description>Preprocessor - DCAT-AP-SE metadata</description>
 	<properties>
 		<java.version>25</java.version>
-		<argLine>-Dfile.encoding=UTF-8</argLine>
 		<tomcat.version>11.0.26</tomcat.version>
 	</properties>
 	<dependencies>
