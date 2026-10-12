@@ -34,7 +34,8 @@ async function generateRdf(button) {
   showResultTab();
   if (specs.length === 0) {
     showError('Fel: Ingen API specifikation angiven.');
-    showToast(TOAST_ERROR, 'error')
+    showToast(TOAST_ERROR, 'error');
+    updateQualityReport(false);
     return;
   }
 
