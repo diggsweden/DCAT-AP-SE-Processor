@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -186,7 +187,10 @@ public class Converter {
     /*
      * Create an Address Object from a list and saves it to the Organization Object */
     void addAddress(DataClass dataObj, String value, Optional<String> subCat, String key) {
-        String[] splitAddress = value.split(";");
+        String[] splitAddress = Arrays.stream(value.split(";"))
+                .map(part -> part.strip())
+                .toArray(String[]::new);
+
         DataClass valueMapAddress = new DataClass();
         if (splitAddress.length == 4) {
             valueMapAddress.dcData.put(ConverterHelpClass.addressObject.get("StreetAddress"), splitAddress[0]);

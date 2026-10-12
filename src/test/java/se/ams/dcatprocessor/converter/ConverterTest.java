@@ -5,11 +5,13 @@
 package se.ams.dcatprocessor.converter;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import org.eclipse.rdf4j.model.vocabulary.DCAT;
 import org.eclipse.rdf4j.model.vocabulary.DCTERMS;
 import org.json.JSONObject;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,8 +20,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import se.ams.dcatprocessor.models.ConverterHelpClass;
 import se.ams.dcatprocessor.models.DataClass;
 import se.ams.dcatprocessor.models.DataSet;
+import se.ams.dcatprocessor.models.Organization;
 import se.ams.dcatprocessor.rdf.validate.ValidationError;
 
 public class ConverterTest {
@@ -128,6 +132,19 @@ public class ConverterTest {
     void testThatSubstringCollisionReturnFalseWhenNoMatch(){
         boolean result = converter.substringCollision("dcat-dataset", "title");
         assertFalse(result);
+    }
+
+    @Test
+    void testThataddAddressStripsWhitespace() {
+        Organization organization = new Organization();
+
+        converter.addAddress(organization, "Exempelgatan 12; 11122; Stockholm; Sverige", Optional.empty(), "adress");
+
+        DataClass address = organization.adress.get(0);
+        assertEquals(List.of("Exempelgatan 12"), address.dcData.get(ConverterHelpClass.addressObject.get("StreetAddress")));
+        assertEquals(List.of("11122"), address.dcData.get(ConverterHelpClass.addressObject.get("PostalCode")));
+        assertEquals(List.of("Stockholm"), address.dcData.get(ConverterHelpClass.addressObject.get("Locality")));
+        assertEquals(List.of("Sverige"), address.dcData.get(ConverterHelpClass.addressObject.get("Country")));
     }
 
     private JSONObject getJSONObjectForTest(){

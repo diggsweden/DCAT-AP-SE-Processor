@@ -105,10 +105,10 @@ public class ManagerTest {
             "\t<vcard:hasTelephone rdf:nodeID=\"TESTNODEID\"/>\n" +
             "</vcard:Organization>\n" +
             "<vcard:Address rdf:nodeID=\"TESTNODEID\">\n" +
-            "\t<vcard:country-name rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\"> Sverige</vcard:country-name>\n" +
+            "\t<vcard:country-name rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Sverige</vcard:country-name>\n" +
             "\t<vcard:street-address rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Testgatan 5</vcard:street-address>\n" +
-            "\t<vcard:postal-code rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\"> 76543</vcard:postal-code>\n" +
-            "\t<vcard:locality rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\"> Tranemo</vcard:locality>\n" +
+            "\t<vcard:postal-code rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">76543</vcard:postal-code>\n" +
+            "\t<vcard:locality rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">Tranemo</vcard:locality>\n" +
             "</vcard:Address>\n" +
             "<vcard:Voice rdf:nodeID=\"TESTNODEID\">\n" +
             "\t<vcard:hasValue rdf:resource=\"tel:98876554\"/>\n" +
