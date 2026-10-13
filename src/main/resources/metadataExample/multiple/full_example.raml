@@ -1,6 +1,6 @@
 #%RAML 1.0
 title: Annotation exempel api
-description: Annotation exempel api är ett påhittat api som använder sig av annotations för att skapa metadata för DCAT-AP-SE.
+description: Annotation exempel api är ett påhittat api som använder sig av annotations för att skapa metadata för DCAT-AP-SE. Organisationen Exempelmyndigheten och all data nedan är fiktiv.
 version: 1.0.0
 
 annotationTypes:
@@ -41,7 +41,7 @@ annotationTypes:
       landingPage: string
       temporalResolution: string
       spatialResolutionInMeters: string
-      versionInfo: string
+      version: string
       versionNotes: string
       accessRights: string
       isReferencedBy: string
@@ -160,136 +160,139 @@ annotationTypes:
           description-sv: string
 
 (dcat-dataset):
-  about: https://www.example.se/#datasetA
-  title-sv: Datamängd A
-  description-sv: Exempel beskrivning datamängd A
+  about: https://exempelmyndigheten.example/data/lediga-jobb-per-lan
+  title-sv: Lediga jobb per län
+  description-sv: Antal publicerade lediga jobb per län och yrkesområde. Datamängden uppdateras dagligen och omfattar annonser publicerade sedan juni 2021.
   creator:
-    about: https://www.example.se/#creatorA
-    name: ExempelFöretag
+    about: https://exempelmyndigheten.example/#org
+    name: Exempelmyndigheten
     type: NationalAuthority
-    homepage: www.exempelforetag.com
-    mbox: kontakt@exempelforetag.com
+    homepage: https://exempelmyndigheten.example
+    mbox: oppnadata@exempelmyndigheten.example
   other agent:
-    about: https://www.example.se/#other_agentA
-    name: ExempelFöretag 2
-    type: NationalAuthority
-    homepage: www.exempelforetag2.com
-    mbox: kontakt@exempelforetag2.com
+    about: https://exempeldata.example/#org
+    name: Exempeldata AB
+    type: Company
+    homepage: https://exempeldata.example
+    mbox: kundtjanst@exempeldata.example
     role: distributor
   contactPoint:
-    about: https://www.example.se/#contactA
-    name: Exempel Organisation
+    about: https://exempelmyndigheten.example/#oppnadata-kontakt
+    name: Exempelmyndighetens funktion för öppna data
     type: Organization
-    email: admin@exempel.se
-    address: Testgatan 5; 76543; Tranemo; Sverige
-    phone: 0799887655
-  keyword-sv: exempel; info; data
-  keyword-en: example; info; computer
-  theme: TRAN; EDUC
-  issued: 2021-03-05
-  modified: 2021-03-15
-  spatialUrl: https://www.geonames.org/6695072/european-union.html
-  versionInfo: version 3.7.5
-  versionNotes: Exempel på VersionsNoteringar; Fler versionsnoteringar
-  landingPage: www.exempelsida.se
-  temporalResolution: P1Y
-  spatialResolutionInMeters: 1.4
-  relation: www.relateradresursexempelsida.se
-  isReferencedBy: www.exempelreferenssida.se
-  identifier: www.identifierare.com
-  adms: www.ovrig-identifierare.com
+    email: oppnadata@exempelmyndigheten.example
+    address: Exempelgatan 12; 11122; Stockholm; Sverige
+    phone: "0701740605"
+  keyword-sv: lediga jobb; arbetsmarknad; platsannonser; län; region
+  keyword-en: job vacancies; labour market; job ads; county; region
+  theme: ECON; SOCI
+  issued: 2021-06-01
+  modified: 2026-09-30
+  spatialUrl: http://publications.europa.eu/resource/authority/country/SWE
+  location:
+    bbox: POLYGON((10.96 55.34, 24.17 55.34, 24.17 69.06, 10.96 69.06, 10.96 55.34))
+    centroid: POINT(17.3 62.2)
+    geometry: POLYGON((10.96 55.34, 24.17 55.34, 24.17 69.06, 10.96 69.06, 10.96 55.34))
+  version: 2.1.0
+  versionNotes: Uppdelning på yrkesområde tillagd; Länskoder uppdaterade enligt gällande indelning
+  landingPage: https://exempelmyndigheten.example/oppna-data/lediga-jobb-per-lan
+  temporalResolution: P1D
+  spatialResolutionInMeters: 10000
+  relation: https://exempelmyndigheten.example/data/lediga-jobb-per-kommun
+  isReferencedBy: https://exempelmyndigheten.example/rapporter/arbetsmarknadslaget-2025
+  identifier: exempelmyndigheten.example/data/lediga-jobb-per-lan
+  adms: exempelmyndigheten.example/id/dataset/EXM-DS-0043
   conformsTo:
-    about: https://www.example.se/#datasetA/conformsTo
-    title-sv: Exempel namn på Standard
-    description-sv: Beskrivning Standard
+    about: https://exempelmyndigheten.example/informationsmodeller/platsannons/1.2
+    title-sv: Exempelmyndighetens informationsmodell för platsannonser 1.2
+    description-sv: Beskriver fält, kodlistor och regler för aggregering av platsannonser.
   temporal:
-    startDate: 2021-03-16
-    endDate: 2021-03-25
+    startDate: 2021-06-01
+    endDate: 2026-09-30
   accessRights: Public
   offers:
-      description-sv: Exempel Avgift
-      page: www.avgiftsexempel.se
+    description-sv: Datamängden är avgiftsfri.
+    page: https://exempelmyndigheten.example/oppna-data/villkor
   page:
-    about: https://www.example.se/#datasetA/page
-    title-sv: Exempel Dokument
-    description-sv: Beskrivning av Exempeldokument
+    about: https://exempelmyndigheten.example/oppna-data/lediga-jobb-per-lan/dokumentation
+    title-sv: Dokumentation för Lediga jobb per län
+    description-sv: Beskrivning av fält, uppdateringsrutiner och kända begränsningar i datamängden.
   distribution:
-    about: https://www.example.se/#distributionA
-    title-sv: Distribution A
-    description-sv: Beskrivning av Distribution A
-    accessURL: www.distribution!.se
-    downloadURL: www.exempelforetag.se/distributionA
-    formatMedia: text/html
-    accessService: https://www.example.se/#dataserviceA
-    temporalResolution: P1Y
-    spatialResolutionInMeters: 1.4
-    byteSize: 3000
-    issued: 2021-05-04
-    modified: 2021-05-20
+    about: https://exempelmyndigheten.example/data/lediga-jobb-per-lan/json
+    title-sv: Lediga jobb per län (JSON)
+    description-sv: Hela datamängden som en JSON-fil, uppdaterad dagligen.
+    accessURL: https://api.exempelmyndigheten.example/lediga-jobb-lan/v1
+    downloadURL: https://data.exempelmyndigheten.example/lediga-jobb/lediga-jobb-per-lan.json
+    formatMedia: application/json
+    accessService: https://exempelmyndigheten.example/api/lediga-jobb-lan
+    temporalResolution: P1D
+    spatialResolutionInMeters: 10000
+    byteSize: 185000
+    issued: 2021-06-01
+    modified: 2026-09-30
     status: Completed
     availability: Stable
-    licenseurl: CC BY-NC-ND 4.0
+    licenseurl: CC BY 4.0
     rights:
-      attributionText-sv: Detta är en rättighetstext
-      attributionURL: www.rattighetstext.se
-      copyrightNotice: Upphovsrätt
+      attributionText-sv: Källa - Exempelmyndigheten, Lediga jobb per län.
+      attributionURL: https://exempelmyndigheten.example/oppna-data/kallangivelse
+      copyrightNotice: © Exempelmyndigheten. Licensierad under CC BY 4.0.
       copyrightStatement:
-        about: https://www.example.se/#distributionA/statement
-        title-sv: Test License
-        description-sv: Test license for dcat spec
-      copyrightYear: 1976
+        about: https://exempelmyndigheten.example/oppna-data/villkor#lediga-jobb-lan
+        title-sv: Villkor för Lediga jobb per län
+        description-sv: Datamängden får användas fritt, även kommersiellt, under förutsättning att källan anges.
+      copyrightYear: 2021
       copyrightHolder:
-        about: https://www.example.se/#copyrightHolderA
-        name: Copyright Name
-        homepage: www.copyrightweb.com
-        type: RegionalAuthority
-        mbox: copyrightname@company.se
-      jurisdiction: www.copyrightwebjurisdiction.com
-      reuserGuidelines: www.guidelines.se
+        about: https://exempelmyndigheten.example/#org
+        name: Exempelmyndigheten
+        homepage: https://exempelmyndigheten.example
+        type: NationalAuthority
+      jurisdiction: http://publications.europa.eu/resource/authority/country/SWE
+      reuserGuidelines: https://exempelmyndigheten.example/oppna-data/riktlinjer
     checksum:
-      value: A23DF
+      value: 356a192b7913b04c54574d18c28d46e6395428ab
     page:
-      about: https://www.example.se/#distributionA/page
-      title-sv: Nytt Exempel Dokument
-      description-sv: Beskrivning av Nytt Exempeldokument
+      about: https://exempelmyndigheten.example/oppna-data/lediga-jobb-per-lan/filformat
+      title-sv: Beskrivning av JSON-filen
+      description-sv: Filstruktur, teckenkodning (UTF-8) och exempel på poster.
     conformsTo:
-      about: https://www.example.se/#distributionA/conformsTo
-      title-sv: Ny Standard
-      description-sv: Beskrivning av Ny Standard
+      about: https://exempelmyndigheten.example/scheman/lediga-jobb-per-lan/1.0/schema.json
+      title-sv: JSON Schema för Lediga jobb per län 1.0
+      description-sv: JSON Schema som filen valideras mot innan publicering.
 (dcat-dataservice):
-  about: https://www.example.se/#dataserviceA
-  title-sv: Datatjänst A
-  description-sv: Beskrivning av Datatjänst A
-  endpointURL: www.datatjanstA.se
-  endpointDescription: www.beskrivningDatatjanstA.se
+  about: https://exempelmyndigheten.example/api/lediga-jobb-lan
+  title-sv: Lediga jobb per län-API
+  description-sv: REST-API för att hämta antal lediga jobb per län och yrkesområde, med filtrering på datum.
+  endpointURL: https://api.exempelmyndigheten.example/lediga-jobb-lan/v1
+  endpointDescription: https://api.exempelmyndigheten.example/lediga-jobb-lan/v1/openapi.yaml
   publisher:
-    about: https://www.example.se/#publisherA2
-    name: Utgivare av Datatjänst A
-    type: NonGovernmentalOrganisation
-    homepage: www.utgivare2.se
-    mbox: kontakt@utgivare2.se
+    about: https://exempelmyndigheten.example/#org
+    name: Exempelmyndigheten
+    type: NationalAuthority
+    homepage: https://exempelmyndigheten.example
+    mbox: oppnadata@exempelmyndigheten.example
   contactPoint:
-    about: https://www.example.se/#contactPointA2
+    about: https://exempelmyndigheten.example/#api-support
     type: Organization
-    name: Namn på Organisation 2
-    email: kontakt@organization2.se
-    phone: 07923568945
-    address: Testvägen 24; 93847; Backa; Sverige
+    name: Exempelmyndighetens API-support
+    email: api-support@exempelmyndigheten.example
+    phone: "0701740610"
+    address: Exempelgatan 12; 11122; Stockholm; Sverige
   type: REST
-  keyword-sv: rest; datatjänst
-  theme: ENER
+  keyword-sv: lediga jobb; arbetsmarknad; län; rest; api
+  theme: ECON; SOCI
   conformsTo:
-    about: https://www.example.se/#dataserviceA/standard
-    title-sv: Standard för Datatjänst A
-    description-sv: Beskrivning av Standard för Datatjänst A
-  servesDataset: https://www.example.se/#datasetA
+    about: https://spec.openapis.org/oas/v3.0.3
+    title-sv: OpenAPI Specification 3.0.3
+    description-sv: API:et är beskrivet enligt OpenAPI 3.0.3.
+  servesDataset: https://exempelmyndigheten.example/data/lediga-jobb-per-lan
   licensedoc:
-    about: https://www.example.se/#dataserviceA/license
-    title-sv: namn på licens för DataTjänst
-    description-sv: Beskrivning av licens för Datatjänst
-  accessRights: Restricted
-  landingPage: www.landingpagefordataservice.com
+    about: http://creativecommons.org/licenses/by/4.0/
+    title-sv: Creative Commons Erkännande 4.0
+    description-sv: Data som hämtas via API:et får återanvändas fritt om källan anges.
+  accessRights: Public
+  landingPage: https://exempelmyndigheten.example/utvecklare/lediga-jobb-lan-api
   page:
-    about: https://www.example.se/#dataserviceA/page
-    title-sv: Namn på exempel dokument för Datatjänst
-    description-sv: Beskrivning av dokument för Datatjänst
+    about: https://exempelmyndigheten.example/utvecklare/lediga-jobb-lan-api/kom-igang
+    title-sv: Kom igång med Lediga jobb per län-API
+    description-sv: Guide för att göra de första anropen, med exempel och information om anropsgränser.

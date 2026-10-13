@@ -2,141 +2,145 @@ openapi: 3.0.3
 info:
   version: 1.0.0
   title: Annotation exempel api
-  description: Annotation exempel api är ett påhittat api som använder sig av annotations för att skapa metadata för DCAT-AP-SE.
+  description: Annotation exempel api är ett påhittat api som använder sig av annotations för att skapa metadata för DCAT-AP-SE. Organisationen Exempelmyndigheten och all data nedan är fiktiv.
   x-dcat:
     dcat-dataset:
-      about: https://www.example.se/#datasetB
-      title-sv: Datamängd B
-      description-sv: Exempel beskrivning datamängd B
+      about: https://exempelmyndigheten.example/data/arbetssokande-per-kommun
+      title-sv: Arbetssökande per kommun
+      description-sv: Antal inskrivna arbetssökande per kommun, åldersgrupp och kön. Datamängden uppdateras månadsvis och omfattar statistik sedan januari 2022.
       creator:
-        about: https://www.example.se/#creatorB
-        name: ExempelFöretag
+        about: https://exempelmyndigheten.example/#org
+        name: Exempelmyndigheten
         type: NationalAuthority
-        homepage: www.exempelforetag.com
-        mbox: kontakt@exempelforetag.com
+        homepage: https://exempelmyndigheten.example
+        mbox: oppnadata@exempelmyndigheten.example
       other agent:
-        about: https://www.example.se/#other_agentB
-        name: ExempelFöretag 2
-        type: NationalAuthority
-        homepage: www.exempelforetag2.com
-        mbox: kontakt@exempelforetag2.com
+        about: https://exempeldata.example/#org
+        name: Exempeldata AB
+        type: Company
+        homepage: https://exempeldata.example
+        mbox: kundtjanst@exempeldata.example
         role: distributor
       contactPoint:
-        about: https://www.example.se/#contactB
-        name: Exempel Organisation
+        about: https://exempelmyndigheten.example/#oppnadata-kontakt
+        name: Exempelmyndighetens funktion för öppna data
         type: Organization
-        email: admin@exempel.se
-        address: Testgatan 5; 76543; Tranemo; Sverige
-        phone: 0799887655
-      keyword-sv: exempel; info; data
-      keyword-en: example; info; computer
-      theme: TRAN; EDUC
-      issued: 2021-03-05
-      modified: 2021-03-15
-      spatialUrl: https://www.geonames.org/6695072/european-union.html
-      versionInfo: version 3.7.5
-      versionNotes: Exempel på VersionsNoteringar; Fler versionsnoteringar
-      landingPage: www.exempelsida.se
-      temporalResolution: P1Y
-      spatialResolutionInMeters: 1.4
-      relation: www.relateradresursexempelsida.se
-      isReferencedBy: www.exempelreferenssida.se
-      identifier: www.identifierare.com
-      adms: www.ovrig-identifierare.com
+        email: oppnadata@exempelmyndigheten.example
+        address: Exempelgatan 12; 11122; Stockholm; Sverige
+        phone: "0701740605"
+      keyword-sv: arbetssökande; arbetslöshet; arbetsmarknad; kommun; statistik
+      keyword-en: jobseekers; unemployment; labour market; municipality; statistics
+      theme: ECON; SOCI
+      issued: 2022-01-15
+      modified: 2026-09-10
+      spatialUrl: http://publications.europa.eu/resource/authority/country/SWE
+      location:
+        bbox: POLYGON((10.96 55.34, 24.17 55.34, 24.17 69.06, 10.96 69.06, 10.96 55.34))
+        centroid: POINT(17.3 62.2)
+        geometry: POLYGON((10.96 55.34, 24.17 55.34, 24.17 69.06, 10.96 69.06, 10.96 55.34))
+      version: 1.0.2
+      versionNotes: Rättad åldersindelning för gruppen 16–24 år; Kommunkoder uppdaterade enligt gällande indelning
+      landingPage: https://exempelmyndigheten.example/oppna-data/arbetssokande-per-kommun
+      temporalResolution: P1M
+      spatialResolutionInMeters: 1000
+      relation: https://exempelmyndigheten.example/data/lediga-jobb-per-kommun
+      isReferencedBy: https://exempelmyndigheten.example/rapporter/arbetsmarknadslaget-2025
+      identifier: exempelmyndigheten.example/data/arbetssokande-per-kommun
+      adms: exempelmyndigheten.example/id/dataset/EXM-DS-0045
       conformsTo:
-        about: https://www.example.se/#datasetB/conformsTo
-        title-sv: Exempel namn på Standard
-        description-sv: Beskrivning Standard
+        about: https://exempelmyndigheten.example/informationsmodeller/arbetssokande/1.0
+        title-sv: Exempelmyndighetens informationsmodell för arbetssökande 1.0
+        description-sv: Beskriver fält, indelningar och regler för aggregering av statistik över arbetssökande.
       temporal:
-        startDate: 2021-03-16
-        endDate: 2021-03-25
+        startDate: 2022-01-01
+        endDate: 2026-08-31
       accessRights: Public
       offers:
-        description-sv: Exempel Avgift
-        page: www.avgiftsexempel.se
+        description-sv: Datamängden är avgiftsfri.
+        page: https://exempelmyndigheten.example/oppna-data/villkor
       page:
-        about: https://www.example.se/#datasetB/page
-        title-sv: Exempel Dokument
-        description-sv: Beskrivning av Exempeldokument
+        about: https://exempelmyndigheten.example/oppna-data/arbetssokande-per-kommun/dokumentation
+        title-sv: Dokumentation för Arbetssökande per kommun
+        description-sv: Beskrivning av fält, indelningar och hur små värden döljs av sekretesskäl.
       distribution:
-        about: https://www.example.se/#distributionB
-        title-sv: Distribution B
-        description-sv: Beskrivning av Distribution B
-        accessURL: www.distributionB.se
-        downloadURL: www.exempelforetag.se/distributionB
-        formatMedia: text/html
-        accessService: https://www.example.se/#dataserviceB
-        temporalResolution: P1Y
-        spatialResolutionInMeters: 1.4
-        byteSize: 3000
-        issued: 2021-05-04
-        modified: 2021-05-20
+        about: https://exempelmyndigheten.example/data/arbetssokande-per-kommun/json
+        title-sv: Arbetssökande per kommun (JSON)
+        description-sv: Hela datamängden som en JSON-fil, uppdaterad månadsvis.
+        accessURL: https://api.exempelmyndigheten.example/arbetssokande/v1
+        downloadURL: https://data.exempelmyndigheten.example/arbetssokande/arbetssokande-per-kommun.json
+        formatMedia: application/json
+        accessService: https://exempelmyndigheten.example/api/arbetssokande
+        temporalResolution: P1M
+        spatialResolutionInMeters: 1000
+        byteSize: 960000
+        issued: 2022-01-15
+        modified: 2026-09-10
         status: Completed
         availability: Stable
-        license: CC BY-NC-ND 4.0
+        licenseurl: CC BY 4.0
         rights:
-          attributionText-sv: Detta är en rättighetstext
-          attributionURL: www.rattighetstext.se
-          copyrightNotice: Upphovsrätt
+          attributionText-sv: Källa - Exempelmyndigheten, Arbetssökande per kommun.
+          attributionURL: https://exempelmyndigheten.example/oppna-data/kallangivelse
+          copyrightNotice: © Exempelmyndigheten. Licensierad under CC BY 4.0.
           copyrightStatement:
-            about: https://www.example.se/#distributionB/statement
-            title-sv: Test License
-            description-sv: Test license for dcat spec
-          copyrightYear: 1976
+            about: https://exempelmyndigheten.example/oppna-data/villkor#arbetssokande
+            title-sv: Villkor för Arbetssökande per kommun
+            description-sv: Datamängden får användas fritt, även kommersiellt, under förutsättning att källan anges.
+          copyrightYear: 2022
           copyrightHolder:
-            about: https://www.example.se/#copyrightHolderB
-            name: Copyright Name
-            homepage: www.copyrightweb.com
-            type: RegionalAuthority
-          jurisdiction: www.copyrightwebjurisdiction.com
-          reuserGuidelines: www.guidelines.se
+            about: https://exempelmyndigheten.example/#org
+            name: Exempelmyndigheten
+            homepage: https://exempelmyndigheten.example
+            type: NationalAuthority
+          jurisdiction: http://publications.europa.eu/resource/authority/country/SWE
+          reuserGuidelines: https://exempelmyndigheten.example/oppna-data/riktlinjer
         checksum:
-          value: A23DF
+          value: 77de68daecd823babbb58edb1c8e14d7106e83bb
         page:
-          about: https://www.example.se/#distributionB/page
-          title-sv: Nytt Exempel Dokument
-          description-sv: Beskrivning av Nytt Exempeldokument
+          about: https://exempelmyndigheten.example/oppna-data/arbetssokande-per-kommun/filformat
+          title-sv: Beskrivning av JSON-filen
+          description-sv: Filstruktur, teckenkodning (UTF-8) och exempel på poster.
         conformsTo:
-          about: https://www.example.se/#distributionB/conformsTo
-          title-sv: Ny Standard
-          description-sv: Beskrivning av Ny Standard
+          about: https://exempelmyndigheten.example/scheman/arbetssokande-per-kommun/1.0/schema.json
+          title-sv: JSON Schema för Arbetssökande per kommun 1.0
+          description-sv: JSON Schema som filen valideras mot innan publicering.
     dcat-dataservice:
-      about: https://www.example.se/#dataserviceB
-      title-sv: Datatjänst A
-      description-sv: Beskrivning av Datatjänst B
-      endpointURL: www.datatjanstB.se
-      endpointDescription: www.beskrivningDatatjanstB.se
+      about: https://exempelmyndigheten.example/api/arbetssokande
+      title-sv: Arbetssökande-API
+      description-sv: REST-API för att hämta antal inskrivna arbetssökande per kommun, åldersgrupp och kön.
+      endpointURL: https://api.exempelmyndigheten.example/arbetssokande/v1
+      endpointDescription: https://api.exempelmyndigheten.example/arbetssokande/v1/openapi.yaml
       publisher:
-        about: https://www.example.se/#publisherB2
-        name: Utgivare av Datatjänst B
-        type: NonGovernmentalOrganisation
-        homepage: www.utgivare2.se
-        mbox: kontakt@utgivare2.se
+        about: https://exempelmyndigheten.example/#org
+        name: Exempelmyndigheten
+        type: NationalAuthority
+        homepage: https://exempelmyndigheten.example
+        mbox: oppnadata@exempelmyndigheten.example
       contactPoint:
-        about: https://www.example.se/#contactPointB2
+        about: https://exempelmyndigheten.example/#api-support
         type: Organization
-        name: Namn på Organisation 2
-        email: kontakt@organization2.se
-        phone: 07923568945
-        address: Testvägen 24; 93847; Backa; Sverige
+        name: Exempelmyndighetens API-support
+        email: api-support@exempelmyndigheten.example
+        phone: "0701740610"
+        address: Exempelgatan 12; 11122; Stockholm; Sverige
       type: REST
-      keyword-sv: rest; datatjänst
-      theme: ENER
+      keyword-sv: arbetssökande; arbetslöshet; kommun; rest; api
+      theme: ECON; SOCI
       conformsTo:
-        about: https://www.example.se/#dataserviceB/standard
-        title-sv: Standard för Datatjänst B
-        description-sv: Beskrivning av Standard för Datatjänst B
-      servesDataset: https://www.example.se/#datasetB
+        about: https://spec.openapis.org/oas/v3.0.3
+        title-sv: OpenAPI Specification 3.0.3
+        description-sv: API:et är beskrivet enligt OpenAPI 3.0.3.
+      servesDataset: https://exempelmyndigheten.example/data/arbetssokande-per-kommun
       licensedoc:
-        about: https://www.example.se/#dataserviceB/license
-        title-sv: namn på licens för DataTjänst
-        description-sv: Beskrivning av licens för Datatjänst
-      accessRights: Restricted
-      landingPage: www.landingpagefordataservice.com
+        about: http://creativecommons.org/licenses/by/4.0/
+        title-sv: Creative Commons Erkännande 4.0
+        description-sv: Data som hämtas via API:et får återanvändas fritt om källan anges.
+      accessRights: Public
+      landingPage: https://exempelmyndigheten.example/utvecklare/arbetssokande-api
       page:
-        about: https://www.example.se/#dataserviceB/page
-        title-sv: Namn på exempel dokument för Datatjänst
-        description-sv: Beskrivning av dokument för Datatjänst
+        about: https://exempelmyndigheten.example/utvecklare/arbetssokande-api/kom-igang
+        title-sv: Kom igång med Arbetssökande-API
+        description-sv: Guide för att göra de första anropen, med exempel och information om anropsgränser.
 paths:
   /users:
     get:
