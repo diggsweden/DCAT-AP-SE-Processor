@@ -2,10 +2,35 @@
 <configuration>
 
     <property name="LOGS" value="./logs" />
+    <property name="CONSOLE_PATTERN"
+        value="%black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1}): %msg%n%throwable" />
 
-    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- TRACE, DEBUG and INFO go to stdout -->
+    <appender name="ConsoleOut" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.out</target>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1}): %msg%n%throwable</pattern>
+            <pattern>${CONSOLE_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- WARN and ERROR go to stderr -->
+    <appender name="ConsoleErr" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${CONSOLE_PATTERN}</pattern>
         </encoder>
     </appender>
 
@@ -15,22 +40,26 @@
             <pattern>%d %p %C{1} [%t] %m%n</pattern>
         </encoder>
 
-        <!-- rollover daily and when the file reaches 10 MegaBytes -->
+        <!-- rollover daily and when the file reaches 10 MegaBytes; keep 180 days of history, capped at 1GB in total -->
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${LOGS}/archived/dcatprocessor-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxFileSize>10MB</maxFileSize>
+            <maxHistory>180</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
     </appender>
 
     <!-- LOG everything at ERROR level -->
     <root level="error">
         <appender-ref ref="RollingFile" />
-        <appender-ref ref="Console" />
+        <appender-ref ref="ConsoleOut" />
+        <appender-ref ref="ConsoleErr" />
     </root>
 
     <!-- LOG "se.ams.dcatprocessor*" at ERROR level -->
     <logger name="se.ams.dcatprocessor" level="error" additivity="false">
-        <appender-ref ref="Console" />
+        <appender-ref ref="ConsoleOut" />
+        <appender-ref ref="ConsoleErr" />
         <appender-ref ref="RollingFile" />
     </logger>
 
