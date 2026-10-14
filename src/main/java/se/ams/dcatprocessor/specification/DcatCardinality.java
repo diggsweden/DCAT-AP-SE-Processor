@@ -8,6 +8,7 @@ public class DcatCardinality {
 
     private Integer min;
     private Integer max;
+	private Integer pref;
 	private final Condition condition; // Makes the min value conditional, most properties have no condition for cardinality 
 
     private static final String LETTER_N = "n";
@@ -16,9 +17,10 @@ public class DcatCardinality {
 
 	public record Condition(String property, String value) { }
 	
-	public DcatCardinality(Integer min, Integer max, Condition condition) {
+	public DcatCardinality(Integer min, Integer max, Integer pref, Condition condition) {
 		this.min = min;
 		this.max = max;
+		this.pref = pref;
 		this.condition = condition;
 	}
 
@@ -29,6 +31,16 @@ public class DcatCardinality {
 	 */
 	public boolean isOneOrMore() {
 		return min != null && min >= 1;
+	}
+
+	/**
+	 * Convenience method for determining if a property is recommended, meaning
+	 * optional but preferred. A mandatory property is not counted as recommended.
+	 *
+	 * @return boolean
+	 */
+	public boolean isRecommended() {
+		return min == 0 && pref >= 1;
 	}
 
     /**
@@ -65,6 +77,10 @@ public class DcatCardinality {
     public Integer getMax() {
         return max;
     }
+
+	public Integer getPref() {
+		return pref;
+	}
 
 	public Condition getCondition() {
 		return condition;

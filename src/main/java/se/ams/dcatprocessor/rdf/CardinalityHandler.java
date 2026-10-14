@@ -51,17 +51,12 @@ public class CardinalityHandler {
 	}
 
 	private void addCardinality(DcatProperty node, Map<String, DcatCardinality> properties) {
-		DcatCardinality cardinality = cardinalityOf(node);
+		DcatCardinality cardinality = specification.cardinalityOf(node);
+		String property = specification.propertyOf(node);
 
-		// The common case: the node is one property and carries it directly.
-		if (node.getProperty() != null) {
-			properties.put(node.getProperty(), cardinality);
-			return;
-		}
-
-		// The node states only what it extends, so the property sits on the extended node.
-		if (node.getExtendsId() != null) {
-			properties.put(specification.node(node.getExtendsId()).getProperty(), cardinality);
+		// The node is one property, either stated directly or taken from the node it extends.
+		if (property != null) {
+			properties.put(property, cardinality);
 			return;
 		}
 
@@ -69,21 +64,6 @@ public class CardinalityHandler {
 		for (DcatProperty alternative : node.getItems()) {
 			addCardinality(alternative, properties);
 		}
-	}
-
-	private DcatCardinality cardinalityOf(DcatProperty node) {
-		DcatCardinality cardinality = node.getCardinality();
-
-		// Some nodes state only what they extend and take the whole cardinality, condition included, from the node they extend.
-		if (cardinality == null && node.getExtendsId() != null) {
-			cardinality = specification.node(node.getExtendsId()).getCardinality();
-		}
-
-		// A node without a cardinality is optional and unbound (0..n).
-		if (cardinality == null) {
-			return new DcatCardinality(0, DcatCardinality.MAX, null);
-		}
-		return cardinality;
 	}
 
 	/**

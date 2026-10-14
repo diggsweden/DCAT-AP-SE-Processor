@@ -4,17 +4,19 @@
 
 package se.ams.dcatprocessor.processor;
 
-public record DcatResult(String rdf, String errorReport) {
+import se.ams.dcatprocessor.rdf.quality.QualityReport;
+
+public record DcatResult(String rdf, String errorReport, QualityReport qualityReport) {
     
     public boolean hasErrors() {
         return errorReport != null && !errorReport.isEmpty();
     }
 
-    public static DcatResult success(String rdf) {
-        return new DcatResult(rdf, null);
+    public static DcatResult success(String rdf, QualityReport qualityReport) {
+        return new DcatResult(rdf, null, qualityReport);
     }
 
     public static DcatResult errors(String errorReport) {
-        return new DcatResult(null, errorReport);
+        return new DcatResult(null, errorReport, null);
     }
 }

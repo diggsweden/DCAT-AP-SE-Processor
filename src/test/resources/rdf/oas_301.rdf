@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:dcat="http://www.w3.org/ns/dcat#"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:locn="http://www.w3.org/ns/locn#"
+	xmlns:schema="http://schema.org/"
+	xmlns:prov="http://www.w3.org/ns/prov#"
+	xmlns:adms="http://www.w3.org/ns/adms#"
+	xmlns:odrs="http://schema.theodi.org/odrs#"
+	xmlns:spdx="http://spdx.org/rdf/terms#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:org="http://www.w3.org/ns/org#"
+	xmlns:dcatap="http://data.europa.eu/r5r/"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+<foaf:Agent rdf:about="https://www.example.se/result.rdf#publisher">
+	<foaf:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Arbetsförmedlingens Catalog</foaf:name>
+	<dcterms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">202100-2114</dcterms:identifier>
+	<dcterms:type rdf:resource="http://purl.org/adms/publishertype/Company"/>
+	<foaf:homepage rdf:resource="http://www.publishertest.se"/>
+	<dcterms:description xml:lang="en">Description in english for publisher (ny agent-egenskap i 3.0.1)</dcterms:description>
+	<dcterms:description xml:lang="sv">Beskrivning av utgivaren (ny agent-egenskap i 3.0.1)</dcterms:description>
+	<owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q1144957"/>
+	<org:classification rdf:resource="http://purl.org/adms/publishertype/NationalAuthority"/>
+	<foaf:mbox rdf:resource="mailTo:publisher1@publisher.com"/>
+</foaf:Agent>
+<dcat:Catalog rdf:about="https://www.af.se">
+	<dcterms:license rdf:resource="https://www.apache.org/licenses/LICENSE-2.0"/>
+	<foaf:homepage rdf:resource="http://www.arbetsformedlingen.se"/>
+	<dcterms:language rdf:resource="http://publications.europa.eu/resource/authority/language/ENG"/>
+	<dcterms:language rdf:resource="http://publications.europa.eu/resource/authority/language/SWE"/>
+	<dcterms:description xml:lang="sv">Arbetsförmedlingens test katalog med flera api'er</dcterms:description>
+	<dcterms:description xml:lang="en">Arbetsformedlingens test catalog with multiple api's</dcterms:description>
+	<dcterms:title xml:lang="en">Example of a catalog for an organistaion with several api's</dcterms:title>
+	<dcterms:title xml:lang="sv">Exempel på catalog för en organisation med flera api'n</dcterms:title>
+	<dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-04-01</dcterms:issued>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-04-02</dcterms:modified>
+	<dcat:themeTaxonomy rdf:resource="http://publications.europa.eu/resource/authority/data-theme"/>
+	<dcterms:rights rdf:nodeID="genid-start-31b90a0c941d78490e9ea3721e1963ee010"/>
+	<dcterms:spatial rdf:resource="https://www.af.se#location"/>
+	<dcterms:publisher rdf:resource="https://www.example.se/result.rdf#publisher"/>
+	<dcat:dataset rdf:resource="https://www.example.se/#datasetC"/>
+	<dcat:dataset rdf:resource="https://www.example.se/#datasetseriesC"/>
+	<dcat:service rdf:resource="https://www.example.se/#dataserviceC"/>
+</dcat:Catalog>
+<odrs:RightsStatement rdf:nodeID="genid-start-31b90a0c941d78490e9ea3721e1963ee010">
+	<odrs:reuserGuidelines rdf:resource="http://www.guidelinescat.se"/>
+	<odrs:attributionURL rdf:resource="http://www.rattighetstextcatalog.se"/>
+	<odrs:copyrightYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1979</odrs:copyrightYear>
+	<odrs:attributionText xml:lang="sv">Detta är ett exempel på rättighetstext för Catalog</odrs:attributionText>
+	<odrs:copyrightNotice rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Upphovsrätt</odrs:copyrightNotice>
+	<odrs:jurisdiction rdf:resource="http://www.nywebaddresscat.com"/>
+	<odrs:copyrightStatement rdf:resource="https://www.af.se/statement"/>
+	<odrs:copyrightHolder rdf:resource="http://www.exempel.se/#copyrightHolderCatalog"/>
+</odrs:RightsStatement>
+<dcterms:LicenseDocument rdf:about="https://www.af.se/statement">
+	<dcterms:description xml:lang="sv">license för Catalog</dcterms:description>
+	<dcterms:title xml:lang="sv">License För Catalog</dcterms:title>
+</dcterms:LicenseDocument>
+<foaf:Agent rdf:about="http://www.exempel.se/#copyrightHolderCatalog">
+	<foaf:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Copyright Holder för Catalog</foaf:name>
+	<dcterms:type rdf:resource="http://purl.org/adms/publishertype/RegionalAuthority"/>
+	<foaf:homepage rdf:resource="http://www.holder.com"/>
+</foaf:Agent>
+<dcterms:Location rdf:about="https://www.af.se#location">
+	<dcat:centroid rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral">POINT(10.0 51.0)</dcat:centroid>
+	<locn:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral">LINESTRING(10.0 51.0, 11.0 52.0, 12.0 53.0)</locn:geometry>
+	<dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral">POLYGON((0 0, 1 0, 1 1, 0 1, 0 0))</dcat:bbox>
+</dcterms:Location>
+<dcat:Dataset rdf:about="https://www.example.se/#datasetC">
+	<dcat:temporalResolution rdf:datatype="http://www.w3.org/2001/XMLSchema#duration">P1Y</dcat:temporalResolution>
+	<dcterms:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/PUBLIC"/>
+	<dcat:landingPage rdf:resource="http://www.exempelsida.se"/>
+	<dcat:keyword xml:lang="en">example</dcat:keyword>
+	<dcat:keyword xml:lang="en">info</dcat:keyword>
+	<dcat:keyword xml:lang="en">computer</dcat:keyword>
+	<dcat:keyword xml:lang="en">test</dcat:keyword>
+	<dcat:keyword xml:lang="en">api</dcat:keyword>
+	<dcat:keyword xml:lang="sv">exempel</dcat:keyword>
+	<dcat:keyword xml:lang="sv">info</dcat:keyword>
+	<dcat:keyword xml:lang="sv">data</dcat:keyword>
+	<dcat:keyword xml:lang="sv">test</dcat:keyword>
+	<dcat:keyword xml:lang="sv">api</dcat:keyword>
+	<dcat:inSeries rdf:resource="https://www.example.se/#datasetseriesC"/>
+	<dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
+	<dcterms:title xml:lang="sv">Datamängd C</dcterms:title>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-03-15</dcterms:modified>
+	<adms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">www.ovrig-identifierare.com</adms:identifier>
+	<dcatap:hvdCategory rdf:resource="http://data.europa.eu/bna/c_a9135398"/>
+	<dcatap:hvdCategory rdf:resource="http://data.europa.eu/bna/c_dd313021"/>
+	<dcterms:isReferencedBy rdf:resource="http://www.exempelreferenssida.se"/>
+	<dcterms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">www.identifierare.com</dcterms:identifier>
+	<dcterms:spatial rdf:resource="http://sws.geonames.org/6695072"/>
+	<dcterms:spatial rdf:nodeID="genid-start-32b90a0c941d78490e9ea3721e1963ee0101"/>
+	<dcat:version rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3.7.5</dcat:version>
+	<dcterms:language rdf:resource="http://publications.europa.eu/resource/authority/language/ENG"/>
+	<dcterms:language rdf:resource="http://publications.europa.eu/resource/authority/language/SWE"/>
+	<dcterms:description xml:lang="sv">En kort men godkännd exempel beskrivning av datamängd C</dcterms:description>
+	<dcat:spatialResolutionInMeters rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.4</dcat:spatialResolutionInMeters>
+	<dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TRAN"/>
+	<dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/EDUC"/>
+	<dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-03-05</dcterms:issued>
+	<dcterms:relation rdf:resource="http://www.relateradresursexempelsida.se"/>
+	<adms:versionNotes rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Exempel på VersionsNoteringar</adms:versionNotes>
+	<adms:versionNotes rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fler versionsnoteringar</adms:versionNotes>
+	<dcterms:publisher rdf:resource="https://www.example.se/result.rdf#publisher"/>
+	<dcterms:creator rdf:resource="https://www.example.se/#creatorC"/>
+	<dcterms:temporal rdf:nodeID="genid-start-33b90a0c941d78490e9ea3721e1963ee01012"/>
+	<schema:offers rdf:nodeID="genid-start-34b90a0c941d78490e9ea3721e1963ee010123"/>
+	<dcterms:conformsTo rdf:resource="https://www.example.se/#datasetC/conformsTo"/>
+	<foaf:page rdf:resource="https://www.example.se/#datasetC/page"/>
+	<prov:qualifiedAttribution rdf:nodeID="genid-start-35b90a0c941d78490e9ea3721e1963ee0101234"/>
+	<dcat:contactPoint rdf:resource="https://www.example.se/#contactC"/>
+	<dcat:distribution rdf:resource="https://www.example.se/#distributionC"/>
+</dcat:Dataset>
+<foaf:Agent rdf:about="https://www.example.se/#creatorC">
+	<foaf:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ExempelFöretag</foaf:name>
+	<dcterms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">556677-8899</dcterms:identifier>
+	<dcterms:type rdf:resource="http://purl.org/adms/publishertype/NationalAuthority"/>
+	<foaf:homepage rdf:resource="http://www.exempelforetag.com"/>
+	<dcterms:description xml:lang="sv">Beskrivning av skaparen (ny agent-egenskap i 3.0.1)</dcterms:description>
+	<owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q123456"/>
+	<org:classification rdf:resource="http://purl.org/adms/publishertype/Company"/>
+	<foaf:mbox rdf:resource="mailTo:kontakt@exempelforetag.com"/>
+</foaf:Agent>
+<dcterms:Location rdf:nodeID="genid-start-32b90a0c941d78490e9ea3721e1963ee0101">
+	<dcat:centroid rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral">POINT (12.83 56.4)</dcat:centroid>
+	<locn:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral">LINESTRING(10.0 51.0, 11.0 52.0, 12.0 53.0)</locn:geometry>
+	<dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral">POLYGON ((12.42 56.3, 13.24 56.3, 13.24 56.5, 12.42 56.5, 12.42 56.3))</dcat:bbox>
+</dcterms:Location>
+<dcterms:PeriodOfTime rdf:nodeID="genid-start-33b90a0c941d78490e9ea3721e1963ee01012">
+	<dcat:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-03-16</dcat:startDate>
+	<dcat:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-03-25</dcat:endDate>
+</dcterms:PeriodOfTime>
+<schema:Offer rdf:nodeID="genid-start-34b90a0c941d78490e9ea3721e1963ee010123">
+	<schema:mainEntityOfPage rdf:resource="http://www.avgiftsexempel.se"/>
+	<schema:description xml:lang="sv">Exempel Avgift</schema:description>
+</schema:Offer>
+<dcterms:Standard rdf:about="https://www.example.se/#datasetC/conformsTo">
+	<dcterms:description xml:lang="sv">Beskrivning Standard</dcterms:description>
+	<dcterms:title xml:lang="sv">Exempel namn på Standard</dcterms:title>
+</dcterms:Standard>
+<foaf:Document rdf:about="https://www.example.se/#datasetC/page">
+	<dcterms:description xml:lang="sv">Beskrivning av Exempeldokument</dcterms:description>
+	<dcterms:title xml:lang="sv">Exempel Dokument</dcterms:title>
+</foaf:Document>
+<prov:Attribution rdf:nodeID="genid-start-35b90a0c941d78490e9ea3721e1963ee0101234">
+	<dcat:hadRole rdf:resource="http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/distributor"/>
+	<prov:agent>
+		<foaf:Agent rdf:about="https://www.example.se/#other_agentC">
+			<foaf:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ExempelFöretag 2</foaf:name>
+			<dcterms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">442233-4455</dcterms:identifier>
+			<dcterms:type rdf:resource="http://purl.org/adms/publishertype/NationalAuthority"/>
+			<foaf:homepage rdf:resource="http://www.exempelforetag2.com"/>
+			<dcterms:description xml:lang="sv">Beskrivning av other agent Attribution (ny egenskap i 3.0.1)</dcterms:description>
+			<owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q483456"/>
+			<org:classification rdf:resource="http://purl.org/adms/publishertype/Company"/>
+			<foaf:mbox rdf:resource="mailTo:kontakt@exempelforetag2.com"/>
+		</foaf:Agent>
+	</prov:agent>
+</prov:Attribution>
+<vcard:Organization rdf:about="https://www.example.se/#contactC">
+	<vcard:fn rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Exempel Organisation</vcard:fn>
+	<vcard:hasEmail rdf:resource="mailTo:admin@exempel.se"/>
+	<vcard:hasURL rdf:resource="https://www.example.se/kontakt"/>
+	<vcard:hasAddress rdf:nodeID="genid-start-36b90a0c941d78490e9ea3721e1963ee01012345"/>
+	<vcard:hasTelephone rdf:nodeID="genid-start-37b90a0c941d78490e9ea3721e1963ee010123456"/>
+</vcard:Organization>
+<vcard:Address rdf:nodeID="genid-start-36b90a0c941d78490e9ea3721e1963ee01012345">
+	<vcard:country-name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> Sverige</vcard:country-name>
+	<vcard:street-address rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Testgatan 5</vcard:street-address>
+	<vcard:postal-code rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> 76543</vcard:postal-code>
+	<vcard:locality rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> Tranemo</vcard:locality>
+</vcard:Address>
+<vcard:Voice rdf:nodeID="genid-start-37b90a0c941d78490e9ea3721e1963ee010123456">
+	<vcard:hasValue rdf:resource="tel:0799887655"/>
+</vcard:Voice>
+<dcat:Distribution rdf:about="https://www.example.se/#distributionC">
+	<dcat:temporalResolution rdf:datatype="http://www.w3.org/2001/XMLSchema#duration">P1Y</dcat:temporalResolution>
+	<dcterms:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">text/html</dcterms:format>
+	<dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
+	<dcterms:title xml:lang="sv">Distribution C</dcterms:title>
+	<dcat:accessService rdf:resource="https://www.example.se/#dataserviceC"/>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-05-20</dcterms:modified>
+	<dcatap:availability rdf:resource="http://data.europa.eu/r5r/availability/stable"/>
+	<dcat:byteSize rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3000</dcat:byteSize>
+	<dcterms:conformsTo rdf:resource="https://www.example.se/#distributionC/conformsTo"/>
+	<dcat:accessURL rdf:resource="http://www.distributionC.se"/>
+	<dcat:downloadURL rdf:resource="http://www.exempelforetag.se/distributionC"/>
+	<dcterms:language rdf:resource="http://publications.europa.eu/resource/authority/language/SWE"/>
+	<dcterms:description xml:lang="sv">En kort demo/test beskrivning av Distribution C</dcterms:description>
+	<dcat:spatialResolutionInMeters rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.4</dcat:spatialResolutionInMeters>
+	<dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-05-04</dcterms:issued>
+	<adms:status rdf:resource="http://publications.europa.eu/resource/authority/distribution-status/COMPLETED"/>
+	<foaf:page rdf:resource="https://www.example.se/#distributionC/page"/>
+	<dcterms:rights rdf:nodeID="genid-start-38b90a0c941d78490e9ea3721e1963ee0101234567"/>
+	<spdx:checksum rdf:nodeID="genid-start-39b90a0c941d78490e9ea3721e1963ee01012345678"/>
+	<dcterms:license rdf:resource="https://www.apache.org/licenses/LICENSE-2.0"/>
+</dcat:Distribution>
+<foaf:Document rdf:about="https://www.example.se/#distributionC/page">
+	<dcterms:description xml:lang="sv">Beskrivning av Nytt Exempeldokument</dcterms:description>
+	<dcterms:title xml:lang="sv">Nytt Exempel Dokument</dcterms:title>
+</foaf:Document>
+<odrs:RightsStatement rdf:nodeID="genid-start-38b90a0c941d78490e9ea3721e1963ee0101234567">
+	<odrs:reuserGuidelines rdf:resource="http://www.guidelines.se"/>
+	<odrs:attributionURL rdf:resource="http://www.rattighetstext.se"/>
+	<odrs:copyrightYear rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1976</odrs:copyrightYear>
+	<odrs:attributionText xml:lang="sv">Detta är en rättighetstext</odrs:attributionText>
+	<odrs:copyrightNotice rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Upphovsrätt</odrs:copyrightNotice>
+	<odrs:jurisdiction rdf:resource="http://www.copyrightwebjurisdiction.com"/>
+	<odrs:copyrightStatement rdf:resource="https://www.example.se/#distributionC/statement"/>
+	<odrs:copyrightHolder rdf:resource="https://www.example.se/#copyrightHolderC"/>
+</odrs:RightsStatement>
+<dcterms:LicenseDocument rdf:about="https://www.example.se/#distributionC/statement">
+	<dcterms:description xml:lang="sv">Test license for dcat spec</dcterms:description>
+	<dcterms:title xml:lang="sv">Test License</dcterms:title>
+</dcterms:LicenseDocument>
+<foaf:Agent rdf:about="https://www.example.se/#copyrightHolderC">
+	<foaf:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Copyright Name</foaf:name>
+	<dcterms:type rdf:resource="http://purl.org/adms/publishertype/RegionalAuthority"/>
+	<foaf:homepage rdf:resource="http://www.copyrightweb.com"/>
+</foaf:Agent>
+<spdx:Checksum rdf:nodeID="genid-start-39b90a0c941d78490e9ea3721e1963ee01012345678">
+	<spdx:algorithm rdf:resource="http://spdx.org/rdf/terms#checksumAlgorithm_sha1"/>
+	<spdx:checksumValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0A23DF</spdx:checksumValue>
+</spdx:Checksum>
+<dcat:DataService rdf:about="https://www.example.se/#dataserviceC">
+	<dcterms:accessRights rdf:resource="http://publications.europa.eu/resource/authority/access-right/RESTRICTED"/>
+	<dcterms:subject rdf:resource="https://www.dataportal.se/terminology/grunddata/person"/>
+	<dcterms:type rdf:resource="http://www.wikidata.org/entity/Q749568"/>
+	<dcat:landingPage rdf:resource="http://www.landingpagefordataservice.com"/>
+	<dcat:keyword xml:lang="sv">rest</dcat:keyword>
+	<dcat:keyword xml:lang="sv">datatjänst</dcat:keyword>
+	<dcat:keyword xml:lang="sv">test</dcat:keyword>
+	<dcat:keyword xml:lang="sv">tjänst</dcat:keyword>
+	<dcat:keyword xml:lang="sv">ams</dcat:keyword>
+	<dcterms:format rdf:datatype="http://www.w3.org/2001/XMLSchema#string">application/json</dcterms:format>
+	<dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
+	<dcterms:title xml:lang="sv">Datatjänst C</dcterms:title>
+	<dcat:servesDataset rdf:resource="https://www.example.se/#datasetC"/>
+	<dcatap:hvdCategory rdf:resource="http://data.europa.eu/bna/c_a9135398"/>
+	<dcterms:conformsTo rdf:resource="https://www.example.se/#dataserviceC/standard"/>
+	<dcat:endpointDescription rdf:resource="http://www.beskrivningDatatjanstC.se"/>
+	<dcterms:description xml:lang="sv">En kort demo beskrivning av Datatjänst C</dcterms:description>
+	<dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/ENER"/>
+	<dcat:endpointURL rdf:resource="http://www.datatjanstC.se"/>
+	<dcterms:license rdf:resource="https://www.example.se/#dataserviceC/license"/>
+	<foaf:page rdf:resource="https://www.example.se/#dataserviceC/page"/>
+	<dcterms:publisher rdf:resource="https://www.example.se/#publisherC2"/>
+	<dcat:contactPoint rdf:resource="https://www.example.se/#contactPointC2"/>
+</dcat:DataService>
+<dcterms:LicenseDocument rdf:about="https://www.example.se/#dataserviceC/license">
+	<dcterms:description xml:lang="sv">Beskrivning av licens för Datatjänst</dcterms:description>
+	<dcterms:title xml:lang="sv">namn på licens för DataTjänst</dcterms:title>
+</dcterms:LicenseDocument>
+<foaf:Document rdf:about="https://www.example.se/#dataserviceC/page">
+	<dcterms:description xml:lang="sv">Beskrivning av dokument för Datatjänst</dcterms:description>
+	<dcterms:title xml:lang="sv">Namn på exempel dokument för Datatjänst</dcterms:title>
+</foaf:Document>
+<foaf:Agent rdf:about="https://www.example.se/#publisherC2">
+	<foaf:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Utgivare av Datatjänst C</foaf:name>
+	<dcterms:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">998877-6655</dcterms:identifier>
+	<dcterms:type rdf:resource="http://purl.org/adms/publishertype/NonGovernmentalOrganisation"/>
+	<foaf:homepage rdf:resource="http://www.utgivare2.se"/>
+	<dcterms:description xml:lang="sv">Beskrivning av datatjänstens utgivare (data.service.publisher.description-sv)</dcterms:description>
+	<owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q654321"/>
+	<org:classification rdf:resource="http://purl.org/adms/publishertype/NonGovernmentalOrganisation"/>
+	<foaf:mbox rdf:resource="mailTo:kontakt@utgivare2.se"/>
+</foaf:Agent>
+<vcard:Organization rdf:about="https://www.example.se/#contactPointC2">
+	<vcard:fn rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Namn på Organisation 2</vcard:fn>
+	<vcard:hasEmail rdf:resource="mailTo:kontakt@organization2.se"/>
+	<vcard:hasURL rdf:resource="https://www.organization2.se"/>
+	<vcard:hasAddress rdf:nodeID="genid-start-301b90a0c941d78490e9ea3721e1963ee01"/>
+	<vcard:hasTelephone rdf:nodeID="genid-start-311b90a0c941d78490e9ea3721e1963ee010"/>
+</vcard:Organization>
+<vcard:Address rdf:nodeID="genid-start-301b90a0c941d78490e9ea3721e1963ee01">
+	<vcard:country-name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> Sverige</vcard:country-name>
+	<vcard:street-address rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Testvägen 24</vcard:street-address>
+	<vcard:postal-code rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> 93847</vcard:postal-code>
+	<vcard:locality rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> Backa</vcard:locality>
+</vcard:Address>
+<vcard:Voice rdf:nodeID="genid-start-311b90a0c941d78490e9ea3721e1963ee010">
+	<vcard:hasValue rdf:resource="tel:07923568945"/>
+</vcard:Voice>
+<dcat:DatasetSeries rdf:about="https://www.example.se/#datasetseriesC">
+	<dcterms:subject rdf:resource="https://www.dataportal.se/terminology/grunddata/foretag"/>
+	<dcat:landingPage rdf:resource="https://www.example.se/serie-landningssida"/>
+	<dcat:keyword xml:lang="en">series</dcat:keyword>
+	<dcat:keyword xml:lang="en">ams</dcat:keyword>
+	<dcat:keyword xml:lang="en">datasetseries</dcat:keyword>
+	<dcat:keyword xml:lang="en">test</dcat:keyword>
+	<dcat:keyword xml:lang="en">example</dcat:keyword>
+	<dcat:keyword xml:lang="sv">serie</dcat:keyword>
+	<dcat:keyword xml:lang="sv">test</dcat:keyword>
+	<dcat:keyword xml:lang="sv">ams</dcat:keyword>
+	<dcat:keyword xml:lang="sv">datasetserie</dcat:keyword>
+	<dcat:keyword xml:lang="sv">exempel</dcat:keyword>
+	<dcterms:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/ANNUAL"/>
+	<dcatap:applicableLegislation rdf:resource="http://data.europa.eu/eli/reg_impl/2023/138/oj"/>
+	<dcterms:title xml:lang="en">Dataset series C</dcterms:title>
+	<dcterms:title xml:lang="sv">Datamängdsserie C</dcterms:title>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-15</dcterms:modified>
+	<dcatap:hvdCategory rdf:resource="http://data.europa.eu/bna/c_a9135398"/>
+	<dcatap:hvdCategory rdf:resource="http://data.europa.eu/bna/c_dd313021"/>
+	<dcterms:spatial rdf:resource="http://sws.geonames.org/6695072"/>
+	<dcterms:spatial rdf:nodeID="genid-start-321b90a0c941d78490e9ea3721e1963ee0101"/>
+	<dcterms:description xml:lang="en">Example of Datasetseries (new primaryclass in 3.0.1)</dcterms:description>
+	<dcterms:description xml:lang="sv">Exempel av Datasetseries (ny primärklass i 3.0.1)</dcterms:description>
+	<dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/TRAN"/>
+	<dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-01</dcterms:issued>
+	<dcterms:relation rdf:resource="https://www.example.se/relaterad-resurs"/>
+	<dcterms:publisher rdf:resource="https://www.example.se/result.rdf#publisher"/>
+	<dcterms:temporal rdf:nodeID="genid-start-331b90a0c941d78490e9ea3721e1963ee01012"/>
+	<dcterms:conformsTo rdf:resource="https://www.example.se/#datasetseriesC/conformsTo"/>
+	<foaf:page rdf:resource="https://www.example.se/#datasetseriesC/page"/>
+	<dcat:contactPoint rdf:resource="https://www.example.se/#dsseriesContact"/>
+</dcat:DatasetSeries>
+<dcterms:Location rdf:nodeID="genid-start-321b90a0c941d78490e9ea3721e1963ee0101">
+	<dcat:centroid rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral">POINT(10.0 51.0)</dcat:centroid>
+	<locn:geometry rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral">LINESTRING(10.0 51.0, 11.0 52.0, 12.0 53.0)</locn:geometry>
+	<dcat:bbox rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral">POLYGON((0 0, 1 0, 1 1, 0 1, 0 0))</dcat:bbox>
+</dcterms:Location>
+<dcterms:PeriodOfTime rdf:nodeID="genid-start-331b90a0c941d78490e9ea3721e1963ee01012">
+	<dcat:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-01-01</dcat:startDate>
+	<dcat:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-12-31</dcat:endDate>
+</dcterms:PeriodOfTime>
+<dcterms:Standard rdf:about="https://www.example.se/#datasetseriesC/conformsTo">
+	<dcterms:description xml:lang="sv">Beskrivning av standard för serie</dcterms:description>
+	<dcterms:title xml:lang="sv">Standard för serie</dcterms:title>
+</dcterms:Standard>
+<foaf:Document rdf:about="https://www.example.se/#datasetseriesC/page">
+	<dcterms:description xml:lang="sv">Beskrivning av dokument för serie</dcterms:description>
+	<dcterms:title xml:lang="sv">Dokument för serie</dcterms:title>
+</foaf:Document>
+<vcard:Organization rdf:about="https://www.example.se/#dsseriesContact">
+	<vcard:fn rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kontakt för serie</vcard:fn>
+	<vcard:hasEmail rdf:resource="mailTo:serie@exempel.se"/>
+	<vcard:hasURL rdf:resource="https://www.example.se/serie-kontakt"/>
+	<vcard:hasAddress rdf:nodeID="genid-start-341b90a0c941d78490e9ea3721e1963ee010123"/>
+	<vcard:hasTelephone rdf:nodeID="genid-start-351b90a0c941d78490e9ea3721e1963ee0101234"/>
+</vcard:Organization>
+<vcard:Address rdf:nodeID="genid-start-341b90a0c941d78490e9ea3721e1963ee010123">
+	<vcard:country-name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> Sverige</vcard:country-name>
+	<vcard:street-address rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Seriegatan 1</vcard:street-address>
+	<vcard:postal-code rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> 11122</vcard:postal-code>
+	<vcard:locality rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> Stockholm</vcard:locality>
+</vcard:Address>
+<vcard:Voice rdf:nodeID="genid-start-351b90a0c941d78490e9ea3721e1963ee0101234">
+	<vcard:hasValue rdf:resource="tel:0701234567"/>
+</vcard:Voice>
+
+</rdf:RDF>

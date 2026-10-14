@@ -52,27 +52,27 @@ paths:
         "200":
           description: RDF/XML was generated.
           content:
-            text/plain;charset=UTF-8:
+            application/json:
               schema:
-                type: string
+                $ref: "#/components/schemas/DcatResult"
         "400":
-          description: The request body is invalid. The body lists each problem found.
+          description: The request body is invalid. The DcatResult.errorReport lists each problem found.
           content:
-            text/plain;charset=UTF-8:
+            application/json:
               schema:
-                type: string
+                $ref: "#/components/schemas/DcatResult"
         "422":
-          description: The specifications were processed but produced no valid metadata. The body is an error report.
+          description: The specifications were processed but produced no valid metadata. The Error report is in DcatResult.errorReport.
           content:
-            text/plain;charset=UTF-8:
+            application/json:
               schema:
-                type: string
+                $ref: "#/components/schemas/DcatResult"
         "500":
-          description: RDF generation failed.
+          description: RDF generation failed. The Error report is in DcatResult.errorReport.
           content:
-            text/plain;charset=UTF-8:
+            application/json:
               schema:
-                type: string
+                $ref: "#/components/schemas/DcatResult"
   /dcat-generation/files/:
     get:
       tags:
@@ -99,6 +99,33 @@ paths:
             text/plain;charset=UTF-8:
               schema:
                 type: string
+  /dcat-generation/files/report:
+    get:
+      tags:
+        - generation
+      operationId: restEndpointProduceRdfAndQualityReport
+      summary: Generate DCAT-AP-SE metadata and a quality report from a directory.
+      description: |
+        Reads every API specification in the given directory and returns the
+        resulting DCAT-AP-SE metadata as RDF/XML, together with an error report
+        and a quality report.
+
+        The directory is resolved on the server running the processor, not on the client.
+      parameters:
+        - name: dir
+          in: query
+          required: false
+          description: Server-side directory containing the API specifications to process.
+          schema:
+            type: string
+            default: /apidef
+      responses:
+        "200":
+          description: Processing finished. Check `errorReport` and `qualityReport` for problems.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DcatResult"
   /api-info:
     get:
       tags:
@@ -168,3 +195,67 @@ components:
             the whole request with 400 — nothing is partially converted.
           items:
             $ref: "#/components/schemas/ApiSource"
+    DcatResult:
+      type: object
+      description: |
+        The outcome of a generation run.
+      properties:
+        rdf:
+          description: |
+            The generated DCAT-AP-SE metadata as RDF/XML.
+          type: string
+        errorReport:
+          description: |
+            Errors found while validating the request or processing the specifications.
+          type: string
+        qualityReport:
+          description: |
+            Quality check of the generated metadata, grouped by DCAT-AP-SE main class.
+          $ref: "#/components/schemas/QualityReport"
+    MainClassQuality:
+      type: object
+      description: |
+        Quality result for a single resource of a DCAT-AP-SE main class.
+      properties:
+        mainClass:
+          description: |
+            The DCAT-AP-SE main class, for example Catalog, Dataset or DataService.
+          type: string
+        uri:
+          description: |
+            URI of the resource that was checked.
+          type: string
+        issues:
+          description: |
+            Quality issues found for the resource. Empty if none were found.
+          type: array
+          items:
+            $ref: "#/components/schemas/QualityIssue"
+    QualityIssue:
+      type: object
+      description: |
+        A single quality issue on a resource.
+      properties:
+        property:
+          description: |
+            The property the issue concerns, for example dcterms:publisher.
+          type: string
+        message:
+          description: |
+            Description of the issue.
+          type: string
+    QualityReport:
+      type: object
+      description: |
+        Quality check of the generated metadata, grouped by DCAT-AP-SE main class.
+      properties:
+        completed:
+          description: |
+            Whether the quality check ran to completion. If false, the report is incomplete.
+          type: boolean
+        mainClasses:
+          description: |
+            Quality results per checked resource.
+          type: array
+          items:
+            $ref: "#/components/schemas/MainClassQuality"
