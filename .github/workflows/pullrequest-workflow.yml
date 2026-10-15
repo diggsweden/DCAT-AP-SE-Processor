@@ -22,13 +22,19 @@ concurrency:
 jobs:
   pr-checks:
     uses: diggsweden/reusable-ci/.github/workflows/pullrequest-orchestrator.yml@997d7dc2238b40c79798fda309d8061b0707a3e5 # v3.0.0
-    secrets: inherit # Pass org-level secrets (for private Maven dependencies)
     permissions:
       contents: read # Clone repository and read source code
       packages: read # Access GitHub Packages for Maven dependencies
       security-events: write # Upload SpotBugs/dependency check results to Security tab
+      pull-requests: read
+    secrets:
+      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      RELEASE_GPG_PRIVATE_KEY: ${{ secrets.RELEASE_GPG_PRIVATE_KEY }}
+      RELEASE_GPG_PASSPHRASE: ${{ secrets.RELEASE_GPG_PASSPHRASE }}
+      RELEASE_GPG_PUBLIC_KEY: ${{ secrets.RELEASE_GPG_PUBLIC_KEY }}
+      CODE_SCANNING_TOKEN: ${{ secrets.CODE_SCANNING_TOKEN }} # Optional SARIF upload
     with:
-      reusable-ci-ref: 617cb32268cb6aefdfa4117b4159d37e3b47d7b3 # v2.8.3
+      reusable-ci-ref: 997d7dc2238b40c79798fda309d8061b0707a3e5 # v3.0.0
       project-type: maven
       # Use devbase-check linting (replaces megalint, commitlint, licenselint)
       linters.devbasecheck: true

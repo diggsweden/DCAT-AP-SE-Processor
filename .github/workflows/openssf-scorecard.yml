@@ -20,6 +20,14 @@ jobs:
       contents: read
       security-events: write
       id-token: write
+      pull-requests: read
     uses: diggsweden/reusable-ci/.github/workflows/security-openssf-scorecard.yml@997d7dc2238b40c79798fda309d8061b0707a3e5 # v3.0.0
+    secrets:
+      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      RELEASE_GPG_PRIVATE_KEY: ${{ secrets.RELEASE_GPG_PRIVATE_KEY }}
+      RELEASE_GPG_PASSPHRASE: ${{ secrets.RELEASE_GPG_PASSPHRASE }}
+      RELEASE_GPG_PUBLIC_KEY: ${{ secrets.RELEASE_GPG_PUBLIC_KEY }}
+      CODE_SCANNING_TOKEN: ${{ secrets.CODE_SCANNING_TOKEN }} # Optional SARIF upload
     with:
+      reusable-ci-ref: 997d7dc2238b40c79798fda309d8061b0707a3e5 # v3.0.0
       publish-results: true
