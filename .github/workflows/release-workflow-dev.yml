@@ -25,9 +25,9 @@ jobs:
     permissions:
       contents: read # Read code for building
       packages: write # Push dev images to ghcr.io
-    uses: diggsweden/reusable-ci/.github/workflows/release-dev-orchestrator.yml@617cb32268cb6aefdfa4117b4159d37e3b47d7b3 # v2.8.3
+      pull-requests: read
+    uses: diggsweden/reusable-ci/.github/workflows/pullrequest-orchestrator.yml@1a76b0c1a69952742ea663c8cfe77d8fe1d168ad # v3.1.0
     with:
-      reusable-ci-ref: 617cb32268cb6aefdfa4117b4159d37e3b47d7b3 # v2.8.3
+      reusable-ci-ref: 1a76b0c1a69952742ea663c8cfe77d8fe1d168ad # v3.1.0
       project-type: maven
       sboms: all
-    secrets: inherit
