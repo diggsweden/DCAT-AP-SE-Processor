@@ -26,7 +26,7 @@ jobs:
       contents: read # Read code for building
       packages: write # Push dev images to ghcr.io
       pull-requests: read
-    uses: diggsweden/reusable-ci/.github/workflows/pullrequest-orchestrator.yml@1a76b0c1a69952742ea663c8cfe77d8fe1d168ad # v3.1.0
+    uses: diggsweden/reusable-ci/.github/workflows/release-dev-orchestrator.yml@1a76b0c1a69952742ea663c8cfe77d8fe1d168ad # v3.1.0
     with:
       reusable-ci-ref: 1a76b0c1a69952742ea663c8cfe77d8fe1d168ad # v3.1.0
       project-type: maven
