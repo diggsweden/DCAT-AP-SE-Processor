@@ -1,6 +1,6 @@
 # DCAT-AP-SE Processor
 
-[![License: EUPL 1.2](https://img.shields.io/badge/License-European%20Union%20Public%20Licence%201.2-library?style=for-the-badge&&color=lightblue)](LICENSE)
+[![License: EUPL 1.2](https://img.shields.io/badge/License-European%20Union%20Public%20Licence%201.2-library?style=for-the-badge&&color=lightblue)](LICENSES/EUPL-1.2.txt)
 
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/diggsweden/DCAT-AP-SE-Processor/badge?style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/diggsweden/DCAT-AP-SE-Processor)
 
