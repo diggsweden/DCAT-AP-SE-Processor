@@ -166,6 +166,7 @@ Konvertera en katalog med specifikationsfiler, resultatet blir en RDF samt en kv
 ```text
 java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -d KATALOG
 ```
+
 Visa hjälpmenyn med information om tillgängliga flaggor och exempel på användning:
 
 ```text
