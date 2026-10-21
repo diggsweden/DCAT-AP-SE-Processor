@@ -106,40 +106,6 @@ public class CliRunner implements ApplicationRunner {
         };
     }
 
-    private void printHelp() {
-        System.out.println("""
-                Usage:
-                java -jar dcat-ap-processor.jar -f <file>
-                java -jar dcat-ap-processor.jar -d <directory>
-                java -jar dcat-ap-processor.jar -h
-
-                Options:
-                  -f <file>       Generate RDF from a single file
-                  -d <directory>  Generate RDF from files in a directory
-                  -h, -help       Show this help message
-
-                Examples:
-                  java -jar dcat-ap-processor.jar -f ./file/spec.json
-                  java -jar dcat-ap-processor.jar -d ./files
-                """);
-    }
-
-    private static String findSupportedFlag(List<String> args) {
-        return args.stream()
-                .filter(CliFlags.SUPPORTED_FLAGS::contains)
-                .findFirst()
-                .orElse(null);
-    }
-
-    /**
-     * Returns the argument directly after the given flag, or {@code null} if the
-     * flag is the last argument.
-     */
-    private static String valueAfter(String flag, List<String> args) {
-        int valueIndex = args.indexOf(flag) + 1;
-        return valueIndex < args.size() ? args.get(valueIndex) : null;
-    }
-
     private ExitCode createDcatFromFile(String filename) {
         try {
             Manager manager = managerProvider.getObject();
@@ -182,5 +148,23 @@ public class CliRunner implements ApplicationRunner {
     private void exitSpringApplication(ExitCode code) {
         int exitCode = SpringApplication.exit(context, code);
         System.exit(exitCode);
+    }
+
+        private void printHelp() {
+        System.out.println("""
+                Usage:
+                java -jar dcat-ap-processor.jar -f <file>
+                java -jar dcat-ap-processor.jar -d <directory>
+                java -jar dcat-ap-processor.jar -h
+
+                Options:
+                  -f <file>       Generate RDF from a single file
+                  -d <directory>  Generate RDF from files in a directory
+                  -h, -help       Show this help message
+
+                Examples:
+                  java -jar dcat-ap-processor.jar -f ./file/spec.json
+                  java -jar dcat-ap-processor.jar -d ./files
+                """);
     }
 }
