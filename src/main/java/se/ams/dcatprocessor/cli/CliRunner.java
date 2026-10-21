@@ -56,15 +56,46 @@ public class CliRunner implements ApplicationRunner {
     protected ExitCode execute(ApplicationArguments args) {
         List<String> nonOptionArgs = args.getNonOptionArgs();
 
-        String flag = findSupportedFlag(nonOptionArgs);
-        if (flag == null) {
-            System.err.println("Error: unknown CLI arguments " + nonOptionArgs);
+        // Show help-menu
+        if (nonOptionArgs.size() == 1 &&
+                CliFlags.HELP_FLAGS.contains(nonOptionArgs.get(0))) {
+            printHelp();
+            return ExitCode.SUCCESS;
+        }
+
+        // Help flag must be used alone
+        if (!nonOptionArgs.isEmpty() &&
+                CliFlags.HELP_FLAGS.contains(nonOptionArgs.get(0))) {
+            System.err.println("Error: help flag must be used alone " + nonOptionArgs);
             return ExitCode.USAGE_ERROR;
         }
 
-        String flagValue = valueAfter(flag, nonOptionArgs);
-        if (flagValue == null) {
-            System.err.println("Error: missing value for flag " + flag);
+        String flag = nonOptionArgs.get(0);
+
+        // Check for unknown flag
+        if (!CliFlags.SUPPORTED_FLAGS.contains(flag)) {
+            System.err.println("Error: unknown CLI flag " + flag);
+            return ExitCode.USAGE_ERROR;
+        }
+
+        // Check if a flag is missing its value
+        if (nonOptionArgs.size() == 1 &&
+                CliFlags.SUPPORTED_FLAGS.contains(nonOptionArgs.get(0))) {
+            System.err.println("Error: missing value for flag " + nonOptionArgs.get(0));
+            return ExitCode.USAGE_ERROR;
+        }
+
+        // Only one flag and value can be used
+        if (nonOptionArgs.size() != 2) {
+            System.err.println("Error: expected exactly one flag and one value " + nonOptionArgs);
+            return ExitCode.USAGE_ERROR;
+        }
+
+        String flagValue = nonOptionArgs.get(1);
+
+        // Ensure the flag value is not empty or another flag
+        if (flagValue.isBlank() || flagValue.startsWith("-")) {
+            System.err.println("Error: missing or invalid value for flag " + flag);
             return ExitCode.USAGE_ERROR;
         }
 
@@ -73,6 +104,24 @@ public class CliRunner implements ApplicationRunner {
             case "-d" -> createDcatFromDirectory(flagValue);
             default -> ExitCode.USAGE_ERROR;
         };
+    }
+
+    private void printHelp() {
+        System.out.println("""
+                Usage:
+                java -jar dcat-ap-processor.jar -f <file>
+                java -jar dcat-ap-processor.jar -d <directory>
+                java -jar dcat-ap-processor.jar -h
+
+                Options:
+                  -f <file>       Generate RDF from a single file
+                  -d <directory>  Generate RDF from files in a directory
+                  -h, -help       Show this help message
+
+                Examples:
+                  java -jar dcat-ap-processor.jar -f ./file/spec.json
+                  java -jar dcat-ap-processor.jar -d ./files
+                """);
     }
 
     private static String findSupportedFlag(List<String> args) {
