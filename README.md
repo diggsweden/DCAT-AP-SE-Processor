@@ -140,8 +140,11 @@ När argument skickas med körs den i CLI-läge och ingen webbserver startas.
 |--------|-------|-------------|---------|
 | `-f` | FIL | Konverterar en specifikationsfil (.raml, .yaml, .json) | `java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -f api.yaml` |
 | `-d` | KATALOG | Konverterar alla specifikationsfiler i en katalog | `java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -d ./specs` |
+| `-h` | - | Visa hjälpmenyn | `java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -h` |
 
-Okända argument, eller en flagga utan värde, avslutas med exitkod 2.
+Endast en CLI-flagga kan användas per körning. Flaggorna `-f` och `-d` kräver ett värde i form av en fil- eller katalogsökväg, medan `-h` och `-help` används utan värde.
+
+Ogiltiga argument, exempelvis okända flaggor, saknade värden eller flera CLI-flaggor, resulterar i exitkod 2.
 Argument som börjar med `--`, t.ex. `--server.port=8081`, är Spring-inställningar och påverkar inte vilket läge applikationen startar i.
 
 #### Användning
@@ -163,6 +166,13 @@ Konvertera en katalog med specifikationsfiler, resultatet blir en RDF samt en kv
 ```text
 java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -d KATALOG
 ```
+Visa hjälpmenyn med information om tillgängliga flaggor och exempel på användning:
+
+```text
+java -jar dcat-ap-processor-0.0.3-SNAPSHOT.jar -h
+```
+
+Hjälpmenyn kan även visas med -help. Båda alternativen avslutar programmet med exitkod 0.
 
 Vid lyckad konvertering skrivs DCAT-datan till stdout och till filen `dcat.rdf` i aktuell katalog.
 Om konverteringen misslyckas skrivs en felrapport till stderr och ingen fil skapas.
@@ -171,7 +181,7 @@ Om konverteringen misslyckas skrivs en felrapport till stderr och ingen fil skap
 
 | Kod | Betydelse |
 |-----|-----------|
-| 0 | DCAT-data genererad |
+| 0 | DCAT-data genererad eller visad hjälpmeny |
 | 1 | Oväntat internt fel |
 | 2 | Felaktiga argument, t.ex. okänd flagga eller saknat värde |
 | 3 | Indata kunde inte konverteras, felrapport skriven till stderr |
