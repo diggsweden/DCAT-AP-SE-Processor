@@ -152,6 +152,8 @@ public class CliRunner implements ApplicationRunner {
 
         private void printHelp() {
         System.out.println("""
+                DCAT-AP-SE Processor
+
                 Usage:
                 java -jar dcat-ap-processor.jar -f <file>
                 java -jar dcat-ap-processor.jar -d <directory>
