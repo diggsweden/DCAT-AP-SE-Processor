@@ -90,7 +90,7 @@
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
 			<artifactId>monaco-editor</artifactId>
-			<version>0.56.0</version>
+			<version>0.57.0</version>
 			<scope>compile</scope>
 		</dependency>
 
