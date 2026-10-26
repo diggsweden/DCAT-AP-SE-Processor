@@ -4,9 +4,14 @@
 
 package se.ams.dcatprocessor.cli;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,6 +34,10 @@ import se.ams.dcatprocessor.processor.Manager;
 import se.ams.dcatprocessor.rdf.quality.QualityReport;
 import se.ams.dcatprocessor.util.Util;
 import tools.jackson.databind.json.JsonMapper;
+
+import java.util.stream.Stream;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 @ExtendWith(MockitoExtension.class)
 public class CliRunnerTest {
@@ -121,7 +130,7 @@ public class CliRunnerTest {
 
         ExitCode result = cliRunner.execute(args);
 
-        verifyNoInteractions(manager);
+        verifyNoInteractions(managerProvider, manager);
         assertEquals(ExitCode.USAGE_ERROR, result);
     }
 
@@ -132,7 +141,7 @@ public class CliRunnerTest {
 
         ExitCode result = cliRunner.execute(args);
 
-        verifyNoInteractions(manager);
+        verifyNoInteractions(managerProvider, manager);
         assertEquals(ExitCode.USAGE_ERROR, result);
     }
 
@@ -174,5 +183,74 @@ public class CliRunnerTest {
         ExitCode result = cliRunner.execute(args);
     
         assertEquals(ExitCode.UNEXPECTED_ERROR, result);
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidArgumentCombinations")
+    void testThatInvalidArgumentCombinationsReturnUsageError(String[] arguments) {
+        ApplicationArguments args = new DefaultApplicationArguments(arguments);
+
+        ExitCode result = cliRunner.execute(args);
+
+        assertEquals(ExitCode.USAGE_ERROR, result);
+        verifyNoInteractions(managerProvider, manager);
+    }
+
+    private static Stream<Arguments> invalidArgumentCombinations() {
+        return Stream.of(
+                Arguments.of((Object) new String[] { "-k", "-d", "./testFiles" }),
+                Arguments.of((Object) new String[] { "-f", "-d" }),
+                Arguments.of((Object) new String[] { "-d", "-f" }),
+                Arguments.of((Object) new String[] { "-f", "./file.yaml", "-d", "./testFiles" }),
+                Arguments.of((Object) new String[] { "-d", "./testFiles", "-f", "./file.yaml" }),
+                Arguments.of((Object) new String[] { "-f", "./file.yaml", "extra" }),
+                Arguments.of((Object) new String[] { "-f", "" }),
+                Arguments.of((Object) new String[] { "-h", "-d" }),
+                Arguments.of((Object) new String[] { "-d", "-h" }),
+                Arguments.of((Object) new String[] { "-help", "-f", "./file.yaml" }));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "-h", "-help" })
+    void testThatHelpFlagPrintsHelpAndReturnsSuccess(String flag) {
+        ApplicationArguments args = new DefaultApplicationArguments(flag);
+
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+
+        try {
+            System.setOut(new PrintStream(output, true, StandardCharsets.UTF_8));
+
+            ExitCode result = cliRunner.execute(args);
+
+            assertEquals(ExitCode.SUCCESS, result);
+            assertTrue(output.toString(StandardCharsets.UTF_8).contains("Usage:"));
+            verifyNoInteractions(managerProvider, manager);
+        } finally {
+            System.setOut(originalOut);
+        }
+    }
+
+    @Test
+    void testThatSpringBootOptionsAreAllowedWithCliFlags() {
+        String file = "./folder/testfile.yaml";
+
+        ApplicationArguments args = new DefaultApplicationArguments(
+                "-f", file, "--spring.profiles.active=dev");
+
+        QualityReport qualityReport = new QualityReport(true, List.of());
+
+        when(managerProvider.getObject()).thenReturn(manager);
+        when(manager.createDcatFromFile(file))
+                .thenReturn(DcatResult.success("<rdf:RDF/>", qualityReport));
+
+        try (MockedStatic<Util> utilMock = mockStatic(Util.class)) {
+            ExitCode result = cliRunner.execute(args);
+
+            assertEquals(ExitCode.SUCCESS, result);
+            utilMock.verify(() -> Util.printToFile("<rdf:RDF/>", "dcat.rdf"));
+        }
+
+        verify(manager).createDcatFromFile(file);
     }
 }
