@@ -6,6 +6,7 @@ package se.ams.dcatprocessor.cli;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +32,7 @@ import tools.jackson.databind.json.JsonMapper;
 
 @ExtendWith(MockitoExtension.class)
 public class CliRunnerTest {
-    
+
     @Mock
     private Manager manager;
 
@@ -39,7 +40,7 @@ public class CliRunnerTest {
     private ObjectProvider<Manager> managerProvider;
 
     @Mock
-    private ApplicationContext context;
+    private ApplicationContext context; // Required by CliRunner's constructor
 
     private CliRunner cliRunner;
 
@@ -54,13 +55,17 @@ public class CliRunnerTest {
         String flag = "-f";
         String file = "./folder/testfile.yaml";
         ApplicationArguments args = new DefaultApplicationArguments(flag, file);
-
         QualityReport qualityReport = new QualityReport(true, List.of());
         when(manager.createDcatFromFile(file)).thenReturn(DcatResult.success("<rdf:RDF/>", qualityReport));
-        
-        cliRunner.run(args);
-        
+
+        ExitCode result;
+        try (MockedStatic<Util> utilMock = mockStatic(Util.class)) {
+            result = cliRunner.execute(args);
+            utilMock.verify(() -> Util.printToFile("<rdf:RDF/>", "dcat.rdf"));
+        }
+
         verify(manager).createDcatFromFile(file);
+        assertEquals(ExitCode.SUCCESS, result);
     }
 
     @Test
@@ -70,13 +75,12 @@ public class CliRunnerTest {
         String file = "./folder/testfile.yaml";
         ApplicationArguments args = new DefaultApplicationArguments(flag, file);
         when(manager.createDcatFromFile(file)).thenReturn(DcatResult.errors("error creating RDF"));
-        
-        cliRunner.run(args);
 
-        // DcatResult with errors should result in printed file
+        // DcatResult with errors should NOT result in a printed file
         try (MockedStatic<Util> utilMock = mockStatic(Util.class)) {
-            cliRunner.run(args);
+            ExitCode result = cliRunner.execute(args);
             utilMock.verifyNoInteractions();
+            assertEquals(ExitCode.GENERATION_FAILED, result);
         }
     }
 
@@ -89,29 +93,86 @@ public class CliRunnerTest {
 
         when(managerProvider.getObject()).thenReturn(manager);
         when(manager.createDcatFromDirectory(dirname)).thenReturn(DcatResult.success("<rdf:RDF/>", qualityReport));
-        
-        cliRunner.run(args);
-        
+
+        ExitCode result;
+        try (MockedStatic<Util> utilMock = mockStatic(Util.class)) {
+            result = cliRunner.execute(args);
+            utilMock.verify(() -> Util.printToFile("<rdf:RDF/>", "dcat.rdf"));
+        }
+
         verify(manager).createDcatFromDirectory(dirname);
+        assertEquals(ExitCode.SUCCESS, result);
+    }
+
+    @Test
+    void testThatUnexpectedExceptionGivesUnexpectedError() {
+        String file = "./folder/testfile.yaml";
+        ApplicationArguments args = new DefaultApplicationArguments("-f", file);
+        when(managerProvider.getObject()).thenReturn(manager);
+        when(manager.createDcatFromFile(file)).thenThrow(new RuntimeException("error"));
+
+        assertEquals(ExitCode.UNEXPECTED_ERROR, cliRunner.execute(args));
     }
 
     @Test
     void testThatInvalidFlagHasNoInteractionsWithService() {
         String flag = "-unknown";
         ApplicationArguments args = new DefaultApplicationArguments(flag);
-        
-        cliRunner.run(args);
-        
+
+        ExitCode result = cliRunner.execute(args);
+
         verifyNoInteractions(manager);
+        assertEquals(ExitCode.USAGE_ERROR, result);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"-f", "-d"})
+    @ValueSource(strings = { "-f", "-d" })
     void testThatMissingFlagValueHasNoInteractionsWithService(String flag) {
         ApplicationArguments args = new DefaultApplicationArguments(flag);
-        
-        cliRunner.run(args);
-        
+
+        ExitCode result = cliRunner.execute(args);
+
         verifyNoInteractions(manager);
+        assertEquals(ExitCode.USAGE_ERROR, result);
+    }
+
+    @Test
+    void testThatFileWriteErrorGivesUnexpectedError() {
+        String file = "./folder/testfile.yaml";
+        ApplicationArguments args = new DefaultApplicationArguments("-f", file);
+        QualityReport qualityReport = new QualityReport(true, List.of());
+        when(managerProvider.getObject()).thenReturn(manager);
+        when(manager.createDcatFromFile(file)).thenReturn(DcatResult.success("<rdf:RDF/>", qualityReport));
+    
+        try (MockedStatic<Util> utilMock = mockStatic(Util.class)) {
+            utilMock.when(() -> Util.printToFile("<rdf:RDF/>", "dcat.rdf"))
+                    .thenThrow(new RuntimeException("write failed"));
+        
+            assertEquals(ExitCode.UNEXPECTED_ERROR, cliRunner.execute(args));
+        }
+    }
+
+    @Test
+    void testThatExceptionFromFileGenerationGivesUnexpectedError() {
+        String file = "./folder/testfile.yaml";
+        ApplicationArguments args = new DefaultApplicationArguments("-f", file);
+        when(managerProvider.getObject()).thenReturn(manager);
+        when(manager.createDcatFromFile(file)).thenThrow(new RuntimeException("error"));
+    
+        ExitCode result = cliRunner.execute(args);
+    
+        assertEquals(ExitCode.UNEXPECTED_ERROR, result);
+    }
+    
+    @Test
+    void testThatExceptionFromDirectoryGenerationGivesUnexpectedError() {
+        String dirname = "./testFiles";
+        ApplicationArguments args = new DefaultApplicationArguments("-d", dirname);
+        when(managerProvider.getObject()).thenReturn(manager);
+        when(manager.createDcatFromDirectory(dirname)).thenThrow(new RuntimeException("error"));
+    
+        ExitCode result = cliRunner.execute(args);
+    
+        assertEquals(ExitCode.UNEXPECTED_ERROR, result);
     }
 }

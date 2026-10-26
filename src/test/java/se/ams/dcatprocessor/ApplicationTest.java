@@ -3,33 +3,21 @@
 // SPDX-License-Identifier: EUPL-1.2
 package se.ams.dcatprocessor;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 
-import se.ams.dcatprocessor.cli.CliFlags;
+class ApplicationTest {
 
-
-public class ApplicationTest {
-    
     @ParameterizedTest
-    @MethodSource("supportedFlagsProvider")
-    void testThatCliArgsReturnsTrueIfValidFlag(String flag) {
-        boolean result = Application.isCliArgs(new String[]{flag});
-        assertTrue(result);
-    }
-    
-    @ParameterizedTest
-    @ValueSource(strings = {"-x","-invalid", ""})
-    void testThatCliArgsReturnsFalseIfUnknownOrEmptyFlag(String flag) {
-        boolean result = Application.isCliArgs(new String[]{flag});
-        assertFalse(result);
+    @ValueSource(strings = {"-f", "-d", "-k", "./testFiles"})
+    void testThatNonOptionArgumentGivesCliMode(String arg) {
+        assertTrue(Application.isCliArgs(new String[] {arg}));
     }
 
     @Test
@@ -37,8 +25,25 @@ public class ApplicationTest {
         boolean result = Application.isCliArgs(new String[]{});
         assertFalse(result);
     }
+    
+    @Test
+    void testThatNoArgumentsIsNotCliMode() {
+        String[] args = new String[0];
+        assertFalse(Application.isCliArgs(args));
+    }
 
-    static Stream<String> supportedFlagsProvider() {
-        return CliFlags.SUPPORTED_FLAGS.stream(); // returns all supported flags.
+    @Test
+    void testThatSpringOptionIsNotCliMode() {
+        String[] args = new String[] {"--server.port=8081"};
+        assertFalse(Application.isCliArgs(args));
+    }
+
+
+    @Test
+    void testThatNoArgumentsKeepsWebserver() {
+        String[] args = new String[0];
+        SpringApplication app = Application.createApplication(args);
+
+        assertEquals(WebApplicationType.SERVLET, app.getWebApplicationType());
     }
 }
