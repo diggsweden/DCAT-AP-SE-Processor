@@ -2,9 +2,9 @@
 
 [![License: EUPL 1.2](https://img.shields.io/badge/License-European%20Union%20Public%20Licence%201.2-library?style=for-the-badge&&color=lightblue)](LICENSES/EUPL-1.2.txt)
 
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/diggsweden/DCAT-AP-SE-Processor/badge?style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/diggsweden/DCAT-AP-SE-Processor)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/diggsweden/dcat-ap-se-processor/badge?style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/diggsweden/dcat-ap-se-processor)
 
-[![REUSE status](https://img.shields.io/reuse/compliance/github.com%2Fdiggsweden%2FDCAT-AP-SE-Processor?style=for-the-badge)](https://api.reuse.software/info/github.com/diggsweden/DCAT-AP-SE-Processor)
+[![REUSE status](https://img.shields.io/reuse/compliance/github.com%2Fdiggsweden%2Fdcat-ap-se-processor?style=for-the-badge)](https://api.reuse.software/info/github.com/diggsweden/dcat-ap-se-processor)
 
 [![publiccode.yml](https://img.shields.io/badge/publiccode.yml-library?style=for-the-badge&color=orange)](publiccode.yml)
 
